@@ -22,7 +22,7 @@
     <!--框架高度设置-->
 </head>
 
-<body onLoad="Resize();">
+<body>
 <div id="right_ctn">
     <div class="right_m">
         <!--会议列表-->
@@ -34,12 +34,12 @@
 
             <!--列表-->
             <form action="" method="post">
-                <table cellpadding="0" cellspacing="0" class="list_hy">
+                <table cellpadding="0" cellspacing="0" class="list_hy" style="width: 95%">
                     <tr>
                         <th scope="col">活动名称</th>
                         <th scope="col">活动时间</th>
                         <th scope="col">活动状态</th>
-
+                        <th scope="col">参选企业</th>
                         <th scope="col">编辑</th>
                     </tr>
                     <foreach name="list" item="v">
@@ -51,7 +51,8 @@
                                 <eq name="v['act_state']" value="0">下线</eq>
 
                             </td>
-                            <td><a href="{:U('update_act',array('id'=>$v['id']))}">编辑</a></td>
+                            <td><a href="{:U('company_list',array('id'=>$v['id']))}" class="btn">参选企业</a></td>
+                            <td><a href="{:U('update_act',array('id'=>$v['id']))}" class="btn">编辑</a></td>
                         </tr>
                     </foreach>
                 </table>
