@@ -1,0 +1,56 @@
+.head_middle {
+    background: #EB3357;
+    font-size: 0.6rem;
+    color: #ffffff;
+    margin-bottom: .4rem;
+}
+.head_dh li{
+    float: left; /* 往左浮动 */
+    display: block;
+    text-align: center;
+    width: 33%;
+    margin: .48rem 0;
+    border-right:1px solid #ccc
+}
+.head_middle li:last-child {
+    border: none;
+}
+.head_dh p {
+    text-align: center;
+}
+
+.head_footer {
+    text-align: center;
+    font-size: .8rem;
+}
+.head_footer img{
+    width: 0.81rem;
+    height: 0.82rem;
+}
+
+.date-tiem-span,.date-s-span {
+    display: inline-block;
+    width:1.2rem;
+    height:1rem;
+    line-height: 1rem;
+    text-align: center;
+    border-radius:5px;
+    background: #EB3357;
+    color: #ffffff;
+}
+.date-info-show {
+    color:#eb325b;
+}
+.date-s-span {
+    background:#f00;
+}
+.date-def {
+    display: inline-block;
+    width:1.2rem;
+    height:1rem;
+    line-height: 1rem;
+    text-align: center;
+    border-radius:5px;
+    background:#BFBFBF;
+    color: #ffffff;
+}
