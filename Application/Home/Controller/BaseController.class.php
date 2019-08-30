@@ -10,7 +10,10 @@ class BaseController extends Controller
     public function __construct()
     {
         parent::__construct();
-        
+
+        $act_id = I('id',1);
+
+
         //检查用户登录状态
         if (!check_cookie_exist()) {
             //未登录则跳转到登录页面
