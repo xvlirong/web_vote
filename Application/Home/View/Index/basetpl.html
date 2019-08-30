@@ -12,8 +12,9 @@
     <link rel="stylesheet" href="__STATIC__/css/common.css">
     <link rel="stylesheet" href="__STATIC__/css/head.css">
     <!--引入js-->
-    <link rel="stylesheet" href="__STATIC__/js/jquery-1.12.2.min.js">
-    <link rel="stylesheet" href="__STATIC__/js/rem.js">
+    <script src="__STATIC__/js/jquery-1.12.2.min.js"></script>
+    <script src="__STATIC__/js/rem.js"></script>
+    <script src="__STATIC__/js/leftTime.min.js"></script>
     <!-- source模块 -->
     <block name="source">
     </block>
@@ -38,18 +39,17 @@
             </li>
         </ul>
     </div>
-
-    <div class="head_footer">
+    <div class="head_footer data-show-box" id="dateShow1">
         <img src="__STATIC__/images/mobile_time.png" alt="">
-        <span>投票剩余时间：</span>
-        <span>21</span>
-        <span>天</span>
-        <span>21</span>
-        <span>时</span>
-        <span>21</span>
-        <span>分</span>
-        <span>21</span>
-        <span>秒</span>
+        <span class="date-info-show" id="dataInfoShow_1">投票剩余时间：</span>
+        <span class="date-tiem-span d">00</span>
+        <span class="date-def">天</span>
+        <span class="date-tiem-span h">00</span>
+        <span class="date-def">时</span>
+        <span class="date-tiem-span m">00</span>
+        <span class="date-def">分</span>
+        <span class="date-tiem-span s">00</span>
+        <span class="date-def">秒</span>
     </div>
 </block>
 
@@ -60,4 +60,25 @@
 <!--底部模块-->
 <block name="footer"></block>
 </body>
+<script type="text/javascript">
+   $(function () {
+       var data={};
+       var enddate = "{$end_date}";
+       var nowdate = "{$now_date}";
+       data.enddate = parseInt(enddate);
+       data.nowdate = parseInt(nowdate);
+       data.init = true;
+       //日期倒计时
+       $.leftTime(data,function(d){
+           console.log(d);
+           if(d.status){
+               var $dateShow1=$("#dateShow1");
+               $dateShow1.find(".d").html(d.d);
+               $dateShow1.find(".h").html(d.h);
+               $dateShow1.find(".m").html(d.m);
+               $dateShow1.find(".s").html(d.s);
+           }
+       });
+   })
+</script>
 </html>

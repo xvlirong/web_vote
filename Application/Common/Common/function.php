@@ -472,4 +472,5 @@ function formatTimeStr($time,$type = 1)
                     return date('Y-m-d',$time);
             }
     }
+
 }
