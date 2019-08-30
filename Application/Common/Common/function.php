@@ -7,72 +7,24 @@ function dd($data)
 }
 //检测用户session跟cookie是否存在
 function check_cookie_exist(){
-
-    $server_name = $_SERVER['SERVER_NAME'];
-
-	//echo 1;die;
-    $blackArr = array(
-        '224817'
-    );
     //获取课程上一步地址
     $url= 'https://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
     cookie('category_url',$url);
     /*获取上一次用户微信授权的id cookie记录*/
     $cookie_user_id = cookie('auth_user_id');
     $user_id =session('adminId');
-    if (in_array($user_id, $blackArr)) {
-        $jumpUrl = U('Black/blackUser');
-        header('Location:'.$jumpUrl);
-        die;
-    }
-	//echo $user_id;die;
-    //如果session不存在
     if(!$user_id){
         //判断cookie是否存在
         if($cookie_user_id){
             //cookie存在，建立session，完成自动登录
-			$is_unreal = M("users")->where("uid=$cookie_user_id")->getField("is_unreal");
-			if($is_unreal==0){
-				$openid = M("users")->where("uid=$cookie_user_id")->getField("OpenID");
-                if($server_name=='www.renlibaike.com'){
-                    return true;
-                }else{
-                    if(empty($openid)){
-                        header('Location:https://m.hrpindao.com/wechat.php?m=wechat&c=activity&a=loginwechat');
-                        die;
-                    }
-                }
-
-			}
             session('adminId',$cookie_user_id);
             return true;
         }else{
 
-            if($server_name=='www.renlibaike.com'){
-                return true;
-            }else{
-                //cookie不存在
-                return false;
-            }
-
+            //cookie不存在
+            return false;
         }
     } else {
-		if (strpos($_SERVER['HTTP_USER_AGENT'], 'MicroMessenger') !== false ) {
-			$is_unreal = M("users")->where("uid=$user_id")->getField("is_unreal");
-			if($is_unreal==0){
-				$openid = M("users")->where("uid=$user_id")->getField("OpenID");
-                if($server_name=='www.renlibaike.com'){
-                    return true;
-                }else{
-                    if(empty($openid)){
-                        header('Location:https://m.hrpindao.com/wechat.php?m=wechat&c=activity&a=loginwechat');
-                        die;
-                    }
-                }
-
-			}
-		}
-
         return true;
     }
 }

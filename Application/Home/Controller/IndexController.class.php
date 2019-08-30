@@ -1,12 +1,11 @@
 <?php
 namespace Home\Controller;
 use Think\Controller;
-class IndexController extends Controller {
+class IndexController extends BaseController {
     public function index(){
         $id = I('id',1);
         //pv自增
         M("rv_act")->where(array('id'=>$id))->setInc('pv_num');
-
 
         //公共信息
         $base_info = $this->getBaseInfo($id);
@@ -49,4 +48,6 @@ class IndexController extends Controller {
         $info['pv_num'] = M("rv_act")->where(array('id'=>$id))->getField('pv_num');
         return $info;
     }
+
+
 }
