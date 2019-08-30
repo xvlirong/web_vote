@@ -9,6 +9,12 @@ class IndexController extends Controller {
         $now_date = msectime();
         $this->assign('now_date',$now_date);
         $this->assign('end_date',$end_date);
+
         $this->display();
+    }
+
+    public function detail()
+    {
+        echo 'xiangqing';
     }
 }
