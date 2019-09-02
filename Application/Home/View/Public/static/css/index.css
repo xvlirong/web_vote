@@ -1,0 +1,57 @@
+.index_body {
+    min-height: auto;
+    margin-bottom: 1rem;
+}
+.vote_list {
+    padding: 0px 4%;
+}
+.vote_list li {
+    float: left;
+    width: 48%;
+    margin: 0.5rem 0.1rem;
+    text-align: center;
+    padding: 1rem 0.3rem;
+    border: 1px solid #D5D5D5;
+    /*float: left;*/
+    /*width: 50%;*/
+    /*padding: 0px .5rem;*/
+    /*text-align: center;*/
+    /*padding-bottom: 2rem;*/
+}
+.vote_list li p {
+    padding-top: .5rem;
+}
+.vote_list li img {
+    width: 100%;
+    height: 100%;
+    vertical-align: top;
+}
+.iconfont {
+    font-family: "iconfont" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+}
+.v_num {
+    color: #969696;
+}
+.v_vote {
+    color: #EB3357;
+}
+.vote_list li dd {
+    padding-top: .3rem;
+}
+.vote_list li dd span {
+    display: inline-block;
+    width: 50%;
+    padding: .3rem 0px;
+    background: #EB3357;
+    color: #ffffff;
+    border-right:1px solid #ccc
+}
+.vote_list li dd span:last-child {
+    border: none;
+}
+
