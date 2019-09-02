@@ -11,20 +11,33 @@
         <!-- Swiper -->
         <div class="swiper-container">
             <div class="swiper-wrapper">
-                <div class="swiper-slide"><img src="__STATIC__/images/head_img2.jpg" alt=""></div>
-                <div class="swiper-slide"><img src="__STATIC__/images/head_img2.jpg" alt=""></div>
+                <volist name="list" id="v">
+                    <div class="swiper-slide">
+                        <div style="width:100%">
+                            <img src="__PUBLIC__/upload/banner_img/{$v.img_url}" alt="">
+                            <!--                        <p class="rv_intro">这款凯伦宾威大通C型纪念款房车这款凯伦宾威大通C型纪念款房车这款凯伦宾威大通C型纪念款房车</p>-->
+                        </div>
+                    </div>
+                </volist>
+
 
             </div>
             <!-- Add Pagination -->
             <div class="swiper-pagination"></div>
         </div>
-        <p class="rv_intro">这款凯伦宾威大通C型纪念款房车这款凯伦宾威大通C型纪念款房车这款凯伦宾威大通C型纪念款房车这款凯伦宾威大通C型纪念款房车这款凯伦宾威大通C型纪念款房车</p>
+        <p class="rv_intro">{$info.company_intro}</p>
         <dd>
             <span data-id="{$v.id}">投票</span><span class="share">分享</span>
         </dd>
-        <p class="vote_num">票数：100</p>
+        <p class="vote_num">票数：{$info.tp_num}</p>
     </div>
-
+    <div class="foot clearFix">
+        <ul class="foot_menu clearFix">
+            <li class="foot_act">全部参赛</li>
+            <li>当前排名</li>
+            <li>活动规则</li>
+        </ul>
+    </div>
     <!-- Initialize Swiper -->
     <script>
         var swiper = new Swiper('.swiper-container', {

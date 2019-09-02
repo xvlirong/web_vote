@@ -124,6 +124,41 @@ class ActivityController extends CommonController
         }
     }
 
+    public function update_banner()
+    {
+        $id = I('id');
+        $list = M("company_banner")->where(array('pid'=>$id))->select();
+        $this->assign('list',$list);
+        $this->assign('id',$id);
+
+        $this->display();
+    }
+
+    public function addBanner()
+    {
+        $data['pid'] = I('pid');
+        $img = uploadImg('banner_img');
+        $data['img_url'] = $img['img_url']['savename'];
+        $data['add_time'] = time();
+        $res = M("company_banner")->add($data);
+        if($res){
+            echo "<script>alert('添加成功'); location.replace(document.referrer);</script>";
+        } else {
+            echo "<script>alert('添加失败'); location.replace(document.referrer);</script>";
+        }
+    }
+
+    public function delBanner()
+    {
+        $id = I('id');
+        $res = M("company_banner")->where(array('id'=>$id))->delete();
+        if($res){
+            echo "<script>alert('处理成功'); location.replace(document.referrer);</script>";
+        } else {
+            echo "<script>alert('处理失败'); location.replace(document.referrer);</script>";
+        }
+    }
+
 
 }
 

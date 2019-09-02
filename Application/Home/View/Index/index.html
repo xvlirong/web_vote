@@ -7,104 +7,25 @@
 <block name="body">
     <div class="index_body">
                 <ul class="vote_list" style="overflow: hidden;">
+                    <volist name="list" id="v">
                         <li>
-<!--                            <a href="{:U('Lecturer/company_detail',array('id'=>$v['l_id'],'yd'=>1))}">-->
-<!--                                <img src="__PUBLIC__/upload/company_logo/{$v.logo}">-->
-<!--                            </a>-->
-                            <img src="__STATIC__/images/head_img.jpg">
-                            <p>凯伦宾威</p>
+                            <!--                            <a href="{:U('Lecturer/company_detail',array('id'=>$v['l_id'],'yd'=>1))}">-->
+                            <!--                                <img src="__PUBLIC__/upload/company_logo/{$v.logo}">-->
+                            <!--                            </a>-->
+                            <a href="{:U('detail',array('id'=>$v['id']))}">
+                            <img src="__PUBLIC__/upload/company_logo/{$v.company_logo}" />
+                            </a>
+                            <p>{$v.company_name}</p>
                             <p>
-                                <span class="v_num">编号：01</span>
-                                <span class="v_vote">票数：12345</span>
+                                <span class="v_num">编号：{$key+1}</span>
+                                <span class="v_vote">票数：{$v.tp_num}</span>
                             </p>
                             <dd>
                                 <span data-id="{$v.id}">投票</span><span class="share">分享</span>
                             </dd>
                         </li>
-                    <li>
-                        <!--                            <a href="{:U('Lecturer/company_detail',array('id'=>$v['l_id'],'yd'=>1))}">-->
-                        <!--                                <img src="__PUBLIC__/upload/company_logo/{$v.logo}">-->
-                        <!--                            </a>-->
-                        <img src="__STATIC__/images/head_img.jpg">
-                        <p>凯伦宾威</p>
-                        <p>
-                            <span class="v_num">编号：01</span>
-                            <span class="v_vote">票数：12345</span>
-                        </p>
-                        <dd>
-                            <span data-id="{$v.id}">投票</span><span class="share">分享</span>
-                        </dd>
-                    </li>
-                    <li>
-                        <!--                            <a href="{:U('Lecturer/company_detail',array('id'=>$v['l_id'],'yd'=>1))}">-->
-                        <!--                                <img src="__PUBLIC__/upload/company_logo/{$v.logo}">-->
-                        <!--                            </a>-->
-                        <img src="__STATIC__/images/head_img.jpg">
-                        <p>凯伦宾威</p>
-                        <p>
-                            <span class="v_num">编号：01</span>
-                            <span class="v_vote">票数：12345</span>
-                        </p>
-                        <dd>
-                            <span data-id="{$v.id}">投票</span><span class="share">分享</span>
-                        </dd>
-                    </li>
-                    <li>
-                        <!--                            <a href="{:U('Lecturer/company_detail',array('id'=>$v['l_id'],'yd'=>1))}">-->
-                        <!--                                <img src="__PUBLIC__/upload/company_logo/{$v.logo}">-->
-                        <!--                            </a>-->
-                        <img src="__STATIC__/images/head_img.jpg">
-                        <p>凯伦宾威</p>
-                        <p>
-                            <span class="v_num">编号：01</span>
-                            <span class="v_vote">票数：12345</span>
-                        </p>
-                        <dd>
-                            <span data-id="{$v.id}">投票</span><span class="share">分享</span>
-                        </dd>
-                    </li>
-                    <li>
-                        <!--                            <a href="{:U('Lecturer/company_detail',array('id'=>$v['l_id'],'yd'=>1))}">-->
-                        <!--                                <img src="__PUBLIC__/upload/company_logo/{$v.logo}">-->
-                        <!--                            </a>-->
-                        <img src="__STATIC__/images/head_img.jpg">
-                        <p>凯伦宾威</p>
-                        <p>
-                            <span class="v_num">编号：01</span>
-                            <span class="v_vote">票数：12345</span>
-                        </p>
-                        <dd>
-                            <span data-id="{$v.id}">投票</span><span class="share">分享</span>
-                        </dd>
-                    </li>
-                    <li>
-                        <!--                            <a href="{:U('Lecturer/company_detail',array('id'=>$v['l_id'],'yd'=>1))}">-->
-                        <!--                                <img src="__PUBLIC__/upload/company_logo/{$v.logo}">-->
-                        <!--                            </a>-->
-                        <img src="__STATIC__/images/head_img.jpg">
-                        <p>凯伦宾威</p>
-                        <p>
-                            <span class="v_num">编号：01</span>
-                            <span class="v_vote">票数：12345</span>
-                        </p>
-                        <dd>
-                            <span data-id="{$v.id}">投票</span><span class="share">分享</span>
-                        </dd>
-                    </li>
-                    <li>
-                        <!--                            <a href="{:U('Lecturer/company_detail',array('id'=>$v['l_id'],'yd'=>1))}">-->
-                        <!--                                <img src="__PUBLIC__/upload/company_logo/{$v.logo}">-->
-                        <!--                            </a>-->
-                        <img src="__STATIC__/images/head_img.jpg">
-                        <p>凯伦宾威</p>
-                        <p>
-                            <span class="v_num">编号：01</span>
-                            <span class="v_vote">票数：12345</span>
-                        </p>
-                        <dd>
-                            <span data-id="{$v.id}">投票</span><span class="share">分享</span>
-                        </dd>
-                    </li>
+                    </volist>
+
 
                 </ul>
     </div>

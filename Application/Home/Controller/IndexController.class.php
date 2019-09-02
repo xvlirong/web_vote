@@ -6,9 +6,10 @@ class IndexController extends BaseController {
         $id = I('act_id',1);
         //列表
         $list = M("act_company")
-            ->where(array('id'=>$id,'company_state'=>1))
-            ->field('company_name,company_logo')
+            ->where(array('act_id'=>$id,'company_state'=>1))
+            ->field('id,company_name,company_logo,tp_num')
             ->select();
+        $this->assign('list',$list);
 
         //公共信息
         $base_info = $this->getBaseInfo($id);
@@ -24,6 +25,9 @@ class IndexController extends BaseController {
         $id = I('id');
         $list = M("company_banner")->where(array('pid'=>$id))->select();
         $this->assign('list',$list);
+
+        $info = M("act_company")->where(array('id'=>$id))->find();
+        $this->assign('info',$info);
 
         //公共信息
         $base_info = $this->getBaseInfo($act_id);

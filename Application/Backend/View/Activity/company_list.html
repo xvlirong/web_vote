@@ -43,6 +43,7 @@
                         <th scope="col">企业logo</th>
                         <th scope="col">企业状态</th>
                         <th scope="col">投票数量</th>
+                        <th scope="col">轮播图</th>
                         <th scope="col">编辑</th>
                     </tr>
                     <foreach name="list" item="v">
@@ -56,6 +57,7 @@
 
                             </td>
                             <td>{$v.tp_num}</td>
+                            <td><a href="{:U('update_banner',array('id'=>$v['id']))}" class="btn">查看轮播图</a></td>
                             <td><a href="{:U('update_company',array('id'=>$v['id']))}" class="btn">编辑</a></td>
                         </tr>
                     </foreach>
