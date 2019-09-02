@@ -1,0 +1,37 @@
+<extend name="Home@Index/basetpl"/>
+<block name="source">
+    <title>投票详情</title>
+    <link rel="stylesheet" href="__STATIC__/css/swiper.min.css">
+    <link rel="stylesheet" href="__STATIC__/css/detail.css">
+    <script src="__STATIC__/js/swiper.min.js"></script>
+</block>
+
+<block name="body">
+    <div class="detail_banner">
+        <!-- Swiper -->
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="__STATIC__/images/head_img2.jpg" alt=""></div>
+                <div class="swiper-slide"><img src="__STATIC__/images/head_img2.jpg" alt=""></div>
+
+            </div>
+            <!-- Add Pagination -->
+            <div class="swiper-pagination"></div>
+        </div>
+        <p class="rv_intro">这款凯伦宾威大通C型纪念款房车这款凯伦宾威大通C型纪念款房车这款凯伦宾威大通C型纪念款房车这款凯伦宾威大通C型纪念款房车这款凯伦宾威大通C型纪念款房车</p>
+        <dd>
+            <span data-id="{$v.id}">投票</span><span class="share">分享</span>
+        </dd>
+        <p class="vote_num">票数：100</p>
+    </div>
+
+    <!-- Initialize Swiper -->
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+            pagination: {
+                el: '.swiper-pagination',
+            },
+            autoplay: false,
+        });
+    </script>
+</block>

@@ -3,10 +3,8 @@ namespace Home\Controller;
 use Think\Controller;
 class IndexController extends BaseController {
     public function index(){
-        $id = I('id',1);
-        //pv自增
-        M("rv_act")->where(array('id'=>$id))->setInc('pv_num');
-
+        $id = I('act_id',1);
+        //列表
         $list = M("act_company")
             ->where(array('id'=>$id,'company_state'=>1))
             ->field('company_name,company_logo')
@@ -22,7 +20,19 @@ class IndexController extends BaseController {
 
     public function detail()
     {
-        echo 'xiangqing';
+        $act_id = I('act_id',1);
+        $id = I('id');
+        $list = M("company_banner")->where(array('pid'=>$id))->select();
+        $this->assign('list',$list);
+
+        //公共信息
+        $base_info = $this->getBaseInfo($act_id);
+        $this->assign('end_date',$base_info['end_date']);
+        $this->assign('now_date',$base_info['now_date']);
+        $this->assign('base_info',$base_info);
+
+        $this->display();
+
     }
 
     /**
@@ -33,6 +43,8 @@ class IndexController extends BaseController {
      */
     public function getBaseInfo($id)
     {
+        //pv自增
+        M("rv_act")->where(array('id'=>$id))->setInc('pv_num');
         //活动信息
         $act_info = M("rv_act")->where(array('id'=>$id))->field('act_name,end_time')->find();
 
