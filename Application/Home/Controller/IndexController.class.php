@@ -7,6 +7,11 @@ class IndexController extends BaseController {
         //pv自增
         M("rv_act")->where(array('id'=>$id))->setInc('pv_num');
 
+        $list = M("act_company")
+            ->where(array('id'=>$id,'company_state'=>1))
+            ->field('company_name,company_logo')
+            ->select();
+
         //公共信息
         $base_info = $this->getBaseInfo($id);
         $this->assign('end_date',$base_info['end_date']);
