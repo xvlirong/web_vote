@@ -163,7 +163,7 @@ function getSMS($url,$data='')
 	return file_get_contents($url.'?'.$get);
 }
 //数字随机码
-function randNumber($len = 5)
+function randNumber($len = 6)
 {
 	$chars = str_repeat('0123456789', 10);
 	$chars = str_shuffle($chars);

@@ -18,10 +18,10 @@
                             <p>{$v.company_name}</p>
                             <p>
                                 <span class="v_num">编号：{$key+1}</span>
-                                <span class="v_vote">票数：{$v.tp_num}</span>
+                                <span class="v_vote">票数：<en id="vote_num{$v.id}">{$v.tp_num}</en></span>
                             </p>
                             <dd>
-                                <span data-id="{$v.id}">投票</span><span class="share">分享</span>
+                                <span onclick="do_vote({$v.id})" >投票</span><span class="share">分享</span>
                             </dd>
                         </li>
                     </volist>
@@ -37,4 +37,32 @@
             <li>活动规则</li>
         </ul>
     </div>
+    <script>
+        votes_state = {$vote_state};
+        function do_vote(pid){
+            var old_num = $("#vote_num"+pid).html();
+            var old_all_num = $("#all_vote_num").html();
+            if(votes_state == 3){
+                open_tk();
+            }else if(votes_state == 2){
+                alert('今日已投');
+            }else if(votes_state == 1){
+                $.ajax({
+                    type:"post",
+                    url:"{:U('handleVotes')}",
+                    data:{id:pid},
+                    success:function (data) {
+                        var code = data.code;
+                        alert(data.msg)
+                        if(code ==1 ){
+                            var new_num = parseInt(old_num)+1;
+                            var new_all_num = parseInt(old_all_num)+1;
+                            $("#vote_num"+pid).html(new_num);
+                            $("#all_vote_num").html(new_all_num);
+                        }
+                    }
+                })
+            }
+        }
+    </script>
 </block>
