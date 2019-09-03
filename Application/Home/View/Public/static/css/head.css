@@ -66,6 +66,7 @@
     bottom: 0;
     right: 0;
     background: #1b1919;
+    z-index: 9;
 
 }
 
@@ -79,7 +80,7 @@
     color: #fff;
     background: rgb(65,133,244);
     cursor: pointer;
-    margin-top: 1.2rem;
+    margin-top: 0.5rem;
     margin-left: 0.3rem;
 }
 .testBtn-a.on {
@@ -98,36 +99,37 @@
 .yan .inp input {
 
     width: 55%;
-    height: 50px;
-    line-height: 50px;
-    font-size: 14px;
+    height: 1.3rem;
+    line-height: 1rem;
+    font-size: .8rem;
     /* font-weight: 700; */
-    /*background-color: #f1eced;*/
+    /* background-color: #f1eced; */
     margin-top: 15px;
 }
 .button {
-    margin: 1.2rem 1.6rem 0 3.2rem;
-    width: 50%;
-    height: 50px;
-    border-radius: 30px;
+    margin: .8rem 0 .3rem 4.4rem;
+    width: 35%;
+    height: 2rem;
+    border-radius: 1.2rem;
     border: none;
     background-color: rgb(65,133,244);
     color: #fff;
-    font-size: 1rem;
+    font-size: .8rem;
 }
 .register {
     width: 16rem;
-    height: 14rem;
+    height: 11rem;
     background-color: #fff;
     /* margin: 6% auto 0 auto; */
     border-radius: 7%;
     padding: .6rem .3rem .6rem 1rem;
     position: absolute;
     left: 9%;
+    z-index: 21;
 }
 .register p{
     text-align: center;
-    font-size: 1rem;
+    font-size: .8rem;
     margin-top: .5rem;
 }
 .close_tk {

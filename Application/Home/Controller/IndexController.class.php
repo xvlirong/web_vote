@@ -50,6 +50,8 @@ class IndexController extends BaseController {
         $info = M("act_company")->where(array('id'=>$id))->find();
         $this->assign('info',$info);
 
+        $vote_state = $this->checkVoteState();
+        $this->assign('vote_state',$vote_state);
         //公共信息
         $base_info = $this->getBaseInfo($act_id);
         $this->assign('end_date',$base_info['end_date']);
