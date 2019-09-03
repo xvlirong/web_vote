@@ -106,15 +106,14 @@
     margin-top: 15px;
 }
 .button {
-    margin: 1.4rem 1.6rem 0 1.8rem;
-    width: 77%;
+    margin: 1.2rem 1.6rem 0 2rem;
+    width: 68%;
     height: 50px;
     border-radius: 30px;
     border: none;
     background-color: rgb(65,133,244);
     color: #fff;
-    font-size: 25px;
-    box-shadow: 0px 5px 20px #ecc9ca;
+    font-size: 1rem;
 }
 .register {
     width: 16rem;
