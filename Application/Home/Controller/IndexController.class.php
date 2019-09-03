@@ -141,6 +141,7 @@ class IndexController extends BaseController {
      */
     public function handleVotes()
     {
+        $act_id = 1;
         $id = I('id');
         $data['uid'] = $this->userid;
         $data['batch'] = date("Y-m-d",time());
@@ -151,7 +152,7 @@ class IndexController extends BaseController {
         }else{
             M()->startTrans();
             $data['pid'] = $id;
-            $data['act_id'] = I('act_id');
+            $data['act_id'] = $act_id;
             $data['add_time'] = time();
             $res1 = M("votes_record")->add($data);
             $res2 = M("act_company")->where(array('id'=>$id))->setInc('tp_num');
