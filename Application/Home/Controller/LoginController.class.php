@@ -131,10 +131,7 @@ class LoginController extends Controller
             echo '<br/><h2>错误信息：</h2>'.$user->errmsg;
             exit;
         }
-        if(empty($_COOKIE["user_info"])){
-            setcookie('user_info',$user['nickname']."#".$user['unionid']."#".$user['headimgurl']."#".$user['openid'],time()+600);
-        }
-
+        setcookie('user_info',$user['nickname']."#".$user['unionid']."#".$user['headimgurl']."#".$user['openid'],time()+600);
         $this->getInfoSave();
     }
 
@@ -142,19 +139,20 @@ class LoginController extends Controller
     {
         $info = cookie("user_info");
         $info_arr=(explode("#",$info));
-        print_r($info_arr);die;
+
         //dump($weuser);
         $open_id = $info_arr[3];
         $uid = M("rv_users")->where(array('open_id'=>$open_id))->getField('id');
         $timeout = time()+3600*24*365;
         if($uid){
+            print_r($info_arr);die;
             setcookie('auth_user_id',$uid,$timeout);
             session('adminId',$uid);
         }else{
             $downls=$info_arr[2];
             $data['head_img'] = saveUserHeadImg($downls);
             $data["username"] = $info_arr[0];
-            $data["union_id"] = $info_arr[1];
+            //$data["union_id"] = $info_arr[1];
             $data["open_id"] = $info_arr[3];
             $data["regist_time"] = time();
             $last_id = M("rv_users")->add($data);
