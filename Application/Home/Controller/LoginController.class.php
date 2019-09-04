@@ -125,7 +125,7 @@ class LoginController extends Controller
         }
 
         $token_user = 'https://api.weixin.qq.com/sns/userinfo?access_token='.$token->access_token.'&openid='.$token->openid.'&lang=zh_CN';
-        $user = json_decode(file_get_contents($token_user));
+        $user = json_decode(file_get_contents($token_user),1);
         print_r($user);die;
         if (isset($user->errcode)) {
             echo '<h1>错误：</h1>'.$user->errcode;
