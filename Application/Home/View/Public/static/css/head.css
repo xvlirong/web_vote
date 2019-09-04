@@ -141,3 +141,26 @@
     /* margin: .3rem 0; */
     width: 1rem;
 }
+.ts_tk{
+    width: 13rem;
+    height: 7rem;
+    background-color: #fff;
+    /*border-radius: 7%;*/
+    padding: .6rem .3rem .6rem 1rem;
+    position: fixed;
+    z-index: 21;
+    top: 30%;
+    left: 16%;
+    text-align: center;
+}
+.ts_tk p{
+    line-height: 2rem;
+    padding: 1rem;
+    color: #eb325b;
+    font-size: 1rem;
+}
+.ts_tk img{
+    width: 1.5rem;
+    /* padding: 1rem; */
+    padding-right: .3rem;
+}

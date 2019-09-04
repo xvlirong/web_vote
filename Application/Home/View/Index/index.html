@@ -45,7 +45,8 @@
             if(votes_state == 3){
                 open_tk();
             }else if(votes_state == 2){
-                alert('今日已投');
+                $(".d_ts_info").html('今日已投');
+                djs_tk();
             }else if(votes_state == 1){
                 $.ajax({
                     type:"post",
@@ -53,13 +54,17 @@
                     data:{id:pid},
                     success:function (data) {
                         var code = data.code;
-                        alert(data.msg)
                         if(code ==1 ){
+                            $(".ts_info").html(data.msg);
                             var new_num = parseInt(old_num)+1;
                             var new_all_num = parseInt(old_all_num)+1;
                             $("#vote_num"+pid).html(new_num);
                             $("#all_vote_num").html(new_all_num);
+
+                        }else{
+                            $(".d_ts_info").html(data.msg);
                         }
+                        djs_tk();
                     }
                 })
             }

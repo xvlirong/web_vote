@@ -53,7 +53,7 @@
     </div>
     <div class="mask" style="opacity: 0.6;display: none"></div>
     <div class="register" style="display: none">
-        <span class="close_tk clearFix">x</span>
+        <span class="close_tk clearFix">×</span>
         <p>请先完善信息</p>
         <div class="yan">
             <div class="inp">
@@ -65,6 +65,12 @@
             </div>
         </div>
         <button class="button" id="sub_btn">立即完善</button>
+    </div>
+
+    <div class="ts_tk" style="display: none">
+        <span class="close_tk clearFix">×</span>
+        <p class="d_ts_info"><img src="__STATIC__/images/success.png" alt=""><span class="ts_info">投票成功</span></p>
+        <span id="djs_cs" class="djs_cs">30秒后自动关闭</span>
     </div>
 </block>
 
@@ -132,6 +138,7 @@
    function close_tk(){
        $('.mask').css('display','none');
        $('.register').css('display','none');
+       $('.ts_tk').css('display','none');
    }
 
    function open_tk(){
@@ -157,7 +164,24 @@
                }
            }
        });
-   })
+   });
+
+   function djs_tk(){
+       $('.mask').css('display','block');
+       $('.ts_tk').css('display','block');
+       var _this=$("#djs_cs");
+       if(!$(this).hasClass("on")){
+           $.leftTime(30,function(d){
+               if(d.status){
+                   _this.addClass("on");
+                   _this.html((d.s=="00"?"30":d.s)+"秒后自动关闭");
+               }else{
+                   _this.removeClass("on");
+                   close_tk();
+               }
+           });
+       }
+   }
 
 </script>
 </html>

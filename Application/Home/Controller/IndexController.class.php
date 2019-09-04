@@ -24,7 +24,7 @@ class IndexController extends BaseController {
     public function checkVoteState()
     {
         $data['uid'] = $this->userid;
-        $res1 = M("rv_users")->where($data)->getField('tel_phone');
+        $res1 = M("rv_users")->where(array('id'=>$data['uid']))->getField('tel_phone');
         if($res1 == ''){
             $state = 3;  //1可投票 2已投票 3 未完善信息
         }else{
