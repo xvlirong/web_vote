@@ -143,7 +143,7 @@ class LoginController extends Controller
         $info = cookie("user_info");
         $info_arr=(explode("#",$info));
         //dump($weuser);
-        $uid = M("rv_users")->where(array('oprn_id'=>$info_arr[3]))->limit(1)->getField('id');
+        $uid = M("rv_users")->where(array('open_id'=>$info_arr[3]))->limit(1)->getField('id');
         $timeout = time()+3600*24*365;
         if($uid){
             setcookie('auth_user_id',$uid,$timeout);

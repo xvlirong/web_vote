@@ -8,7 +8,7 @@ function dd($data)
 //检测用户session跟cookie是否存在
 function check_cookie_exist(){
     //获取课程上一步地址
-    $url= 'https://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+    $url= 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
     cookie('category_url',$url);
     /*获取上一次用户微信授权的id cookie记录*/
     $cookie_user_id = cookie('auth_user_id');
