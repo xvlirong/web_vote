@@ -167,6 +167,12 @@ class LoginController extends Controller
         }
     }
 
+    public function delSessInfo()
+    {
+        setcookie('auth_user_id',0,time()-1);
+        unset($_SESSION['adminId']);
+    }
+
 }
 
 ?>
