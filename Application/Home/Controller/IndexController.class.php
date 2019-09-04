@@ -144,7 +144,7 @@ class IndexController extends BaseController {
         $act_id = 1;
         $id = I('id');
         $data['uid'] = $this->userid;
-        $data['batch'] = date("Y-m-d",time());
+        $data['batch'] = date("Ymd",time());
         $exist = M("votes_record")->where($data)->find();
         if($exist){
             $res_info['code'] = 0;
@@ -168,6 +168,47 @@ class IndexController extends BaseController {
         }
 
         $this->ajaxReturn($res_info);
+    }
+
+    /**
+     * @throws \think\Exception
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     * 排行榜
+     */
+    public function rank_list()
+    {
+        $id = I('act_id',1);
+
+        $list = M("act_company")
+            ->where(array('act_id'=>$id))
+            ->order(array('tp_num'=>'desc','id'=>'asc'))
+            ->field('id,company_name,company_logo,tp_num')
+            ->select();
+        $this->assign('list',$list);
+
+        //公共信息
+        $base_info = $this->getBaseInfo($id);
+        $this->assign('end_date',$base_info['end_date']);
+        $this->assign('now_date',$base_info['now_date']);
+        $this->assign('base_info',$base_info);
+        $this->display();
+    }
+
+    public function act_rules()
+    {
+        $id = I('act_id',1);
+
+        $info = M("rv_act")->where(array('id'=>$id))->find();
+        $this->assign('info',$info);
+
+        //公共信息
+        $base_info = $this->getBaseInfo($id);
+        $this->assign('end_date',$base_info['end_date']);
+        $this->assign('now_date',$base_info['now_date']);
+        $this->assign('base_info',$base_info);
+        $this->display();
     }
 
 

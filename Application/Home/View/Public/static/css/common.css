@@ -104,14 +104,22 @@ textarea {
     background: #EB3357
 }
 .foot_menu li{
-    float: left; /* 往左浮动 */
+    float: left;
     display: block;
-    padding: .8rem 0px;
     text-align: center;
     width: 33%;
-    border-right:1px solid #fff;
+    border-right: 1px solid #fff;
+    line-height: 2.3rem;
 
 }
 .foot_menu li:last-child {
     border: none;
+}
+.foot_menu a{
+    text-decoration: none;
+    color: #fff;
+    display: block;
+    width: 100%;
+    height: 100%;
+
 }

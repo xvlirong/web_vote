@@ -7,9 +7,9 @@ class LoginController extends Controller
 {
     public function loginwechat(){
         //dump(1);die;
-        $appid = 'wxbd4d33e0bd2dbe99';
+        $appid = 'wx25c3d8d3570674cd';
         echo '请登录';
-        //header('location:https://open.weixin.qq.com/connect/oauth2/authorize?appid='.$appid.'&redirect_uri=https://m.hrpindao.com/oauth.php&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect');
+        header('location:https://open.weixin.qq.com/connect/oauth2/authorize?appid='.$appid.'&redirect_uri=http://votes.rvtimes.cn/login/handleOauthInfo&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect');
         die;
     }
 
@@ -107,6 +107,64 @@ class LoginController extends Controller
         }
         return $res_info;
 
+    }
+
+    public function handleOauthInfo()
+    {
+        $code = $_GET['code'];
+        $state = $_GET['state'];
+        $appid = 'wx25c3d8d3570674cd';
+        $appsecret = '913e9fe977454d5ba1a98a2ea51b62ad';
+
+        $token_url = 'https://api.weixin.qq.com/sns/oauth2/access_token?appid='.$appid.'&secret='.$appsecret.'&code='.$code.'&grant_type=authorization_code';
+        $token = json_decode(file_get_contents($token_url));
+        if (isset($token->errcode)) {
+            echo '<h1>错误：</h1>'.$token->errcode;
+            echo '<br/><h2>错误信息：</h2>'.$token->errmsg;
+            exit;
+        }
+
+        $token_user = 'https://api.weixin.qq.com/sns/userinfo?access_token='.$token->access_token.'&openid='.$token->openid.'&lang=zh_CN';
+        $user = json_decode(file_get_contents($token_user));
+        if (isset($user->errcode)) {
+            echo '<h1>错误：</h1>'.$user->errcode;
+            echo '<br/><h2>错误信息：</h2>'.$user->errmsg;
+            exit;
+        }
+        if(empty($_COOKIE["user_info"])){
+            setcookie('user_info',$user->nickname."#".$user->unionid."#".$user->headimgurl."#".$user->openid,time()+600);
+        }
+
+        $this->getInfoSave();
+    }
+
+    public function getInfoSave()
+    {
+        $info = cookie("user_info");
+        $info_arr=(explode("#",$info));
+        //dump($weuser);
+        $uid = M("rv_users")->where(array('union_id'=>$info_arr[1]))->limit(1)->getField('id');
+        $timeout = time()+3600*24*365;
+        if($uid){
+            setcookie('auth_user_id',$uid,$timeout);
+            session('adminId',$uid);
+        }else{
+            $downls=$info_arr[2];
+            $data['head_img'] = saveUserHeadImg($downls);
+            $data["username"] = $info_arr[0];
+            $data["union_id"] = $info_arr[1];
+            $data["open_id"] = $info_arr[3];
+            $data["regist_time"] = time();
+            $last_id = M("rv_users")->add($data);
+            setcookie('auth_user_id',$last_id,$timeout);
+            session('adminId',$last_id);
+        }
+        $category_url = cookie('category_url');
+        if($category_url){
+            echo "<script>location.href='{$category_url}';</script>";
+        }else{
+            $this->redirect('Index/index');
+        }
     }
 
 }

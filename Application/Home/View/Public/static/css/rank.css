@@ -1,0 +1,49 @@
+
+.rank_title{
+    background: #E9E9E9;
+    height: 2rem;
+}
+.rank_title p{
+    line-height: 2rem;
+    padding-left: 1.5rem;
+    font-size: .7rem;
+}
+.rank_list img{
+    width: 100%;
+    padding-left: .1rem;
+    border: 1px solid #ccc;
+}
+.rank_list span:first-child{
+    display: inline-block;
+    width: 2rem;
+    padding-left: .5rem;
+    text-align: center;
+}
+.rank_list li{
+    /* padding: .5rem 0; */
+    margin: .8rem 0;
+    font-size: .7rem;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: .8rem;
+}
+.v_vote{
+    color: #EB3357;
+    border-left: 1px solid #ccc;
+    padding: .6rem .5rem .6rem .5rem;
+    display: inline-block;
+    width: 6rem;
+
+}
+.rank_name{
+    padding: 0 1rem;
+    display: inline-block;
+    width: 5.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.rank_list a{
+    display: inline-block;
+    height: 3rem;
+    width: 4rem;
+}

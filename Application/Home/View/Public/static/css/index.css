@@ -1,6 +1,6 @@
 .index_body {
     min-height: auto;
-    margin-bottom: 1rem;
+    margin-bottom: 2.5rem;
 }
 .vote_list {
     padding: 0px 4%;
@@ -8,9 +8,9 @@
 .vote_list li {
     float: left;
     width: 48%;
-    margin: 0.5rem 0.1rem;
+    margin: .5rem .1rem;
     text-align: center;
-    padding: 1rem 0.3rem;
+    padding: .5rem 0.3rem;
     border: 1px solid #D5D5D5;
     /*float: left;*/
     /*width: 50%;*/
@@ -20,6 +20,9 @@
 }
 .vote_list li p {
     padding-top: .5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .vote_list li img {
     width: 100%;

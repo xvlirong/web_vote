@@ -1,0 +1,14 @@
+.rule_box{
+    margin: 0 .8rem;
+}
+.rule_title{
+    color: #019C97;
+    font-weight: bold;
+    width: 20%;
+    padding: .2rem;
+    border: 1px solid #019c97;
+}
+.rule_intro p{
+    margin: .8rem 0 .5rem 0;
+    font-weight: bold;
+}
