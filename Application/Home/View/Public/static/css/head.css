@@ -124,9 +124,11 @@
     /* margin: 6% auto 0 auto; */
     border-radius: 7%;
     padding: .6rem .3rem .6rem 1rem;
-    position: absolute;
-    left: 9%;
+    position: fixed;
     z-index: 21;
+    top: 30%;
+    left: 8%;
+
 }
 .register p{
     text-align: center;
