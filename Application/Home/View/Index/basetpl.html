@@ -135,7 +135,10 @@
    });
    document.body.addEventListener('focusin', () =>{
        　　//软键盘弹起事件
-       $('html,body').animate({scrollTop:"10rem"},500);
+       setTimeout(function(){
+           $('html,body').animate({scrollTop:"1rem"},500);
+       },1000)
+
 
    });
 
