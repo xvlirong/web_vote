@@ -126,7 +126,6 @@ class LoginController extends Controller
 
         $token_user = 'https://api.weixin.qq.com/sns/userinfo?access_token='.$token->access_token.'&openid='.$token->openid.'&lang=zh_CN';
         $user = json_decode(file_get_contents($token_user),1);
-        print_r($user);die;
         if (isset($user->errcode)) {
             echo '<h1>错误：</h1>'.$user->errcode;
             echo '<br/><h2>错误信息：</h2>'.$user->errmsg;
@@ -143,9 +142,8 @@ class LoginController extends Controller
     {
         $info = cookie("user_info");
         $info_arr=(explode("#",$info));
-        print_r($info_arr);die;
         //dump($weuser);
-        $uid = M("rv_users")->where(array('union_id'=>$info_arr[1]))->limit(1)->getField('id');
+        $uid = M("rv_users")->where(array('oprn_id'=>$info_arr[3]))->limit(1)->getField('id');
         $timeout = time()+3600*24*365;
         if($uid){
             setcookie('auth_user_id',$uid,$timeout);
