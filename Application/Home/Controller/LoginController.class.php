@@ -131,7 +131,7 @@ class LoginController extends Controller
             echo '<br/><h2>错误信息：</h2>'.$user->errmsg;
             exit;
         }
-        setcookie('user_info',$user['nickname']."#".$user['unionid']."#".$user['headimgurl']."#".$user['openid'],time()+600);
+        cookie('user_info',$user['nickname']."#".$user['unionid']."#".$user['headimgurl']."#".$user['openid'],time()+600);
         $this->getInfoSave();
     }
 
