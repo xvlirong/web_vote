@@ -54,8 +54,7 @@
             if(votes_state == 3){
                 open_tk();
             }else if(votes_state == 2){
-                $(".d_ts_info").html('今日已投');
-                djs_tk();
+                alert('今日已投')
             }else if(votes_state == 1){
                 $.ajax({
                     type:"post",
@@ -69,10 +68,10 @@
                             var new_all_num = parseInt(old_all_num)+1;
                             $("#vote_num"+pid).html(new_num);
                             $("#all_vote_num").html(new_all_num);
+                            djs_tk();
                         }else{
-                            $(".d_ts_info").html(data.msg);
+                            alert(data.msg);
                         }
-                        djs_tk();
                     }
                 })
             }
