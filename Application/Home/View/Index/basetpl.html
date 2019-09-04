@@ -133,6 +133,11 @@
 
        }
    });
+   document.body.addEventListener('focusin', () =>{
+       　　//软键盘弹起事件
+        $("#verify_code").focus();
+
+   });
 
    // 关闭弹框
    $(".close_tk").click(function () {
