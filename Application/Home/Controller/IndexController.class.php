@@ -4,12 +4,11 @@ use Think\Controller;
 class IndexController extends BaseController {
     public function index(){
         $id = I('act_id',1);
-        //列表
-        $list = M("act_company")
-            ->where(array('act_id'=>$id,'company_state'=>1))
-            ->field('id,company_name,company_logo,tp_num')
-            ->select();
+        $key = I('key','');
+
+        $list = $this->getTpList($key,$id);
         $this->assign('list',$list);
+        $this->assign('key',$key);
 
         $vote_state = $this->checkVoteState();
         $this->assign('vote_state',$vote_state);
@@ -269,6 +268,26 @@ class IndexController extends BaseController {
             $data['share_data']='';
         }
         $this->ajaxReturn($data);
+    }
+
+    public function getTpList($key,$id)
+    {
+        $maps['act_id'] = array("EQ",$id);
+        $maps['company_state'] = array("EQ",1);
+        if($key != ''){
+            if(is_numeric($key)){
+                $maps['sort'] = array("EQ",$key);
+            }else{
+                $maps['company_name'] = array("LIKE","%$key%");
+            }
+        }
+
+        //列表
+        $list = M("act_company")
+            ->where($maps)
+            ->field('id,company_name,company_logo,tp_num,sort')
+            ->select();
+        return $list;
     }
 
 

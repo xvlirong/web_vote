@@ -9,8 +9,8 @@
 <block name="body">
     <div class="index_body">
         <div class="sel_box">
-            <form action="">
-                <input type="text" placeholder="请输入名称">
+            <form action="{:U('index')}" method="post">
+                <input type="text" name="key" <neq name="key" value="0">value="{$key}"</neq> placeholder="请输入名称">
                 <img id="sel_btn" src="__STATIC__/images/search@3x.png" alt="">
 
             </form>
@@ -26,7 +26,7 @@
                             </a>
                             <p>{$v.company_name}</p>
                             <p>
-                                <span class="v_num">编号：{$key+1}</span>
+                                <span class="v_num">编号：{$v.sort}</span>
                                 <span class="v_vote">票数：<en id="vote_num{$v.id}">{$v.tp_num}</en></span>
                             </p>
                             <dd>
@@ -83,7 +83,7 @@
             }
         }
         $("#sel_btn").click(function () {
-            alert('该搜索了');
+            $("form").submit();
         })
     </script>
 </block>
