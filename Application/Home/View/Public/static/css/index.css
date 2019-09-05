@@ -72,7 +72,7 @@
     margin: 0 3rem;
 }
 .sel_box img{
-    position: fixed;
+    position: absolute;
     top: 14.8rem;
     left: 13.5rem;
     width: 1rem;
