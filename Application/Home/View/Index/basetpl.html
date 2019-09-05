@@ -72,6 +72,11 @@
         <p class="d_ts_info"><img src="__STATIC__/images/success.png" alt=""><span class="ts_info">投票成功</span></p>
         <span id="djs_cs" class="djs_cs">30秒后自动关闭</span>
     </div>
+    <div id="model" style="display: none;">
+        <img src="__STATIC__/images/shared.png" style="width: 6em;float: right;margin-right: -2em;">
+        <p>点击右上角分享<br/>邀请好友帮企业投票吧</p>
+        <button>知道了</button>
+    </div>
 </block>
 
 <!-- body模块 -->
@@ -143,9 +148,7 @@
        close_tk();
    });
    function close_tk(){
-       $('.mask').css('display','none');
-       $('.register').css('display','none');
-       $('.ts_tk').css('display','none');
+       $('.mask,.register,.ts_tk').hide();
    }
 
    function open_tk(){
@@ -191,6 +194,15 @@
 
        }
    }
+   
+   $(".share").click(function () {
+       $('.mask').css('display','block');
+       $('#model').css('display','block');
+   })
+
+   $('#model button').click(function(){
+       $('#model,.mask').hide();
+   })
 
 </script>
 </html>

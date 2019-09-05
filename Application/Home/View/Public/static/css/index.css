@@ -24,6 +24,13 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+
+.vote_list li a {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
 .vote_list li img {
     width: 100%;
     height: 100%;
