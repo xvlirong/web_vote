@@ -64,4 +64,17 @@
 .vote_list li dd span:last-child {
     border: none;
 }
+.sel_box input{
+    border: 1px solid #ccc;
+    border-radius: 1.2rem;
+    width: 12rem;
+    line-height: 1.5rem;
+    margin: 0 3rem;
+}
+.sel_box img{
+    position: fixed;
+    top: 14.8rem;
+    left: 13.5rem;
+    width: 1rem;
+}
 

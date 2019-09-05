@@ -8,6 +8,13 @@
 
 <block name="body">
     <div class="index_body">
+        <div class="sel_box">
+            <form action="">
+                <input type="text">
+                <img id="sel_btn" src="__STATIC__/images/search@3x.png" alt="">
+
+            </form>
+        </div>
                 <ul class="vote_list" style="overflow: hidden;">
                     <volist name="list" id="v">
                         <li>
@@ -75,5 +82,8 @@
                 })
             }
         }
+        $("#sel_btn").click(function () {
+            alert('该搜索了');
+        })
     </script>
 </block>
