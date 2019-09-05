@@ -161,6 +161,10 @@
    $("#sub_btn").click(function () {
        var phone = $("#phone").val();
        var verify_code = $("#verify_code").val();
+       if(!(/^1(3|4|5|6|7|8|9)\d{9}$/.test(phone)) || phone == ''){
+           alert("手机号码有误，请重填");
+           return false;
+       }
        $.ajax({
            type:'post',
            url:"{:U('handleUserInfo')}",
