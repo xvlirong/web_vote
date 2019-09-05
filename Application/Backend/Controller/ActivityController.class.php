@@ -159,6 +159,34 @@ class ActivityController extends CommonController
         }
     }
 
+    public function update_company()
+    {
+        $id = I('id');
+        $info = M("act_company")->where(array('id'=>$id))->find();
+        $this->assign('info',$info);
+
+        $this->display();
+    }
+
+    public function saveCompany()
+    {
+        $id = I('id');
+        $data['company_name'] = I('company_name');
+        $data['company_intro'] = I('company_intro');
+        if($_FILES['company_logo']['name'] != '')
+        {
+            $img = uploadImg('company_logo');
+            $data['company_logo'] = $img['company_logo']['savename'];
+        }
+
+        $res = M("act_company")->where(array('id'=>$id))->save($data);
+        if($res){
+            echo "<script>alert('处理成功'); location.replace(document.referrer);</script>";
+        } else {
+            echo "<script>alert('处理失败'); location.replace(document.referrer);</script>";
+        }
+    }
+
 
 }
 
