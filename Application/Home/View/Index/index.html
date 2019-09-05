@@ -2,6 +2,7 @@
 <block name="source">
     <title>房车时代</title>
     <link rel="stylesheet" href="__STATIC__/css/index.css">
+    <script src="__STATIC__/js/tp_share.js"></script>
 </block>
 
 <block name="body">
@@ -45,7 +46,7 @@
             if(votes_state == 3){
                 open_tk();
             }else if(votes_state == 2){
-                alert('今日已投')
+                alert('今日已投，请明日再来')
             }else if(votes_state == 1){
                 $.ajax({
                     type:"post",

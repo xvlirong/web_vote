@@ -211,5 +211,31 @@ class IndexController extends BaseController {
         $this->display();
     }
 
+    /**
+     * 分享
+     */
+    public function tp_js_api(){
+        $url=htmlspecialchars_decode(trim(I('url')));
+        $jssdk=A("Jssdk");
+        $signPackage = $jssdk->GetSignPackage($url);
+        $img_url = HTTP_TYPE."votes.rvtimes.cn/Public/img/tp_fx.jpg";
+
+        $share_data['title'] = '房车时代2018智慧论坛"优秀服务商"评选';
+        $share_data['desc'] = '快来帮你喜欢的企业投上宝贵的1票！';
+        $share_data['link']=HTTP_TYPE."votes.rvtimes.cn/index/index/since/1";
+        $share_data['imgUrl']=$img_url;
+
+        if($signPackage){
+            $data['result']="success";
+            $data['js_data']=$signPackage;
+            $data['share_data']=$share_data;
+        }else{
+            $data['result']="error";
+            $data['js_data']='';
+            $data['share_data']='';
+        }
+        $this->ajaxReturn($data);
+    }
+
 
 }

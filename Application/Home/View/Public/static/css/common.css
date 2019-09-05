@@ -107,14 +107,13 @@ textarea {
     float: left;
     display: block;
     text-align: center;
-    width: 33%;
+    width: 33.3%;
     border-right: 1px solid #fff;
     line-height: 2.3rem;
 
 }
 .foot_menu li:last-child {
     border: none;
-    width: 34%;
 }
 .foot_menu a{
     text-decoration: none;
