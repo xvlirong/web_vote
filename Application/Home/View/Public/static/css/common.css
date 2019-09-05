@@ -114,6 +114,7 @@ textarea {
 }
 .foot_menu li:last-child {
     border: none;
+    width: 34%;
 }
 .foot_menu a{
     text-decoration: none;

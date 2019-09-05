@@ -4,11 +4,15 @@
 .rule_title{
     color: #019C97;
     font-weight: bold;
-    width: 20%;
+    width: 23%;
     padding: .2rem;
     border: 1px solid #019c97;
+    text-align: center
 }
 .rule_intro p{
     margin: .8rem 0 .5rem 0;
     font-weight: bold;
+}
+rule_intro{
+    margin-bottom: 2.5rem;
 }
