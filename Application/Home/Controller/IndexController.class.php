@@ -13,6 +13,11 @@ class IndexController extends BaseController {
 
         $vote_state = $this->checkVoteState();
         $this->assign('vote_state',$vote_state);
+
+        $batch = date("Ymd",time());
+        $record_id = M("votes_record")->where(array('uid'=>$this->userid,'act_id'=>$id,'batch'=>$batch))->getField('pid');
+        $this->assign('record_id',$record_id);
+
         //公共信息
         $base_info = $this->getBaseInfo($id);
         $this->assign('end_date',$base_info['end_date']);
@@ -28,7 +33,7 @@ class IndexController extends BaseController {
         if($res1 == ''){
             $state = 3;  //1可投票 2已投票 3 未完善信息
         }else{
-            $data['batch'] = date("Y-m-d",time());
+            $data['batch'] = date("Ymd",time());
             $exist = M("votes_record")->where($data)->find();
             if($exist){
                 $state = 2;

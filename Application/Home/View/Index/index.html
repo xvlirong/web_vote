@@ -22,7 +22,11 @@
                                 <span class="v_vote">票数：<en id="vote_num{$v.id}">{$v.tp_num}</en></span>
                             </p>
                             <dd>
-                                <span onclick="do_vote({$v.id})" >投票</span><span class="share">分享</span>
+                                <eq name="record_id" value="$v.id">
+                                    <span  style="background:#959595" onclick="do_vote({$v.id})" >已投</span><span class="share">分享</span>
+                                    <else />
+                                    <span id="btn_tp{$v.id}"  onclick="do_vote({$v.id})" >投票</span><span class="share">分享</span>
+                                </eq>
                             </dd>
                         </li>
                     </volist>
@@ -60,6 +64,8 @@
                             var new_all_num = parseInt(old_all_num)+1;
                             $("#vote_num"+pid).html(new_num);
                             $("#all_vote_num").html(new_all_num);
+                            $("#btn_tp"+pid).css("background",'#959595');
+                            $("#btn_tp"+pid).html("已投");
                             djs_tk();
                         }else{
                            alert(data.msg);

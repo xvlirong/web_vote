@@ -1,5 +1,5 @@
-// var fx_url = "https://m.hrpindao.com/Salon/tp_js_api";
-var fx_url = "{:U('Index/tp_js_api')}";
+var fx_url = "https://votes.rvtimes.cn/Index/tp_js_api";
+//var fx_url = "{:U('Index/tp_js_api')}";
 $(document).ready(function(){
 
     $.ajax({
