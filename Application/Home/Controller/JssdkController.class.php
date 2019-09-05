@@ -1,6 +1,5 @@
 <?php
-namespace Wechat\Controller;
-use Wechat\Controller;
+namespace Home\Controller;
 class JssdkController extends BaseController{
   private $appId='wx25c3d8d3570674cd';
   private $appSecret='913e9fe977454d5ba1a98a2ea51b62ad';
