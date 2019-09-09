@@ -40,6 +40,7 @@
                         <th scope="col">活动时间</th>
                         <th scope="col">活动状态</th>
                         <th scope="col">参选企业</th>
+                        <th scope="col">轮播图管理</th>
                         <th scope="col">编辑</th>
                     </tr>
                     <foreach name="list" item="v">
@@ -52,6 +53,7 @@
 
                             </td>
                             <td><a href="{:U('company_list',array('id'=>$v['id']))}" class="btn">参选企业</a></td>
+                            <td><a href="{:U('banner_list',array('id'=>$v['id']))}" class="btn">轮播图管理</a></td>
                             <td><a href="{:U('update_act',array('id'=>$v['id']))}" class="btn">编辑</a></td>
                         </tr>
                     </foreach>

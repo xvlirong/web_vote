@@ -1,0 +1,122 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=8" >
+    <title>标签</title>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/Assets/css/reset.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/Assets/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/Assets/css/thems.css">
+    <script type="text/javascript" src="__STATIC__/Assets/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            //自适应屏幕宽度
+            window.onresize=function(){ location=location };
+
+            var main_h = $(window).height();
+            $('.hy_list').css('height',main_h-45+'px');
+
+            var search_w = $(window).width()-40;
+            $('.search').css('width',search_w+'px');
+            //$('.list_hy').css('width',search_w+'px');
+        });
+    </script>
+
+    <style>
+        .sub-btn{
+            display: inline-block;
+            zoom: 1;
+            width: 126px;
+            height: 36px;
+            text-align: center;
+            line-height: 36px;
+            color: #fff;
+            vertical-align: top;
+            margin-top: 16px;
+            margin-right: 5px;
+            margin-left: 155px;
+            background-color: #518fe8;
+            border: none;
+        }
+
+        .checkbox {
+            width: 16px !important;
+            height: 16px !important;
+        }
+
+        .edit-tip{
+            cursor:pointer;
+        }
+    </style>
+    <!--框架高度设置-->
+</head>
+
+<body onLoad="Resize();">
+<div id="right_ctn">
+    <div class="right_m">
+        <!--会议列表-->
+        <div class="hy_list">
+            <div class="box_t">
+                <span class="name">轮播管理</span>
+            </div>
+            <div class="space_hx">&nbsp;</div>
+            <div class="xjhy" style="padding:0px;">
+                <div class="tabBox_t">
+                    <div class="tabBox">
+                        <ul class="tabNav">
+                            <li class="now"><span>图片列表</span></li>
+                        </ul>
+                        <div class="tabCont" style="display:block;">
+                            <table cellpadding="0" cellspacing="0" class="list_hy">
+
+                                <tr>
+                                    <th scope="col"><div>ID</div></th>
+                                    <th scope="col"><div>图片</div></th>
+                                    <th scope="col" style="width: 200px">操作</th>
+                                </tr>
+                                <foreach name="list" item="v">
+                                    <tr>
+                                        <td>{$key+1}</td>
+                                        <td><img width="250px" src="__PUBLIC__/upload/banner_img/{$v.img_url}" alt=""></td>
+
+                                        <td style="max-width: 200px">
+                                            <a href="{:U('delActBanner',array('id'=>$v['id']))}">删除</a>
+                                        </td>
+                                    </tr>
+                                </foreach>
+                            </table>
+                        </div>
+                        <ul class="tabNav">
+                            <li class="now"><span>添加图片</span></li>
+                        </ul>
+                        <form method="post" action="{:U('addActBanner')}"  enctype="multipart/form-data">
+                            <input type="hidden" name="id" value="{$id}">
+                            <ul class="hypz">
+                                <li class="clearfix">
+                                    <span class="title">图片：</span>
+                                    <div class="li_r">
+                                        <input  name="img_url" type="file">
+                                    </div>
+                                </li>
+                                <li class="tj_btn">
+                                    <input type="submit" value="添加" class="sub-btn">
+                                </li>
+
+                            </ul>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!--会议列表-->
+    </div>
+</div>
+<script>
+    /*提交搜索*/
+    $('#sub').click(function(){
+        document.formtest.submit();
+    });
+</script>
+</body>
+</html>

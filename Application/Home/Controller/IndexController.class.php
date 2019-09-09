@@ -147,28 +147,34 @@ class IndexController extends BaseController {
     public function handleVotes()
     {
         $act_id = 1;
-        $id = I('id');
-        $data['uid'] = $this->userid;
-        $data['batch'] = date("Ymd",time());
-        $exist = M("votes_record")->where($data)->find();
-        if($exist){
-            $res_info['code'] = 0;
-            $res_info['msg'] = '今日已投';
+        $act_info = M("rv_act")->where(array('id'=>$act_id))->find();
+        if($act_info['act_state'] == 0 || time()>$act_info['end_time']){
+            $res_info['code'] = 3;
+            $res_info['msg'] = '活动已结束';
         }else{
-            M()->startTrans();
-            $data['pid'] = $id;
-            $data['act_id'] = $act_id;
-            $data['add_time'] = time();
-            $res1 = M("votes_record")->add($data);
-            $res2 = M("act_company")->where(array('id'=>$id))->setInc('tp_num');
-            if($res1 && $res2){
-                M()->commit();
-                $res_info['code'] = 1;
-                $res_info['msg'] = '投票成功';
+            $id = I('id');
+            $data['uid'] = $this->userid;
+            $data['batch'] = date("Ymd",time());
+            $exist = M("votes_record")->where($data)->find();
+            if($exist){
+                $res_info['code'] = 0;
+                $res_info['msg'] = '今日已投';
             }else{
-                M()->rollback();
-                $res_info['code'] = 2;
-                $res_info['msg'] = '处理失败';
+                M()->startTrans();
+                $data['pid'] = $id;
+                $data['act_id'] = $act_id;
+                $data['add_time'] = time();
+                $res1 = M("votes_record")->add($data);
+                $res2 = M("act_company")->where(array('id'=>$id))->setInc('tp_num');
+                if($res1 && $res2){
+                    M()->commit();
+                    $res_info['code'] = 1;
+                    $res_info['msg'] = '投票成功';
+                }else{
+                    M()->rollback();
+                    $res_info['code'] = 2;
+                    $res_info['msg'] = '处理失败';
+                }
             }
         }
 
