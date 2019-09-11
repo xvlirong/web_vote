@@ -46,6 +46,8 @@ class ActivityController extends CommonController
     {
         $id = I('id');
         $data['act_name'] = I('act_name');
+        $data['act_rule'] = I('act_rule');
+        $data['act_intro'] = I('act_intro');
         $data['start_time'] = strtotime(I('start_time'));
         $data['end_time'] = strtotime(I('end_time'));
         $data['act_state'] = I('act_state');
@@ -66,6 +68,8 @@ class ActivityController extends CommonController
     public function addAct()
     {
         $data['act_name'] = I('act_name');
+        $data['act_rule'] = I('act_rule');
+        $data['act_intro'] = I('act_intro');
         $data['start_time'] = strtotime(I('start_time'));
         $data['end_time'] = strtotime(I('end_time'));
         $data['add_time'] = time();
