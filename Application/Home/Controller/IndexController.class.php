@@ -95,6 +95,8 @@ class IndexController extends BaseController {
 
         //访问量
         $info['pv_num'] = M("rv_act")->where(array('id'=>$id))->getField('pv_num');
+
+        $info['head_img'] = M("act_banner")->where(array('act_id'=>$id))->getField('img_url');
         return $info;
     }
 
