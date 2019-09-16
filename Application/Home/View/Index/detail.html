@@ -55,7 +55,7 @@
 
         votes_state = {$vote_state};
         function do_vote(pid){
-            var old_num = $("#vote_num"+pid).html();
+            var old_num = {$info['tp_num']};
             var old_all_num = $("#all_vote_num").html();
             if(votes_state == 3){
                 open_tk();
