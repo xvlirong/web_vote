@@ -72,10 +72,13 @@
     margin: 0 3rem;
     padding-left: .5rem;
 }
-.sel_box img{
+.sel_box img {
     position: absolute;
-    top: 15.8rem;
+    top: .3rem;
     left: 13.5rem;
     width: 1rem;
+}
+.sel_box {
+    position: relative;
 }
 
