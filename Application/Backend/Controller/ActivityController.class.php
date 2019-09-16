@@ -195,7 +195,7 @@ class ActivityController extends CommonController
     {
         $id = I('id');
 
-        $list = M("act_banner")->where(array('id'=>$id))->select();
+        $list = M("act_banner")->where(array('act_id'=>$id))->select();
         $this->assign('list',$list);
         $this->assign('id',$id);
 
