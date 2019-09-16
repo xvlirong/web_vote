@@ -269,8 +269,9 @@ class IndexController extends BaseController {
         $pid = cookie('share_pid');
         $info = M("act_company")->where(array('id'=>$pid))->field('company_name,company_logo')->find();
         $img_url = HTTP_TYPE."votes.rvtimes.cn/Public/upload/company_logo/".$info['company_logo'];
-        $con = '我正在为'.$info['company_name'].'投票，你也来帮忙吧';
-        $share_data['title'] = '房车时代网2019"优秀服务商"评选';
+        $title = '【'.$info['company_name'].'】中国房车20周年荣耀盛典评选-房车时代';
+        $con = '选择'.$info['company_name'].'，为您喜爱的房车企业投上宝贵的一票-房车时代网';
+        $share_data['title'] = $title;
         $share_data['desc'] = $con;
         $share_data['link']=HTTP_TYPE."votes.rvtimes.cn/index/detail/since/1/id/".$pid;
         $share_data['imgUrl']=$img_url;
