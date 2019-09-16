@@ -242,8 +242,8 @@ class IndexController extends BaseController {
         $signPackage = $jssdk->GetSignPackage($url);
         $img_url = HTTP_TYPE."votes.rvtimes.cn/Public/img/tp_fx.jpg";
 
-        $share_data['title'] = '房车时代网2019"优秀服务商"评选"';
-        $share_data['desc'] = '快来帮你喜欢的企业投上宝贵的1票！';
+        $share_data['title'] = '中国房车20周年荣耀盛典评选';
+        $share_data['desc'] = '选出自己喜欢的品牌，投上您宝贵的一票';
         $share_data['link']=HTTP_TYPE."votes.rvtimes.cn/index/index/since/1";
         $share_data['imgUrl']=$img_url;
 
