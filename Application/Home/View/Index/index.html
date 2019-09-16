@@ -30,11 +30,11 @@
                                 <span class="v_vote">票数：<en id="vote_num{$v.id}">{$v.tp_num}</en></span>
                             </p>
                             <dd>
-                                <eq name="record_id" value="$v.id">
-                                    <span  style="background:#959595" onclick="do_vote({$v.id})" >已投</span><span class="share">分享</span>
+                                <if condition="in_array($v['id'],$record_id)">
+                                    <span  style="background:#959595" >已投</span><span class="share">分享</span>
                                     <else />
                                     <span id="btn_tp{$v.id}"  onclick="do_vote({$v.id})" >投票</span><span class="share">分享</span>
-                                </eq>
+                                </if>
                             </dd>
                         </li>
                     </volist>
@@ -58,7 +58,7 @@
             if(votes_state == 3){
                 open_tk();
             }else if(votes_state == 2){
-                alert('今日已投，请明日再来')
+                alert('今日剩余投票次数不足，请明日再来')
             }else if(votes_state == 1){
                 $.ajax({
                     type:"post",

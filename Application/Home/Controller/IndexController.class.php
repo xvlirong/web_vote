@@ -2,6 +2,7 @@
 namespace Home\Controller;
 use Think\Controller;
 class IndexController extends BaseController {
+    //$act_id 活动ID
     public function index(){
         $id = I('act_id',1);
         $key = I('key','');
@@ -14,7 +15,8 @@ class IndexController extends BaseController {
         $this->assign('vote_state',$vote_state);
 
         $batch = date("Ymd",time());
-        $record_id = M("votes_record")->where(array('uid'=>$this->userid,'act_id'=>$id,'batch'=>$batch))->getField('pid');
+        $record_id = M("votes_record")->where(array('uid'=>$this->userid,'act_id'=>$id,'batch'=>$batch))->field('pid')->select();
+        $record_id = array_column($record_id,'pid');
         $this->assign('record_id',$record_id);
 
         //公共信息
@@ -33,8 +35,10 @@ class IndexController extends BaseController {
             $state = 3;  //1可投票 2已投票 3 未完善信息
         }else{
             $data['batch'] = date("Ymd",time());
-            $exist = M("votes_record")->where($data)->find();
-            if($exist){
+            $exist_arr = M("votes_record")->where($data)->field('pid')->select();
+            $tp_num = count($exist_arr);
+
+            if($tp_num >= 3){
                 $state = 2;
             }else{
                 $state = 1;
@@ -54,6 +58,10 @@ class IndexController extends BaseController {
 
         $info = M("act_company")->where(array('id'=>$id))->find();
         $this->assign('info',$info);
+
+        $batch = date("Ymd",time());
+        $record_info = M("votes_record")->where(array('uid'=>$this->userid,'pid'=>$id,'batch'=>$batch))->find();
+        $this->assign('record_info',$record_info);
 
         $vote_state = $this->checkVoteState();
         $this->assign('vote_state',$vote_state);
@@ -156,11 +164,12 @@ class IndexController extends BaseController {
         }else{
             $id = I('id');
             $data['uid'] = $this->userid;
+            $data['pid'] = $id;
             $data['batch'] = date("Ymd",time());
             $exist = M("votes_record")->where($data)->find();
             if($exist){
                 $res_info['code'] = 0;
-                $res_info['msg'] = '今日已投';
+                $res_info['msg'] = '今日剩余投票次数不足';
             }else{
                 M()->startTrans();
                 $data['pid'] = $id;
