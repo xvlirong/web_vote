@@ -30,9 +30,9 @@
         <p class="rv_intro">{$info.company_intro}</p>
         <dd>
             <notempty name="record_info">
-                <span  style="background:#959595" >已投</span><span class="share">分享</span>
+                <span id="tp_btn"  style="background:#959595" >已投</span><span class="share">分享</span>
                 <else />
-                <span onclick="do_vote({$info.id})">投票</span> <span class="share">分享</span>
+                <span id="tp_btn" onclick="do_vote({$info.id})">投票</span> <span class="share">分享</span>
             </notempty>
         </dd>
         <p class="vote_num" id="vote_num{$info.id}">票数：{$info.tp_num}</p>
@@ -60,7 +60,7 @@
             if(votes_state == 3){
                 open_tk();
             }else if(votes_state == 2){
-                alert('今日已投，请明日再来')
+                alert('今日剩余投票次数不足，请明日再来')
             }else if(votes_state == 1){
                 $.ajax({
                     type:"post",
@@ -72,8 +72,10 @@
                             $(".ts_info").html(data.msg);
                             var new_num = parseInt(old_num)+1;
                             var new_all_num = parseInt(old_all_num)+1;
-                            $("#vote_num"+pid).html(new_num);
+                            $(".vote_num").html('票数：'+new_num);
                             $("#all_vote_num").html(new_all_num);
+                            $("#tp_btn").css("background",'#959595');
+                            $("#tp_btn").html("已投");
                             djs_tk();
                         }else{
                             alert(data.msg);
