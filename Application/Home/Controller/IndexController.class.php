@@ -160,15 +160,25 @@ class IndexController extends BaseController {
         $act_id = 1;
         $act_info = M("rv_act")->where(array('id'=>$act_id))->find();
         if($act_info['act_state'] == 0 || time()>$act_info['end_time']){
+            //判断活动状态是否结束
             $res_info['code'] = 3;
             $res_info['msg'] = '活动已结束';
         }else{
             $id = I('id');
+            //判断该企业状态是否正常
+            $company_state = M("act_company")->where(array('id'=>$id))->getField('company_state');
+            if($company_state != 1){
+                //是否已为该企业投过票
+                $res_info['code'] = 4;
+                $res_info['msg'] = '禁止为该企业投票';
+                $this->ajaxReturn($res_info);die;
+            }
             $data['uid'] = $this->userid;
             $data['pid'] = $id;
             $data['batch'] = date("Ymd",time());
             $exist = M("votes_record")->where($data)->find();
             if($exist){
+                //是否已为该企业投过票
                 $res_info['code'] = 0;
                 $res_info['msg'] = '今日剩余投票次数不足';
             }else{
