@@ -36,7 +36,7 @@ class IndexController extends BaseController {
         $list = $this->getTpList($key,$id);
         if(empty($list)){
             $res['code'] = 0;
-            $res['msg'] = '无相关搜索数据';
+            $res['msg'] = '暂无该品牌';
         }else{
             $res['code'] = 1;
             $res['list'] = $list;
