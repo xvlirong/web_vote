@@ -4,6 +4,7 @@ use Think\Controller;
 class IndexController extends BaseController {
     //$act_id 活动ID
     public function index(){
+
         $id = I('act_id',1);
         $key = I('key','');
 
@@ -308,5 +309,9 @@ class IndexController extends BaseController {
         return $list;
     }
 
+    public function test_ip()
+    {
+        $this->checkIP();
+    }
 
 }
