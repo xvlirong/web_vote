@@ -70,7 +70,7 @@
     <div class="ts_tk" style="display: none">
         <span class="close_tk clearFix">×</span>
         <p class="d_ts_info"><img src="__STATIC__/images/success.png" alt=""><span class="ts_info">投票成功</span></p>
-        <span id="djs_cs" class="djs_cs">30秒后自动关闭</span>
+        <span id="djs_cs" class="djs_cs">3秒后自动关闭</span>
     </div>
     <div id="model" style="display: none;">
         <img src="__STATIC__/images/shared.png" style="width: 6em;float: right;margin-right: -2em;">
@@ -187,7 +187,7 @@
        $('.ts_tk').css('display','block');
        var _this=$("#djs_cs");
        if(!$(this).hasClass("on")){
-           $.leftTime(30,function(d){
+           $.leftTime(3,function(d){
                if(d.status){
                    _this.addClass("on");
                    _this.html((d.s=="00"?"30":d.s)+"秒后自动关闭");
