@@ -10,7 +10,7 @@
     <div class="index_body">
         <div class="sel_box">
             <form action="{:U('index')}" method="post">
-                <input type="text" name="key" <neq name="key" value="0">value="{$key}"</neq> placeholder="请输入名称">
+                <input type="text" id="key" name="key" <neq name="key" value="0">value="{$key}"</neq> placeholder="请输入名称">
                 <img id="sel_btn" src="__STATIC__/images/search@3x.png" alt="">
 
             </form>
@@ -18,9 +18,6 @@
                 <ul class="vote_list" style="overflow: hidden;">
                     <volist name="list" id="v">
                         <li>
-                            <!--                            <a href="{:U('Lecturer/company_detail',array('id'=>$v['l_id'],'yd'=>1))}">-->
-                            <!--                                <img src="__PUBLIC__/upload/company_logo/{$v.logo}">-->
-                            <!--                            </a>-->
                             <a href="{:U('detail',array('id'=>$v['id']))}">
                             <img src="__PUBLIC__/upload/company_logo/{$v.company_logo}" />
                             </a>
@@ -83,8 +80,52 @@
             }
         }
         $("#sel_btn").click(function () {
-            $("form").submit();
-        })
+            //$("form").submit();
+            var key = $("#key").val();
+            $.ajax({
+                type:"post",
+                url:"{:U('searchList')}",
+                data:{key:key},
+                dataType:"json",
+                success:function (data) {
+                    var code = data.code;
+                    if(code == 0){
+                        alert(data.msg);
+                    }else{
+                        $(".vote_list").html('');
+                        var tp_arr = {$record_id_json};
+                        console.log(tp_arr);
+                        data.list.forEach(function(item,index,arr){
+                            var ts = '';
+                            if(in_array(item.id,tp_arr)){
+                                ts = '<span  style="background:#959595" >已投</span><span class="share">分享</span>';
+                            }else{
+                                ts =  `<span id="btn_tp`+item.id+`"  onclick="do_vote(`+item.id+`)" >投票</span><span class="share">分享</span>`
+                            };
+                            var url = "__APP__/index/detail/id/"+item.id;
+                            var content =
+                                `   <li>
+                            <a href="`+url+`">
+                            <img src="__PUBLIC__/upload/company_logo/`+item.company_logo+`" />
+                            </a>
+                            <p>`+item.company_name+`</p>
+                            <p>
+                                <span class="v_num">编号：`+item.sort+`</span>
+                                <span class="v_vote">票数：<en id="vote_num`+item.id+`">`+item.tp_num+`</en></span>
+                            </p>
+                            <dd>
+                                `+ts+`
+                            </dd>
+                        </li>`;
+
+                            $(".vote_list").append(content);
+                        });
+
+
+                    }
+                }
+            })
+        });
         var b = '';
         $(window).scroll(function(){
            b = $(this).scrollTop();
@@ -94,5 +135,13 @@
                $(".foot").hide();
            }
         })
+        function in_array(search,array) {
+            for(var i in array){
+                if(array[i]==search){
+                    return true;
+                }
+            }
+            return false;
+        }
     </script>
 </block>

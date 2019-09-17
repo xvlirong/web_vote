@@ -19,6 +19,7 @@ class IndexController extends BaseController {
         $record_id = M("votes_record")->where(array('uid'=>$this->userid,'act_id'=>$id,'batch'=>$batch))->field('pid')->select();
         $record_id = array_column($record_id,'pid');
         $this->assign('record_id',$record_id);
+        $this->assign('record_id_json',json_encode($record_id));
 
         //公共信息
         $base_info = $this->getBaseInfo($id);
@@ -26,6 +27,23 @@ class IndexController extends BaseController {
         $this->assign('now_date',$base_info['now_date']);
         $this->assign('base_info',$base_info);
         $this->display();
+    }
+
+    public function searchList()
+    {
+        $key = I('key','');
+        $id = I('act_id',1);
+        $list = $this->getTpList($key,$id);
+        if(empty($list)){
+            $res['code'] = 0;
+            $res['msg'] = '无相关搜索数据';
+        }else{
+            $res['code'] = 1;
+            $res['list'] = $list;
+            $res['msg'] = '处理成功';
+        }
+        $this->ajaxReturn($res);
+
     }
 
     public function checkVoteState()
