@@ -44,8 +44,9 @@ class BaseController extends Controller
                 $realip = getenv("REMOTE_ADDR");
             }
         }
-        $data = $this->getCity($realip);
-        print_r($data);die;
+        return $realip;
+        //$data = $this->getCity($realip);
+        //print_r($data);die;
     }
 
     function getCity($ip)

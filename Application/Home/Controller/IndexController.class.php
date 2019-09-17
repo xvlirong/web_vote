@@ -175,6 +175,7 @@ class IndexController extends BaseController {
                 M()->startTrans();
                 $data['pid'] = $id;
                 $data['act_id'] = $act_id;
+                $data['real_ip'] = $this->checkIP();
                 $data['add_time'] = time();
                 $res1 = M("votes_record")->add($data);
                 $res2 = M("act_company")->where(array('id'=>$id))->setInc('tp_num');
