@@ -98,9 +98,9 @@
                         data.list.forEach(function(item,index,arr){
                             var ts = '';
                             if(in_array(item.id,tp_arr)){
-                                ts = '<span  style="background:#959595" >已投</span><span class="share">分享</span>';
+                                ts = '<span  style="background:#959595" >已投</span><span onclick="tk_ts()" class="share">分享</span>';
                             }else{
-                                ts =  `<span id="btn_tp`+item.id+`"  onclick="do_vote(`+item.id+`)" >投票</span><span class="share">分享</span>`
+                                ts =  `<span id="btn_tp`+item.id+`"  onclick="do_vote(`+item.id+`)" >投票</span><span onclick="tk_ts()" class="share">分享</span>`
                             };
                             var url = "__APP__/index/detail/id/"+item.id;
                             var content =
@@ -142,6 +142,10 @@
                 }
             }
             return false;
+        }
+        function tk_ts(){
+            $('.mask').css('display','block');
+            $('#model').css('display','block');
         }
     </script>
 </block>
