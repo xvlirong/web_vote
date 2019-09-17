@@ -43,7 +43,7 @@
                 </ul>
     </div>
 
-    <div class="foot clearFix">
+    <div class="foot clearFix" style="display: none">
         <ul class="foot_menu clearFix">
             <li class="foot_act"><a href="{:U('index')}">全部参赛</a></li>
             <li><a href="{:U('rank_list')}">当前排名</a></li>
@@ -84,6 +84,15 @@
         }
         $("#sel_btn").click(function () {
             $("form").submit();
+        })
+        var b = '';
+        $(window).scroll(function(){
+           b = $(this).scrollTop();
+           if(b>300){
+               $(".foot").show();
+           }else{
+               $(".foot").hide();
+           }
         })
     </script>
 </block>
