@@ -182,41 +182,48 @@ class IndexController extends BaseController {
             $res_info['code'] = 3;
             $res_info['msg'] = '活动已结束';
         }else{
-            $id = I('id');
-            //判断该企业状态是否正常
-            $company_state = M("act_company")->where(array('id'=>$id))->getField('company_state');
-            if($company_state != 1){
-                //是否已为该企业投过票
-                $res_info['code'] = 4;
-                $res_info['msg'] = '禁止为该企业投票';
-                $this->ajaxReturn($res_info);die;
-            }
-            $data['uid'] = $this->userid;
-            $data['pid'] = $id;
-            $data['batch'] = date("Ymd",time());
-            $exist = M("votes_record")->where($data)->find();
-            if($exist){
-                //是否已为该企业投过票
+            $tp_state = $this->checkVoteState();
+            if($tp_state == 1){
+                $id = I('id');
+                //判断该企业状态是否正常
+                $company_state = M("act_company")->where(array('id'=>$id))->getField('company_state');
+                if($company_state != 1){
+                    $res_info['code'] = 4;
+                    $res_info['msg'] = '禁止为该企业投票';
+                    $this->ajaxReturn($res_info);die;
+                }
+                $data['uid'] = $this->userid;
+                $data['pid'] = $id;
+                $data['batch'] = date("Ymd",time());
+                $exist = M("votes_record")->where($data)->find();
+                if($exist){
+                    //是否已为该企业投过票
+                    $res_info['code'] = 0;
+                    $res_info['msg'] = '今日剩余投票次数不足';
+                }else{
+                    M()->startTrans();
+                    $data['pid'] = $id;
+                    $data['act_id'] = $act_id;
+                    $data['real_ip'] = $this->checkIP();
+                    $data['add_time'] = time();
+                    $res1 = M("votes_record")->add($data);
+                    $res2 = M("act_company")->where(array('id'=>$id))->setInc('tp_num');
+                    if($res1 && $res2){
+                        M()->commit();
+                        $res_info['code'] = 1;
+                        $res_info['msg'] = '投票成功';
+                    }else{
+                        M()->rollback();
+                        $res_info['code'] = 2;
+                        $res_info['msg'] = '处理失败';
+                    }
+                }
+            }else{
                 $res_info['code'] = 0;
                 $res_info['msg'] = '今日剩余投票次数不足';
-            }else{
-                M()->startTrans();
-                $data['pid'] = $id;
-                $data['act_id'] = $act_id;
-                $data['real_ip'] = $this->checkIP();
-                $data['add_time'] = time();
-                $res1 = M("votes_record")->add($data);
-                $res2 = M("act_company")->where(array('id'=>$id))->setInc('tp_num');
-                if($res1 && $res2){
-                    M()->commit();
-                    $res_info['code'] = 1;
-                    $res_info['msg'] = '投票成功';
-                }else{
-                    M()->rollback();
-                    $res_info['code'] = 2;
-                    $res_info['msg'] = '处理失败';
-                }
             }
+
+
         }
 
         $this->ajaxReturn($res_info);
