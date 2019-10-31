@@ -61,7 +61,7 @@
     overflow: hidden;
 }
 #footer .texts {
-    width: 900px;
+    width: 1000px;
     float: left;
 }
 #footer .txt {
@@ -82,11 +82,11 @@
     *display: inline;
 }
 #footer .img {
-    /*width: 330px;*/
-    margin-left: 150px;
+    /*width: 330px; */
+    margin-left: 114px;
     float: left;
     overflow: hidden;
-    margin-top: -44px;
+    margin-top: -22px;
 }
 .footer_bg{
     width: 100%;
