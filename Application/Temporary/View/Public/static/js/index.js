@@ -28,7 +28,7 @@ var brand={
         })
     },
     move:function(iNow){
-        $('#brand ul').animate({'margin-left':-1210*iNow},300);
+        $('#brand ul').animate({'margin-left':-1200*iNow},300);
     }
 };
 brand.init();

@@ -1,6 +1,6 @@
 
 #brand .list {
-    width: 1210px;
+    width: 1200px;
     /*margin: 18px auto 0;*/
     overflow: hidden;
     height: auto;
@@ -13,7 +13,7 @@
 
 }
 #brand li {
-    width: 1210px;
+    width: 1200px;
     float: left;
 }
 #brand li div {
@@ -56,7 +56,7 @@
 }
 
 #footer .con {
-    width: 1300px;
+    width: 1200px;
     padding-top: 45px;
     overflow: hidden;
 }
@@ -83,7 +83,7 @@
 }
 #footer .img {
     /*width: 330px; */
-    margin-left: 80px;
+    margin-left: 45px;
     float: left;
     overflow: hidden;
     margin-top: -22px;
