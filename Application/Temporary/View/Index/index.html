@@ -133,9 +133,9 @@
                     <a style="color: #ff3838" href="#">首页</a>
                     <b class="btnline" style="display: block;"></b>
                 </li>
-                <li>服务保障</li>
-                <li>合作品牌</li>
-                <li>参展现场</li>
+                <li id="fwbz">服务保障</li>
+                <li id="hzpp">合作品牌</li>
+                <li id="czxc">参展现场</li>
                 <li><a href="http://www.rvtimes.cn/">网站</a></li>
                 <li class="btn">关于我们</li>
             </ul>
@@ -157,7 +157,7 @@
         </div>
         <!--     banner  end-->
 
-        <div class="fwbz">
+        <div class="fwbz" id="con_fwbz">
             <div class="fwbz_body">
                 <div class="bz_title">
                     <span class="title">服务保障</span>
@@ -290,7 +290,7 @@
             </div>
         </div>
 
-        <div class="czxc">
+        <div class="czxc" id="con_czxc">
             <div class="fwbz_body">
                 <div class="bz_title">
                     <span class="title">参展现场</span>
@@ -353,5 +353,15 @@
         $('#mask-kk,.popup-kk').css('display', 'none');
         $("body").css({overflow:""})
     })
+
+    $('#fwbz').click(function() {
+        $('html,body').animate({ scrollTop: $("#con_fwbz").offset().top - 8 }, 200)
+    });
+    $('#hzpp').click(function() {
+        $('html,body').animate({ scrollTop: $("#brand").offset().top - 10 }, 200)
+    });
+    $('#czxc').click(function() {
+        $('html,body').animate({ scrollTop: $("#con_czxc").offset().top - 10 }, 200)
+    });
 </script>
 </html>
