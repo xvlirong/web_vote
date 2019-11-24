@@ -3,7 +3,7 @@ return array(
 	//'配置项'=>'配置值'
     define('HTTP_TYPE',((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on') || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')) ? 'https://' : 'http://'),
     //'配置项' =>'配置值'
-    'MODULE_ALLOW_LIST' =>    array('Home','Backend','Temporary'),
+    'MODULE_ALLOW_LIST' =>    array('Home','Backend','Temporary','Rvact','Admin'),
     'DEFAULT_MODULE' =>    'Temporary',
     //我们用了入口版定 所以下面这行可以注释掉
     //'SHOW_PAGE_TRACE'   =>  true,
