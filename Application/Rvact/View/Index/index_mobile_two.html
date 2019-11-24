@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{$info.title}</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <link rel="stylesheet" href="__STATIC__/css/neat.css" />
+    <link rel="stylesheet" href="__STATIC__/css/swiper.css" />
+    <link rel="stylesheet" href="__STATIC__/css/phone_one.css" />
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=tBW47T7lwTiNXTigAGMKt42K"></script>
+    <script type="text/javascript">
+        function setFontSize(){
+            var oWrap=document.getElementById('wrap');
+            var width=document.documentElement.clientWidth;
+            var height=document.documentElement.clientHeight;
+            var oHtml=document.getElementsByTagName('html')[0];
+            var fz = width/750*100;
+            fz=fz>150?150:fz;
+            oHtml.style.width = 7.5*fz + 'px';
+            oHtml.style.fontSize = fz + 'px';
+            oWrap.style.display='block';
+        };
+        window.addEventListener('load',setFontSize,false);
+        window.addEventListener('resize',setFontSize,false);
+    </script>
+</head>
+<body>
+<div id="mask"></div>
+<div id="message">必填项不能为空</div>
+<div id="wrap">
+    <header>
+        <img  src="__PUBLIC__/upload/banner/{$info.banner_mobile}" alt="" />
+    </header>
+    <a name="fix"></a>
+    <div class="main_content">
+        <div class="activity">
+            <div class="countdown">
+                <img src="__STATIC__/images/mobile_time.png" alt="" />
+                <b>活动剩余时间：</b>
+                <b class="time">
+                    <b>
+                        <span>-</span>
+                        <span>-</span>
+                        <span>-</span>
+                        <span>-</span>
+                    </b>
+                </b>
+            </div>
+            <div class="form">
+                <h2>本车展已有<span>{$activityNum}</span>人报名领票</h2>
+                <div class="content">
+                    <div class="formBox">
+                        <div class="item">
+                            <h4>您的意向购买车型</h4>
+                            <div id="newtest">
+                                <div class="checkboxs">
+                                    <input type="checkbox" name="model" value="B型房车"><span>B型房车</span>
+                                    <input type="checkbox" name="model" value="C型房车"><span>C型房车</span>
+                                    <input type="checkbox" name="model" value="拖挂式房车"><span>拖挂式房车</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item">
+                            <input type="text" class="text" id="username" placeholder="您的姓名"/>
+                        </div>
+                        <div class="item">
+                            <input type="text" class="text" id="phone" placeholder="您的手机号"/>
+                        </div>
+                        <div class="item">
+                            <eq name="act_status" value="1">
+                                <input type="submit" class="submit" id="submit" value="免费报名领票" />
+                                <else />
+                                <input type="submit" class="submit no" value="免费报名领票" />
+                            </eq>
+                        </div>
+                        <div class="txt">
+                            <p>价值50元门票限量免费发送{$info.ticket_num}张</p>
+                            <p>任何问题请拨打咨询热线: <a href="tel:{$activityData.majorphone}">{$info.service_phone}</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="signlist clearfix">
+                <div class="list">
+                    <ul>
+                        <foreach name="activityMemberList" item="v">
+                            <li>
+                                <span class="username">{$v.username}</span><span class="userphone">{$v.userphone}</span><span class="usercar">{$v.usercar}</span><span class="usertime">{$v.usertime}</span>
+                            </li>
+                        </foreach>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div id="flow">
+            <div class="con">
+                <img src="__STATIC__/images/mobile_flow.jpg" alt="" />
+            </div>
+        </div>
+        <!--车展亮点-->
+        <div class="spot">
+            <h3>【车展亮点】</h3>
+            <div class="list">
+                <ul class="clearfix">
+                    <foreach name="info['act_highlights']" item="v" key="k">
+                        <li>
+                            <div class="circle"><p>{$k+1}</p></div>
+                            <p>{$v}</p>
+                        </li>
+                    </foreach>
+                </ul>
+            </div>
+        </div>
+        <!--合作品牌-->
+        <div id="brand">
+            <div class="title"><h3>【合作品牌】</h3></div>
+            <div class="list">
+                <ul class="clearfix">
+                    <foreach name="brand_list" item="v" key="i">
+                        <if condition="$i lt 12">
+                            <li>
+                                <div><img src="__PUBLIC__/upload/brand/{$v.brand_logo}" alt="" /></div>
+                            </li>
+                            <else />
+                            <li class="none">
+                                <div><img src="__PUBLIC__/upload/brand/{$v.brand_logo}" alt="" /></div>
+                            </li>
+                        </if>
+                    </foreach>
+                </ul>
+            </div>
+            <div class="more" id="more">查看更多品牌</div>
+        </div>
+        <!--车展路线-->
+        <div id="address">
+            <div class="title"><h3>【车展路线】</h3></div>
+            <div id="allmap"></div>
+            <div class="txt">
+                <img src="__STATIC__/images/mobile_car.png" alt="" />
+                <span>乘车线路：</span>
+                <foreach name="info['lines']" item="v">
+                    <p>{$v}</p>
+                </foreach>
+            </div>
+        </div>
+        <!--车展会场-->
+        <div id="scene">
+            <div class="title"><h3>【车展会场】</h3></div>
+            <div class="img">
+                <div class="swiper-container" id="swipers">
+                    <div class="swiper-wrapper">
+                        <foreach name="scene_img" item="v">
+                            <div class="swiper-slide">
+                                <img src="__PUBLIC__/upload/scene/{$v.img_url}" alt="">
+                            </div>
+                        </foreach>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--车展简介-->
+        <div id="desc">
+            <div class="title"><h3>车展简介</h3></div>
+            <dl>
+                <dt>▶ 展会详细信息</dt>
+                <dd><span>时　　间：</span>{$info.start_time|date="m月d日",###}-{$info.end_time|date="m月d日",###}</dd>
+                <dd><span>地　　点：</span>{$info.act_address}</dd>
+                <if condition="$activityData.support neq ''"><dd><span>支持单位：</span>{$info.support}</dd></if>
+                <dd><span>主办单位：</span>{$info.sponsor_unit}</dd>
+                <if condition="$info.co_sponsored neq ''"><dd><span>联合主办：</span>{$info.co_sponsored}</dd></if>
+                <dd class="chengban"><span>承办单位：</span></dd>
+                <dd><span>咨询热线：</span>{$info.consult_phone}</dd>
+                <dd><p>{$info.act_intro}</p></dd>
+            </dl>
+        </div>
+        <div class="copy">&copy; 2014-2019 房车时代 <p>京ICP备07503663号 京公网安备11010802015289号</p> </div>
+    </div>
+    <!--
+    <footer>
+        <img src="{$activityData.weixin}" alt="" />
+    </footer>
+    -->
+    <div id="fixed">
+        <ul class="footer clearfloat">
+            <li><a href="#fix" target="_self">免费报名</a></li>
+            <li><a href="tel:{$info.recept_phone}">{$info.recept_phone}</a></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+    // 百度地图API功能
+    var lgt="{$info.map_longitude}";
+    var lat="{$info.map_latitude}";
+    var themes='__STATIC__';
+    //倒计时
+    var time_end='{$info.end_time}'*1000;
+    //表单
+    var id="{$info['id']}";
+    var source='{$source}';
+    //var url='{$refererUrl}';
+    var organizer='{$info.undertaking_unit}';
+    var use_url = "__APP__/Rvact/Index/sign";
+    var type='mobile';
+    var base_url = "__APP__/Rvact/Index/";
+
+</script>
+<script type="text/javascript" src="__STATIC__/js/jquery.min.js"></script>
+<script type="text/javascript" src="__STATIC__/js/swiper.js"></script>
+<script type="text/javascript" src="__STATIC__/js/global.js"></script>
+<script type="text/javascript" src="__STATIC__/js/phone.js"></script>
+<script type="text/javascript" src="__STATIC__/js/activity.js"></script>
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?45b5abb08536534812572d35aec22430";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+    $(window).on('scroll load',function() {
+        if($(window).scrollTop()>=$('.signlist').offset().top){
+            $('#fixed').show();
+        }else{
+            $('#fixed').hide();
+        }
+    });
+    organize(organizer);
+    function organize(organizer){
+        var arr=organizer.split('、');
+        var dom='';
+        for(var i=0; i<arr.length; i++){
+            if(arr[i].indexOf('房车时代')>-1){
+                dom+='<a href="http://www.rvtimes.cn/" class="organizer">'+arr[i]+'、</a>';
+            } else{
+                dom+='<i class="organizer">'+arr[i]+'、</i>';
+            }
+        }
+        $('.chengban').append(dom);
+        $('.organizer:last').text($('.organizer:last').text().split('、')[0]);
+    }
+
+    /*轮播图*/
+    if($('#swipers img').size()>1){
+        var swiper = new Swiper('.swiper-container', {
+            paginationClickable: true,
+            speed: 1000,
+            loop: true,
+            observer:true,
+            observeParents:true,
+            autoplayDisableOnInteraction : false,
+            autoplay:3000
+        });
+    }
+</script>
