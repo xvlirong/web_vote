@@ -10,7 +10,7 @@ return array(
     'LOAD_EXT_CONFIG'   => 'db', //加载数据库配置
     'URL_CASE_INSENSITIVE'  =>  true,  //url不区分大小写
     'URL_ROUTER_ON' => true, //URL路由
-    'URL_MODEL'   =>1,
+    'URL_MODEL'   =>2,
     'URL_HTML_SUFFIX'  =>'html',
     //文件上传配置
 	'UPLOAD_CONFIG'	=> array(
