@@ -19,7 +19,7 @@ header {
     display: none;
 }
 
-#message {
+#message {.main_content
     position: fixed;
     z-index: 1000;
     width: 5rem;
@@ -43,7 +43,7 @@ header {
     width: 7.2rem;
     margin: 0 auto;
     position: relative;
-    padding-top: 6.5rem;
+    padding-top: 3.3rem;
 }
 .activity {
     width: 6.66rem;
