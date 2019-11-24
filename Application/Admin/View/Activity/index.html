@@ -1,0 +1,314 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=8" >
+    <title>网络配置</title>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/Assets/css/reset.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/Assets/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/Assets/css/thems.css">
+    <script type="text/javascript" src="__STATIC__/Assets/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/Assets/js/WdatePicker.js"> </script>
+    <script type="text/javascript">
+        $(function(){
+            //自适应屏幕宽度
+            window.onresize=function(){ location=location };
+
+            var main_h = $(window).height();
+            $('.hy_list').css('height',main_h-45+'px');
+
+            var main_w = $(window).width();
+            $('.xjhy').css('width',main_w-40+'px');
+
+
+            $(".tabBox .tabCont:first").css("display","block");
+            $(".tabBox .tabNav li").click(function(){
+                $(this).siblings("li").removeClass("now");
+                $(this).addClass("now");
+                $(this).parents(".tabBox").find(".tabCont").css("display","none");
+                var i=$(this).index();
+                $(this).parents(".tabBox").find(".tabCont:eq("+i+")").css("display","block");
+            });
+
+            $('.xial_m span').click(function(){
+                $(this).parent('.xial_m').siblings('.xl_ctn').toggle();
+            });
+        });
+    </script>
+    <style>
+        .checkbox {
+            width: 16px !important;
+            height: 16px !important;
+        }
+    </style>
+</head>
+
+<body onLoad="Resize();">
+<div id="right_ctn">
+    <div class="right_m">
+        <!--会议列表-->
+        <div class="hy_list">
+            <div class="box_t">
+                <span class="name">活动添加</span>
+                <!--当前位置-->
+
+                <!--当前位置-->
+            </div>
+            <div class="space_hx">&nbsp;</div>
+            <!--网络配置-->
+            <form action="{:U('addAct')}" method="post" enctype="multipart/form-data">
+                <div class="xjhy" style="padding:0px;">
+                    <div class="tabBox_t">
+                        <div class="tabBox">
+                            <ul class="tabNav">
+                                <li class="now" style="width:150px;"><span style="width:150px;">基础</span></li>
+                                <li style="width:150px;"><span style="width:150px;">扩展</span></li>
+                            </ul>
+                            <div class="tabCont" style="display:block;">
+                                <!--网口地址配置-->
+                                <ul class="hypz gjpz clearfix">
+                                    <table cellpadding="0" cellspacing="0" class="wlpz">
+                                        <tr>
+                                            <td>
+                                                <li class="clearfix">
+                                                    <span class="title">活动标题：</span>
+                                                    <div class="li_r">
+                                                        <input id="title" name="title" type="text">
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix" id="act_id">
+                                                    <span class="title">选择模板：</span>
+                                                    <div class="li_r">
+                                                        <select name="template_id" class="" style="font-family:'microsoft yahei';">
+                                                            <option value="">请选择</option>
+                                                            <foreach name="tpl_list" item="v">
+                                                                <option value="{$v.id}">{$v.title}</option>
+                                                            </foreach>
+                                                        </select>
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix">
+                                                    <span class="title">banner图（PC端）：</span>
+                                                    <div class="li_r">
+                                                        <input type="file" name="banner">
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix">
+                                                    <span class="title">移动端banner图：</span>
+                                                    <div class="li_r">
+                                                        <input type="file" name="banner_mobile">
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix">
+                                                    <span class="title">开始时间：</span>
+                                                    <div class="li_r">
+                                                        <input type="text" name="start_time"  onClick="WdatePicker()" readonly="readonly">
+                                                    </div>
+                                                </li>
+
+
+
+                                                <li class="clearfix">
+                                                    <span class="title">结束时间：</span>
+                                                    <div class="li_r">
+                                                        <input type="text" name="end_time"  onClick="WdatePicker()" readonly="readonly">
+                                                    </div>
+                                                </li>
+
+                                                <li class="clearfix">
+                                                    <span class="title">活动地址：</span>
+                                                    <div class="li_r">
+                                                        <input name="act_address" type="text">
+                                                    </div>
+                                                </li>
+
+                                                <li class="clearfix">
+                                                    <span class="title">票数总数：</span>
+                                                    <div class="li_r">
+                                                        <input name="ticket_num" type="text">
+                                                    </div>
+                                                </li>
+
+                                                <li class="clearfix">
+                                                    <span class="title">票数基数：</span>
+                                                    <div class="li_r">
+                                                        <input name="ticket_base_num" type="text">
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix">
+                                                    <span class="title">客服电话：</span>
+                                                    <div class="li_r">
+                                                        <input name="service_phone" type="text">
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix">
+                                                    <span class="title">经度：</span>
+                                                    <div class="li_r">
+                                                        <input name="map_longitude" type="text">
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix">
+                                                    <span class="title">纬度：</span>
+                                                    <div class="li_r">
+                                                        <input name="map_latitude" type="text">
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix">
+                                                    <span class="title">短信标识：</span>
+                                                    <div class="li_r">
+                                                        <input name="msg_mark" type="text">
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix">
+                                                    <span class="title">联合主办：</span>
+                                                    <div class="li_r">
+                                                        <input name="co_sponsored" type="text">
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix">
+                                                    <span class="title">招商类别：</span>
+                                                    <div class="li_r">
+                                                        <input name="investment_type" type="text">
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix">
+                                                    <span class="title">咨询热线：</span>
+                                                    <div class="li_r">
+                                                        <input id="consult_phone" name="consult_phone" type="text">
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix">
+                                                    <span class="title">专业观众接待电话：</span>
+                                                    <div class="li_r">
+                                                        <input name="recept_phone" type="text">
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix">
+                                                    <span class="title">微信公众号：</span>
+                                                    <div class="li_r">
+                                                        <input type="file" name="wx_img">
+                                                    </div>
+                                                </li>
+                                            </td>
+                                            <td>
+                                                <li class="clearfix">
+                                                    <span class="title">乘车路线：</span>
+                                                    <div class="li_r">
+                                                        <textarea name="car_line" cols="30" placeholder="多条请使用“|”分割" rows="10"></textarea>
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix">
+                                                    <span class="title">主办单位：</span>
+                                                    <div class="li_r">
+                                                        <textarea name="sponsor_unit"  cols="30" rows="10"></textarea>
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix">
+                                                    <span class="title">承办单位：</span>
+                                                    <div class="li_r">
+                                                        <input name="undertaking_unit" type="text">
+                                                    </div>
+                                                </li>
+
+                                                <li class="clearfix">
+                                                    <span class="title">活动亮点：</span>
+                                                    <div class="li_r">
+                                                        <textarea name="act_highlights"  cols="30" rows="10" placeholder="多条请使用“|”分割"></textarea>
+                                                    </div>
+                                                </li>
+
+                                                <li class="clearfix">
+                                                    <span class="title">活动简介：</span>
+                                                    <div class="li_r">
+                                                        <textarea name="act_intro"  cols="30" rows="10"></textarea>
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix">
+                                                    <span class="title">报名成功后显示文字：</span>
+                                                    <div class="li_r">
+                                                        <input name="success_info" type="text">
+                                                    </div>
+                                                </li>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">&nbsp;</td>
+                                        </tr>
+                                    </table>
+                                    <li class="tj_btn">
+                                        <a class="add_course">提交</a>
+                                    </li>
+                                </ul>
+                                <!--网口地址配置-->
+                            </div>
+                            <div class="tabCont">
+                                <!--本地地址列表-->
+                                <ul class="hypz gjpz clearfix">
+                                    <table cellpadding="0" cellspacing="0" class="wlpz">
+                                        <tr>
+                                            <td>
+                                                <li class="clearfix">
+                                                    <span class="title">现场照片(PC端)：</span>
+                                                    <div class="li_r">
+                                                        <input type="file" name="pc_img">
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix">
+                                                    <span class="title">现场照片(移动端)：</span>
+                                                    <div class="li_r">
+                                                        <input type="file" name="mobile_img">
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix">
+                                                    <span class="title">品牌库:</span>
+                                                    <div class="li_r" style="width: 80%">
+                                                        <volist name="brand_list" id="v">
+                                                            <input type="checkbox" name="brand_list[]" value="{$v.id}" class="checkbox"/>{$v.brand_name}&nbsp;&nbsp;&nbsp;
+                                                        </volist>
+                                                    </div>
+
+                                                </li>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">&nbsp;&nbsp;</td>
+                                        </tr>
+                                    </table>
+                                    <li class="tj_btn">
+                                        <a class="add_course">提交</a>
+                                    </li>
+                                </ul>
+                                <!--本地地址列表-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!--网络配置-->
+        </div>
+        <!--会议列表-->
+    </div>
+</div>
+</body>
+<script>
+    $(".add_course").click(function(){
+        var title = $("#title").val();
+        var consult_phone = $("#consult_phone").val();
+        if(title == ''){
+            alert('标题不能为空');
+            return false;
+        }else if(consult_phone == ''){
+            alert('咨询热线不能为空');
+            return false;
+        }
+        $("form").submit();
+    });
+
+</script>
+</html>

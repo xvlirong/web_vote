@@ -1,0 +1,84 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=8" >
+    <title>报名列表</title>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/Assets/css/reset.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/Assets/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/Assets/css/thems.css">
+    <script type="text/javascript" src="__STATIC__/Assets/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            //自适应屏幕宽度
+
+            var main_h = $(window).height();
+            $('.hy_list').css('height',main_h-45+'px');
+
+            var search_w = $(window).width()-40;
+            $('.search').css('width',search_w+'px');
+            //$('.list_hy').css('width',search_w+'px');
+        });
+    </script>
+    <!--框架高度设置-->
+</head>
+
+<body>
+<div id="right_ctn">
+    <div class="right_m">
+        <!--会议列表-->
+        <div class="hy_list">
+            <div class="box_t">
+                <span class="name">报名列表</span>
+
+            </div>
+            <div class="search gzrj">
+                <a href="{:U('Activity/exam_export',array('id'=>$id))}" class="btn">导出信息</a>
+            </div>
+            <!--列表-->
+            <form action="" method="post">
+                <table cellpadding="0" cellspacing="0" class="list_hy" style="width: 95%">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">姓名</th>
+                        <th scope="col">手机号</th>
+                        <th scope="col">意向车型</th>
+                        <th scope="col">来源</th>
+                        <th scope="col">报名时间</th>
+                    </tr>
+                    <foreach name="list" item="v">
+                        <tr>
+                            <td>{$v.id}</td>
+                            <td>{$v.username}</td>
+                            <td>{$v.userphone}</td>
+                            <td>{$v.car_type}</td>
+                            <td>{$v.source_title}</td>
+                            <td>{$v.add_time|date="Y-m-d H:i:s",###}</td>
+
+                        </tr>
+                    </foreach>
+                </table>
+                <!--列表-->
+                <!--右边底部-->
+            </form>
+            <!--右边底部-->
+
+        </div>
+        <!--会议列表-->
+    </div>
+</div>
+<script>
+    /*提交搜索*/
+    $('#sub').click(function(){
+        document.formtest.submit();
+    });
+
+    function setRecommend(id)
+    {
+        $.ajax({
+            url:"{:U('setRecommend')}",
+            data:{id:id}
+        })
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+#wrap {
+    display: none;
+}
+#header {
+    height: 0.8rem;
+    background: #eee;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 7.5rem;
+    margin-left: -3.75rem;
+}
+#header li {
+    width: 16.66%;
+    line-height: 0.8rem;
+    font-size: 0.34rem;
+    float: left;
+    text-align: center;
+    color: #313131;
+    font-weight: bold;
+}
+#header li a {
+    color: #313131;
+}
+#header li.act {
+    background: #e13d3b;
+    color: #fff;
+}
+#header li.act a {
+    color: #fff;
+}
+section {
+    padding-top: 1rem;
+}
+.info {
+    text-align: center;
+    padding: 0.6rem 0;
+}
+.img img {
+    width: 1.66rem;
+    height: 1.66rem;
+    display: block;
+    margin: 0 auto;
+}
+.info h3{
+    font-size: 0.3rem;
+    color: #3db39d;
+    padding: 0.3rem 0;
+}
+.content {
+    width: 5.9rem;
+    margin: 0 auto;
+    background: #eee;
+    padding: 0.45rem;
+    font-size: 0.26rem;
+    color: #656565;
+}
+.weixin {
+    width: 3.46rem;
+    height: 4.7rem;
+    background: url("../images/sign_weixin_phone.jpg") no-repeat center;
+    background-size: 100%;
+    margin: 0.5rem auto 0;
+}
+.links {
+    width: 5.9rem;
+    margin: 0 auto;
+    font-size: 0.24rem;
+    color: #313131;
+    padding: 0.3rem 0 1rem;
+}
+.links a {
+    display: inline-block;
+    background:#88abda;
+    color: #fff;
+    padding: 0 0.1rem;
+    margin: 0 0.05rem;
+    border-radius: 5px;
+}
