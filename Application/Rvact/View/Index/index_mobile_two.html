@@ -50,7 +50,7 @@
                 </b>
             </div>
             <div class="form">
-                <h2>本车展已有<span>{$activityNum}</span>人报名领票</h2>
+                <h2>本活动已有<span>{$activityNum}</span>人报名领票</h2>
                 <div class="content">
                     <div class="formBox">
                         <div class="item">
@@ -77,7 +77,7 @@
                             </eq>
                         </div>
                         <div class="txt">
-                            <p>价值50元门票限量免费发送{$info.ticket_num}张</p>
+<!--                            <p>价值50元门票限量免费发送{$info.ticket_num}张</p>-->
                             <p>任何问题请拨打咨询热线: <a href="tel:{$activityData.majorphone}">{$info.service_phone}</a></p>
                         </div>
                     </div>
@@ -136,7 +136,7 @@
         </div>
         <!--车展路线-->
         <div id="address">
-            <div class="title"><h3>【车展路线】</h3></div>
+            <div class="title"><h3>【活动路线】</h3></div>
             <div id="allmap"></div>
             <div class="txt">
                 <img src="__STATIC__/images/mobile_car.png" alt="" />
@@ -148,7 +148,7 @@
         </div>
         <!--车展会场-->
         <div id="scene">
-            <div class="title"><h3>【车展会场】</h3></div>
+            <div class="title"><h3>【团购会场】</h3></div>
             <div class="img">
                 <div class="swiper-container" id="swipers">
                     <div class="swiper-wrapper">
@@ -163,7 +163,7 @@
         </div>
         <!--车展简介-->
         <div id="desc">
-            <div class="title"><h3>车展简介</h3></div>
+            <div class="title"><h3>活动简介</h3></div>
             <dl>
                 <dt>▶ 展会详细信息</dt>
                 <dd><span>时　　间：</span>{$info.start_time|date="m月d日",###}-{$info.end_time|date="m月d日",###}</dd>
