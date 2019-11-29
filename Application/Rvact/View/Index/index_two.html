@@ -4,20 +4,24 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>{$info.title}</title>
     <link rel="stylesheet" href="__STATIC__/css/neat.css" />
-    <link rel="stylesheet" href="__STATIC__/css/index.css" />
+    <link rel="stylesheet" href="__STATIC__/css/index.css?time=11250858" />
     <style type="text/css">
         /*.header { background:url("__PUBLIC__/upload/banner/{$info.banner}") no-repeat center top; }*/
         #desc .abstract dd a{color: #3e629f;}
+        .highlights li{
+            width: 40.7%;
+            padding: 21px 38px 32px;
+        }
     </style>
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=tBW47T7lwTiNXTigAGMKt42K"></script>
 </head>
 <body>
 <div id="mask"></div>
 <div id="message"></div>
-<div id="wrap" class="main">
+<div id="wrap" class="main" style="height: 3550px">
     <div class="footer_bg"></div>
     <div id="header">
-        <div class="header">
+        <div class="header" id="box_hea">
             <div class="con_one"><img src="__PUBLIC__/upload/banner/{$info.banner}" alt=""></div>
         </div>
     </div>
@@ -26,7 +30,7 @@
         <div id="activity">
             <div class="clearfix">
                 <div class="form fl">
-                    <h2>本活动已有<span>{$activityNum}</span>人报名领票</h2>
+                    <h2>本活动已有<span>{$activityNum}</span>人报名</h2>
                     <div class="content">
                         <div class="formBox">
                             <div class="item">
@@ -45,14 +49,14 @@
                             </div>
                             <div class="item">
                                 <eq name="act_status" value="1">
-                                    <input type="submit" class="submit" id="submit" value="免费报名领票" />
+                                    <input type="submit" class="submit" id="submit" value="免费报名" />
                                     <else />
-                                    <input type="submit" class="submit no" value="免费报名领票" />
+                                    <input type="submit" class="submit no" value="免费报名" />
                                 </eq>
                             </div>
                             <div class="txt">
-<!--                                <p>价值50元门票限量免费发送{$info.ticket_num}张</p>-->
-                                <p>任何问题请拨打咨询热线 {$info.service_phone}</p>
+                                <p><!--价值50元门票限量免费发送{$info.ticket_num}张--></p>
+                                <p style="margin-top: 35px">任何问题请拨打咨询热线 {$info.service_phone}</p>
                             </div>
                         </div>
                     </div>
@@ -98,8 +102,8 @@
                     <div class="title">
                         <h2>【活动简介】</h2>
                     </div>
-                    <div class="content clearfix">
-                        <div id="allmap"></div>
+                    <div class="content clearfix" style="height: 550px">
+                        <div id="allmap" style="height: 550px"></div>
                         <div class="abstract">
                             <ul>
                                 <li>
@@ -129,7 +133,7 @@
         <div id="brand">
             <div class="con">
                 <div class="title">
-                    <h2>【合作品牌】</h2>
+                    <h2>【参与品牌】</h2>
                 </div>
                 <div class="list">
                     <ul style="margin-left: 0px;">
@@ -144,10 +148,10 @@
         </div>
         <!-- 合作品牌 end -->
         <!-- 车展亮点 start -->
-        <div id="guarantee">
+        <div id="guarantee" style="width: 1240px;margin: 0 auto">
             <div class="con">
                 <div class="title">
-                    <h2>【团购亮点】</h2>
+                    <h2>【团购政策】</h2>
                 </div>
                 <!-- class="highlights_bg"-->
                 <div>
@@ -224,6 +228,7 @@
     //表单
     var id="{$info['id']}";
     var source='{$source}';
+    var all_url='{$all_url}';
     var type='pc';
     //var url='{$refererUrl}';
     var organizer='{$info.undertaking_unit}';

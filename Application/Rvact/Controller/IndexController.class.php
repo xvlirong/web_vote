@@ -6,6 +6,8 @@ class IndexController extends BaseController {
         //活动id
         $id = I('id',1);
 
+        $all_url = $_SERVER['REQUEST_URI'];
+        $this->assign('all_url',$all_url);
         //基础信息
         $info = M("activity")->where(array('id'=>$id))->find();
         $info['lines'] = explode('|',$info['car_line']);
@@ -20,7 +22,7 @@ class IndexController extends BaseController {
         }
         $this->assign('act_status',$act_status);
         //访问来源
-        $source = I('source','wangzhan');
+        $source = I('souce','rvtimeswz');
         $this->assign('source',$source);
 
         //报名人数

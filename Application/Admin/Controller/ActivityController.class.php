@@ -1,6 +1,7 @@
 <?php
 
 namespace Admin\Controller;
+use Extend\Page;
 use Think\Controller;
 class ActivityController extends CommonController
 {
@@ -298,9 +299,42 @@ class ActivityController extends CommonController
     public function entry_info()
     {
         $id = I('id');
-        $list = M("act_registration")->where(array('act_id'=>$id))->select();
+        $this->assign('id',$id);
+
+        $start_time = strtotime(I('start_time',0));
+        //echo $start_time;
+        $this->assign('start_time',$start_time);
+        $end_time = strtotime(I('end_time',0));
+        $this->assign('end_time',$end_time);
+        if($start_time>0){
+            $map['add_time'] = array('BETWEEN',array($start_time,$end_time));
+        }
+        $map['act_id'] = array('EQ',$id);
+
+        $list = M("act_registration")->where($map)->order('id desc')->select();
+        $count = count($list);
+        $Page = new \Extend\Page($count,50);
+        $show = $Page->show();// 分页显示输出
+
+        $list = M("act_registration")
+            ->where($map)
+            ->limit($Page->firstRow.','.$Page->listRows)
+            ->order('id desc')
+            ->select();
+        $all_num = count($list);
+        $this->assign('all_num',$all_num);
+
+        $today_time = strtotime(date("Y-m-d",time()));
+       // echo $end_time;die;
+        $maps['add_time'] = array("GT",$today_time);
+        $maps['act_id'] = array("EQ",$id);
+
+        $today_num = M("act_registration")->where($maps)->count();
+        $this->assign('today_num',$today_num);
+
         $this->assign('list',$list);
         $this->assign('id',$id);
+        $this->assign('page',$show);
 
         $this->display();
     }

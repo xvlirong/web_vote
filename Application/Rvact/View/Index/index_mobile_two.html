@@ -9,7 +9,7 @@
     <meta content="telephone=no" name="format-detection">
     <link rel="stylesheet" href="__STATIC__/css/neat.css" />
     <link rel="stylesheet" href="__STATIC__/css/swiper.css" />
-    <link rel="stylesheet" href="__STATIC__/css/phone_one.css" />
+    <link rel="stylesheet" href="__STATIC__/css/phone_one.css?time=1124" />
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=tBW47T7lwTiNXTigAGMKt42K"></script>
     <script type="text/javascript">
         function setFontSize(){
@@ -31,11 +31,17 @@
 <div id="mask"></div>
 <div id="message">必填项不能为空</div>
 <div id="wrap">
-    <header>
-        <img  src="__PUBLIC__/upload/banner/{$info.banner_mobile}" alt="" />
-    </header>
+<!--    <header>-->
+<!--        <img  src="__PUBLIC__/upload/banner/{$info.banner_mobile}" alt="" />-->
+<!--    </header>-->
+    <div>
+        <div>
+<!--            <img  class="lazy" data-original="__PUBLIC__/upload/banner/{$info.banner_mobile}"  alt="" />-->
+            <img   src="__PUBLIC__/upload/banner/{$info.banner_mobile}"  alt="" />
+        </div>
+    </div>
     <a name="fix"></a>
-    <div class="main_content">
+    <div class="main_content" style="padding-top: 0;">
         <div class="activity">
             <div class="countdown">
                 <img src="__STATIC__/images/mobile_time.png" alt="" />
@@ -49,7 +55,7 @@
                     </b>
                 </b>
             </div>
-            <div class="form">
+            <div class="form" style="height: 6rem">
                 <h2>本活动已有<span>{$activityNum}</span>人报名领票</h2>
                 <div class="content">
                     <div class="formBox">
@@ -63,13 +69,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="item">
+                        <div class="item" style="margin-bottom: 0.25rem;">
                             <input type="text" class="text" id="username" placeholder="您的姓名"/>
                         </div>
-                        <div class="item">
+                        <div class="item" style="margin-bottom: 0.25rem;">
                             <input type="text" class="text" id="phone" placeholder="您的手机号"/>
                         </div>
-                        <div class="item">
+                        <div class="item" style="margin-bottom: 0.25rem;">
                             <eq name="act_status" value="1">
                                 <input type="submit" class="submit" id="submit" value="免费报名" />
                                 <else />
@@ -77,8 +83,8 @@
                             </eq>
                         </div>
                         <div class="txt">
-<!--                            <p>价值50元门票限量免费发送{$info.ticket_num}张</p>-->
-                            <p>任何问题请拨打咨询热线: <a href="tel:{$activityData.majorphone}">{$info.service_phone}</a></p>
+                          <p><!--  价值50元门票限量免费发送{$info.ticket_num}张--></p>
+                            <p style="margin-top: .3rem">任何问题请拨打咨询热线: <a href="tel:{$info.service_phone}">{$info.service_phone}</a></p>
                         </div>
                     </div>
                 </div>
@@ -97,12 +103,12 @@
         </div>
         <div id="flow">
             <div class="con">
-                <img src="__STATIC__/images/mobile_flow1.jpg" alt="" />
+                <img class="lazy" data-original="__STATIC__/images/mobile_flow1.jpg"  alt="" />
             </div>
         </div>
         <!--车展亮点-->
         <div class="spot">
-            <h3>【活动亮点】</h3>
+            <h3>【团购政策】</h3>
             <div class="list">
                 <ul class="clearfix">
                     <foreach name="info['act_highlights']" item="v" key="k">
@@ -115,24 +121,24 @@
             </div>
         </div>
         <!--合作品牌-->
-        <div id="brand">
-            <div class="title"><h3>【合作品牌】</h3></div>
-            <div class="list">
+        <div id="brand" >
+            <div class="title"><h3>【参与品牌】</h3></div>
+            <div class="list" style="margin-bottom: 0.3rem;">
                 <ul class="clearfix">
                     <foreach name="brand_list" item="v" key="i">
-                        <if condition="$i lt 12">
+                        <if condition="$i lt 50">
                             <li>
-                                <div><img src="__PUBLIC__/upload/brand/{$v.brand_logo}" alt="" /></div>
+                                <div><img class="lazy"  data-original="__PUBLIC__/upload/brand/{$v.brand_logo}" alt="" /></div>
                             </li>
                             <else />
                             <li class="none">
-                                <div><img src="__PUBLIC__/upload/brand/{$v.brand_logo}" alt="" /></div>
+                                <div><img class="lazy"  data-original="__PUBLIC__/upload/brand/{$v.brand_logo}" alt="" /></div>
                             </li>
                         </if>
                     </foreach>
                 </ul>
             </div>
-            <div class="more" id="more">查看更多品牌</div>
+<!--            <div class="more" id="more">查看更多品牌</div>-->
         </div>
         <!--车展路线-->
         <div id="address">
@@ -154,7 +160,7 @@
                     <div class="swiper-wrapper">
                         <foreach name="scene_img" item="v">
                             <div class="swiper-slide">
-                                <img src="__PUBLIC__/upload/scene/{$v.img_url}" alt="">
+                                <img class="lazy" data-original="__PUBLIC__/upload/scene/{$v.img_url}" alt="">
                             </div>
                         </foreach>
                     </div>
@@ -165,7 +171,7 @@
         <div id="desc">
             <div class="title"><h3>活动简介</h3></div>
             <dl>
-                <dt>▶ 展会详细信息</dt>
+                <dt style="height: 0"><!--▶ 展会详细信息 --></dt>
                 <dd><span>时　　间：</span>{$info.start_time|date="m月d日",###}-{$info.end_time|date="m月d日",###}</dd>
                 <dd><span>地　　点：</span>{$info.act_address}</dd>
                 <if condition="$activityData.support neq ''"><dd><span>支持单位：</span>{$info.support}</dd></if>
@@ -192,6 +198,7 @@
 </div>
 </body>
 </html>
+
 <script type="text/javascript">
     // 百度地图API功能
     var lgt="{$info.map_longitude}";
@@ -202,6 +209,7 @@
     //表单
     var id="{$info['id']}";
     var source='{$source}';
+    var all_url='{$all_url}';
     //var url='{$refererUrl}';
     var organizer='{$info.undertaking_unit}';
     var use_url = "__APP__/Rvact/Index/sign";
@@ -214,6 +222,16 @@
 <script type="text/javascript" src="__STATIC__/js/global.js"></script>
 <script type="text/javascript" src="__STATIC__/js/phone.js"></script>
 <script type="text/javascript" src="__STATIC__/js/activity.js"></script>
+<script src="__STATIC__/js/jquery.lazyload.js?v=1.9.1"></script>
+<script type="text/javascript" charset="utf-8">
+
+    $(function() {
+
+        $("img.lazy").lazyload({effect: "fadeIn"});
+
+    });
+
+</script>
 <script>
     var _hmt = _hmt || [];
     (function() {

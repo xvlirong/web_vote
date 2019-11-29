@@ -7,6 +7,7 @@
     <link rel="stylesheet" type="text/css" href="__STATIC__/Assets/css/common.css"/>
     <link rel="stylesheet" type="text/css" href="__STATIC__/Assets/css/thems.css">
     <script type="text/javascript" src="__STATIC__/Assets/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/Assets/js/WdatePicker.js"> </script>
     <script type="text/javascript">
         $(function(){
             //自适应屏幕宽度
@@ -32,7 +33,18 @@
 
             </div>
             <div class="search gzrj">
-                <a href="{:U('Activity/exam_export',array('id'=>$id))}" class="btn">导出信息</a>
+                <form action="{:U('Activity/entry_info')}" name="formtest" method="post">
+                    <div class="search">
+                        <span>输入日期：</span>
+                        <input type="text" id="key1" name="start_time" <gt name="start_time" value="0">value="{$start_time|date='Y-m-d',###}" </gt> onClick="WdatePicker()" readonly="readonly">--
+                        <input type="text" id="key2" name="end_time" <gt name="end_time" value="0">value="{$end_time|date='Y-m-d',###}" </gt>   onClick="WdatePicker()" readonly="readonly">
+                        <input type="hidden" name="id" value="{$id}">
+                        <a class="btn" id="sub">查询</a>
+                        <span>今日新报名人数 {$today_num}人&nbsp;&nbsp;&nbsp;&nbsp;共计报名{$all_num}人</span>
+                    </div>
+
+                </form>
+<!--                <a href="{:U('Activity/exam_export',array('id'=>$id))}" class="btn">导出信息</a>-->
             </div>
             <!--列表-->
             <form action="" method="post">
@@ -43,6 +55,7 @@
                         <th scope="col">手机号</th>
                         <th scope="col">意向车型</th>
                         <th scope="col">来源</th>
+                        <th scope="col">来源类型</th>
                         <th scope="col">报名时间</th>
                     </tr>
                     <foreach name="list" item="v">
@@ -52,11 +65,13 @@
                             <td>{$v.userphone}</td>
                             <td>{$v.car_type}</td>
                             <td>{$v.source_title}</td>
+                            <td>{$v.source_type}</td>
                             <td>{$v.add_time|date="Y-m-d H:i:s",###}</td>
 
                         </tr>
                     </foreach>
                 </table>
+                <div class="pagination">{$page}</div>
                 <!--列表-->
                 <!--右边底部-->
             </form>
@@ -79,6 +94,9 @@
             data:{id:id}
         })
     }
+    $('#sub').click(function(){
+        document.formtest.submit();
+    });
 </script>
 </body>
 </html>

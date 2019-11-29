@@ -17,13 +17,14 @@
                 <h3>恭喜您,报名成功！</h3>
                 <p>{$info.success_info}</p>
                 <div class="links">
-                    接下来您可以：<a href="{:U('Index',array('id'=>$id,'source'=>$source))}" target="_self">返回活动继续报名</a>   ｜ <a href="http://www.rvtimes.cn">房车时代首页</a>   ｜   <a href="http://www.rvtimes.cn/rv-car/">热门车型</a>
+<!--                    {:U('Index/index',array('id'=>$id,'source'=>$source))}-->
+                    接下来您可以：<a href="__APP__/Rvact/index/index/id/{$id}/souce/{$source}" target="_self">返回活动继续报名</a>   ｜ <a href="http://www.rvtimes.cn">房车时代首页</a>   ｜   <a href="http://www.rvtimes.cn/rv-car/">热门车型</a>
                 </div>
             </div>
             <div class="fl right"></div>
         </div>
     </div>
 </div>
-<iframe src="__APP__/index/footer" width="100%" height="186" frameborder="0" scrolling="0"></iframe>
+<iframe src="__APP__/Rvact/index/footer" width="100%" height="186" frameborder="0" scrolling="0"></iframe>
 </body>
 </html>

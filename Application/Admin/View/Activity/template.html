@@ -40,7 +40,7 @@
                     <tr>
                         <th scope="col">ID</th>
                         <th scope="col">模板名称</th>
-                        <th scope="col">预览图</th>
+<!--                        <th scope="col">预览图</th>-->
                         <th scope="col">添加时间</th>
                         <th scope="col">编辑</th>
                     </tr>
@@ -48,7 +48,7 @@
                         <tr>
                             <td>{$v.id}</td>
                             <td>{$v.title}</td>
-                            <td><img src="__PUBLIC__/upload/img/{$v.preview_img}" width="200px" alt=""></td>
+<!--                            <td><img src="__PUBLIC__/upload/img/{$v.preview_img}" width="200px" alt=""></td>-->
                             <td>{$v.add_time|date="Y-m-d",###}</td>
                             <td><a href="{:U('update_tpl',array('id'=>$v['id']))}" class="btn">编辑</a></td>
                         </tr>

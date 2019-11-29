@@ -51,7 +51,11 @@
                             <td>{$v.brand_name}</td>
                             <td><img src="__PUBLIC__/upload/brand/{$v.brand_logo}" style="width: 200px" alt=""></td>
                             <td>{$v.sort}</td>
-                            <td><a href="{:U('update_brand',array('id'=>$v['id']))}" class="btn">编辑</a><a href="{:U('del_brand',array('id'=>$v['id']))}" class="btn">删除</a></td>
+                            <td><a href="{:U('update_brand',array('id'=>$v['id']))}" class="btn">编辑</a>
+<!--                                <a href="{:U('del_brand',array('id'=>$v['id']))}" class="btn">删除</a>-->
+                                <a style="cursor: pointer" onclick="delf({$v.id})" class="btn">删除</a>
+
+                            </td>
                         </tr>
                     </foreach>
                 </table>
@@ -76,6 +80,13 @@
             url:"{:U('setRecommend')}",
             data:{id:id}
         })
+    }
+    function delf(id) {
+        if(confirm('是否确认删除')){
+            var url = "{:U('del_brand')}";
+            var new_url = url+"&id="+id;
+            location.href = new_url;
+        }
     }
 </script>
 </body>

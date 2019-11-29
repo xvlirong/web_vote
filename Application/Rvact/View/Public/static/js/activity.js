@@ -36,6 +36,7 @@
         var data = {
             act_id:id,
             source:source,
+            sign_url:all_url,
             username: username,
             //objective:objective||0,
             userphone:phone,
