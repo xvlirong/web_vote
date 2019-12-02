@@ -19,7 +19,7 @@ header {
     display: none;
 }
 
-#message {
+#message{
     position: fixed;
     z-index: 1000;
     width: 5rem;
