@@ -13,7 +13,7 @@ return array(
     
     //测试数据库
     'DB_TYPE'               =>  'mysql',     // 数据库类型
-    'DB_HOST'               =>  '101.201.197.88', // 服务器地址
+    'DB_HOST'               =>  '59.110.232.79', // 服务器地址
     'DB_NAME'               =>  'rvtimes_act',          // 数据库名
     'DB_USER'               =>  'root',      // 用户名
     'DB_PWD'                =>  'Rvtimes2015',          // 密码
