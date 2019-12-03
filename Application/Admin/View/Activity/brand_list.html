@@ -41,7 +41,8 @@
                     <tr>
                         <th scope="col">编号</th>
                         <th scope="col">品牌名称</th>
-                        <th scope="col">logo</th>
+                        <th scope="col">团购logo</th>
+                        <th scope="col">展会logo</th>
                         <th scope="col">排序</th>
                         <th scope="col">编辑</th>
                     </tr>
@@ -50,6 +51,7 @@
                             <td>{$v.id}</td>
                             <td>{$v.brand_name}</td>
                             <td><img src="__PUBLIC__/upload/brand/{$v.brand_logo}" style="width: 200px" alt=""></td>
+                            <td><img src="__PUBLIC__/upload/brand/{$v.zh_logo}" style="width: 200px" alt=""></td>
                             <td>{$v.sort}</td>
                             <td><a href="{:U('update_brand',array('id'=>$v['id']))}" class="btn">编辑</a>
 <!--                                <a href="{:U('del_brand',array('id'=>$v['id']))}" class="btn">删除</a>-->
