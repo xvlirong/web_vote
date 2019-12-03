@@ -166,6 +166,8 @@ class ActivityController extends CommonController
         $data['brand_name'] = I('brand_name');
         $file = $_FILES['brand_logo'];
         $data['brand_logo'] = $this->uploadImgs($file,'brand');
+        $file1 = $_FILES['zh_logo'];
+        $data['zh_logo'] = $this->uploadImgs($file1,'brand');
         $data['sort'] = I('sort');
         $data['add_time'] = time();
         $res = M("brand_library")->add($data);
@@ -519,6 +521,10 @@ class ActivityController extends CommonController
         if($_FILES['brand_logo']['name'] != ''){
             $file = $_FILES['brand_logo'];
             $data['brand_logo'] = $this->uploadImgs($file,'brand');
+        }
+        if($_FILES['zh_logo']['name'] != ''){
+            $file1 = $_FILES['zh_logo'];
+            $data['zh_logo'] = $this->uploadImgs($file1,'brand');
         }
         $data['sort'] = I('sort');
         $res = M("brand_library")->where(array('id'=>$id))->save($data);
