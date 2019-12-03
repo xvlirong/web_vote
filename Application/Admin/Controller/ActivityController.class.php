@@ -315,13 +315,13 @@ class ActivityController extends CommonController
         $count = count($list);
         $Page = new \Extend\Page($count,50);
         $show = $Page->show();// 分页显示输出
+        $all_num = count($list);
 
         $list = M("act_registration")
             ->where($map)
             ->limit($Page->firstRow.','.$Page->listRows)
             ->order('id desc')
             ->select();
-        $all_num = count($list);
         $this->assign('all_num',$all_num);
 
         $today_time = strtotime(date("Y-m-d",time()));
