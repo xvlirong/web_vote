@@ -52,6 +52,7 @@
                             <td>{$v.add_time|date="Y-m-d",###}</td>
                             <td>
 <!--                                <a href="{:U('del_source',array('id'=>$v['id']))}" class="btn">删除</a>-->
+                                <a href="{:U('save_source',array('id'=>$v['id']))}" class="btn">编辑</a>
                                 <a style="cursor: pointer" onclick="delf({$v.id})" class="btn">删除</a>
                             </td>
                         </tr>

@@ -477,6 +477,30 @@ class ActivityController extends CommonController
         }
     }
 
+    public function save_source()
+    {
+        $id = I('id');
+
+        $info = M("source")->where(array('id'=>$id))->find();
+        $this->assign('info',$info);
+
+        $this->display();
+    }
+
+    public function saveSource()
+    {
+        $data['source_title'] = I('source_title');
+        $data['source_id'] = I('source_id');
+        $id = I('id');
+
+        $res = M("source")->where(array('id'=>$id))->save($data);
+        if($res){
+            echo "<script>alert('处理成功'); location.replace(document.referrer);</script>";
+        } else {
+            echo "<script>alert('处理失败'); location.replace(document.referrer);</script>";
+        }
+    }
+
 
     public function update_brand()
     {
