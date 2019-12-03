@@ -12,7 +12,8 @@
     $('#submit').click(function(){
         var objective = $('input[name="objective"]:checked').val();
         var reg=/\s+/;
-        var num=/\d{11}/;
+        //var num=/\d{11}/;
+        var num = /^1[3456789]\d{9}$/;
         var text=/[\u4e00-\u9fa5]{2,5}/;
         var username = $('#username').val();
         var phone = $('#phone').val();
