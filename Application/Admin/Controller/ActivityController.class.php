@@ -312,11 +312,10 @@ class ActivityController extends CommonController
         $map['act_id'] = array('EQ',$id);
 
         $list = M("act_registration")->where($map)->order('id desc')->select();
+        $all_num = count($list);
         $count = count($list);
         $Page = new \Extend\Page($count,50);
         $show = $Page->show();// 分页显示输出
-        $all_num = count($list);
-
         $list = M("act_registration")
             ->where($map)
             ->limit($Page->firstRow.','.$Page->listRows)
