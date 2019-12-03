@@ -24,7 +24,7 @@ class ActivityController extends CommonController
      */
     public function act_list()
     {
-        $act_list = M("activity")->order('id desc')->select();
+        $act_list = M("activity")->where(array('act_status'=>1))->order('id desc')->select();
         $this->assign('list',$act_list);
 
         $this->display();
