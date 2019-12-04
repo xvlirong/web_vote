@@ -87,7 +87,7 @@
         <div id="flow" class="flow">
             <div class="con">
                 <h2>【报名流程】</h2>
-                <img src="__STATIC__/images/flow.png" alt="" />
+                <img class="lazy" data-original="__STATIC__/images/flow.png" alt="">
             </div>
         </div>
         <!-- 活动流程 end -->
@@ -135,7 +135,9 @@
                     <ul>
                         <foreach name="brand_list" item="v" key="i">
                             <if condition="($i+1)%40 eq 1"><li class="clearfix"></if>
-                            <div><img src="__PUBLIC__/upload/brand/{$v.zh_logo}" alt="" /></div>
+                            <div>
+                                <img class="lazy" data-original="__PUBLIC__/upload/brand/{$v.zh_logo}" alt="">
+                            </div>
                             <if condition="($i+1)%40 eq 0"></li> </if>
                         </foreach>
                     </ul>
@@ -169,7 +171,7 @@
                     <h2>【参展现场】</h2>
                 </div>
                 <div class="scene_img">
-                    <img src="__PUBLIC__/upload/scene/{$scene_img.img_url}" alt="" />
+                    <img class="lazy" data-original="__PUBLIC__/upload/scene/{$scene_img.img_url}" alt="">
                 </div>
             </div>
         </div>
@@ -206,7 +208,7 @@
                 </div>
             </div>
             <div class="img">
-                <img src="__PUBLIC__/upload/wx_img/{$info.wx_img}" alt="" />
+                <img class="lazy" data-original="__PUBLIC__/upload/wx_img/{$info.wx_img}" alt="">
             </div>
         </div>
         <div class="copy">&copy; 2014-2019 房车时代 京ICP备07503663号 京公网安备11010802015289号</div>
@@ -234,6 +236,7 @@
 <script type="text/javascript" src="__STATIC__/js/global.js"></script>
 <script type="text/javascript" src="__STATIC__/js/index.js"></script>
 <script type="text/javascript" src="__STATIC__/js/activity.js"></script>
+<script src="__STATIC__/js/jquery.lazyload.js?v=1.9.1"></script>
 <script>
     organize(organizer);
     function organize(organizer){
