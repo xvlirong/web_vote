@@ -238,6 +238,11 @@
 <script type="text/javascript" src="__STATIC__/js/activity.js"></script>
 <script src="__STATIC__/js/jquery.lazyload.js?v=1.9.1"></script>
 <script>
+    $(function() {
+
+        $("img.lazy").lazyload({effect: "fadeIn"});
+
+    });
     organize(organizer);
     function organize(organizer){
         let arr=organizer.split('、');
