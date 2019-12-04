@@ -256,6 +256,7 @@ body {
 }
 .abstract .host_green{
     border-left: 3px solid #23ac3a;
+    height: 127px;
 }
 /*#desc .abstract dt {*/
 /*font-size: 18px;*/
