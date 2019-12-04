@@ -192,7 +192,7 @@ class ActivityController extends CommonController
         $this->assign('info',$info);
 
         //现场照片
-        $pc_scene = M("scene_img")->where(array('act_id'=>$id,'img_type'=>1))->find();
+        $pc_scene = M("scene_img")->where(array('act_id'=>$id,'img_type'=>1))->order('id desc')->find();
         $this->assign('pc_scene',$pc_scene);
         $mobile_scene = M("scene_img")->where(array('act_id'=>$id,'img_type'=>2))->select();
         $this->assign('mobile_scene',$mobile_scene);
