@@ -39,7 +39,7 @@ class IndexController extends BaseController {
             $scene_img = M("scene_img")->where(array('act_id'=>$id,'img_type'=>2))->select();
             $template_name = $template['mobile_name'];
         }else{
-            $scene_img = M("scene_img")->where(array('act_id'=>$id,'img_type'=>1))->find();
+            $scene_img = M("scene_img")->where(array('act_id'=>$id,'img_type'=>1))->order('id desc')->find();
             $template_name = $template['pc_name'];
         }
         $this->assign('scene_img',$scene_img);
