@@ -101,7 +101,7 @@
         </div>
         <div id="flow">
             <div class="con">
-                <img src="__STATIC__/images/mobile_flow.jpg" alt="" />
+                <img class="lazy" data-original="__STATIC__/images/mobile_flow.jpg"  alt="" />
             </div>
         </div>
         <!--车展亮点-->
@@ -126,11 +126,15 @@
                     <foreach name="brand_list" item="v" key="i">
                         <if condition="$i lt 12">
                             <li>
-                                <div><img src="__PUBLIC__/upload/brand/{$v.zh_logo}" alt="" /></div>
+                                <div>
+                                    <img class="lazy" data-original="__PUBLIC__/upload/brand/{$v.zh_logo}"  alt="" />
+                                </div>
                             </li>
                             <else />
                             <li class="none">
-                                <div><img src="__PUBLIC__/upload/brand/{$v.zh_logo}" alt="" /></div>
+                                <div>
+                                    <img class="lazy" data-original="__PUBLIC__/upload/brand/{$v.zh_logo}"  alt="" />
+                                </div>
                             </li>
                         </if>
                     </foreach>
@@ -143,7 +147,7 @@
             <div class="title"><h3>【车展路线】</h3></div>
             <div id="allmap"></div>
             <div class="txt">
-                <img src="__STATIC__/images/mobile_car.png" alt="" />
+                <img class="lazy" data-original="__STATIC__/images/mobile_car.png"  alt="" />
                 <span>乘车线路：</span>
                 <foreach name="info['lines']" item="v">
                     <p>{$v}</p>
@@ -158,7 +162,7 @@
                     <div class="swiper-wrapper">
                         <foreach name="scene_img" item="v">
                             <div class="swiper-slide">
-                                <img src="__PUBLIC__/upload/scene/{$v.img_url}" alt="">
+                                <img class="lazy" data-original="__PUBLIC__/upload/scene/{$v.img_url}"  alt="" />
                             </div>
                         </foreach>
                     </div>
@@ -218,7 +222,13 @@
 <script type="text/javascript" src="__STATIC__/js/global.js"></script>
 <script type="text/javascript" src="__STATIC__/js/phone.js"></script>
 <script type="text/javascript" src="__STATIC__/js/activity.js"></script>
+<script src="__STATIC__/js/jquery.lazyload.js?v=1.9.1"></script>
 <script>
+    $(function() {
+
+        $("img.lazy").lazyload({effect: "fadeIn"});
+
+    });
     var _hmt = _hmt || [];
     (function() {
         var hm = document.createElement("script");
