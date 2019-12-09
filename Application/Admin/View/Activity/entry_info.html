@@ -41,7 +41,8 @@
                         <input type="hidden" name="id" value="{$id}">
                         <a class="btn" id="sub">查询</a>
                         <span>今日新报名人数 {$today_num}人&nbsp;&nbsp;&nbsp;&nbsp;共计报名{$all_num}人</span>
-                        <a href="{:U('Activity/exam_export',array('id'=>$id))}" class="btn">导出信息</a>
+<!--                        <a href="{:U('Activity/exam_export',array('id'=>$id))}" class="btn">导出信息</a>-->
+                        <a onclick="export_info()" class="btn">导出信息</a>
                     </div>
 
                 </form>
@@ -49,7 +50,7 @@
             <!--列表-->
             <form action="" method="post">
                 <table cellpadding="0" cellspacing="0" class="list_hy" style="width: 95%">
-                    <tr>
+                    <tr> 
                         <th scope="col">ID</th>
                         <th scope="col">姓名</th>
                         <th scope="col">手机号</th>
@@ -97,6 +98,20 @@
     $('#sub').click(function(){
         document.formtest.submit();
     });
+    
+    function export_info() {
+        var id = "{$id}";
+        var start_time = $("#key1").val();
+        var end_time = $("#key2").val();
+        if(start_time == ''){
+            start_time = 0;
+            end_time = 0;
+        }
+
+        var url = "__APP__/Activity/exam_export/id/"+id+"/start_time/"+start_time+"/end_time/"+end_time;
+
+        location.href = url;
+    }
 </script>
 </body>
 </html>

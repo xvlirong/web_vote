@@ -309,6 +309,7 @@ class ActivityController extends CommonController
         $end_time = strtotime(I('end_time',0));
         $this->assign('end_time',$end_time);
         if($start_time>0){
+            $end_time = $end_time+86400;
             $map['add_time'] = array('BETWEEN',array($start_time,$end_time));
         }
         $map['act_id'] = array('EQ',$id);
@@ -398,8 +399,15 @@ class ActivityController extends CommonController
     public function exam_export()
     {
         $id = I('id');
+        $start_time = strtotime(I('start_time',0));
+        $end_time = strtotime(I('end_time',0));
+        if($start_time>0){
+            $end_time = $end_time+86400;
+            $map['add_time'] = array('BETWEEN',array($start_time,$end_time));
+        }
+        $map['act_id'] = array('EQ',$id);
         $goods_list = M('act_registration')
-            ->where(array('act_id'=>$id))
+            ->where($map)
             ->order('add_time desc')
             ->select();
         $data = array();
@@ -408,6 +416,8 @@ class ActivityController extends CommonController
             $data[$k]['userphone'] = $goods_info['userphone'];
             $data[$k]['car_type'] = $goods_info['car_type'];
             $data[$k]['source_title'] = $goods_info['source_title'];
+            $data[$k]['source'] = $goods_info['source'];
+            $data[$k]['source_type'] = $goods_info['source_type'];
             $data[$k]['add_time'] = date("Y-m-d H:i:s",$goods_info['add_time']);
         }
         //print_r($goods_list);
@@ -424,10 +434,16 @@ class ActivityController extends CommonController
                 $headArr[]='手机号';
             }
             if($field == 'car_type'){
-                $headArr[]='车型';
+                $headArr[]='意向车型';
             }
             if($field == 'source_title'){
                 $headArr[]='来源';
+            }
+            if($field == 'source'){
+                $headArr[]='来源标识';
+            }
+            if($field == 'source_type'){
+                $headArr[]='来源类型';
             }
             if($field == 'add_time'){
                 $headArr[]='报名时间';
