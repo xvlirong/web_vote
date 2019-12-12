@@ -75,7 +75,11 @@ class IndexController extends BaseController {
         $list = M("company_banner")->where(array('pid'=>$id))->select();
         $this->assign('list',$list);
 
-        $info = M("act_company")->where(array('id'=>$id))->find();
+        $info = M("act_company")
+            ->join("left join brand_library on act_company.company_id=brand_library.id")
+            ->where(array('act_company.id'=>$id))
+            ->field('act_company.*,brand_library.company_name,brand_library.company_logo,brand_library.company_intro')
+            ->find();
         $this->assign('info',$info);
 
         $batch = date("Ymd",time());
@@ -113,12 +117,14 @@ class IndexController extends BaseController {
         //当前时间
         $info['now_date'] = msectime();
 
-        $maps = array('act_id'=>$id,'company_state'=>1);
+        $maps = array('act_id'=>$id);
         //参赛数
         $info['entries_num'] = M("act_company")->where($maps)->count();
 
         //投票数
-        $info['vote_num'] = M("act_company")->where($maps)->sum('tp_num');
+        $vote_num = M("act_company")->where($maps)->sum('tp_num');
+        $base_num = M("act_company")->where($maps)->sum('tp_base_num');
+        $info['vote_num'] = $vote_num+$base_num;
 
         //访问量
         $info['pv_num'] = M("rv_act")->where(array('id'=>$id))->getField('pv_num');
@@ -241,9 +247,10 @@ class IndexController extends BaseController {
         $id = I('act_id',1);
 
         $list = M("act_company")
+            ->join("left join brand_library on act_company.company_id=brand_library.id")
             ->where(array('act_id'=>$id))
             ->order(array('tp_num'=>'desc','id'=>'asc'))
-            ->field('id,company_name,company_logo,tp_num')
+            ->field('act_company.id,brand_library.company_name,brand_library.company_logo,tp_num')
             ->select();
         $this->assign('list',$list);
 
@@ -304,7 +311,11 @@ class IndexController extends BaseController {
         $jssdk=A("Jssdk");
         $signPackage = $jssdk->GetSignPackage($url);
         $pid = cookie('share_pid');
-        $info = M("act_company")->where(array('id'=>$pid))->field('company_name,company_logo')->find();
+        $info = M("act_company")
+            ->join("left join brand_library on act_company.company_id=brand_library.id")
+            ->where(array('act_company.id'=>$pid))
+            ->field('brand_library.company_name,brand_library.company_logo')
+            ->find();
         $img_url = HTTP_TYPE."votes.rvtimes.cn/Public/upload/company_logo/".$info['company_logo'];
         $title = '【'.$info['company_name'].'】中国房车20周年荣耀盛典评选-房车时代';
         $con = '选择'.$info['company_name'].'，为您喜爱的房车企业投上宝贵的一票-房车时代网';
@@ -339,8 +350,9 @@ class IndexController extends BaseController {
 
         //列表
         $list = M("act_company")
+            ->join("left join brand_library on act_company.company_id=brand_library.id")
             ->where($maps)
-            ->field('id,company_name,company_logo,tp_num,sort')
+            ->field('act_company.id,brand_library.company_name,brand_library.company_logo,tp_num,sort')
             ->select();
         return $list;
     }
