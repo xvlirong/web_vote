@@ -95,7 +95,11 @@ class ActivityController extends CommonController
         $id = I('id');
         $this->assign('act_id',$id);
 
-        $list = M("act_company")->where(array('act_id'=>$id))->field('id,company_name,company_logo,add_time,company_state,tp_num')->select();
+        $list = M("act_company")
+            ->join("left join brand_library on act_company.company_id=brand_library.id")
+            ->where(array('act_id'=>$id))
+            ->field('act_company.id,brand_library.company_name,brand_library.company_logo,act_company.add_time,company_state,tp_num,tp_base_num,company_number')
+            ->select();
         $this->assign('list',$list);
 
         $this->display('company_list');
@@ -114,13 +118,13 @@ class ActivityController extends CommonController
      */
     public function addCompany()
     {
-        $data['act_id'] = I('act_id');
+       // $data['act_id'] = I('act_id');
         $data['company_name'] = I('company_name');
         $img = uploadImg('company_logo');
         $data['company_logo'] = $img['company_logo']['savename'];
         $data['company_intro'] = I('company_intro');
         $data['add_time'] = time();
-        $res = M("act_company")->add($data);
+        $res = M("brand_library")->add($data);
         if($res){
             $this->success('添加成功',U('company_list',array('id'=>$data['act_id'])));
         } else {
@@ -166,7 +170,7 @@ class ActivityController extends CommonController
     public function update_company()
     {
         $id = I('id');
-        $info = M("act_company")->where(array('id'=>$id))->find();
+        $info = M("brand_library")->where(array('id'=>$id))->find();
         $this->assign('info',$info);
 
         $this->display();
@@ -183,7 +187,7 @@ class ActivityController extends CommonController
             $data['company_logo'] = $img['company_logo']['savename'];
         }
 
-        $res = M("act_company")->where(array('id'=>$id))->save($data);
+        $res = M("brand_library")->where(array('id'=>$id))->save($data);
         if($res){
             echo "<script>alert('处理成功'); location.replace(document.referrer);</script>";
         } else {
