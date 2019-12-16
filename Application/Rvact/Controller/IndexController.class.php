@@ -125,6 +125,7 @@ class IndexController extends BaseController {
         if(empty($data['userphone'])){
             return $this->jsonData(0,'手机号码不能为空');
         }
+        $data['mobile_area'] = $this->getMobileInfo($data['userphone']);
         $data['add_time']=time();
 
         $data['source_title'] = M("source")->where(array('source_id'=>$data['source']))->getField('source_title');
