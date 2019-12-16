@@ -124,7 +124,8 @@ class BaseController extends Controller {
     {
         if (!preg_match("/^1[34578]\d{9}$/", $mobile)) {
             //return '请输入正确手机号码！';
-            return '未知';
+            $info['prov'] = '未知';
+            $info['city'] = '未知';
         }else{
             $phone_json = file_get_contents('http://sp0.baidu.com/8aQDcjqpAAV3otqbppnN2DJv/api.php?query={'.$mobile.'}&resource_id=6004&ie=utf8&oe=utf8&format=json');
             $phone_array = json_decode($phone_json,true);
@@ -132,7 +133,9 @@ class BaseController extends Controller {
             $phone_info['mobile'] = $mobile;
             $phone_info['type'] = $phone_array['data'][0]['type'];
             $phone_info['location'] = $phone_array['data'][0]['prov'].$phone_array['data'][0]['city'];
-            return $phone_info['location'];
+            $info['prov'] = $phone_array['data'][0]['prov'];
+            $info['city'] = $phone_array['data'][0]['city'];
+            return $info;
         }
     }
 

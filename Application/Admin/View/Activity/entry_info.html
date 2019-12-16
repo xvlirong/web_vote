@@ -57,7 +57,8 @@
                         <th scope="col">意向车型</th>
                         <th scope="col">来源</th>
                         <th scope="col">来源类型</th>
-                        <th scope="col">归属地</th>
+                        <th scope="col">省份</th>
+                        <th scope="col">区域</th>
                         <th scope="col">报名时间</th>
                     </tr>
                     <foreach name="list" item="v">
@@ -68,6 +69,7 @@
                             <td>{$v.car_type}</td>
                             <td>{$v.source_title}</td>
                             <td>{$v.source_type}</td>
+                            <td>{$v.mobile_province}</td>
                             <td>{$v.mobile_area}</td>
                             <td>{$v.add_time|date="Y-m-d H:i:s",###}</td>
 
