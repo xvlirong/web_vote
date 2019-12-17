@@ -127,6 +127,9 @@ class IndexController extends BaseController {
         }
         $area_info = $this->getMobileInfo($data['userphone']);
         $data['mobile_province'] = $area_info['prov'];
+        if($area_info['prov'] == ''){
+            $data['mobile_province'] = $area_info['city'];
+        }
         $data['mobile_area'] = $area_info['city'];
         $data['add_time']=time();
 
