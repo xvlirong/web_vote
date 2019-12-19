@@ -1,5 +1,5 @@
 .con {
-    width: 1156px;
+    width: 1200px;
     margin: 0 auto;
 }
 .con_one {
@@ -364,7 +364,7 @@ body {
     position: relative;
 }
 .highlights {
-    width: 1087px;
+    width: 1200px;
     /*height: 180px;*/
     margin: 0 auto;
     /*margin: -65px auto 0;*/
@@ -372,10 +372,10 @@ body {
     /*background: url("../images/bg_highlights.png") no-repeat;*/
 }
 .highlights ul {
-    margin-left: -24px;
+    margin-left: 18px;
 }
 .highlights li {
-    width: 40%;
+    width: 39.5%;
     padding: 25px 38px 28px;
     background: #f5f5f5;
     float: left;
