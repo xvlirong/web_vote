@@ -171,12 +171,12 @@ body {
     width: 80px;
 }
 .countdown {
-    width: 350px;
-    height: 68px;
+    width: 387px;
+    height: 400px;
     /*margin-left: 8px;*/
-    padding: 322px 0 10px 38px;
+    /*padding: 322px 0 10px 38px;*/
     *display:inline;
-    background: #fff url("../images/gift1.png") no-repeat 27px 20px;
+    background: #fff;
 }
 .bm1{
     /*margin-left: 5px;*/
@@ -188,6 +188,9 @@ body {
     font-size: 16px;
     color: #f6f6f6;
 }
+.countdown .time1 {
+    margin-left: 29px;
+}
 .countdown .time span {
     display: inline-block;
     zoom: 1;
@@ -195,6 +198,10 @@ body {
     height: 32px;
     text-align: center;
     margin-right: 38px;
+}
+.countdown .time1 span sj {
+width: 100px;
+
 }
 #flow {
     height: 210px;
@@ -261,7 +268,7 @@ body {
 }
 .abstract .host_green{
     border-left: 3px solid #23ac3a;
-    height: 127px;
+    /*height: 127px;*/
 }
 /*#desc .abstract dt {*/
 /*font-size: 18px;*/
@@ -506,4 +513,28 @@ body {
 #box_hea{
     width: 1240px;
     margin: 0 auto;
+}
+
+.date-tiem-span, .date-s-span {
+    font-size: 14px;
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    border-radius: 3px;
+    background: #EB3357;
+    color: #ffffff;
+}
+
+.date-def {
+    font-size: 14px;
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    text-align: center;
+    border-radius: 3px;
+    background: #BFBFBF;
+    color: #ffffff;
 }

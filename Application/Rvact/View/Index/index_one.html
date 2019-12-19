@@ -72,13 +72,25 @@
                         </ul>
                     </div>
                 </div>
-                <div class="countdown fl">
-                    <div class="time">
-                        <span>-</span>
-                        <span>-</span>
-                        <span>-</span>
-                        <span>-</span>
+                <div class="countdown fl" id="dateShow1">
+                    <img style="width: 320px;margin-left: 30px;margin-top: 35px" src="__STATIC__/images/gift3.jpg" alt="">
+                    <div class="time1">
+                        <p style="font-size: 22px;margin-left: 70px;margin-bottom: 5px;">活动剩余时间</p>
+                        <span class="date-tiem-span d">00</span>
+                        <span class="date-def">天</span>
+                        <span class="date-tiem-span h">00</span>
+                        <span class="date-def">时</span>
+                        <span class="date-tiem-span m">00</span>
+                        <span class="date-def">分</span>
+                        <span class="date-tiem-span s">00</span>
+                        <span class="date-def">秒</span>
                     </div>
+<!--                    <div class="time">-->
+<!--                        <span>-</span>-->
+<!--                        <span>-</span>-->
+<!--                        <span>-</span>-->
+<!--                        <span>-</span>-->
+<!--                    </div>-->
                 </div>
             </div>
         </div>
@@ -238,10 +250,27 @@
 <script type="text/javascript" src="__STATIC__/js/global.js"></script>
 <script type="text/javascript" src="__STATIC__/js/index.js?time=1603"></script>
 <script type="text/javascript" src="__STATIC__/js/activity.js"></script>
+<script src="__STATIC__/js/leftTime.min.js"></script>
 <script src="__STATIC__/js/jquery.lazyload.js?v=1.9.1"></script>
 <script>
-    $(function() {
 
+    $(function() {
+        var data={};
+        var enddate = "{$end_date}";
+        var nowdate = "{$now_date}";
+        data.enddate = parseInt(enddate);
+        data.nowdate = parseInt(nowdate);
+        data.init = true;
+        //日期倒计时
+        $.leftTime(data,function(d){
+            if(d.status){
+                var $dateShow1=$("#dateShow1");
+                $dateShow1.find(".d").html(d.d);
+                $dateShow1.find(".h").html(d.h);
+                $dateShow1.find(".m").html(d.m);
+                $dateShow1.find(".s").html(d.s);
+            }
+        });
         $("img.lazy").lazyload({effect: "fadeIn"});
 
     });
