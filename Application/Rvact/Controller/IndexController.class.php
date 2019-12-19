@@ -13,6 +13,12 @@ class IndexController extends BaseController {
         $info['lines'] = explode('|',$info['car_line']);
         $info['act_highlights'] = explode('|',$info['act_highlights']);
         $this->assign('info',$info);
+        //结束时间
+        $end_date = $info['end_time']*1000;
+        $now_date = time()*1000;
+        $this->assign('end_date',$end_date);
+        $this->assign('now_date',$now_date);
+
 
         //活动状态
         if($info['act_status'] == 1 && $info['end_time']>time()){
