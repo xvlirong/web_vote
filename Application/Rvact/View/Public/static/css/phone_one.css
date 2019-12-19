@@ -468,7 +468,7 @@ header {
 #scene .img img {
     display: block;
     width: 6.92rem;
-    height: 3.04rem;
+/*height: 3.04rem;*/
     margin: 0 auto 0.1rem;
 }
 #scene .txt {
