@@ -63,7 +63,7 @@ body {
 }
 .form {
     width: 384px;
-    background: #fbfbfb;
+    background: #fff;
 }
 .form h2 {
     margin-top: 20px;
@@ -129,7 +129,7 @@ body {
     width: 360px;
     padding-right: 41px;
     height: 400px;
-    background: #fbfbfb;
+    background: #fff;
     padding-left: 27px;
 }
 .ticket{
@@ -176,7 +176,7 @@ body {
     /*margin-left: 8px;*/
     padding: 322px 0 10px 38px;
     *display:inline;
-    background: #fbfbfb url("../images/gift2.png") no-repeat 27px 20px;
+    background: #fff url("../images/gift2.png") no-repeat 27px 20px;
 }
 .bm1{
     /*margin-left: 5px;*/
