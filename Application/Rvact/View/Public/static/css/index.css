@@ -200,7 +200,7 @@ body {
     height: 210px;
 }
 .flow{
-    padding: 12px 0 40px;
+    padding: 24px 0 40px;
 }
 .flow h2,
 .title h2{
@@ -309,7 +309,7 @@ body {
 }
 #brand {
     background: #f6f6f6;
-    padding: 26px 0 11px;
+    padding: 24px 0 0px;
 }
 #brand .list {
     width: 1116px;
@@ -360,7 +360,7 @@ body {
 }
 #guarantee {
     /*height: 240px;*/
-    padding: 20px 0 28px;
+    padding: 24px 0 0px;
     position: relative;
 }
 .highlights {
@@ -404,7 +404,7 @@ body {
     border-top-color: #fe4362;
 }
 #scene {
-    padding-top: 23px;
+    padding-top: 24px;
 }
 .scene_img{
     text-align: center;
