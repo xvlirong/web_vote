@@ -127,7 +127,7 @@ body {
 }
 .signlist {
     width: 360px;
-    padding-right: 35px;
+    padding-right: 41px;
     height: 400px;
     background: #fbfbfb;
     padding-left: 27px;
@@ -179,7 +179,7 @@ body {
     background: #fbfbfb url("../images/gift1.png") no-repeat 27px 20px;
 }
 .bm1{
-    margin-left: 5px;
+    /*margin-left: 5px;*/
 }
 .countdown .time {
     width: 280px;
