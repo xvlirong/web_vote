@@ -227,7 +227,7 @@ body {
     margin-top: 18px;
     height: 480px;
     overflow: hidden;
-    /*margin-left: 20px;*/
+    margin-left: 20px;
 }
 #desc .abstract {
     width: 579px;
@@ -367,7 +367,7 @@ body {
     position: relative;
 }
 .highlights {
-    width: 1200px;
+    width: 1240px;
     /*height: 180px;*/
     margin: 0 auto;
     /*margin: -65px auto 0;*/
