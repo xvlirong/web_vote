@@ -172,10 +172,13 @@ body {
 .countdown {
     width: 350px;
     height: 68px;
-    margin-left: 8px;
+    /*margin-left: 8px;*/
     padding: 322px 0 10px 38px;
     *display:inline;
-    background: #f6f6f6 url("../images/gift1.png") no-repeat 27px 20px;
+    background: #fbfbfb url("../images/gift1.png") no-repeat 27px 20px;
+}
+.bm1{
+    margin-left: 13px;
 }
 .countdown .time {
     width: 280px;
@@ -196,7 +199,7 @@ body {
     height: 210px;
 }
 .flow{
-    padding: 24px 0 40px;
+    padding: 12px 0 40px;
 }
 .flow h2,
 .title h2{
