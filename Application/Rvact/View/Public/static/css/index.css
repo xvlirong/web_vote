@@ -218,7 +218,7 @@ body {
     background: #3b81e0;
 }
 #desc .con {
-    padding: 32px 0 30px;
+    padding: 24px 0 30px;
 }
 #desc .box {
     padding: 0 20px;
@@ -227,11 +227,12 @@ body {
     margin-top: 18px;
     height: 480px;
     overflow: hidden;
+    margin-left: 20px;
 }
 #desc .abstract {
     width: 538px;
     float: left;
-    margin-left: 20px;
+    margin-left: 26px;
     *display: inline;
 }
 .abstract ul{
