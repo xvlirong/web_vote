@@ -82,7 +82,7 @@ var brand={
         })
     },
     move:function(iNow){
-        $('#brand ul').animate({'margin-left':-1197*iNow},300);
+        $('#brand ul').animate({'margin-left':-1240*iNow},300);
     }
 };
 brand.init();
