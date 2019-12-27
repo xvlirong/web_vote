@@ -235,7 +235,7 @@ class IndexController extends BaseController {
             $res = M("sign_info")->add($data);
             if($res){
                 $res_info['code'] = 1;
-                $res['id'] = $res;
+                $res_info['id'] = $res;
                 $res_info['msg'] = '处理成功';
             }else{
                 $res_info['code'] = 0;
@@ -304,7 +304,7 @@ class IndexController extends BaseController {
         $exist = M("sign_info")->where(array('tel_phone'=>$phone))->find();
         if($exist){
             $res['code'] = 4;
-            $res['msg'] = '该手机号已登记';
+            $res['msg'] = '您已报名成功';
             $this->ajaxReturn($res);die;
         }
         $res = $this->handleSendMs($phone,$project);
