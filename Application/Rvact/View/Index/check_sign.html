@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>签到登记</title>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <link href="__STATIC__/css/style.css?time=1111" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<section class="jq22-flexView">
+    <section class="jq22-scrollView">
+        <div class="jq22-auto-img">
+            <img src="__STATIC__/images/info.jpg" alt="">
+        </div>
+        <div class="jq22-auto-form">
+            <div class="jq22-auto-box" style="text-align: center;">
+                <div class="sel_box">
+                    <input type="text" id="key" name="key" placeholder="请输入名称">
+                    <button class="jq22-apply-btn1" id="sel_btn" >查询</button>
+                </div>
+                <div>
+                    <div class="jq22-flex">
+                        <label>姓名</label>
+                        <div class="jq22-flex-box">
+                            <span id="username"></span>
+                        </div>
+                    </div>
+                    <div class="jq22-flex">
+                        <label>品牌</label>
+                        <div class="jq22-flex-box">
+                            <span id="brand"></span>
+                        </div>
+                    </div>
+                    <div class="jq22-flex">
+                        <label>车型</label>
+                        <div class="jq22-flex-box">
+                            <span id="car_type"></span>
+                        </div>
+                    </div>
+                    <div class="jq22-flex">
+                        <label>手机号</label>
+                        <div class="jq22-flex-box">
+                            <span id="tel_phone"></span>
+                        </div>
+                    </div>
+                    <div class="jq22-flex">
+                        <label>核验状态</label>
+                        <div class="jq22-flex-box">
+                            <span id="hy_state"></span>
+                        </div>
+                    </div>
+                    <button class="jq22-apply-btn" id="hy_btn" style="display: none">核验</button>
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+</body>
+<script src="__STATIC__/js/jquery-1.12.2.min.js"></script>
+<script>
+    var cx_url = "__APP__/Rvact.php/Index/showUserInfo";
+    $("#sel_btn").click(function () {
+        var con = $("#key").val();
+        $.ajax({
+            url:cx_url,
+            data:{con:con},
+            success:function (data) {
+                $("#username").html(data.username);
+                $("#brand").html(data.brand);
+                $("#car_type").html(data.car_type);
+                $("#tel_phone").html(data.tel_phone);
+                if(data.hy_state==0){
+                    $("#hy_state").html('未核验');
+                    $("#hy_btn").show();
+                }else{
+                    $("#hy_state").html('已核验');
+                }
+
+            }
+        })
+    })
+</script>

@@ -338,4 +338,58 @@ class IndexController extends BaseController {
         return $str;
     }
 
+    public function loginUser()
+    {
+        if(!IS_POST){
+            $res_info['code'] = 1;
+            $res_info['msg'] = '非法操作！稍后重试';
+            $this->ajaxReturn($res_info);die;
+        }
+        $username = I('phone');
+        $hyr = I('username');
+        $pwd = md5(md5(I('password')));
+        $exist = M("admin_user")->where(array('username'=>$username,'password'=>$pwd))->find();
+        if($exist){
+            session('adminId',$exist['id']);
+            session('adminName',$hyr);
+            $url = U('Index/checkSignInfo');
+            $res_info['code'] = 0;
+            $res_info['msg'] = '登陆成功';
+            $res_info['url'] = $url;
+        }else{
+            $res_info['code'] = 2;
+            $res_info['msg'] = '账号或密码错误';
+        }
+        $this->ajaxReturn($res_info);
+    }
+
+    public function checkSignInfo()
+    {
+        $uid = session('adminId');
+        if(!$uid){
+            header('Location:http://peoplerv.rvtimes.cn/rvact/index/admin_login');
+            die;
+            die;
+        }
+        $this->display('check_sign');
+    }
+
+    public function md_pwd()
+    {
+        echo md5(md5(123456));
+    }
+
+    public function showUserInfo()
+    {
+        $con = I('con');
+        $maps['tel_phone'] = array("EQ",$con);
+        $info = M("sign_info")->where($maps)->find();
+        $res_info['username'] = $info['username'];
+        $res_info['brand'] = $info['yx_brand'];
+        $res_info['car_type'] = $info['yx_type'];
+        $res_info['tel_phone'] = $info['tel_phone'];
+        $res_info['hy_state'] = $info['hy_state'];
+        $this->ajaxReturn($res_info);
+    }
+
 }

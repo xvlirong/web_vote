@@ -1,0 +1,85 @@
+.main{position: relative;
+    min-width: 320px;
+    max-width: 750px;
+    /*background-color: pink;*/
+    margin: 0 auto;
+    font-size: 14px;
+}
+.wrong{position: absolute;top: 0;left: 0;width: 100%;height: 70px;z-index: 99;
+    background-color: #333333;opacity: 0.9;color: white;text-align: center;line-height: 70px}
+.denglu{width: 100%;height: 1.75rem;background-color: #52c6f2;text-align: center;line-height:1.75rem;font-size: 0.85rem;color: #fff;position: relative}
+.denglu .fanhui{display: inline-block;width: 1rem;height: 1rem; position: absolute;top: 0%;left: 0%;
+}
+/*.dz li:nth-child(0) a{color: #333;width: 100%；height:100%;}*/
+/*.dz li:nth-child(1) a{color: #999; width: 100%；height:100%;}*/
+/*.dz li:nth-child(0){border-right: 1px solid #333333;}*/
+/*.dz li:nth-child(1){border-bottom: 1px solid #333333;}*/
+/*.current{color: #333;border-top: 1px solid #333333;}*/
+.clearfix:after
+{
+    content:"";
+    display: block;
+    height: 0;
+    line-height: 0;
+    visibility: hidden;
+    clear: both;
+}
+.bb ul{margin-top: 1.5rem;}
+.bb ul li{float: left;width: 50%;height: 2.4rem;text-align: center;line-height:2.4rem;font-size: 0.5rem; float: left;}
+.bb ul li a{color: #999;width: 100%;height: 2.4rem;display: block;}
+.bb ul li .dl{border-right: 1px solid #333;}
+.bb ul li .zc{border-bottom: 1px solid #333;color: #c9c9c9;font-size: 0.9rem;}
+.bb ul li .current{border-top: 1px solid #333333;border-bottom: 0 none;color: #000000;font-size: 0.9rem
+}
+#downbox ul{ display: none; }
+.touxiang{width: 5rem;height: 5rem;margin: 0 auto;
+    margin-top: 3rem;}
+.touxiang img{width: 100%;}
+#downbox .phone{margin:1rem auto;width:80%;height: 2.2rem;border-bottom: 1px solid #52c6f2;
+   line-height:2.2rem;color:#6D6D6D;position: relative;
+}
+
+#downbox .phone .huoqu{width: 35%;height: 2.2rem;display: inline-block;
+    background-color:#37b059 ; margin-left: 0.25rem;text-align: center;font-size: 0.75rem;color: white;float: right;}
+#downbox .phone .people{width: 0.9rem;height: 0.9rem;line-height: 0.9rem;
+    margin: 0 0.5rem;}
+#downbox .phone .people img{width: 100%;display: inline-block;vertical-align: middle;}
+
+#downbox .phone .suo{width: 0.9rem;height: 0.9rem;line-height: 0.9rem;
+    margin: 0 0.5rem;}
+#downbox .phone .suo img{display: inline-block;width: 100%;vertical-align: middle;}
+#downbox ul li span{display: inline-block;font-size: 0.75rem;line-height: 2.2rem;}
+#downbox ul li div input{display:inline-block;width: 80%;height: 1.9rem;border: none;line-height: 2.1rem;font-size: 0.75rem;outline: none;}
+#downbox ul li div .tt{font-size: 0.45rem;color: #666;line-height: 2.2rem;}
+#downbox ul li div .forget{float: right;padding-right: 0.5rem;font-size: 0.45rem;color: #666; }
+#downbox .over{margin:1.2rem auto 0;width:80%;height:2rem;
+    background-color: #52c6f2;line-height: 2rem;color: #fff;line-height: 2rem;text-align: center;font-size: 0.75rem;
+    border-radius: 50px;}
+#downbox ul li div .yanzheng{width:0.9rem;height: 0.9rem;line-height: 0.9rem;
+    margin: 0 0.5rem; }
+#downbox ul li div .yanzheng img{display: inline-block;width: 100%;vertical-align: middle;}
+#downbox ul li div #code{width: 45%;}
+#downbox ul .ts{width: 100%;height: 2rem;line-height: 4rem;font-size: 0.65rem;color: red;}
+#downbox ul .ts img{vertical-align: middle;width: 1rem;height: 1rem;}
+#downbox ul .se{margin-top: 0.75rem;}
+#downbox .wm{width: 3rem;height: 1rem;background-color: #ffffff;outline: none;border: none;top: 0.7rem;right: 1rem;z-index: 5;position: absolute;font-size: 0.6rem; color: #6c6c6c;cursor: pointer;}
+.bottom{width: 100%;text-align: center;height: 1rem;line-height: 1rem;margin: 0.5rem auto 0;font-size: 0.65rem;margin-top:4.3rem;}
+.ts{width: 100%;text-align: center;height: 1rem;line-height: 1rem;color: #6c6c6c;font-size: 0.65rem; margin-bottom: 0.5rem}
+.free{color: #13aefe;}
+
+.sb::-webkit-input-placeholder { /* WebKit browsers */
+    font-size: 0.75rem;
+    color: #6c6c6c;
+}
+.sb:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    font-size: 0.75rem;
+    color:#6c6c6c;
+}
+.sb::-moz-placeholder { /* Mozilla Firefox 19+ */
+    font-size: 0.75rem;
+    color:#6c6c6c;
+}
+.sb:-ms-input-placeholder { /* Internet Explorer 10+ */
+    font-size: 0.75rem;
+    color:#6c6c6c;
+}

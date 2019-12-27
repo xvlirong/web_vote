@@ -1,0 +1,197 @@
+.head_middle {
+    background: #EB3357;
+    font-size: 0.6rem;
+    color: #ffffff;
+    margin-bottom: .4rem;
+}
+.head_dh li{
+    float: left; /* 往左浮动 */
+    display: block;
+    text-align: center;
+    width: 33%;
+    margin: .48rem 0;
+    border-right:1px solid #ccc
+}
+.head_middle li:last-child {
+    border: none;
+}
+.head_dh p {
+    text-align: center;
+}
+
+.head_footer {
+    text-align: center;
+    font-size: .8rem;
+    margin-bottom: 1rem;
+}
+.head_footer img{
+    width: 0.81rem;
+    height: 0.82rem;
+}
+
+
+.date-tiem-span,.date-s-span {
+    font-size: .7rem;
+    display: inline-block;
+    width:1.1rem;
+    height:1rem;
+    line-height: 1rem;
+    text-align: center;
+    border-radius:5px;
+    background: #EB3357;
+    color: #ffffff;
+}
+.date-info-show {
+    font-size: .7rem;
+    color:#eb325b;
+}
+.date-s-span {
+    background:#f00;
+}
+.date-def {
+    font-size: .65rem;
+    display: inline-block;
+    width:1.1rem;
+    height:1rem;
+    line-height: 1rem;
+    text-align: center;
+    border-radius:5px;
+    background:#BFBFBF;
+    color: #ffffff;
+}
+
+.mask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: #1b1919;
+    z-index: 9;
+
+}
+
+
+.testBtn-a{
+    display: inline-block;
+    height: 30px;
+    line-height: 30px;
+    padding: 0 10px;
+    border-radius: 5px;
+    color: #fff;
+    background: rgb(65,133,244);
+    cursor: pointer;
+    margin-top: 0.5rem;
+    margin-left: 0.3rem;
+}
+.testBtn-a.on {
+    background: #c9c9c9;
+    color: #666;
+    cursor: default;
+}
+
+.register .yan .inp input {
+    margin-top: 15px;
+    font-weight: 400;
+}
+.inp {
+    border-bottom: 2px solid #c1c1c1;
+}
+.yan .inp input {
+
+    width: 55%;
+    height: 1.3rem;
+    line-height: 1rem;
+    font-size: .8rem;
+    /* font-weight: 700; */
+    /* background-color: #f1eced; */
+    margin-top: 15px;
+}
+.button {
+    margin: .8rem 0 .3rem 4.4rem;
+    width: 35%;
+    height: 2rem;
+    border-radius: 1.2rem;
+    border: none;
+    background-color: rgb(65,133,244);
+    color: #fff;
+    font-size: .8rem;
+}
+.register {
+    width: 16rem;
+    height: 11rem;
+    background-color: #fff;
+    /* margin: 6% auto 0 auto; */
+    border-radius: 7%;
+    padding: .6rem .3rem .6rem 1rem;
+    position: fixed;
+    z-index: 21;
+    top: 30%;
+    left: 8%;
+
+}
+.register p{
+    text-align: center;
+    font-size: .8rem;
+    margin-top: .5rem;
+}
+.close_tk {
+    display: block;
+    float: right;
+    /* margin: .3rem 0; */
+    width: 1rem;
+    font-size: 1rem;
+}
+.ts_tk{
+    width: 13rem;
+    height: 7rem;
+    background-color: #fff;
+    /*border-radius: 7%;*/
+    padding: .6rem .3rem .6rem 1rem;
+    position: fixed;
+    z-index: 21;
+    top: 30%;
+    left: 16%;
+    text-align: center;
+}
+.ts_tk p{
+    line-height: 2rem;
+    padding: 1rem;
+    color: #eb325b;
+    font-size: 1rem;
+}
+.ts_tk img{
+    width: 1.5rem;
+    /* padding: 1rem; */
+    padding-right: .3rem;
+}
+
+#model {
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    z-index: 21;
+    width: 100%;
+    height: 100%;
+    border-radius: 7px;
+    color: #fff;
+    padding: 1em;
+}
+#model p {
+    font-size: 1.1rem;
+    clear: both;
+    margin: 0 auto;
+    margin-top: 7rem;
+    width: 80%;
+    text-align: center;
+    line-height: 2rem;
+}
+#model button {
+    width: 8rem;
+    display: block;
+    margin: 0 auto;
+    background: none;
+    color: #fff;
+    border: 1px solid #dcdcdc;
+    margin-top: 3rem;
+}
