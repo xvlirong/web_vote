@@ -164,19 +164,17 @@
             type:"post",
             data:{username:username,brand:brand,car_type:car_type,yzm_code:yzm_code,tel_phone:tel_phone},
             success:function (data) {
-                var url = "__APP__/Rvact/Index/dj_success/id/"+data.id;
-                location.href = url;
+                if(data.code == 1){
+                    var url = "__APP__/Rvact/Index/dj_success/id/"+data.id;
+                    location.href = url;
+                }else{
+                    alert(data.msg)
+                }
+
             }
         })
         return false;
     }
-    let [timeout, beforeTop] = [null, 0];
-    document.body.addEventListener('focusout', () => {
-        //软键盘收起的事件处理
-        if(isIphone()){
-
-        }
-    })
 </script>
 
 </html>

@@ -228,6 +228,12 @@ class IndexController extends BaseController {
         $data['tel_phone'] = I('tel_phone');
         $data['yx_brand'] = I('brand');
         $data['yx_type'] = I('car_type');
+        $exist = M("sign_info")->where(array('tel_phone'=>$data['tel_phone']))->find();
+        if($exist){
+            $res_info['code'] = 3;
+            $res_info['msg'] = '您已报名成功';
+            $this->ajaxReturn($res_info);die;
+        }
         $code = I('yzm_code');
         $msg_code = session('msg_code');
         if($code==$msg_code){
@@ -243,7 +249,7 @@ class IndexController extends BaseController {
             }
         }else{
             $res_info['code'] = 2;
-            $res_info['msg'] = '账号或密码错误';
+            $res_info['msg'] = '验证码错误';
         }
         $this->ajaxReturn($res_info);
     }
