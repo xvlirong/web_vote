@@ -151,6 +151,7 @@ a {
 .jq22-flexView {
     width: 100%;
     height: 100%;
+    position: absolute;
 }
 
 .jq22-scrollView {
