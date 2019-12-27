@@ -221,4 +221,113 @@ class IndexController extends BaseController {
     {
         $this->display();
     }
+
+    public function handleSignInfo()
+    {
+        $data['username'] = I('username');
+        $data['tel_phone'] = I('tel_phone');
+        $data['yx_brand'] = I('brand');
+        $data['yx_type'] = I('car_type');
+        $code = I('yzm_code');
+        $msg_code = session('msg_code');
+        if($code==$msg_code){
+            $data['add_time'] = time();
+            $res = M("sign_info")->add($data);
+            if($res){
+                $res_info['code'] = 1;
+                $res['id'] = $res;
+                $res_info['msg'] = '处理成功';
+            }else{
+                $res_info['code'] = 0;
+                $res_info['msg'] = '处理失败';
+            }
+        }else{
+            $res_info['code'] = 2;
+            $res_info['msg'] = '账号或密码错误';
+        }
+        $this->ajaxReturn($res_info);
+    }
+
+
+    /**
+     * @param $phone
+     * @param $project
+     * @return mixed
+     * 处理发送验证码
+     */
+    public function handleSendMs($phone,$project)
+    {
+        $url = "http://api.mysubmail.com/message/xsend.json";
+        $appid = '40135';
+        $appkey = '1bb05e3b06a5b1e1c4d806d5367fa959';
+        $code = $this->randNumber(6);
+        $vars['code'] = $code;
+        $js_code = json_encode($vars);
+        $post_data = "appid=$appid&to=$phone&project=$project&vars=$js_code&signature=$appkey";
+        $ch = curl_init();//初始化curl
+        curl_setopt($ch, CURLOPT_URL,$url);//抓取指定网页
+        curl_setopt($ch, CURLOPT_HEADER, 0);//设置header
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);//要求结果为字符串且输出到屏幕上
+        curl_setopt($ch, CURLOPT_POST, 1);//post提交方式
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
+        $data = curl_exec($ch);//运行curl
+        curl_close($ch);
+        $info = json_decode($data,1);
+        if($info['status'] == 'success'){
+            session('msg_code',$code);
+            $res_info['code'] = 1;
+            $res_info['msg'] = '短信发送成功，请查收';
+        }else{
+            $res_info['code'] = 2;
+            $res_info['msg'] = '验证码发送失败';
+        }
+        return $res_info;
+
+    }
+
+    /**
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     * 发送验证码
+     */
+    public function sendMsCode()
+    {
+        $project = 'Xuc3e';
+        $phone = I('phone');
+        $check = '/^(1(([35789][0-9])|(47)))\d{8}$/';
+        if (!preg_match($check, $phone)) {
+            $res['code'] = 3;
+            $res['msg'] = '手机号格式错误';
+            $this->ajaxReturn($res);die;
+        }
+        $exist = M("sign_info")->where(array('tel_phone'=>$phone))->find();
+        if($exist){
+            $res['code'] = 4;
+            $res['msg'] = '该手机号已登记';
+            $this->ajaxReturn($res);die;
+        }
+        $res = $this->handleSendMs($phone,$project);
+        $this->ajaxReturn($res);
+    }
+
+    public function dj_success()
+    {
+        $id = I('id');
+
+        $info = M('sign_info')->where(array('id'=>$id))->find();
+        $this->assign('info',$info);
+
+        $this->display();
+    }
+
+    //数字随机码
+    public function randNumber($len = 6)
+    {
+        $chars = str_repeat('0123456789', 10);
+        $chars = str_shuffle($chars);
+        $str   = substr($chars, 0, $len);
+        return $str;
+    }
+
 }

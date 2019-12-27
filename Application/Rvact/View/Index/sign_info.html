@@ -19,19 +19,19 @@
         <div class="jq22-auto-form">
             <div class="jq22-auto-box">
 
-                <form action="" class="jq22-auto-inp">
+                <div  class="jq22-auto-inp">
                     <div class="jq22-flex">
                         <label>姓名</label>
                         <div class="jq22-flex-box">
-                            <input type="text" placeholder="请输入姓名">
+                            <input type="text" id="username" placeholder="请输入姓名">
                         </div>
                     </div>
                     <div class="jq22-flex">
                         <label>品牌</label>
                         <div class="jq22-flex-box">
-                            <select class="weui-select" name="select1">
+                            <select id="brand" class="weui-select" name="select1">
 
-                                <option selected="" value="请选择">请选择</option>
+                                <option selected="" value="0">请选择</option>
                                 <option value="江铃集团旅居车">江铃集团旅居车</option>
                                 <option value="福客特房车">福客特房车</option>
                                 <option value="览众房车">览众房车</option>
@@ -57,7 +57,13 @@
                     <div class="jq22-flex">
                         <label>车型</label>
                         <div class="jq22-flex-box">
-                            <input type="checkbox" value="1"><span>b型</span><input type="checkbox" value="2"><span>c型</span><input type="checkbox" value="3"><span>拖挂</span>
+                            <select id="car_type" class="weui-select" name="select1">
+                                <option selected="" value="0">请选择</option>
+                                <option value="b型">b型</option>
+                                <option value="c型">c型</option>
+                                <option value="拖挂">拖挂</option>
+
+                            </select>
                         </div>
                     </div>
                     <div class="jq22-flex">
@@ -75,10 +81,14 @@
                     </div>
                     <button class="jq22-apply-btn"  onClick="binding()">签到登记</button>
 
-                </form>
-            </div>
-        </div>
+                </div>
 
+            </div>
+
+        </div>
+        <div style="text-align: center">
+            <p>活动内容最终解释权归主办方所有</p>
+        </div>
     </section>
 </section>
 </body>
@@ -88,6 +98,8 @@
     var count = 60;
     var InterValObj1;
     var curCount1;
+    var yzm_url = "__APP__/Rvact/Index/sendMsCode";
+    var sign_url = "__APP__/Rvact/Index/handleSignInfo";
     function sendMessage1() {
         curCount1 = count;
         var phone = $.trim($('#phone1').val());
@@ -95,12 +107,25 @@
             alert(" 请输入有效的手机号码");
             return false;
         }
+        $.ajax({
+            type:'post',
+            url:yzm_url,
+            data:{phone:phone},
+            success:function (data) {
+                if(data.code == 1){
+                    $("#btnSendCode1").attr("disabled", "true");
+                    $("#btnSendCode1").val( + curCount1 + "秒再获取");
+                    InterValObj1 = window.setInterval(SetRemainTime1, 1000);
+                }else{
+                    alert(data.msg)
+                }
+            }
+        });
 
-        $("#btnSendCode1").attr("disabled", "true");
-        $("#btnSendCode1").val( + curCount1 + "秒再获取");
-        InterValObj1 = window.setInterval(SetRemainTime1, 1000);
 
     }
+
+
     function SetRemainTime1() {
         if (curCount1 == 0) {
             window.clearInterval(InterValObj1);
@@ -114,7 +139,36 @@
     }
 
     function binding(){
-        alert('请输入手机号码')
+        var username = $("#username").val();
+        var yzm_code = $("#code1").val();
+        if(username == ''){
+            alert('姓名不能为空');
+        }
+        var brand = $("#brand").val();
+        if(brand == 0){
+            alert('品牌不能为空');
+            return false;
+        }
+        var car_type = $("#car_type").val();
+        if(car_type == 0){
+            alert('车型不能为空');
+            return false;
+        }
+        var code1 = $("#code1").val();
+        if(code1 == ''){
+            alert('验证码不能为空');
+        }
+        var tel_phone = $("#phone1").val();
+        $.ajax({
+            url:sign_url,
+            type:"post",
+            data:{username:username,brand:brand,car_type:car_type,yzm_code:yzm_code,tel_phone:tel_phone},
+            success:function (data) {
+                var url = "{:U('Index/dj_success')}";
+                location.href = url + "/id/"+data.id;
+            }
+        })
+        return false;
     }
 </script>
 
