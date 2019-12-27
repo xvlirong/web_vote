@@ -8,7 +8,7 @@
     <meta content="yes" name="apple-mobile-web-app-capable" />
     <meta content="black" name="apple-mobile-web-app-status-bar-style" />
     <meta content="telephone=no" name="format-detection" />
-    <link href="__STATIC__/css/style.css?time=1533" rel="stylesheet" type="text/css" />
+    <link href="__STATIC__/css/style.css?time=1534" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <section class="jq22-flexView">
@@ -170,6 +170,14 @@
         })
         return false;
     }
+    $('input, textarea').on('focus', () => {
+        beforeTop = document.body.scrollTop
+        clearTimeout(timeout)
+    }).on('blur', () => {
+        timeout = setTimeout(() => {
+            document.body.scrollTop = beforeTop
+        }, 100)
+    })
 </script>
 
 </html>
