@@ -620,7 +620,7 @@ option {
 #btnSendCode1{
     position:absolute;
     right:15px;
-    top:-3px;
+    top:4px;
     color:#f37936;
 }
 
@@ -654,7 +654,7 @@ option {
     background:none;
     border:none;
     padding:0.4rem 0;
-    height:2.3rem;
+    /*height:2.3rem;*/
     line-height:2.3rem;
 }
 .f_title p{
