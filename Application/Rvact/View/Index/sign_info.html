@@ -1,0 +1,113 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>签到登记</title>
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" name="viewport" />
+    <meta content="yes" name="apple-mobile-web-app-capable" />
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta content="telephone=no" name="format-detection" />
+    <link href="__STATIC__/css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<section class="jq22-flexView">
+    <section class="jq22-scrollView">
+        <div class="jq22-auto-img">
+            <img src="__STATIC__/images/info.jpg" alt="">
+        </div>
+        <div class="jq22-auto-form">
+            <div class="jq22-auto-box">
+
+                <form action="" class="jq22-auto-inp">
+                    <div class="jq22-flex">
+                        <label>姓名</label>
+                        <div class="jq22-flex-box">
+                            <input type="text" placeholder="请输入姓名">
+                        </div>
+                    </div>
+                    <div class="jq22-flex">
+                        <label>品牌</label>
+                        <div class="jq22-flex-box">
+                            <select class="weui-select" name="select1">
+                                <option selected="" value="1">广汽丰金科专营店</option>
+                                <option value="2">广汽丰金科专营店</option>
+                                <option value="3">广汽丰金科专营店</option>
+                                <option value="2">广汽丰金科专营店</option>
+                                <option value="3">广汽丰金科专营店</option>
+                                <option value="2">广汽丰金科专营店</option>
+                                <option value="3">广汽丰金科专营店</option>
+                                <option value="2">广汽丰金科专营店</option>
+                                <option value="3">广汽丰金科专营店</option>
+                                <option value="2">广汽丰金科专营店</option>
+                                <option value="3">广汽丰金科专营店</option>
+                                <option value="2">广汽丰金科专营店</option>
+                                <option value="3">广汽丰金科专营店</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="jq22-flex">
+                        <label>车型</label>
+                        <div class="jq22-flex-box">
+                            <input type="checkbox" value="1"><span>b型</span><input type="checkbox" value="2"><span>c型</span><input type="checkbox" value="3"><span>拖挂</span>
+                        </div>
+                    </div>
+                    <div class="jq22-flex">
+                        <label>手机号</label>
+                        <div class="jq22-flex-box">
+                            <input type="text" id="phone1" autocomplete="off" placeholder="请输入手机号码">
+                        </div>
+                    </div>
+                    <div class="jq22-flex">
+                        <label>短信验证码</label>
+                        <div class="jq22-flex-box">
+                            <input type="text" id="code1" autocomplete="off" placeholder="请输入验证码">
+                            <input id="btnSendCode1" type="button" class="btn btn-default" value="获取验证码" onClick="sendMessage1()" />
+                        </div>
+                    </div>
+                    <button class="jq22-apply-btn"  onClick="binding()">立即申请</button>
+
+                </form>
+            </div>
+        </div>
+
+    </section>
+</section>
+</body>
+<script src="__STATIC__/js/jquery-1.12.2.min.js"></script>
+<script type="text/javascript">
+    var phoneReg = /(^1[3|4|5|7|8]\d{9}$)|(^09\d{8}$)/;
+    var count = 60;
+    var InterValObj1;
+    var curCount1;
+    function sendMessage1() {
+        curCount1 = count;
+        var phone = $.trim($('#phone1').val());
+        if (!phoneReg.test(phone)) {
+            alert(" 请输入有效的手机号码");
+            return false;
+        }
+
+        $("#btnSendCode1").attr("disabled", "true");
+        $("#btnSendCode1").val( + curCount1 + "秒再获取");
+        InterValObj1 = window.setInterval(SetRemainTime1, 1000);
+
+    }
+    function SetRemainTime1() {
+        if (curCount1 == 0) {
+            window.clearInterval(InterValObj1);
+            $("#btnSendCode1").removeAttr("disabled");
+            $("#btnSendCode1").val("重新发送");
+        }
+        else {
+            curCount1--;
+            $("#btnSendCode1").val( + curCount1 + "秒再获取");
+        }
+    }
+
+    function binding(){
+        alert('请输入手机号码')
+    }
+</script>
+
+</html>

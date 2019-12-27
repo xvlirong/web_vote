@@ -219,7 +219,6 @@ class IndexController extends BaseController {
 
     public function sign_info()
     {
-        die;
         $this->display();
     }
 }
