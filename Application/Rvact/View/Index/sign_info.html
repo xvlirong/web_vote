@@ -170,6 +170,7 @@
         })
         return false;
     }
+    let [timeout, beforeTop] = [null, 0]
     $('input, textarea').on('focus', () => {
         beforeTop = document.body.scrollTop
         clearTimeout(timeout)
