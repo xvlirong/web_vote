@@ -63,6 +63,9 @@
 <script src="__STATIC__/js/jquery-1.12.2.min.js"></script>
 <script>
     var cx_url = "__APP__/Rvact/Index/showUserInfo";
+    var hy_id = 0;
+    var hy_url= "__APP__/Rvact/Index/hyUserInfo";
+    var hy_url1= "__APP__/Rvact/Index/checkSignInfo";
     $("#sel_btn").click(function () {
         var con = $("#key").val();
         $.ajax({
@@ -74,6 +77,7 @@
                 $("#car_type").html(data.car_type);
                 $("#tel_phone").html(data.tel_phone);
                 if(data.hy_state==0){
+                    hy_id = data.id;
                     $("#hy_state").html('未核验');
                     $("#hy_btn").show();
                 }else{
@@ -82,5 +86,20 @@
 
             }
         })
+    })
+    
+    $("#hy_btn").click(function () {
+        if(hy_id>0){
+            $.ajax({
+                url:hy_url,
+                data:{id:hy_id},
+                success:function(data){
+                    if(data.code==1){
+                        alert(data.msg);
+                        location.href = hy_url1;
+                    }
+                }
+            })
+        }
     })
 </script>

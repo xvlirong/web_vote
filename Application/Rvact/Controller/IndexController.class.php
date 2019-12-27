@@ -389,7 +389,24 @@ class IndexController extends BaseController {
         $res_info['car_type'] = $info['yx_type'];
         $res_info['tel_phone'] = $info['tel_phone'];
         $res_info['hy_state'] = $info['hy_state'];
+        $res_info['hy_id'] = $info['id'];
         $this->ajaxReturn($res_info);
+    }
+
+    public function hyUserInfo()
+    {
+        $id = I('id');
+        $hy_user = session('adminName');
+        $hy_state = 1;
+        $res = M("sign_info")->where(array('id'=>$id))->save(array('hy_user'=>$hy_user,'hy_state'=>$hy_state));
+        if($res){
+            $info['msg'] = '核验成功';
+            $info['code'] = '1';
+        }else{
+            $info['msg'] = '核验失败';
+            $info['code'] = '0';
+        }
+        $this->ajaxReturn($info);
     }
 
 }
