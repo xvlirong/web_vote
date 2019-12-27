@@ -86,7 +86,7 @@
             </div>
 
         </div>
-        <div style="text-align: center">
+        <div style="text-align: center;font-size: .8rem;">
             <p>活动内容最终解释权归主办方所有</p>
         </div>
     </section>
@@ -146,6 +146,7 @@
         var yzm_code = $("#code1").val();
         if(username == ''){
             alert('姓名不能为空');
+            return false;
         }
         var brand = $("#brand").val();
         if(brand == 0){
@@ -160,6 +161,7 @@
         var code1 = $("#code1").val();
         if(code1 == ''){
             alert('验证码不能为空');
+            return false;
         }
         var tel_phone = $("#phone1").val();
         $.ajax({
