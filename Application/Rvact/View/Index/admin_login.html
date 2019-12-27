@@ -109,11 +109,11 @@
             return false;
         }
 
-        var yzm_url = "__APP__/Rvact.php/Index/loginUser";
+        var yzm_url = "__APP__/Rvact/Index/loginUser";
         /*异步请求*/
         $.post(yzm_url, {phone:phone,password:password,username:username},function(data){
             if (data.code == 0) {
-                var yz_url = "__APP__/Rvact.php/Index/checkSignInfo";
+                var yz_url = "__APP__/Rvact/Index/checkSignInfo";
                 location.href = yz_url;
             }else{
                 alert(data.msg)
