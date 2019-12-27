@@ -59,8 +59,8 @@
                         <div class="jq22-flex-box">
                             <select id="car_type" class="weui-select" name="select1">
                                 <option selected="" value="0">请选择</option>
-                                <option value="b型">b型</option>
-                                <option value="c型">c型</option>
+                                <option value="b型">B型</option>
+                                <option value="c型">C型</option>
                                 <option value="拖挂">拖挂</option>
 
                             </select>
@@ -116,7 +116,10 @@
                     $("#btnSendCode1").attr("disabled", "true");
                     $("#btnSendCode1").val( + curCount1 + "秒再获取");
                     InterValObj1 = window.setInterval(SetRemainTime1, 1000);
-                }else{
+                }else if(data.code == 4){
+                    var url = "__APP__/Rvact/Index/dj_success/id/"+data.id;
+                    location.href = url;
+                } else{
                     alert(data.msg)
                 }
             }
@@ -164,10 +167,10 @@
             type:"post",
             data:{username:username,brand:brand,car_type:car_type,yzm_code:yzm_code,tel_phone:tel_phone},
             success:function (data) {
-                if(data.code == 1){
+                if(data.code == 1||data.code==3){
                     var url = "__APP__/Rvact/Index/dj_success/id/"+data.id;
                     location.href = url;
-                }else{
+                } else{
                     alert(data.msg)
                 }
 

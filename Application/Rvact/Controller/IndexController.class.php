@@ -232,6 +232,7 @@ class IndexController extends BaseController {
         if($exist){
             $res_info['code'] = 3;
             $res_info['msg'] = '您已报名成功';
+            $res_info['id'] = $exist['id'];
             $this->ajaxReturn($res_info);die;
         }
         $code = I('yzm_code');
@@ -311,6 +312,7 @@ class IndexController extends BaseController {
         if($exist){
             $res['code'] = 4;
             $res['msg'] = '您已报名成功';
+            $res['id'] = $exist['id'];
             $this->ajaxReturn($res);die;
         }
         $res = $this->handleSendMs($phone,$project);
