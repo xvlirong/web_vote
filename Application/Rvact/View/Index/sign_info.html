@@ -8,7 +8,7 @@
     <meta content="yes" name="apple-mobile-web-app-capable" />
     <meta content="black" name="apple-mobile-web-app-status-bar-style" />
     <meta content="telephone=no" name="format-detection" />
-    <link href="__STATIC__/css/style.css?time=1537" rel="stylesheet" type="text/css" />
+    <link href="__STATIC__/css/style.css?time=1538" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <section class="jq22-flexView">
@@ -170,14 +170,12 @@
         })
         return false;
     }
-    let [timeout, beforeTop] = [null, 0]
-    $('input, textarea').on('focus', () => {
-        beforeTop = document.body.scrollTop
-        clearTimeout(timeout)
-    }).on('blur', () => {
-        timeout = setTimeout(() => {
-            document.body.scrollTop = beforeTop
-        }, 100)
+    let [timeout, beforeTop] = [null, 0];
+    document.body.addEventListener('focusout', () => {
+        //软键盘收起的事件处理
+        if(isIphone()){
+
+        }
     })
 </script>
 
