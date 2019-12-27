@@ -78,10 +78,10 @@
                 $("#tel_phone").html(data.tel_phone);
                 if(data.hy_state==0){
                     hy_id = data.id;
-                    $("#hy_state").html('未核验');
+                    $("#hy_state").text('未核验');
                     $("#hy_btn").show();
                 }else{
-                    $("#hy_state").html('已核验');
+                    $("#hy_state").text('已核验');
                 }
 
             }
