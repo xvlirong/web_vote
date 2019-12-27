@@ -164,8 +164,8 @@
             type:"post",
             data:{username:username,brand:brand,car_type:car_type,yzm_code:yzm_code,tel_phone:tel_phone},
             success:function (data) {
-                var url = "{:U('Index/dj_success')}";
-                location.href = url + "/id/"+data.id;
+                var url = "__APP__/Rvact/Index/dj_success/id/"+data.id;
+                location.href = url;
             }
         })
         return false;
