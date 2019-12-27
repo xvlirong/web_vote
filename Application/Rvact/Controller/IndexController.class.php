@@ -216,4 +216,10 @@ class IndexController extends BaseController {
         $footer = str_replace('target="_self"','target="_blank"',$footer);
         echo $footer;
     }
+
+    public function sign_info()
+    {
+        die;
+        $this->display();
+    }
 }
