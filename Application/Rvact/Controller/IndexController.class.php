@@ -384,13 +384,20 @@ class IndexController extends BaseController {
         $con = I('con');
         $maps['tel_phone'] = array("EQ",$con);
         $info = M("sign_info")->where($maps)->find();
-        $res_info['username'] = $info['username'];
-        $res_info['brand'] = $info['yx_brand'];
-        $res_info['car_type'] = $info['yx_type'];
-        $res_info['tel_phone'] = $info['tel_phone'];
-        $res_info['hy_state'] = $info['hy_state'];
-        $res_info['hy_id'] = $info['id'];
-        $this->ajaxReturn($res_info);
+        if($info){
+            $data['code'] = 1;
+            $res_info['username'] = $info['username'];
+            $res_info['brand'] = $info['yx_brand'];
+            $res_info['car_type'] = $info['yx_type'];
+            $res_info['tel_phone'] = $info['tel_phone'];
+            $res_info['hy_state'] = $info['hy_state'];
+            $res_info['hy_id'] = $info['id'];
+            $data['info'] = $res_info;
+        }else{
+            $data['code'] = 0;
+        }
+
+        $this->ajaxReturn($data);
     }
 
     public function hyUserInfo()

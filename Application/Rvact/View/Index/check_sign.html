@@ -72,17 +72,23 @@
             url:cx_url,
             data:{con:con},
             success:function (data) {
-                $("#username").html(data.username);
-                $("#brand").html(data.brand);
-                $("#car_type").html(data.car_type);
-                $("#tel_phone").html(data.tel_phone);
-                if(data.hy_state==0){
-                    hy_id = data.hy_id;
-                    $("#hy_state").text('未核验');
-                    $("#hy_btn").show();
+                if(data.code == 1){
+                    var info = data.info;
+                    $("#username").html(info.username);
+                    $("#brand").html(info.brand);
+                    $("#car_type").html(info.car_type);
+                    $("#tel_phone").html(info.tel_phone);
+                    if(info.hy_state==0){
+                        hy_id = info.hy_id;
+                        $("#hy_state").text('未核验');
+                        $("#hy_btn").show();
+                    }else{
+                        $("#hy_state").text('已核验');
+                    }
                 }else{
-                    $("#hy_state").text('已核验');
+                    alert('未查询到登记信息');
                 }
+
 
             }
         })
@@ -96,7 +102,7 @@
                 success:function(data){
                     if(data.code==1){
                         alert(data.msg);
-                        location.href = hy_url1;
+                        $("#hy_state").text('已核验');
                     }
                 }
             })
