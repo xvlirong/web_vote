@@ -656,6 +656,7 @@ option {
     /* margin-bottom: 1rem; */
     padding: 5px 15px;
     width: 75%;
+    height: 2rem;
 }
 
 .jq22-flex label{
