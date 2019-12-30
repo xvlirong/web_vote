@@ -53,7 +53,7 @@
                             <span id="hy_state"></span>
                         </div>
                     </div>
-                    <button class="jq22-apply-btn" id="hy_btn" style="display: none">核验</button>
+                    <button class="jq22-apply-btn" id="hy_btn" style="display: none">核销</button>
                 </div>
             </div>
         </div>
@@ -84,6 +84,7 @@
                         $("#hy_btn").show();
                     }else{
                         $("#hy_state").text('已核验');
+                        $("#hy_btn").hide();
                     }
                 }else{
                     alert('未查询到登记信息');
@@ -103,6 +104,7 @@
                     if(data.code==1){
                         alert(data.msg);
                         $("#hy_state").text('已核验');
+                        $("#hy_btn").hide();
                     }
                 }
             })
