@@ -48,7 +48,7 @@
                         </div>
                     </div>
                     <div class="jq22-flex">
-                        <label>核验状态</label>
+                        <label>核销状态</label>
                         <div class="jq22-flex-box">
                             <span id="hy_state"></span>
                         </div>
@@ -80,13 +80,18 @@
                     $("#tel_phone").html(info.tel_phone);
                     if(info.hy_state==0){
                         hy_id = info.hy_id;
-                        $("#hy_state").text('未核验');
+                        $("#hy_state").text('未核销');
                         $("#hy_btn").show();
                     }else{
-                        $("#hy_state").text('已核验');
+                        $("#hy_state").text('已核销');
                         $("#hy_btn").hide();
                     }
                 }else{
+                    $("#username").html('');
+                    $("#brand").html('');
+                    $("#car_type").html('');
+                    $("#tel_phone").html('');
+                    $("#hy_state").text('');
                     alert('未查询到登记信息');
                 }
 
@@ -103,7 +108,7 @@
                 success:function(data){
                     if(data.code==1){
                         alert(data.msg);
-                        $("#hy_state").text('已核验');
+                        $("#hy_state").text('已核销');
                         $("#hy_btn").hide();
                     }
                 }
