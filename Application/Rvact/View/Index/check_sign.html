@@ -72,6 +72,7 @@
             url:cx_url,
             data:{con:con},
             success:function (data) {
+                $('html,body').animate({"scrollTop":"650px"},0);
                 if(data.code == 1){
                     var info = data.info;
                     $("#username").html(info.username);
