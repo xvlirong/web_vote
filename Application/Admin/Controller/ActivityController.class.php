@@ -566,6 +566,13 @@ class ActivityController extends CommonController
         }
     }
 
+    public function sign_info()
+    {
+        $list = M("sign_info")->order('add_time desc')->select();
+        $this->assign('list',$list);
+
+        $this->display();
+    }
 
 
 

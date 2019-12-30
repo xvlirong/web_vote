@@ -1,0 +1,116 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=8" >
+    <title>报名列表</title>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/Assets/css/reset.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/Assets/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/Assets/css/thems.css">
+    <script type="text/javascript" src="__STATIC__/Assets/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/Assets/js/WdatePicker.js"> </script>
+    <script type="text/javascript">
+        $(function(){
+            //自适应屏幕宽度
+
+            var main_h = $(window).height();
+            $('.hy_list').css('height',main_h-45+'px');
+
+            var search_w = $(window).width()-40;
+            $('.search').css('width',search_w+'px');
+            //$('.list_hy').css('width',search_w+'px');
+        });
+    </script>
+    <!--框架高度设置-->
+</head>
+
+<body>
+<div id="right_ctn">
+    <div class="right_m">
+        <!--会议列表-->
+        <div class="hy_list">
+            <div class="box_t">
+                <span class="name">报名列表</span>
+
+            </div>
+            <div class="search gzrj">
+            </div>
+            <!--列表-->
+            <form action="" method="post">
+                <table cellpadding="0" cellspacing="0" class="list_hy" style="width: 95%">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">姓名</th>
+                        <th scope="col">手机号</th>
+                        <th scope="col">意向品牌</th>
+                        <th scope="col">意向车型</th>
+                        <th scope="col">省份</th>
+                        <th scope="col">区域</th>
+                        <th scope="col">签到时间</th>
+                        <th scope="col">核销状态</th>
+                        <th scope="col">核销人</th>
+                        <th scope="col">核销时间/th>
+                    </tr>
+                    <foreach name="list" item="v">
+                        <tr>
+                            <td>{$v.id}</td>
+                            <td>{$v.username}</td>
+                            <td>{$v.tel_phone}</td>
+                            <td>{$v.yx_brand}</td>
+                            <td>{$v.yx_type}</td>
+                            <td>{$v.mobile_province}</td>
+                            <td>{$v.mobile_area}</td>
+                            <td>{$v.add_time|date="Y-m-d H:i:s",###}</td>
+                            <td>
+                                <eq name="v['hy_state']" value="1">已核销
+                                <else />
+                                    待核销
+                                </eq>
+                            </td>
+                            <td>{$v.hy_user}</td>
+                            <td>{$v.hx_time|date="Y-m-d H:i:s",###}</td>
+                        </tr>
+                    </foreach>
+                </table>
+                <div class="pagination">{$page}</div>
+                <!--列表-->
+                <!--右边底部-->
+            </form>
+            <!--右边底部-->
+
+        </div>
+        <!--会议列表-->
+    </div>
+</div>
+<script>
+    /*提交搜索*/
+    $('#sub').click(function(){
+        document.formtest.submit();
+    });
+
+    function setRecommend(id)
+    {
+        $.ajax({
+            url:"{:U('setRecommend')}",
+            data:{id:id}
+        })
+    }
+    $('#sub').click(function(){
+        document.formtest.submit();
+    });
+
+    function export_info() {
+        var id = "{$id}";
+        var start_time = $("#key1").val();
+        var end_time = $("#key2").val();
+        if(start_time == ''){
+            start_time = 0;
+            end_time = 0;
+        }
+
+        var url = "__APP__/Activity/exam_export/id/"+id+"/start_time/"+start_time+"/end_time/"+end_time;
+
+        location.href = url;
+    }
+</script>
+</body>
+</html>
