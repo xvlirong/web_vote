@@ -376,7 +376,7 @@ class IndexController extends BaseController {
 
     public function md_pwd()
     {
-        echo md5(md5(123456));
+        echo md5(md5('peoplerv2015'));
     }
 
     public function showUserInfo()
