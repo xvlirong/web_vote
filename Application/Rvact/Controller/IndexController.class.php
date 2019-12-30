@@ -413,10 +413,10 @@ class IndexController extends BaseController {
         $hy_state = 1;
         $res = M("sign_info")->where(array('id'=>$id))->save(array('hy_user'=>$hy_user,'hy_state'=>$hy_state,'hy_time'=>time()));
         if($res){
-            $info['msg'] = '核验成功';
+            $info['msg'] = '核销成功';
             $info['code'] = '1';
         }else{
-            $info['msg'] = '核验失败';
+            $info['msg'] = '核销失败';
             $info['code'] = '0';
         }
         $this->ajaxReturn($info);
