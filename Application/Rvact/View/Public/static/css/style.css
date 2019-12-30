@@ -639,13 +639,12 @@ option {
 .jq22-apply-btn1{
     width: 17%;
     height: 2rem;
-    line-height: 2rem;
+    line-height: 1.8rem;
     background: #f47936;
     color: #fff;
     border: none;
     border-radius: 3px;
     font-size: 0.8rem;
-    margin-top: -0.2rem
 }
 .sel_box{
     text-align: left;
