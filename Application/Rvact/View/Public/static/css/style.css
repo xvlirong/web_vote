@@ -636,11 +636,27 @@ option {
     font-size:0.9rem;
     margin-top: 3rem;
 }
+.jq22-apply-btn11{
+    width: 17%;
+    height: 2rem;
+    line-height: 2rem;
+    background: #f47936;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    font-size: 0.8rem;
+}
+.sel_box{
+    text-align: left;
+    margin-left: .8rem;
+
+}
 
 .jq22-flex label{
     color:#000000;
     font-size:0.88rem;
     width:80px;
+    text-align: left;
 }
 
 .jq22-flex-box input{

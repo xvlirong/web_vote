@@ -35,8 +35,15 @@
 .touxiang{width: 5rem;height: 5rem;margin: 0 auto;
     margin-top: 3rem;}
 .touxiang img{width: 100%;}
-#downbox .phone{margin:1rem auto;width:80%;height: 2.2rem;border-bottom: 1px solid #52c6f2;
-   line-height:2.2rem;color:#6D6D6D;position: relative;
+#downbox .phone{
+    margin: 1rem auto;
+    width: 80%;
+    height: 2.5rem;
+    /* border-bottom: 1px solid #52c6f2; */
+    line-height: 2.2rem;
+    color: #6D6D6D;
+    position: relative;
+    border: 1px solid #dbdbdb;
 }
 
 #downbox .phone .huoqu{width: 35%;height: 2.2rem;display: inline-block;
