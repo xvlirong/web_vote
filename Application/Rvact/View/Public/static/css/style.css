@@ -636,7 +636,7 @@ option {
     font-size:0.9rem;
     margin-top: 3rem;
 }
-.jq22-apply-btn11{
+.jq22-apply-btn1{
     width: 17%;
     height: 2rem;
     line-height: 2rem;
@@ -649,7 +649,12 @@ option {
 .sel_box{
     text-align: left;
     margin-left: .8rem;
-
+}
+.sel_box input{
+    border: 1px solid #dbdbdb;
+    border-radius: 3px;
+    /* margin-bottom: 1rem; */
+    padding: 5px 15px;
 }
 
 .jq22-flex label{
