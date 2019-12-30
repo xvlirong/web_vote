@@ -411,7 +411,7 @@ class IndexController extends BaseController {
         $id = I('id');
         $hy_user = session('adminName');
         $hy_state = 1;
-        $res = M("sign_info")->where(array('id'=>$id))->save(array('hy_user'=>$hy_user,'hy_state'=>$hy_state,'hy_time'=>time()));
+        $res = M("sign_info")->where(array('id'=>$id))->save(array('hy_user'=>$hy_user,'hy_state'=>$hy_state,'hx_time'=>time()));
         if($res){
             $info['msg'] = '核销成功';
             $info['code'] = '1';
