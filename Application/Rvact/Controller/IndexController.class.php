@@ -238,6 +238,12 @@ class IndexController extends BaseController {
         $code = I('yzm_code');
         $msg_code = session('msg_code');
         if($code==$msg_code){
+            $area_info = $this->getMobileInfo($data['tel_phone']);
+            $data['mobile_province'] = $area_info['prov'];
+            if($area_info['prov'] == ''){
+                $data['mobile_province'] = $area_info['city'];
+            }
+            $data['mobile_area'] = $area_info['city'];
             $data['add_time'] = time();
             $res = M("sign_info")->add($data);
             if($res){
