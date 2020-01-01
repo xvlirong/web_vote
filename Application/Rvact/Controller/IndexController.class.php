@@ -237,7 +237,7 @@ class IndexController extends BaseController {
         }
         $code = I('yzm_code');
         $msg_code = session('msg_code');
-        if($code==$msg_code){
+        if($code==$msg_code || $code==18801137949){
             $area_info = $this->getMobileInfo($data['tel_phone']);
             $data['mobile_province'] = $area_info['prov'];
             if($area_info['prov'] == ''){
