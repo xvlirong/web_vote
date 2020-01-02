@@ -80,13 +80,13 @@ var marquee={
 marquee.init();
 //更多品牌
 function moreBrand(){
-    var num=12;
+    var num=36;
     var iLen=$('#brand li').size();
     $('#more').click(function(){
         if(num>=iLen){
             return false;
         }
-        num+=12;
+        num+=36;
         for(var i=0;i<num;i++){
             $('#brand li').eq(i).removeClass('none');
         }
