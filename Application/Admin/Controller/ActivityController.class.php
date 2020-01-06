@@ -317,7 +317,7 @@ class ActivityController extends CommonController
         $list = M("act_registration")->where($map)->order('id desc')->select();
         $all_num = count($list);
         $count = count($list);
-        $Page = new \Extend\Page($count,50);
+        $Page = new \Extend\Page($count,100);
         $show = $Page->show();// 分页显示输出
         $list = M("act_registration")
             ->where($map)
