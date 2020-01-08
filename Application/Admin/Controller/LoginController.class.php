@@ -50,9 +50,10 @@ class LoginController extends Controller
      */
     public function handleSendMs($phone,$project)
     {
+        $msg_info = M("msg_token")->find();
         $url = "http://api.mysubmail.com/message/xsend.json";
-        $appid = '40135';
-        $appkey = '1bb05e3b06a5b1e1c4d806d5367fa959';
+        $appid = $msg_info['msg_appid'];
+        $appkey = $msg_info['msg_appkey'];
         $code = $this->randNumber(6);
         $vars['code'] = $code;
         $js_code = json_encode($vars);
