@@ -157,12 +157,14 @@ class IndexController extends BaseController {
     {
         $where['id'] =$activityid;
         $msg_mark = M('activity')->where($where)->getField('msg_mark');
+
+        $msg_info = M("msg_token")->find();
         // ini_set("error_reporting","E_ALL & ~E_NOTICE");
         $obj = array(
-            "appid"=>"40135",
+            "appid"=>$msg_info['msg_appid'],
             "to"=>$phone,
             "project"=>$msg_mark,
-            "signature"=>"1bb05e3b06a5b1e1c4d806d5367fa959"
+            "signature"=>$msg_info['msg_appkey']
         );
         $data =  json_encode($obj);
         $url = "http://api.mysubmail.com/message/xsend.json";
