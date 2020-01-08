@@ -578,7 +578,12 @@ class ActivityController extends CommonController
     {
         $id = I('id');
 
-        $list = M("act_registration")->where(array('act_id'=>$id))->group('mobile_province')->field('mobile_province,count(id) as num')->select();
+        $list = M("act_registration")
+            ->where(array('act_id'=>$id))
+            ->group('mobile_province')
+            ->field('mobile_province,count(id) as num')
+            ->order('num desc')
+            ->select();
         $this->assign('list',$list);
 
         $this->display();

@@ -44,7 +44,14 @@
                     <foreach name="list" item="v">
                         <tr>
                             <td>{$key+1}</td>
-                            <td>{$v.mobile_province}</td>
+                            <td>
+                                <notempyt name="v['mobile_province']">
+                                    {$v.mobile_province}
+                                    <else />
+                                    未知
+                                </notempyt>
+
+                            </td>
                             <td>{$v.num}</td>
                         </tr>
                     </foreach>
