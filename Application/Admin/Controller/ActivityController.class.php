@@ -574,6 +574,16 @@ class ActivityController extends CommonController
         $this->display();
     }
 
+    public function count_sign_info()
+    {
+        $id = I('id');
+
+        $list = M("act_registration")->where(array('act_id'=>$id))->group('mobile_province')->field('mobile_province,count(id) as num')->select();
+        $this->assign('list',$list);
+
+        $this->display();
+    }
+
 
 
 
