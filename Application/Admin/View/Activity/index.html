@@ -270,6 +270,7 @@
                                                 <li class="clearfix">
                                                     <span class="title">品牌库:</span>
                                                     <div class="li_r" style="width: 80%">
+                                                        <input type="checkbox" id="checkOrCancelAll" class="checkbox"/>全选
                                                         <volist name="brand_list" id="v">
                                                             <input type="checkbox" name="brand_list[]" value="{$v.id}" class="checkbox"/>{$v.brand_name}&nbsp;&nbsp;
                                                         </volist>
@@ -314,6 +315,33 @@
             return false;
         }
         $("form").submit();
+    });
+
+    /**
+     *设置单击响应函数
+     * @param  {[String]} objStr [ 要设置单击响应事件的元素的id ]
+     * @param  {[function]} fun  [ 单击后响应的行为 ]
+     * @return {[none]}
+     */
+    function myClick(objStr, fun) {
+        var obj = document.getElementById(objStr);
+        obj.onclick = fun;
+    }
+    var hobbies = document.getElementsByName("brand_list[]");
+    // 获取全选/全不选选项
+    var checkOrCancelAll = document.getElementById("checkOrCancelAll");
+
+    // 全选/全不选
+    myClick("checkOrCancelAll", function() {
+        if(this.checked){
+            for (var i = 0; i < hobbies.length; i++) {
+                hobbies[i].checked = true;
+            }
+        }else{
+            for (var i = 0; i < hobbies.length; i++) {
+                hobbies[i].checked = false;
+            }
+        }
     });
 
 </script>
