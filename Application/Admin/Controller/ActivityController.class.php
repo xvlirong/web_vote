@@ -144,7 +144,7 @@ class ActivityController extends CommonController
      */
     public function brand_list()
     {
-        $list = M("brand_library")->order(array('id'=>'desc'))->select();
+        $list = M("brand_library")->order(array('sort'=>'desc'))->select();
         $this->assign('list',$list);
 
         $this->display();
