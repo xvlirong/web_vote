@@ -3,6 +3,7 @@
 namespace Admin\Controller;
 use Extend\Page;
 use Think\Controller;
+use Think\Upload;
 class ActivityController extends CommonController
 {
     /**
@@ -589,7 +590,153 @@ class ActivityController extends CommonController
         $this->display();
     }
 
+    public function into_enroll()
+    {
+        $pid = I('pid');
+        $this->assign('pid',$pid);
 
+        $this->display();
+
+    }
+
+    public function uploadExcel()
+    {
+        $pid = I('pid');
+        $config  = C('UPLOAD_CONFIG');
+        $config['exts'] = array("xls","xlsx");
+        $config['savePath'] = 'upload/excel/';
+        $upload = new Upload($config);
+        // 上传文件
+        $active = I('active');
+        $info   =   $upload->upload();
+        if(!$info) {// 上传错误提示错误信息
+            $this->error($upload->getError());
+        }else{// 上传成功
+            $excelData = $this->getExcelData('./Public/upload/excel/'.$info['excel']['savename'], $active,$info['excel']['ext']);
+            print_r($excelData);die;
+        }
+
+
+    }
+
+    /**
+     * 获取Excel数据
+     * @param $file_name
+     * @param string $exts
+     * @return array
+     */
+    private function getExcelData($file_name,$active , $exts = 'xlsx')
+    {
+        set_time_limit(0);
+        ini_set("memory_limit", "1024M");
+        //导入PHPExcel类库，因为PHPExcel没有用命名空间，只能inport导入
+        //创建PHPExcel对象，注意，不能少了\
+        vendor("PHPExcel.PHPExcel");
+        //创建PHPExcel对象，注意，不能少了\
+        $PHPExcel=new \PHPExcel();
+
+        if($exts=="xls")
+        {
+            import("Org.Util.PHPExcel.Reader.Excel5");
+            $PHPReader=new \PHPExcel_Reader_Excel5();
+        }
+        else if($exts=="xlsx")
+        {
+            import("Org.Util.PHPExcel.Reader.Excel2007");
+            $PHPReader=new \PHPExcel_Reader_Excel2007();
+        }
+        //载入文件
+        $PHPExcel=$PHPReader->load($file_name);
+        //获取表中的第一个工作表，如果要获取第二个，把0改为1，依次类推
+        $currentSheet=$PHPExcel->getSheet(0);
+
+        //获取总列数
+        $allColumn=$currentSheet->getHighestColumn();
+
+        //获取总行数
+        $allRow=$currentSheet->getHighestDataRow();
+
+
+        $excelData = array();
+        //循环获取表中的数据，$currentRow表示当前行，从哪行开始读取数据，索引值从0开始
+        for($currentRow=1;$currentRow<=$allRow;$currentRow++){
+            //从哪列开始，A表示第一列
+            $i = 0;
+            for($currentColumn='A';$currentColumn<=$allColumn;$currentColumn++){
+                //数据坐标
+                $address=$currentColumn.$currentRow;
+                //读取到的数据，保存到数组$arr中
+                $rowArr = $currentSheet-> getCell($address)-> getValue();
+                $excelData[$currentRow - 1][++$i] = $rowArr;
+            }
+        }
+        $count = count($excelData);
+        for ($i = 0; $i < $count; $i++) {
+            $str = implode('',$excelData[$i]);
+            if ($str == '' || $str == null) {
+                unset($excelData[$i]);
+            } else {
+                $excelData[$i];
+            }
+        }
+
+        $excelData = array_values($excelData);
+        return $excelData;
+    }
+
+    public function getMobileInfo($mobile)
+    {
+        if (!preg_match("/^1[34578]\d{9}$/", $mobile)) {
+            //return '请输入正确手机号码！';
+            $info['prov'] = '未知';
+            $info['city'] = '未知';
+        }else{
+            $phone_json = file_get_contents('http://sp0.baidu.com/8aQDcjqpAAV3otqbppnN2DJv/api.php?query={'.$mobile.'}&resource_id=6004&ie=utf8&oe=utf8&format=json');
+            $phone_array = json_decode($phone_json,true);
+            $phone_info = array();
+            $phone_info['mobile'] = $mobile;
+            $phone_info['type'] = $phone_array['data'][0]['type'];
+            $phone_info['location'] = $phone_array['data'][0]['prov'].$phone_array['data'][0]['city'];
+            $info['prov'] = $phone_array['data'][0]['prov'];
+            $info['city'] = $phone_array['data'][0]['city'];
+            return $info;
+        }
+    }
+    public function plan_info(){
+        $list = M("act_plan")->join("left join activity on act_plan.pid=activity.id")->field('act_plan.*,activity.title')->select();
+        $this->assign('list',$list);
+
+        $this->display();
+    }
+
+    public function save_plan()
+    {
+        $id = I('id');
+        $map['end_time'] = array("GT",time());
+        $act_list = M("activity")->where($map)->field('id,title')->select();
+        $this->assign('act_list',$act_list);
+
+        $info = M("act_plan")->where(array('id'=>$id))->find();
+        $this->assign('info',$info);
+
+        $this->display();
+    }
+
+    public function savePlan()
+    {
+        $id = I('id');
+        $data['start_num'] = I('start_num');
+        $data['end_num'] = I('end_num');
+        $data['state'] = I('state');
+
+        $res = M("act_plan")->where(array('id'=>$id))->save($data);
+        if($res){
+            echo "<script>alert('处理成功'); location.replace(document.referrer);</script>";
+        } else {
+            echo "<script>alert('处理失败'); location.replace(document.referrer);</script>";
+        }
+
+    }
 
 
 }
