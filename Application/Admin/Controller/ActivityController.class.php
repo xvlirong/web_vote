@@ -725,6 +725,7 @@ class ActivityController extends CommonController
     public function savePlan()
     {
         $id = I('id');
+        $data['plan_name'] = I('plan_name');
         $data['start_num'] = I('start_num');
         $data['end_num'] = I('end_num');
         $data['state'] = I('state');
