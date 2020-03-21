@@ -6,7 +6,7 @@ class IndexController extends BaseController {
         //活动id
         $id = I('id',1);
 
-        $refer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '无';
+        $refer = $_SERVER['HTTP_REFERER'];
         cookie('url_refer',$refer);
         $all_url = $_SERVER['REQUEST_URI'];
         $this->assign('all_url',$all_url);
