@@ -38,6 +38,7 @@
             act_id:id,
             source:source,
             sign_url:all_url,
+            url_refer:url_refer,
             username: username,
             //objective:objective||0,
             userphone:phone,

@@ -7,7 +7,6 @@ class IndexController extends BaseController {
         $id = I('id',1);
 
         $refer = $_SERVER['HTTP_REFERER'];
-        cookie('url_refer',$refer);
         $all_url = $_SERVER['REQUEST_URI'];
         $this->assign('all_url',$all_url);
         //基础信息
@@ -20,6 +19,7 @@ class IndexController extends BaseController {
         $now_date = time()*1000;
         $this->assign('end_date',$end_date);
         $this->assign('now_date',$now_date);
+        $this->assign('url_refer',$refer);
 
 
         //活动状态
