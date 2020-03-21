@@ -431,8 +431,11 @@ class IndexController extends BaseController {
     public function handleActPlan()
     {
         $info = M('act_plan')->find();
-        $num = mt_rand($info['start_num'],$info['end_num']);
-        M("activity")->where(array('id'=>$info['pid']))->setInc('ticket_base_num',$num);
+        if($info['state'] == 1){
+            $num = mt_rand($info['start_num'],$info['end_num']);
+            M("activity")->where(array('id'=>$info['pid']))->setInc('ticket_base_num',$num);
+        }
+
     }
 
 }
