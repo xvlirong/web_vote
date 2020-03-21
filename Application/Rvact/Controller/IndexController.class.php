@@ -6,6 +6,8 @@ class IndexController extends BaseController {
         //活动id
         $id = I('id',1);
 
+        $refer = isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : '无';
+        cookie('url_refer',$refer);
         $all_url = $_SERVER['REQUEST_URI'];
         $this->assign('all_url',$all_url);
         //基础信息
@@ -247,6 +249,7 @@ class IndexController extends BaseController {
             }
             $data['mobile_area'] = $area_info['city'];
             $data['add_time'] = time();
+            $data['url_refer'] = cookie('url_refer');
             $res = M("sign_info")->add($data);
             if($res){
                 $res_info['code'] = 1;
