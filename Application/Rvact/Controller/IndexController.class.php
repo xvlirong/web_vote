@@ -233,6 +233,7 @@ class IndexController extends BaseController {
         $data['yx_brand'] = I('brand');
         $data['yx_type'] = I('car_type');
         $data['url_refer'] = I('url_refer');
+        
         $exist = M("sign_info")->where(array('tel_phone'=>$data['tel_phone']))->find();
         if($exist){
             $res_info['code'] = 3;
