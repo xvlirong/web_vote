@@ -232,7 +232,7 @@ class IndexController extends BaseController {
         $data['tel_phone'] = I('tel_phone');
         $data['yx_brand'] = I('brand');
         $data['yx_type'] = I('car_type');
-        $data['url_refer'] = 111111;
+        $data['url_refer'] = I('url_refer');
 
         $exist = M("sign_info")->where(array('tel_phone'=>$data['tel_phone']))->find();
         if($exist){
