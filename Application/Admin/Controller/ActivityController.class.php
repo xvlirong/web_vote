@@ -419,6 +419,7 @@ class ActivityController extends CommonController
             $data[$k]['source_title'] = $goods_info['source_title'];
             $data[$k]['source'] = $goods_info['source'];
             $data[$k]['source_type'] = $goods_info['source_type'];
+            $data[$k]['area'] = $goods_info['mobile_province'].'+'.$goods_info['mobile_area'];
             $data[$k]['add_time'] = date("Y-m-d H:i:s",$goods_info['add_time']);
         }
         //print_r($goods_list);
@@ -445,6 +446,9 @@ class ActivityController extends CommonController
             }
             if($field == 'source_type'){
                 $headArr[]='来源类型';
+            }
+            if($field == 'area'){
+                $headArr[]='地区';
             }
             if($field == 'add_time'){
                 $headArr[]='报名时间';
