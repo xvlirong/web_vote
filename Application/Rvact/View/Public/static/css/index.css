@@ -206,7 +206,7 @@ body {
 }
 #flow img {
     display: block;
-    width: 824px;
+    /*width: 824px;*/
     height: 151px;
     margin: 12px auto 0;
 }
