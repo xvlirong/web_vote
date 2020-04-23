@@ -252,7 +252,27 @@
 <script type="text/javascript" src="__STATIC__/js/global.js"></script>
 <script type="text/javascript" src="__STATIC__/js/index.js"></script>
 <script type="text/javascript" src="__STATIC__/js/activity.js"></script>
+<script src="__STATIC__/js/leftTime.min.js"></script>
 <script>
+    $(function() {
+        var data={};
+        var enddate = "{$end_date}";
+        var nowdate = "{$now_date}";
+        data.enddate = parseInt(enddate);
+        data.nowdate = parseInt(nowdate);
+        data.init = true;
+        //日期倒计时
+        $.leftTime(data,function(d){
+            if(d.status){
+                var $dateShow1=$("#dateShow1");
+                $dateShow1.find(".d").html(d.d);
+                $dateShow1.find(".h").html(d.h);
+                $dateShow1.find(".m").html(d.m);
+                $dateShow1.find(".s").html(d.s);
+            }
+        });
+
+    });
     organize(organizer);
     function organize(organizer){
         let arr=organizer.split('、');
