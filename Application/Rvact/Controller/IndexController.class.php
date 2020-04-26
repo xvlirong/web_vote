@@ -430,11 +430,20 @@ class IndexController extends BaseController {
 
     public function handleActPlan()
     {
-        $info = M('act_plan')->find();
-        if($info['state'] == 1){
-            $num = mt_rand($info['start_num'],$info['end_num']);
-            M("activity")->where(array('id'=>$info['pid']))->setInc('ticket_base_num',$num);
+        $now_time = time();
+        //活动列表
+        $maps['end_time'] = array("GT",$now_time);
+        $list = M("act_plan")
+            ->join("left join activity on act_plan.pid=activity.id")
+            ->where($maps)
+            ->field('act_plan.*,activity.title,end_time')
+            ->select();
+
+        for ($i=0; $i<count($list); $i++){
+            $num = mt_rand($list[$i]['start_num'],$list[$i]['end_num']);
+            M("activity")->where(array('id'=>$list[$i]['pid']))->setInc('ticket_base_num',$num);
         }
+
 
     }
 
