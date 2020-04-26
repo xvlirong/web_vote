@@ -719,7 +719,7 @@ class ActivityController extends CommonController
      * @throws \think\exception\DbException
      */
     public function plan_info(){
-        $list = M("act_plan")->join("left join activity on act_plan.pid=activity.id")->field('act_plan.*,activity.title')->select();
+        $list = M("act_plan")->join("left join activity on act_plan.pid=activity.id")->field('act_plan.*,activity.title,end_time')->select();
         $this->assign('list',$list);
 
         $this->display();
@@ -784,7 +784,7 @@ class ActivityController extends CommonController
         $data['pid'] = I('pid');
         $data['plan_name'] = I('plan_name');
         $data['start_num'] = I('start_num');
-        $data['end_num'] = I('start_num');
+        $data['end_num'] = I('end_num');
         $res = M("act_plan")->add($data);
 
         if($res){
