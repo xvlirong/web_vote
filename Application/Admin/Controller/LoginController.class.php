@@ -7,6 +7,7 @@ use think\Controller;
 class LoginController extends Controller
 {
     public function login (){
+        session('our_adminId',1);
         $this->display();
     }
 

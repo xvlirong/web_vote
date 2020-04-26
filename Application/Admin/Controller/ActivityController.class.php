@@ -688,6 +688,11 @@ class ActivityController extends CommonController
         return $excelData;
     }
 
+    /**
+     * 手机号地区查询接口
+     * @param $mobile
+     * @return mixed
+     */
     public function getMobileInfo($mobile)
     {
         if (!preg_match("/^1[34578]\d{9}$/", $mobile)) {
@@ -706,6 +711,13 @@ class ActivityController extends CommonController
             return $info;
         }
     }
+
+    /**
+     * 定时计划列表
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
     public function plan_info(){
         $list = M("act_plan")->join("left join activity on act_plan.pid=activity.id")->field('act_plan.*,activity.title')->select();
         $this->assign('list',$list);
@@ -713,6 +725,12 @@ class ActivityController extends CommonController
         $this->display();
     }
 
+    /**
+     * 定时计划任务修改
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
     public function save_plan()
     {
         $id = I('id');
@@ -726,6 +744,9 @@ class ActivityController extends CommonController
         $this->display();
     }
 
+    /**
+     * 定时计划任务修改
+     */
     public function savePlan()
     {
         $id = I('id');
@@ -741,6 +762,36 @@ class ActivityController extends CommonController
             echo "<script>alert('处理失败'); location.replace(document.referrer);</script>";
         }
 
+    }
+
+    /**
+     * 新增计划任务
+     */
+    public function add_plan()
+    {
+        $now_time = time();
+        //活动列表
+        $maps['end_time'] = array("GT",$now_time);
+        $act_list = M("activity")->where($maps)->field('id,title')->select();
+        $this->assign('act_list',$act_list);
+
+        $this->display();
+
+    }
+
+    public function addPlan()
+    {
+        $data['pid'] = I('pid');
+        $data['plan_name'] = I('plan_name');
+        $data['start_num'] = I('start_num');
+        $data['end_num'] = I('start_num');
+        $res = M("act_plan")->add($data);
+
+        if($res){
+            echo "<script>alert('处理成功'); location.replace(document.referrer);</script>";
+        } else {
+            echo "<script>alert('处理失败'); location.replace(document.referrer);</script>";
+        }
     }
 
 
