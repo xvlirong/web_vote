@@ -613,7 +613,13 @@ class ActivityController extends CommonController
             $this->error($upload->getError());
         }else{// 上传成功
             $excelData = $this->getExcelData('./Public/upload/excel/'.$info['excel']['savename'], $active,$info['excel']['ext']);
-            print_r($excelData);die;
+            $list = array();
+            for ($i = 1; $i<count($excelData); $i++){
+                $list[$i]['name'] = $excelData[$i][1];
+                $list[$i]['phone'] = $excelData[$i][2];
+                $list[$i]['area'] = $this->getMobileInfo($excelData[$i][2]);
+            }
+            print_r($list);
         }
 
 
@@ -704,7 +710,7 @@ class ActivityController extends CommonController
             $phone_info['location'] = $phone_array['data'][0]['prov'].$phone_array['data'][0]['city'];
             $info['prov'] = $phone_array['data'][0]['prov'];
             $info['city'] = $phone_array['data'][0]['city'];
-            return $info;
+            return $info['prov']."+".$info['city'];
         }
     }
 
