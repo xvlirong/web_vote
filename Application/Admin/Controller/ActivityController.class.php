@@ -596,16 +596,12 @@ class ActivityController extends CommonController
 
     public function into_enroll()
     {
-        $pid = I('pid');
-        $this->assign('pid',$pid);
-
         $this->display();
 
     }
 
     public function uploadExcel()
     {
-        $pid = I('pid');
         $config  = C('UPLOAD_CONFIG');
         $config['exts'] = array("xls","xlsx");
         $config['savePath'] = 'upload/excel/';
