@@ -619,8 +619,8 @@ class ActivityController extends CommonController
                 $list[$i]['phone'] = $excelData[$i][2];
                 $list[$i]['area'] = $this->getMobileInfo($excelData[$i][2]);
             }
-            $goods_list = array_column($list);
-
+           array_column($list);
+           $goods_list = $list;
 
             $data = array();
             foreach ($goods_list as $k=>$goods_info){
