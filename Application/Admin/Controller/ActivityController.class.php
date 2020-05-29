@@ -619,7 +619,34 @@ class ActivityController extends CommonController
                 $list[$i]['phone'] = $excelData[$i][2];
                 $list[$i]['area'] = $this->getMobileInfo($excelData[$i][2]);
             }
-            print_r($list);
+            $goods_list = array_column($list);
+
+
+            $data = array();
+            foreach ($goods_list as $k=>$goods_info){
+                $data[$k]['name'] = $goods_info['name'];
+                $data[$k]['phone'] = $goods_info['phone'];
+                $data[$k]['area'] = $goods_info['area'];
+            }
+            foreach ($data as $field=>$v){
+                if($field == 'name'){
+                    $headArr[]='姓名';
+                }
+
+                if($field == 'phone'){
+                    $headArr[]='手机号';
+                }
+                if($field == 'area'){
+                    $headArr[]='地区';
+                }
+
+            }
+            $filename="地区转换";
+
+
+            $this->getExcel($filename,$headArr,$data);
+
+
         }
 
 
