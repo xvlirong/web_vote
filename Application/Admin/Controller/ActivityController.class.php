@@ -619,7 +619,7 @@ class ActivityController extends CommonController
                 $list[$i]['phone'] = $excelData[$i][2];
                 $list[$i]['area'] = $this->getMobileInfo($excelData[$i][2]);
             }
-           array_column($list);
+           array_merge($list);
            $goods_list = $list;
 
             $data = array();
@@ -735,9 +735,14 @@ class ActivityController extends CommonController
             $phone_info['mobile'] = $mobile;
             $phone_info['type'] = $phone_array['data'][0]['type'];
             $phone_info['location'] = $phone_array['data'][0]['prov'].$phone_array['data'][0]['city'];
-            $info['prov'] = $phone_array['data'][0]['prov'];
-            $info['city'] = $phone_array['data'][0]['city'];
-            return $info['prov']."+".$info['city'];
+            $prov = $phone_array['data'][0]['prov'];
+            $city = $phone_array['data'][0]['city'];
+            if($prov == ''){
+                return $city;
+            }else{
+                return $prov."+".$city;
+
+            }
         }
     }
 
