@@ -82,6 +82,11 @@ var brand={
         })
     },
     move:function(iNow){
+        if(iNow==2){
+            $("#wrap").height(3340)
+        }else{
+            $("#wrap").height(3840)
+        }
         $('#brand ul').animate({'margin-left':-1240*iNow},300);
     }
 };
