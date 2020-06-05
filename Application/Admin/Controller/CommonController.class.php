@@ -23,9 +23,15 @@ class CommonController extends Controller
             return;
         }
         if (!session('our_adminId')) {
-            $url = U('Login/login');
-            echo "<script>window.top.location.href='{$url}';</script>";
-            die;
+            $cookie_adminid = cookie('admin_id');
+            if($cookie_adminid){
+                session('our_adminId',$cookie_adminid);
+                return;
+            }else{
+                $url = U('Login/login');
+                echo "<script>window.top.location.href='{$url}';</script>";
+                die;
+            }
         }
     }
 

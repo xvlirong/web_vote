@@ -30,6 +30,7 @@ class LoginController extends Controller
                 'login_ip' => get_client_ip()
             );
             M("admin_user")->where(array('id'=>$exist['id']))->save($data);
+            cookie('admin_id',$exist['id'],time()+86400);
             session('our_adminId',$exist['id']);
             $url = U('Index/index');
             $res_info['code'] = 0;
