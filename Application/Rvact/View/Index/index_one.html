@@ -118,10 +118,17 @@
                         <div class="abstract">
                             <ul>
                                 <li>
-                                    <p><span>支持单位：</span>{$info.support}</p>
-                                    <p><span>主办单位：</span>{$info.sponsor_unit}</p>
+                                    <notempty name="info['sponsor_unit']">
+                                        <p><span>主办单位：</span>{$info.sponsor_unit}</p>
+                                    </notempty>
+                                        <p class="chengban"><span>承办单位：</span></p>
+                                    <notempty name="info['support']">
+                                        <p><span>支持单位：</span>{$info.support}</p>
+                                    </notempty>
+                                    <notempty name="info['sponsor']">
+                                        <p><span>赞助商：</span>{$info.sponsor}</p>
+                                    </notempty>
                                     <if condition="$info.co_sponsored neq ''"><p><span>联合主办：</span>{$info.co_sponsored}</p></if>
-                                    <p class="chengban"><span>承办单位：</span></p>
                                     <p><span>咨询热线：</span>{$info.consult_phone}</p>
                                 </li>
                                 <li class="host_red">
@@ -285,7 +292,7 @@
             if(arr[i].indexOf('房车时代')>-1){
                 dom+='<a href="http://www.rvtimes.cn/" class="organizer">'+arr[i]+'、</a>';
             } else{
-                dom+='<i class="organizer">'+arr[i]+'、</i>';
+                dom+='<span>'+arr[i]+'、</span>';
             }
         }
         $('.chengban').append(dom);
