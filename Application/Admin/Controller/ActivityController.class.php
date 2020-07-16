@@ -753,9 +753,12 @@ class ActivityController extends CommonController
      * @throws \think\exception\DbException
      */
     public function plan_info(){
-        $list = M("act_plan")->join("left join activity on act_plan.pid=activity.id")->field('act_plan.*,activity.title,end_time')->select();
+        $list = M("act_plan")
+            ->join("left join activity on act_plan.pid=activity.id")
+            ->field('act_plan.*,activity.title,end_time')
+            ->order('act_plan.id desc')
+            ->select();
         $this->assign('list',$list);
-
         $this->display();
     }
 
@@ -796,6 +799,22 @@ class ActivityController extends CommonController
             echo "<script>alert('处理失败'); location.replace(document.referrer);</script>";
         }
 
+    }
+
+    /**
+     * @throws \think\Exception
+     * @throws \think\exception\PDOException
+     * 删除定时计划
+     */
+    public function del_plan()
+    {
+        $id = I('id');
+        $res = M("act_plan")->where(array('id'=>$id))->delete();
+        if($res){
+            echo "<script>alert('处理成功'); location.replace(document.referrer);</script>";
+        } else {
+            echo "<script>alert('处理失败'); location.replace(document.referrer);</script>";
+        }
     }
 
     /**
