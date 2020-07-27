@@ -865,6 +865,7 @@ class ActivityController extends CommonController
             $this->error($upload->getError());
         }else {// 上传成功
             $excelData = $this->getExcelData('./Public/upload/excel/' . $info['excel']['savename'], $active, $info['excel']['ext']);
+            $excelData = array_column($excelData,'1');
             print_r($excelData);die;
             for ($i = 1; $i<count($excelData); $i++){
               $arr = explode('+',$excelData[$i]);
