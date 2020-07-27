@@ -884,19 +884,21 @@ class ActivityController extends CommonController
                $new_province [$a]['省占比'] = '无';
                $a++;
             }
-            print_r($new_province);die;
+            $b = 0;
             for($i=0; $i<count($new_province);$i++){
-                $all_data[] = $new_province[$i];
+                $all_data[$b] = $new_province[$i];
                foreach ($area_data as $key=>$v){
                    if(strpos($key,$new_province[$i]['城市']) !== false){
-                       $all_data[] =  array('城市'=>$key);
-                       $all_data [] = array('数量'=>$v);
+                       $b++;
+                       $all_data[$b]['城市'] = $key;;
+                       $all_data[$b]['数量'] = $v;
                        $ratio = round($v/$all_num,4)*100;
-                       $all_data [] = array('总占比'=>$ratio.'%');
+                       $all_data[$b]['总占比'] = $ratio.'%';
                        $pro_ratio = round($v/$key,$new_province[$i]['数量'],4)*100;
-                       $all_data [] = array('省占比'=>$pro_ratio);
+                       $all_data[$b]['省占比'] = $pro_ratio.'%';
                    }
                }
+               $b++;
             }
 
             print_r($all_data);
