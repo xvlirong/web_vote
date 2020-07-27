@@ -847,6 +847,58 @@ class ActivityController extends CommonController
         }
     }
 
+    public function count_area()
+    {
+        $this->display();
+    }
+
+    public function handleCountArea()
+    {
+        $config  = C('UPLOAD_CONFIG');
+        $config['exts'] = array("xls","xlsx");
+        $config['savePath'] = 'upload/excel/';
+        $upload = new Upload($config);
+        // 上传文件
+        $active = I('active');
+        $info   =   $upload->upload();
+        if(!$info) {// 上传错误提示错误信息
+            $this->error($upload->getError());
+        }else {// 上传成功
+            $excelData = $this->getExcelData('./Public/upload/excel/' . $info['excel']['savename'], $active, $info['excel']['ext']);
+
+            for ($i = 1; $i<count($excelData); $i++){
+              $arr = explode('+',$excelData[$i]);
+              $province[] = $arr[0];
+            }
+            $area_data = array_count_values($excelData);
+            $province_data = array_count_values($province);
+            print_r($area_data);
+            $all_num = count($excelData);
+            foreach ($province_data as $key=>$v){
+               $new_province [] = array('城市'=>$key);
+               $new_province [] = array('数量'=>$v);
+               $ratio = round($v/$all_num,4)*100;
+               $new_province [] = array('总占比'=>$ratio.'%');
+               $new_province [] = array('省占比'=>'无');
+            }
+            for($i=0; $i<count($new_province);$i++){
+                $all_data[] = $new_province[$i];
+               foreach ($area_data as $key=>$v){
+                   if(strpos($key,$new_province[$i]['城市']) !== false){
+                       $all_data[] =  array('城市'=>$key);
+                       $all_data [] = array('数量'=>$v);
+                       $ratio = round($v/$all_num,4)*100;
+                       $all_data [] = array('总占比'=>$ratio.'%');
+                       $pro_ratio = round($v/$key,$new_province[$i]['数量'],4)*100;
+                       $all_data [] = array('省占比'=>$pro_ratio);
+                   }
+               }
+            }
+
+            print_r($all_data);
+        }
+    }
+
 
 }
 

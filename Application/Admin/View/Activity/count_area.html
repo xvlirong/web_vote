@@ -1,0 +1,83 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=8" >
+    <title>轮播图</title>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/Assets/css/reset.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/Assets/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/Assets/css/thems.css">
+    <script type="text/javascript" src="__STATIC__/Assets/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            //自适应屏幕宽度
+
+            var main_h = $(window).height();
+            $('.hy_list').css('height',main_h-45+'px');
+
+            var main_w = $(window).width();
+            $('.xjhy').css('width',main_w-40+'px');
+
+
+            $(".tabBox .tabCont:first").css("display","block");
+            $(".tabBox .tabNav li").click(function(){
+                $(this).siblings("li").removeClass("now");
+                $(this).addClass("now");
+                $(this).parents(".tabBox").find(".tabCont").css("display","none");
+                var i=$(this).index();
+                $(this).parents(".tabBox").find(".tabCont:eq("+i+")").css("display","block");
+            });
+
+            $('.xial_m span').click(function(){
+                $(this).parent('.xial_m').siblings('.xl_ctn').toggle();
+            });
+
+            /*js submit form action*/
+            $("#add_course").click(function(){
+                $("form").submit();
+            });
+        });
+    </script>
+</head>
+
+<body onLoad="Resize();">
+<div id="right_ctn">
+    <div class="right_m">
+        <!--会议列表-->
+        <div class="hy_list">
+            <div class="box_t">
+                <span class="name">上传文件</span>
+            </div>
+            <div class="space_hx">&nbsp;</div>
+            <!--MCU配置-->
+            <div class="xjhy" style="padding:0px;">
+                <div class="tabBox_t">
+                    <div class="tabBox">
+                        <ul class="tabNav">
+                            <li class="now"><span>上传文件</span></li>
+                        </ul>
+                        <div class="tabCont" style="display:block;">
+                            <form method="post" action="{:U('handleCountArea')}" enctype="multipart/form-data">
+                                <ul class="hypz">
+
+                                    <li class="clearfix">
+                                        <span class="title">Excel表格</span>
+                                        <input type="file" name="excel" style="padding-left: 20px;"/>
+                                    </li>
+                                    <li class="tj_btn">
+                                        <a id="add_course">提交</a>
+                                    </li>
+
+                                </ul>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!--MCU配置-->
+        </div>
+        <!--会议列表-->
+    </div>
+</div>
+</body>
+</html>
