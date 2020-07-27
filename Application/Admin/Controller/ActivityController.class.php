@@ -872,15 +872,19 @@ class ActivityController extends CommonController
             }
             $area_data = array_count_values($excelData);
             $province_data = array_count_values($province);
-            print_r($area_data);
+
             $all_num = count($excelData);
+            $a = 0;
             foreach ($province_data as $key=>$v){
-               $new_province [] = array('城市'=>$key);
-               $new_province [] = array('数量'=>$v);
+
+               $new_province [$a]['城市'] = $key;
+               $new_province [$a]['数量'] = $v;
                $ratio = round($v/$all_num,4)*100;
-               $new_province [] = array('总占比'=>$ratio.'%');
-               $new_province [] = array('省占比'=>'无');
+               $new_province [$a]['总占比'] = $ratio.'%';
+               $new_province [$a]['省占比'] = '无';
+               $a++;
             }
+            print_r($new_province);die;
             for($i=0; $i<count($new_province);$i++){
                 $all_data[] = $new_province[$i];
                foreach ($area_data as $key=>$v){
