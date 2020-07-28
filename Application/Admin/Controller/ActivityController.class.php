@@ -875,7 +875,7 @@ class ActivityController extends CommonController
             foreach ($province_data as $key=>$v){
                $new_province [$a]['城市'] = $key;
                $new_province [$a]['数量'] = $v;
-               $ratio = round(bcdiv($v,$all_num,4))*100;
+               $ratio = bcdiv($v,$all_num,4)*100;
                $new_province [$a]['总占比'] = $ratio.'%';
                $new_province [$a]['省占比'] = '无';
                $a++;
@@ -889,9 +889,9 @@ class ActivityController extends CommonController
                        $b++;
                        $all_data[$b]['城市'] = $key;;
                        $all_data[$b]['数量'] = $v;
-                       $ratio = round(bcdiv($v,$all_num,4))*100;
+                       $ratio = bcdiv($v,$all_num,4)*100;
                        $all_data[$b]['总占比'] = $ratio.'%';
-                       $pro_ratio = round(bcdiv($v,$new_province[$i]['数量'],4))*100;
+                       $pro_ratio = bcdiv($v,$new_province[$i]['数量'],4)*100;
                        $all_data[$b]['省占比'] = $pro_ratio.'%';
                    }
                }
