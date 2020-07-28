@@ -898,6 +898,7 @@ class ActivityController extends CommonController
                $b++;
             }
 
+            print_r($all_data);die;
 
             $goods_list = $all_data;
 
