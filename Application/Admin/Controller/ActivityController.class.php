@@ -876,8 +876,8 @@ class ActivityController extends CommonController
 
             $all_num = count($excelData);
             $a = 0;
+            //省份统计处理
             foreach ($province_data as $key=>$v){
-
                $new_province [$a]['城市'] = $key;
                $new_province [$a]['数量'] = $v;
                $ratio = round($v/$all_num,4)*100;
@@ -886,6 +886,7 @@ class ActivityController extends CommonController
                $a++;
             }
             $b = 0;
+            //合并地区与省份
             for($i=0; $i<count($new_province);$i++){
                 $all_data[$b] = $new_province[$i];
                foreach ($area_data as $key=>$v){
@@ -902,7 +903,36 @@ class ActivityController extends CommonController
                $b++;
             }
 
-            print_r($all_data);
+
+            $goods_list = $all_data;
+
+            $data = array();
+            foreach ($goods_list as $k=>$goods_info){
+                $data[$k]['city'] = $goods_info['城市'];
+                $data[$k]['num'] = $goods_info['数量'];
+                $data[$k]['ratio'] = $goods_info['总占比'];
+                $data[$k]['pro_ratio'] = $goods_info['省占比'];
+            }
+            foreach ($data as $field=>$v){
+                if($field == 'city'){
+                    $headArr[]='城市';
+                }
+
+                if($field == 'num'){
+                    $headArr[]='数量';
+                }
+                if($field == 'ratio'){
+                    $headArr[]='总占比';
+                }
+                if($field == 'pro_ratio'){
+                    $headArr[]='省占比';
+                }
+
+            }
+            $filename="地区统计";
+
+
+            $this->getExcel($filename,$headArr,$data);
         }
     }
 
