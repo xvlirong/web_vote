@@ -866,7 +866,7 @@ class ActivityController extends CommonController
         }else {// 上传成功
             $excelDatas = $this->getExcelData('./Public/upload/excel/' . $info['excel']['savename'], $active, $info['excel']['ext']);
             $excelData = array_column($excelDatas,1);
-            for ($i = 0; $i<count($excelData); $i++)
+            for ($i = 0; $i<count($excelData); $i++){
               preg_replace('# #','',$excelData[$i]);
               $arr = explode('+',$excelData[$i]);
               $province[] = $arr[0];
