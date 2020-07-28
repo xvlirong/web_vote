@@ -372,11 +372,6 @@ class ActivityController extends CommonController
             $span = ord("A");
             foreach($rows as $keyName=>$value){// 列写入
                 $j = chr($span);
-                if($value==1){
-                    $value='是';
-                }elseif($value=='0'){
-                    $value='否';
-                }
                 $objActSheet->setCellValue($j.$column, $value);
                 $span++;
             }
@@ -909,7 +904,7 @@ class ActivityController extends CommonController
             $data = array();
             foreach ($goods_list as $k=>$goods_info){
                 $data[$k]['city'] = $goods_info['城市'];
-                $data[$k]['num'] = ",".$goods_info['数量'];
+                $data[$k]['num'] = $goods_info['数量'];
                 $data[$k]['ratio'] = $goods_info['总占比'];
                 $data[$k]['pro_ratio'] = $goods_info['省占比'];
             }
