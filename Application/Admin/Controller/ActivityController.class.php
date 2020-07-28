@@ -866,7 +866,8 @@ class ActivityController extends CommonController
         }else {// 上传成功
             $excelDatas = $this->getExcelData('./Public/upload/excel/' . $info['excel']['savename'], $active, $info['excel']['ext']);
             $excelData = array_column($excelDatas,1);
-            for ($i = 0; $i<count($excelData); $i++){
+            for ($i = 0; $i<count($excelData); $i++)
+              preg_replace('# #','',$excelData[$i]);
               $arr = explode('+',$excelData[$i]);
               $province[] = $arr[0];
             }
@@ -894,7 +895,7 @@ class ActivityController extends CommonController
                        $all_data[$b]['数量'] = $v;
                        $ratio = round($v/$all_num,4)*100;
                        $all_data[$b]['总占比'] = $ratio.'%';
-                       $pro_ratio = round($v/$key,$new_province[$i]['数量'],4)*100;
+                       $pro_ratio = round($v/$new_province[$i]['数量'],4)*100;
                        $all_data[$b]['省占比'] = $pro_ratio.'%';
                    }
                }
