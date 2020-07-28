@@ -909,7 +909,7 @@ class ActivityController extends CommonController
             $data = array();
             foreach ($goods_list as $k=>$goods_info){
                 $data[$k]['city'] = $goods_info['城市'];
-                $data[$k]['num'] = $goods_info['数量'];
+                $data[$k]['num'] = intval($goods_info['数量']);
                 $data[$k]['ratio'] = $goods_info['总占比'];
                 $data[$k]['pro_ratio'] = $goods_info['省占比'];
             }
