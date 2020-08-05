@@ -882,6 +882,7 @@ class ActivityController extends Controller
             }
 
             $sort_pro = array_column($new_province,'数量');
+
             array_multisort($sort_pro, SORT_DESC, $new_province);
             $new_province = array_merge($new_province);
             //地区统计处理
@@ -893,10 +894,15 @@ class ActivityController extends Controller
                 $new_area [$a]['地区占比'] = $ratio.'%';
                 $a++;
             }
-            $sort_area = array_column($new_area,'数量');
+            $sort_area = array_column($new_area,'地区数量');
             array_multisort($sort_area, SORT_DESC, $new_area);
             $new_area = array_merge($new_area);
+
             $pro_num = count($new_province);
+            $area_num = count($new_area);
+            if($area_num>50){
+                $area_num = 50;
+            }
             for($i=0; $i<count($new_area);$i++){
               $inum = $i+1;
               if($inum>$pro_num){
@@ -908,7 +914,7 @@ class ActivityController extends Controller
             $data = array();
             foreach ($list as $k=>$goods_info){
                 $data[$k]['province'] = $goods_info['省份'];
-                $data[$k]['ratio'] = $goods_info['数量'];
+                $data[$k]['ratio'] = $goods_info['省份占比'];
                 $data[$k]['area'] = $goods_info['地区'];
                 $data[$k]['area_ratio'] = $goods_info['地区占比'];
             }
