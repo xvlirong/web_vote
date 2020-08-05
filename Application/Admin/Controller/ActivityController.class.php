@@ -4,7 +4,7 @@ namespace Admin\Controller;
 use Extend\Page;
 use Think\Controller;
 use Think\Upload;
-class ActivityController extends Controller
+class ActivityController extends CommonController
 {
     /**
      * 添加活动
