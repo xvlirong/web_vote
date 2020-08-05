@@ -597,7 +597,7 @@ class ActivityController extends Controller
 
     public function uploadExcel()
     {
-        set_time_limit(0)
+        set_time_limit(0);
         $config  = C('UPLOAD_CONFIG');
         $config['exts'] = array("xls","xlsx");
         $config['savePath'] = 'upload/excel/';
