@@ -877,7 +877,7 @@ class ActivityController extends Controller
                $new_province [$a]['数量'] = $v;
 
                $ratio = substr(bcdiv($v,$all_num,4),0,6)*100;
-               $new_province [$a]['省份占比'] = $ratio.'%';
+               $new_province [$a]['省份占比'] = $ratio;
                $a++;
             }
 
@@ -891,7 +891,7 @@ class ActivityController extends Controller
                 $new_area [$a]['地区数量'] = $v;
 
                 $ratio = substr(bcdiv($v,$all_num,4),0,6)*100;
-                $new_area [$a]['地区占比'] = $ratio.'%';
+                $new_area [$a]['地区占比'] = $ratio;
                 $a++;
             }
             $sort_area = array_column($new_area,'地区数量');
@@ -924,13 +924,13 @@ class ActivityController extends Controller
                 }
 
                 if($field == 'ratio'){
-                    $headArr[]='省份占比';
+                    $headArr[]='省份占比(%)';
                 }
                 if($field == 'area'){
                     $headArr[]='地区';
                 }
                 if($field == 'area_ratio'){
-                    $headArr[]='地区占比';
+                    $headArr[]='地区占比(%)';
                 }
 
             }
