@@ -903,7 +903,7 @@ class ActivityController extends Controller
             if($area_num>50){
                 $area_num = 50;
             }
-            for($i=0; $i<count($new_area);$i++){
+            for($i=0; $i<$area_num;$i++){
               $inum = $i+1;
               if($inum>$pro_num){
                   $list[] = $new_area[$i];
