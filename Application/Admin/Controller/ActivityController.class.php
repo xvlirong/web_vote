@@ -4,7 +4,7 @@ namespace Admin\Controller;
 use Extend\Page;
 use Think\Controller;
 use Think\Upload;
-class ActivityController extends CommonController
+class ActivityController extends Controller
 {
     /**
      * 添加活动
@@ -873,54 +873,58 @@ class ActivityController extends CommonController
             $a = 0;
             //省份统计处理
             foreach ($province_data as $key=>$v){
-               $new_province [$a]['城市'] = $key;
+               $new_province [$a]['省份'] = $key;
                $new_province [$a]['数量'] = $v;
-               $ratio = bcdiv($v,$all_num,4)*100;
-               $new_province [$a]['总占比'] = $ratio.'%';
-               $new_province [$a]['省占比'] = '无';
+
+               $ratio = substr(bcdiv($v,$all_num,4),0,6)*100;
+               $new_province [$a]['省份占比'] = $ratio.'%';
                $a++;
             }
-            $b = 0;
-            //合并地区与省份
-            for($i=0; $i<count($new_province);$i++){
-                $all_data[$b] = $new_province[$i];
-               foreach ($area_data as $key=>$v){
-                   if(strpos($key,$new_province[$i]['城市']) !== false){
-                       $b++;
-                       $all_data[$b]['城市'] = $key;;
-                       $all_data[$b]['数量'] = $v;
-                       $ratio = bcdiv($v,$all_num,4)*100;
-                       $all_data[$b]['总占比'] = $ratio.'%';
-                       $pro_ratio = bcdiv($v,$new_province[$i]['数量'],4)*100;
-                       $all_data[$b]['省占比'] = $pro_ratio.'%';
-                   }
-               }
-               $b++;
+
+            $sort_pro = array_column($new_province,'数量');
+            array_multisort($sort_pro, SORT_DESC, $new_province);
+            $new_province = array_merge($new_province);
+            //地区统计处理
+            foreach ($area_data as $key=>$v){
+                $new_area [$a]['地区'] = $key;
+                $new_area [$a]['地区数量'] = $v;
+
+                $ratio = substr(bcdiv($v,$all_num,4),0,6)*100;
+                $new_area [$a]['地区占比'] = $ratio.'%';
+                $a++;
             }
-
-
-            $goods_list = $all_data;
-
+            $sort_area = array_column($new_area,'数量');
+            array_multisort($sort_area, SORT_DESC, $new_area);
+            $new_area = array_merge($new_area);
+            $pro_num = count($new_province);
+            for($i=0; $i<count($new_area);$i++){
+              $inum = $i+1;
+              if($inum>$pro_num){
+                  $list[] = $new_area[$i];
+              }else{
+                  $list[] = array_merge($new_area[$i],$new_province[$i]);
+              }
+            }
             $data = array();
-            foreach ($goods_list as $k=>$goods_info){
-                $data[$k]['city'] = $goods_info['城市'];
-                $data[$k]['num'] = $goods_info['数量'];
-                $data[$k]['ratio'] = $goods_info['总占比'];
-                $data[$k]['pro_ratio'] = $goods_info['省占比'];
+            foreach ($list as $k=>$goods_info){
+                $data[$k]['province'] = $goods_info['省份'];
+                $data[$k]['ratio'] = $goods_info['数量'];
+                $data[$k]['area'] = $goods_info['地区'];
+                $data[$k]['area_ratio'] = $goods_info['地区占比'];
             }
             foreach ($data as $field=>$v){
-                if($field == 'city'){
-                    $headArr[]='城市';
+                if($field == 'province'){
+                    $headArr[]='省份';
                 }
 
-                if($field == 'num'){
-                    $headArr[]='数量';
-                }
                 if($field == 'ratio'){
-                    $headArr[]='总占比';
+                    $headArr[]='省份占比';
                 }
-                if($field == 'pro_ratio'){
-                    $headArr[]='省占比';
+                if($field == 'area'){
+                    $headArr[]='地区';
+                }
+                if($field == 'area_ratio'){
+                    $headArr[]='地区占比';
                 }
 
             }
