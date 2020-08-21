@@ -224,7 +224,12 @@ class DmController extends CommonController {
         if($sale_id===''&&$invite_state===''){
         }else{
             if($sale_id===''){
-                $maps['sms_offer_record.update_time'] = array("GT",0);
+                if($invite_state == 1){
+                    $maps['sms_offer_record.update_time'] = array("GT",0);
+                }else{
+                    $maps['sms_offer_record.update_time'] = array("GT",0);
+                }
+
                 $map_str = '&invite_state='.$invite_state;
             }elseif ($invite_state === ''){
                 $maps['sms_offer_record.sale_id'] = array("EQ",$sale_id);
