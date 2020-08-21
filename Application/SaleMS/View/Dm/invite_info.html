@@ -27,21 +27,21 @@
                     <div class="search" style="padding-left: 10px">
 
                         <select name="sale_id" class="" style="font-family:'microsoft yahei';">
-                            <option value="">销售所属地区</option>
+<!--                            <option value="">销售所属地区</option>-->
                                 <option value="张家港">张家港</option>
                         </select>
 
                         <select  name="sale_id" class="" style="font-family:'microsoft yahei';margin-left: 10px">
                             <option value="">请选择销售人员</option>
                             <foreach name="sale_list" item="v">
-                                <option value="{$v.id}">{$v.user_name}</option>
+                                <option value="{$v.id}" <eq name="sale_id" value="$v['id']">selected</eq>>{$v.user_name}</option>
                             </foreach>
                         </select>
 
                         <select name="invite_state" class="" style="font-family:'microsoft yahei';margin-left: 10px">
                             <option value="">邀约状态</option>
-                            <option value="1">已邀约</option>
-                            <option value="0">未邀约</option>
+                            <option value="1" <eq name="invite_state" value="1">selected</eq>>已邀约</option>
+                            <option value="0" <eq name="invite_state" value="0">selected</eq>>未邀约</option>
                         </select>
                         <a class="btn" id="sub">查询</a>
 

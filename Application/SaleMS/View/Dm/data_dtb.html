@@ -25,8 +25,8 @@
             <div class="search gzrj">
                 <form action="{:U('Dm/data_dtb')}" name="formtest" method="post">
                     <div class="search">
-                        <input type="text" name="sel_name" placeholder="姓名">
-                        <input type="text" name="sel_phone" placeholder="手机号">
+                        <input type="text" name="sel_name" <notempty name="sel_name">value="{$sel_name}"</notempty> placeholder="姓名">
+                        <input type="text" name="sel_phone" placeholder="手机号" <notempty name="sel_phone">value="{$sel_phone}"</notempty>>
                         <a class="btn" id="sub">查询</a>
 
                         <!--                        <a href="{:U('Activity/exam_export',array('id'=>$id))}" class="btn">导出信息</a>-->
