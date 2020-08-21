@@ -129,8 +129,8 @@ class DmController extends CommonController {
 
         $sale_list = M("sms_user")->where(array('role_id'=>'2'))->select();
         $this->assign('sale_list',$sale_list);
-        $sel_name = I('sel_name');
-        $sel_phone = I('sel_phone');
+        $sel_name = trim(I('sel_name'));
+        $sel_phone = trim(I('sel_phone'));
         if($sel_name===''&&$sel_phone===''){
         }else{
             if($sel_name===''){
