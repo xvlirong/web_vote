@@ -155,6 +155,7 @@ class LoginController extends Controller {
     //退出
     public function logout(){
         session('sale_our_adminId',null);
+        cookie('admin_id',null);
         redirect(U('Login/login'));
     }
 
