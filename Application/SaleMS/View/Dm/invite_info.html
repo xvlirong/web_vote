@@ -1,0 +1,142 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=8" >
+    <title>邀约详情</title>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/Assets/css/reset.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/Assets/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/Assets/css/thems.css?time=1541">
+    <script type="text/javascript" src="__STATIC__/Assets/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/Assets/js/WdatePicker.js"> </script>
+    <script type="text/javascript">
+    </script>
+    <!--框架高度设置-->
+</head>
+
+<body>
+<div id="right_ctn">
+    <div class="right_m">
+        <!--会议列表-->
+        <div class="hy_list">
+            <div class="box_t">
+                <span class="name">邀约详情</span>
+
+            </div>
+            <div class="search gzrj">
+                <form action="{:U('Dm/invite_info')}" name="formtest" method="post">
+                    <div class="search" style="padding-left: 10px">
+
+                        <select name="sale_id" class="" style="font-family:'microsoft yahei';">
+                            <option value="">销售所属地区</option>
+                                <option value="张家港">张家港</option>
+                        </select>
+
+                        <select  name="sale_id" class="" style="font-family:'microsoft yahei';margin-left: 10px">
+                            <option value="">请选择销售人员</option>
+                            <foreach name="sale_list" item="v">
+                                <option value="{$v.id}">{$v.user_name}</option>
+                            </foreach>
+                        </select>
+
+                        <select name="invite_state" class="" style="font-family:'microsoft yahei';margin-left: 10px">
+                            <option value="">邀约状态</option>
+                            <option value="1">已邀约</option>
+                            <option value="0">未邀约</option>
+                        </select>
+                        <a class="btn" id="sub">查询</a>
+
+                        <!--                        <a href="{:U('Activity/exam_export',array('id'=>$id))}" class="btn">导出信息</a>-->
+                        <!--                        <a  class="btn">查询</a>-->
+                    </div>
+
+                </form>
+            </div>
+            <!--列表-->
+            <form action="{:U('Dm/fp_user')}" method="post" id="fp_user_form">
+                <table cellpadding="0" cellspacing="0" class="list_hy" style="width: 95%">
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">姓名</th>
+                        <th scope="col">手机号</th>
+                        <th scope="col">地区</th>
+                        <th scope="col">更新时间</th>
+                        <th scope="col">客户等级</th>
+                        <th scope="col">购车时间</th>
+                        <th scope="col">意向车型</th>
+                        <th scope="col">购车预算</th>
+                        <th scope="col">用户反馈</th>
+                        <th scope="col">所属销售</th>
+                    </tr>
+                    <foreach name="list" item="v">
+                        <tr>
+                            <td>{$key+1}</td>
+                            <td>{$v.name}</td>
+                            <td>{$v.phone}</td>
+                            <td>{$v.area}</td>
+                            <td>
+                                <eq name="v['update_time']" value="0">
+                                    暂未邀约
+                                    <else />
+                                    {$v.update_time|date="Y-m-d H:i:s",###}
+                                </eq>
+                            </td>
+                            <td>
+                               <notempty name="v['client_level']">
+                                   {$v.client_level}
+                                   <else />
+                                   ——
+                               </notempty>
+                            </td>
+                            <td>
+                                <notempty name="v['buy_time']">
+                                    {$v.buy_time}
+                                    <else />
+                                    ——
+                                </notempty>
+                            </td>
+                            <td>
+                                <notempty name="v['car_type']">
+                                {$v.car_type}
+                                    <else />
+                                    ——
+                                </notempty>
+                            </td>
+                            <td>
+                                <notempty name="v['budget']">
+                                    {$v.budget}
+                                    <else />
+                                    ——
+                                </notempty>
+                            </td>
+                            <td>
+                                <notempty name="v['mark']">
+                                    {$v.mark}
+                                    <else />
+                                    ——
+                                </notempty>
+                            </td>
+                            <td>{$v.user_name}</td>
+
+                        </tr>
+                    </foreach>
+                </table>
+
+                <div class="pagination">{$page}</div>
+                <!--列表-->
+                <!--右边底部-->
+            </form>
+            <!--右边底部-->
+
+        </div>
+        <!--会议列表-->
+    </div>
+</div>
+<script>
+    /*提交搜索*/
+    $('#sub').click(function(){
+        document.formtest.submit();
+    });
+
+</script>
+</body>
+</html>

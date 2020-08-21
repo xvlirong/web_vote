@@ -1,0 +1,102 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=8" >
+    <title>邀约统计</title>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/Assets/css/reset.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/Assets/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/Assets/css/thems.css?time=1541">
+    <script type="text/javascript" src="__STATIC__/Assets/js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/Assets/js/WdatePicker.js"> </script>
+    <script type="text/javascript">
+        $(function () {
+            $(".tabBox .tabCont:first").css("display","block");
+            $(".tabBox .tabNav li").click(function(){
+                $(this).siblings("li").removeClass("now");
+                $(this).addClass("now");
+                $(this).parents(".tabBox").find(".tabCont").css("display","none");
+                var i=$(this).index();
+                $(this).parents(".tabBox").find(".tabCont:eq("+i+")").css("display","block");
+            });
+        })
+
+    </script>
+    <!--框架高度设置-->
+</head>
+
+<body>
+<div id="right_ctn">
+    <div class="right_m">
+        <!--会议列表-->
+        <div class="hy_list">
+            <div class="box_t">
+                <span class="name">邀约统计</span>
+            </div>
+            <div class="tabBox">
+                <ul class="tabNav">
+                    <li class="now"><span>昨日邀约统计</span></li>
+                    <li><span>近七日邀约统计</span></li>
+                </ul>
+
+            <!--列表-->
+            <div class="tabCont" style="display:block;">
+
+
+                <table cellpadding="0" cellspacing="0" class="list_hy" style="width: 95%">
+                    <tr>
+                        <th scope="col">日期</th>
+                        <th scope="col">姓名</th>
+                        <th scope="col">客户分配数</th>
+                        <th scope="col">已邀约数</th>
+                        <th scope="col">未邀约数</th>
+                    </tr>
+                    <foreach name="last_list" item="v">
+                        <tr>
+                            <td>{$v.count_date}</td>
+                            <td>{$v.user_name}</td>
+                            <td>{$v.num}</td>
+                            <td>{$v.yy_num}</td>
+                            <td>{$v.wyy_num}</td>
+                        </tr>
+                    </foreach>
+                </table>
+            </div>
+
+            <div class="tabCont" style="display:none;">
+
+
+                <table cellpadding="0" cellspacing="0" class="list_hy" style="width: 95%">
+                    <tr>
+                        <th scope="col">日期</th>
+                        <th scope="col">姓名</th>
+                        <th scope="col">客户分配数</th>
+                        <th scope="col">已邀约数</th>
+                        <th scope="col">未邀约数</th>
+                    </tr>
+                    <foreach name="week_list" item="v">
+                        <tr>
+                            <td>{$v.count_date}</td>
+                            <td>{$v.user_name}</td>
+                            <td>{$v.num}</td>
+                            <td>{$v.yy_num}</td>
+                            <td>{$v.wyy_num}</td>
+                        </tr>
+                    </foreach>
+                </table>
+            </div>
+            </div>
+                <!--列表-->
+                <!--右边底部-->
+        </div>
+        <!--会议列表-->
+    </div>
+</div>
+<script>
+    /*提交搜索*/
+    $('#sub').click(function(){
+        document.formtest.submit();
+    });
+
+</script>
+</body>
+</html>

@@ -1,0 +1,97 @@
+*{margin:0;padding:0;}
+body{color:#333;font-size:12px;font-family:"宋体"; background:#f9f9f0;}
+ul,li{list-style:none;margin:0;padding:0;}
+select,input{font-size:12px;vertical-align:middle;}
+img{border:0;}
+h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}
+a{color:#333;text-decoration:none;}
+a:hover{color:#f00;text-decoration:none;}
+
+
+
+.pc_wrap{
+	width: 800px;
+	height: 300px;
+	margin:  0 auto; 
+}
+
+.pc_table{
+	width: 800px;
+	height: 300px;
+}
+
+.pc_table ul{
+	float: left;
+	width:150px;
+	height: 300px;
+	border: 1px solid #dcdcdc;
+}
+
+.pc_table ul li{
+	font-family: "微软雅黑";
+	color: #000;
+	font-size: 24px;
+	line-height: 40px;
+	text-align: center;
+	border-bottom: 1px solid #dcdcdc;
+}
+
+.pc_radio{
+	width: 760px;
+	height: 200px;
+	margin-top: 20px;
+	/* background-color: pink; */
+}
+
+.pc_radio_box{
+	width: 150px;
+	height: 50px;
+	float: left;
+	/* background-color: #eee; */
+	margin-top: 15px;
+	margin-left: 10px;
+	margin-right: 15px;
+}
+
+.pc_radio_box button{
+	float: left;
+	width: 100px;
+	height: 40px;
+	border-radius: 6px;
+	border: none;
+	border: 1px solid #dcdcdc;
+	font-family: "微软雅黑";
+	color: #000;
+	font-size: 24px;
+	line-height: 40px;
+	text-align: center;
+	background-color: #fff;
+}
+
+.pc_radio_box img{
+	width: 22px;
+	height: 22px;
+	display: block;
+	float: right;
+	margin-top: 10px;
+}
+
+.pc_foot{
+	width:200px;
+	height:30px;
+	border:1px solid #dcdcdc;
+	margin-left:30%;
+	clear:both;
+	border-radius:8px;
+	background-color:#fff;
+}
+
+.pc_foot p{
+	font-family: "微软雅黑";
+	color: #000;
+	font-size: 14px;
+	text-align:center;
+	line-height:30px;
+	
+	
+}
