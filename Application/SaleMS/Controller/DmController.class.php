@@ -227,7 +227,7 @@ class DmController extends CommonController {
                 if($invite_state == 1){
                     $maps['sms_offer_record.update_time'] = array("GT",0);
                 }else{
-                    $maps['sms_offer_record.update_time'] = array("GT",0);
+                    $maps['sms_offer_record.update_time'] = array("EQ",0);
                 }
 
                 $map_str = '&invite_state='.$invite_state;
@@ -235,7 +235,11 @@ class DmController extends CommonController {
                 $maps['sms_offer_record.sale_id'] = array("EQ",$sale_id);
                 $map_str = '&sale_id='.$sale_id;
             }else{
-                $maps['sms_offer_record.update_time'] = array("GT",0);
+                if($invite_state == 1){
+                    $maps['sms_offer_record.update_time'] = array("GT",0);
+                }else{
+                    $maps['sms_offer_record.update_time'] = array("EQ",0);
+                }
                 $maps['sms_offer_record.sale_id'] = array("EQ",$sale_id);
                 $map_str = '&invite_state='.$invite_state.'&sale_id='.$sale_id;
             }

@@ -4,13 +4,51 @@
 <title>头部</title>
 <link rel="stylesheet" type="text/css" href="__STATIC__/Assets/css/reset.css"/>
 <link rel="stylesheet" type="text/css" href="__STATIC__/Assets/css/common.css"/>
+<link rel="stylesheet" type="text/css" href="__STATIC__/Assets/css/new_style.css"/>
+<link rel="stylesheet" type="text/css" href="__STATIC__/Assets/css/font-awesome.css.css"/>
+	<script type="text/javascript" src="__STATIC__/Assets/js/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript" src="__STATIC__/Assets/js/modernizr.custom.js"> </script>
 </head>
 
 <body>
 <div class="head clearfix" >
 	<div class="logo">
-    	<a href=""><img src="__STATIC__/Assets/images/logo4.png" alt="汉锐会议"/></a>
+    	<a href=""><img src="__STATIC__/Assets/images/logo4.png" alt="房车时代"/></a>
     </div>
+	<div class="gr_gl" style="float: right;margin-right: 20px">
+		<div id="dd" onclick="tc_tk()" class="wrapper-dropdown-5" tabindex="1" title="点击退出登录">
+			<i class="icon-user" style="margin-left: -6px; margin-right: 10px;"></i><span>{$Think.cookie.admin_name}</span>
+<!--			<ul class="dropdown">-->
+<!--				<li><a href="{:U('Login/logout')}" target="_blank"><i class="icon-remove"></i>退出登录</a></li>-->
+<!--			</ul>-->
+		</div>
+	</div>
 </div>
 </body>
+<script type="text/javascript">
+
+	function DropDown(el) {
+		this.dd = el;
+		this.initEvents();
+	}
+	DropDown.prototype = {
+		initEvents : function() {
+			var obj = this;
+
+			obj.dd.on('click', function(event){
+				$(this).toggleClass('active');
+				event.stopPropagation();
+			});
+		}
+	}
+
+
+	function tc_tk() {
+		if(confirm('是否退出登录')){
+			var url = "{:U('Login/logout')}";
+			window.parent.frames.location.href= url
+		}
+	}
+
+</script>
 </html>

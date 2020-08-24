@@ -5,11 +5,23 @@
     <title>数据分配</title>
     <link rel="stylesheet" type="text/css" href="__STATIC__/Assets/css/reset.css"/>
     <link rel="stylesheet" type="text/css" href="__STATIC__/Assets/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/Assets/css/easydropdown.metro.css"/>
     <link rel="stylesheet" type="text/css" href="__STATIC__/Assets/css/thems.css?time=1541">
     <script type="text/javascript" src="__STATIC__/Assets/js/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="__STATIC__/Assets/js/WdatePicker.js"> </script>
+    <script type="text/javascript" src="__STATIC__/Assets/js/jquery.easydropdown.min.js"> </script>
     <script type="text/javascript">
     </script>
+    <style>
+        .search input{
+            margin-left: 15px;
+            width: 150px;
+            height: 30px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding-left: 6px;
+        }
+    </style>
     <!--框架高度设置-->
 </head>
 
@@ -27,7 +39,7 @@
                     <div class="search">
                         <input type="text" name="sel_name" <notempty name="sel_name">value="{$sel_name}"</notempty> placeholder="姓名">
                         <input type="text" name="sel_phone" placeholder="手机号" <notempty name="sel_phone">value="{$sel_phone}"</notempty>>
-                        <a class="btn" id="sub">查询</a>
+                        <a class="btn" id="sub" style="margin-top: -2px">查询</a>
 
                         <!--                        <a href="{:U('Activity/exam_export',array('id'=>$id))}" class="btn">导出信息</a>-->
 <!--                        <a  class="btn">查询</a>-->
@@ -60,14 +72,14 @@
                         </tr>
                     </foreach>
                 </table>
-                <div class="fp_box">
-                    <select name="sale_id" class="" style="font-family:'microsoft yahei';">
+                <div class="fp_box" style="height: 46px">
+                    <select name="sale_id"  class="dropdown" style="font-family:'microsoft yahei';margin-top: 2px">
                         <option value="">请选择销售人员</option>
                         <foreach name="sale_list" item="v">
                             <option value="{$v.id}">{$v.user_name}</option>
                         </foreach>
                     </select>
-                    <a class="btn" id="sub1">提交</a>
+                    <a class="btn" id="sub1" style="margin-top: 3px">提交</a>
                 </div>
                 <div class="pagination">{$page}</div>
                 <!--列表-->

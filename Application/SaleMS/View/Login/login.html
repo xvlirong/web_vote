@@ -55,8 +55,8 @@ $(function(){
     	<form action="" method="post">
 
     	<ul>
-            <div style="margin-left: 27px;font-size: 20px;margin-bottom: 30px">
-                <p>欢迎登录房车时代数据管理系统</p>
+            <div style="font-size: 23px;margin-bottom: 30px;margin-top: 25px;text-align: center">
+                <p>后台管理中心</p>
             </div>
             <li class="wz">用户名</li>
             <li><input name="username" type="text" id="user_name" placeholder="请输入手机号"></li>
@@ -146,7 +146,7 @@ $(function(){
                 data:{phone:phone},
                 success:function (data) {
                     var msg = data.msg;
-                    alert(msg)
+
                     if(data.code == 1){
                         $.leftTime(60,function(d){
                             if(d.status){
@@ -157,6 +157,8 @@ $(function(){
                                 _this.html("获取验证码");
                             }
                         });
+                    }else{
+                        alert(msg)
                     }
                 }
             });

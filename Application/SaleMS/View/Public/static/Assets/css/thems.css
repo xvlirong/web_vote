@@ -67,19 +67,15 @@
 	background:#E9E9E9;
 }
 .search{
-	height:40px;
+	height:48px;
 	/*margin:0px auto;*/
 	border-radius:3px;
 	-moz-border-radius:3px;
 	-webkit-border-radius:3px;
 	background:#FFF;
-	margin-top:20px;
+	margin-top:5px;
 	text-align:left;
 	line-height:40px;
-}
-.search span{
-	color:#656565;
-	margin-left:30px;
 }
 .search .s_text , .search .sz_text{
 	display:inline-block;
@@ -127,14 +123,15 @@
 	display:inline-block;
 	*display:inline;
 	zoom:1;
-	width:76px;
+	width:106px;
 	height:36px;
 	text-align:center;
 	line-height:36px;
-	color:#000;
+	color:#fff;
 	vertical-align:middle;
-	background:url(../images/btn1.png) no-repeat;
+	background:url(../images/btn4.png) no-repeat;
 	margin-left:5px;
+	cursor: pointer;
 }
 .list_hy{
 	background:#FFF;
@@ -893,7 +890,7 @@
 	background:none;
 }
 .login .login_m ul li input{
-	width:327px;
+	width:310px;
 	height:40px;
 	/*margin-left:10px;*/
 	margin-top:6px;

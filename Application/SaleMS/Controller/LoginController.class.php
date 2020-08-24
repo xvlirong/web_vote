@@ -132,6 +132,7 @@ class LoginController extends Controller {
             M("sms_user")->where(array('id'=>$exist['id']))->save($data);
             session('sale_our_adminId',$exist['id']);
             cookie('admin_id',$exist['id'],time()+86400);
+            cookie('admin_name',$exist['user_name'],time()+86400);
             $url = U('Index/index');
             $res_info['code'] = 0;
             $res_info['msg'] = '登陆成功';

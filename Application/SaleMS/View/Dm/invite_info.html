@@ -5,9 +5,11 @@
     <title>邀约详情</title>
     <link rel="stylesheet" type="text/css" href="__STATIC__/Assets/css/reset.css"/>
     <link rel="stylesheet" type="text/css" href="__STATIC__/Assets/css/common.css"/>
+    <link rel="stylesheet" type="text/css" href="__STATIC__/Assets/css/easydropdown.metro.css"/>
     <link rel="stylesheet" type="text/css" href="__STATIC__/Assets/css/thems.css?time=1541">
     <script type="text/javascript" src="__STATIC__/Assets/js/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="__STATIC__/Assets/js/WdatePicker.js"> </script>
+    <script type="text/javascript" src="__STATIC__/Assets/js/jquery.easydropdown.min.js"> </script>
     <script type="text/javascript">
     </script>
     <!--框架高度设置-->
@@ -26,24 +28,24 @@
                 <form action="{:U('Dm/invite_info')}" name="formtest" method="post">
                     <div class="search" style="padding-left: 10px">
 
-                        <select name="sale_id" class="" style="font-family:'microsoft yahei';">
+                        <select name="sale_id" class="dropdown" style="font-family:'microsoft yahei';">
 <!--                            <option value="">销售所属地区</option>-->
-                                <option value="张家港">张家港</option>
+                                <option class="label" value="张家港">张家港</option>
                         </select>
 
-                        <select  name="sale_id" class="" style="font-family:'microsoft yahei';margin-left: 10px">
+                        <select   name="sale_id" class="dropdown" >
                             <option value="">请选择销售人员</option>
                             <foreach name="sale_list" item="v">
                                 <option value="{$v.id}" <eq name="sale_id" value="$v['id']">selected</eq>>{$v.user_name}</option>
                             </foreach>
                         </select>
 
-                        <select name="invite_state" class="" style="font-family:'microsoft yahei';margin-left: 10px">
+                        <select name="invite_state" class="dropdown" style="font-family:'microsoft yahei';margin-left: 10px">
                             <option value="">邀约状态</option>
                             <option value="1" <eq name="invite_state" value="1">selected</eq>>已邀约</option>
                             <option value="0" <eq name="invite_state" value="0">selected</eq>>未邀约</option>
                         </select>
-                        <a class="btn" id="sub">查询</a>
+                        <a class="btn" id="sub" style="margin-top: 2px">查询</a>
 
                         <!--                        <a href="{:U('Activity/exam_export',array('id'=>$id))}" class="btn">导出信息</a>-->
                         <!--                        <a  class="btn">查询</a>-->
