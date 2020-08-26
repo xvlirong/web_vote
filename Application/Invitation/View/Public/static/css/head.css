@@ -91,6 +91,7 @@
     color: #fff;
     cursor: default;
     font-size: 0.75rem;
+    border: none;
 }
 
 .register .yan .inp input {
