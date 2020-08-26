@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>邀约列表</title>
+    <link rel="stylesheet" href="__STATIC__/css/common.css">
+    <link rel="stylesheet" href="__STATIC__/css/head.css">
+    <link rel="stylesheet" href="__STATIC__/css/layui.css">
+    <link rel="stylesheet" href="__STATIC__/css/easydropdown.metro.css">
+    <!--引入js-->
+    <script src="__STATIC__/js/jquery-1.12.2.min.js"></script>
+    <script src="__STATIC__/js/rem.js"></script>
+    <script src="__STATIC__/js/leftTime.min.js"></script>
+    <script src="__STATIC__/js/layui.js"></script>
+    <script src="__STATIC__/js/jquery.easydropdown.min.js"></script>
+    <style>
+        body{
+            background: rgb(245,249,252);
+        }
+        .lb_ys{
+            height: 3em;
+            background: #fff;
+            border: 1px solid rgb(240,240,240);
+            border-radius: 10px;
+            width: 80%;
+            margin: 1em auto;
+            line-height: 3em;
+            box-shadow: 1px 1px 5px rgb(240,240,240);
+            font-size: 1em;
+        }
+        .lb_ys span{
+            padding-left: 1em;
+        }
+        .r_span{
+            display: block;
+            float: right;
+            padding-right: 1em;
+            color: grey;
+            font-size: .8em;
+        }
+        .sel_box{
+            padding-top: 1em;
+            padding-bottom: 1em
+        }
+        .dropdown{
+            margin-top: 0;
+            margin-left: 1em;
+            background: #fff;
+            width: 7.5em;
+            border: 1px solid #ccc;
+            box-shadow: 1px 1px 5px #fff;
+
+        }
+        .sel_box input{
+            background: rgb(245,249,252);
+            width: 10.5em;
+            height: 2.4em;
+            padding-left: 1em;
+            border: 1px solid #ccc;
+            box-shadow: 1px 1px 5px #fff;
+            margin-left: 1em;
+            margin-right: .8em;
+
+        }
+        .dropdown .selected, .dropdown li{
+            font-size: 1em;
+        }
+        .layui-btn{
+            height: 2.4em;
+            line-height: 2.4em;
+        }
+    </style>
+</head>
+<body>
+
+      <div style="background: rgb(245,249,252);padding-bottom: 1em">
+          <div class="sel_box">
+              <form id="sel_form"  action="{:U('Index/index')}" method="post">
+                  <div style="width: 100%">
+                      <select name="invite_state" class="dropdown" id="">
+                          <option value="0" <eq name="state" value="0">selected</eq>>未邀约</option>
+                          <option value="1"  <eq name="state" value="1">selected</eq>>已邀约</option>
+                      </select>
+                      <input type="text" name="title" <notempty name="title">value="{$title}"</notempty>  placeholder="手机号"  >
+                      <button type="button" id="sub" class="layui-btn layui-btn-normal">查询</button>
+                  </div>
+              </form>
+          </div>
+
+          <div>
+              <volist name="list" id="v">
+                  <p class="lb_ys">
+                      <a href="{:U('Index/invite_info',array('id'=>$v['id']))}">
+                      <span>{$v.phone}</span>
+                      <span class="r_span">{$v.add_time|date="Y.m.d H:i:s",###}</span>
+                      </a>
+                  </p>
+              </volist>
+
+
+          </div>
+      </div>
+</body>
+<script>
+    $('#sub').click(function(){
+        $("#sel_form").submit()
+    });
+</script>
+</html>

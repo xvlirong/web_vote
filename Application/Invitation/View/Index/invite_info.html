@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>客户详情</title>
+    <link rel="stylesheet" href="__STATIC__/css/common.css">
+    <link rel="stylesheet" href="__STATIC__/css/head.css">
+    <link rel="stylesheet" href="__STATIC__/css/layui.css">
+    <link rel="stylesheet" href="__STATIC__/css/layer.css">
+    <link rel="stylesheet" href="__STATIC__/css/easydropdown.metro.css">
+    <!--引入js-->
+    <script src="__STATIC__/js/jquery-1.12.2.min.js"></script>
+    <script src="__STATIC__/js/rem.js"></script>
+    <script src="__STATIC__/js/leftTime.min.js"></script>
+    <script src="__STATIC__/js/layui.js"></script>
+    <script src="__STATIC__/js/jquery.easydropdown.min.js"></script>
+    <script src="__STATIC__/js/layer.js"></script>
+    <style>
+
+        .h_title{
+            padding: .6em 0 0 2em;
+        }
+        .all_box{
+            background: rgb(247,248,250);
+        }
+        .info_box{
+            background: #fff;
+            border: 1px solid rgb(240,240,240);
+            border-radius: 10px;
+            width: 80%;
+            margin: 1em auto;
+            box-shadow: 1px 1px 5px rgb(240,240,240);
+        }
+        .info_p{
+            height: 3em;
+            border-bottom: 1px solid #ccc;
+            line-height: 2em;
+            margin: .8em 1em;
+        }
+        .user_info_s{
+            color: rgb(100,100,100);
+            padding-left: 2em;
+            font-size: 1.1em;
+        }
+        .user_info_d{
+            font-size: 1.1em;
+            display: inline-block;
+            width: 4em;
+        }
+        .last_p{
+            border: none;
+        }
+        .dropdown{
+            width: 17em;
+        }
+        .info_p input{
+            background: rgb(245,249,252);
+            width: 17em;
+            height: 2.4em;
+            padding-left: 1em;
+            border: 1px solid #ccc;
+            box-shadow: 1px 1px 5px #fff;
+            margin-left: .8em;
+            margin-right: .8em;
+        }
+        .info_p textarea{
+            background: rgb(245,249,252);
+            width: 17em;
+            height: 5.4em;
+            padding-left: 1em;
+            border: 1px solid #ccc;
+            box-shadow: 1px 1px 5px #fff;
+            margin-left: .8em;
+            margin-right: .8em;
+        }
+        .layui-btn{
+            margin-left: 22%;
+            width: 10em;
+        }
+    </style>
+</head>
+<body>
+    <div class="all_box">
+        <div class="base_info">
+            <h2 class="h_title">基础信息</h2>
+            <div class="info_box">
+                <p class="info_p">
+                    <span class="user_info_d">姓名</span>
+                    <span class="user_info_s">{$info.name}</span>
+                </p>
+                <p class="info_p">
+                    <span class="user_info_d">手机号</span>
+                    <span class="user_info_s"><a href="tel:{$info.phone}">{$info.phone}</a></span>
+                </p>
+                <p class="info_p">
+                    <span class="user_info_d">地区</span>
+                    <span class="user_info_s">{$info.area}</span>
+                </p>
+                <p class="info_p last_p">
+                    <span class="user_info_d">分配时间</span>
+                    <span class="user_info_s">{$info.add_time|date="Y.m.d H:i:s",###}</span>
+                </p>
+
+            </div>
+        </div>
+
+        <div class="yy_info" style="padding-bottom: 1em">
+            <h2 class="h_title">邀约详情</h2>
+            <div class="info_box">
+                <form>
+                    <input type="hidden" value="{$info.new_id}" name="id" id="new_id">
+                    <p class="info_p last_p">
+                        <select name="client_level" class="dropdown" id="sel_level">
+                            <option value="">购车意向等级</option>
+                            <option value="A" <eq name="info['client_level']" value="A">selected</eq>>A</option>
+                            <option value="B" <eq name="info['client_level']" value="B">selected</eq>>B</option>
+                            <option value="C" <eq name="info['client_level']" value="C">selected</eq>>C</option>
+                        </select>
+                    </p>
+                    <p class="info_p last_p">
+                        <select name="buy_time" class="dropdown" id="sel_time">
+                            <option value="">购车时间</option>
+                            <option value="一个月以内" <eq name="info['buy_time']" value="一个月以内">selected</eq>>一个月以内</option>
+                            <option value="1-3个月" <eq name="info['buy_time']" value="1-3个月">selected</eq>>1-3个月</option>
+                            <option value="3-6个月" <eq name="info['buy_time']" value="3-6个月">selected</eq>>3-6个月</option>
+                            <option value="1年以内" <eq name="info['buy_time']" value="1年以内">selected</eq>>1年以内</option>
+                            <option value="1年以上" <eq name="info['buy_time']" value="1年以上">selected</eq>>1年以上</option>
+                            <option value="不确定" <eq name="info['buy_time']" value="不确定">selected</eq>>不确定</option>
+                        </select>
+                    </p>
+                    <p class="info_p last_p">
+                        <input type="text" id="sel_type" name="car_type" placeholder="意向车型" value="{$info.car_type}">
+                    </p>
+                    <p class="info_p last_p">
+                        <input type="text" id="sel_bgt" name="budget" placeholder="购车预算" value="{$info.budget}">
+                    </p>
+                    <p class="info_p last_p" style="height: 5.4em">
+                        <textarea name="mark" id="sel_mark"  cols="30" placeholder="用户反馈" rows="10">{$info.mark}</textarea>
+                    </p>
+                    <p class="info_p last_p">
+                        <button type="button" id="sub" class="layui-btn layui-btn-normal">提交</button>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    var url;
+
+    $('#sub').click(function(){
+        var sel_level = $("#sel_level").val();
+        var sel_time = $("#sel_time").val();
+        var sel_type = $("#sel_type").val();
+        var sel_bgt = $("#sel_bgt").val();
+        var mark = $("#sel_mark").val();
+        var id = $("#new_id").val();
+        if(sel_level == '' || sel_time == '' || sel_type == '' || sel_bgt == '' || mark == ''){
+            layer.msg('输入不能为空');
+        }else{
+            $.ajax({
+                type: "post",
+                url: "{:U('Index/handleInfo')}",
+                data: {client_level:sel_level,buy_time:sel_time,car_type:sel_type,budget:sel_bgt,mark:mark,id:id},
+                success:function (data) {
+                    if(data.code == 1){
+                        layer.msg('提交成功');
+                        url = data.url;
+                        setTimeout("delayURL()", 1000)
+
+                    }else{
+                       layer.msg('处理失败');
+                    }
+                }
+            });
+        }
+
+
+    });
+    function delayURL() {
+        location.replace(url);//跳转
+    }
+</script>
+</html>
