@@ -79,16 +79,18 @@
     padding: 0 10px;
     border-radius: 5px;
     color: #fff;
-    background: rgb(65,133,244);
+    background: #2993f9;
     cursor: pointer;
     margin-top: 0.5rem;
     margin-left: 0.3rem;
     border: none;
+    font-size: 0.75rem;
 }
 .testBtn-a.on {
-    background: #c9c9c9;
-    color: #666;
+    background: #2993f9;
+    color: #fff;
     cursor: default;
+    font-size: 0.75rem;
 }
 
 .register .yan .inp input {
