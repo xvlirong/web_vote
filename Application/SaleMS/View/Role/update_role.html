@@ -57,12 +57,16 @@
                         <li class="clearfix">
                             <span class="title">所属角色：</span>
                             <div class="li_r">
-                                <select name="role_id" class="" style="font-family:'microsoft yahei';">
-                                    <option value="">请选择</option>
-                                    <foreach name="role_list" item="v">
-                                        <option value="{$v.id}" <eq name="v['id']" value="$info['role_id']">selected</eq>>{$v.role_name}</option>
-                                    </foreach>
-                                </select>
+                                <eq name="info['role_id']" value="1">
+                                    <select name="role_id" class="" style="font-family:'microsoft yahei';">
+                                        <option value="1">超级管理员</option>
+                                    </select>
+                                    <else />
+                                    <select name="role_id" class="" style="font-family:'microsoft yahei';">
+                                        <option value="2">销售</option>
+                                    </select>
+                                </eq>
+
                             </div>
                         </li>
                         <li class="clearfix">

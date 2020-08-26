@@ -272,10 +272,11 @@ class DmController extends CommonController {
         $last_time = strtotime(date("Y-m-d",strtotime("-1 day")));
         $last_end_time = strtotime(date("Y-m-d",time()));
 
-        $last_list = $this->handleLastArr($last_time,$last_end_time);
+        $last_list = M("sms_invite_count")->where(array('record_date'=>$last_time))->select();
 
         $week_time = strtotime(date("Y-m-d",strtotime("-1 week")));
-        $week_list = $this->handleLastArr($week_time,$last_end_time);
+        $maps['record_date'] = array("BETWEEN",array($week_time,$last_end_time));
+        $week_list = M("sms_invite_count")->where($maps)->select();
 
        $this->assign('last_list',$last_list);
        $this->assign('week_list',$week_list);

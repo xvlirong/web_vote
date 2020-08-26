@@ -160,4 +160,37 @@ class LoginController extends Controller {
         redirect(U('Login/login'));
     }
 
+    public function handleLastArr()
+    {
+        $last_time = strtotime(date("Y-m-d",strtotime("-1 day")));
+        $last_end_time = strtotime(date("Y-m-d",time()));
+        $maps['update_time'] = array("EQ",0);
+        $list_fp = M("sms_offer_record")
+            ->join("left join sms_user on sms_offer_record.sale_id=sms_user.id")
+            ->where($maps)
+            ->field('count(*) AS num,user_name,sale_id')
+            ->group('sale_id')
+            ->select();
+        $maps1['update_time'] = array("BETWEEN",array($last_time,$last_end_time));
+        $list_yy = M("sms_offer_record")
+            ->join("left join sms_user on sms_offer_record.sale_id=sms_user.id")
+            ->where($maps1)
+            ->field('count(*) AS num,user_name,sale_id')
+            ->group('sale_id')
+            ->select();
+        $add_arr = array();
+        for($i = 0;$i<count($list_fp);$i++){
+            $add_arr[$i]['yy_num'] = 0;
+            $add_arr[$i]['sale_name'] = $list_fp[$i]['user_name'];
+            for($j=0;$j<count($list_yy);$j++){
+                if($list_fp[$i]['sale_id'] == $list_yy[$j]['sale_id']){
+                    $add_arr[$i]['yy_num'] = $list_yy[$j]['num'];
+                }
+            }
+            $add_arr[$i]['wyy_num'] = $list_fp[$i]['num'];
+            $add_arr[$i]['record_date'] = strtotime(date("Y-m-d",strtotime("-1 day")));
+        }
+        $res = M("sms_invite_count")->addAll($add_arr);
+    }
+
 }
