@@ -91,7 +91,7 @@ class LoginController extends Controller {
             $res['msg'] = '手机号格式错误';
             $this->ajaxReturn($res);die;
         }else{
-            $exist = M("sms_user")->where(array('tel_phone'=>$phone))->find();
+            $exist = M("sms_user")->where(array('tel_phone'=>$phone,'role_id'=>1))->find();
             if($exist){
                 $res = $this->handleSendMs($phone,$project);
                 $this->ajaxReturn($res);
@@ -115,7 +115,7 @@ class LoginController extends Controller {
         }
         $username = I('username');
         $code = I('code');
-        $exist = M("sms_user")->where(array('tel_phone'=>$username))->find();
+        $exist = M("sms_user")->where(array('tel_phone'=>$username,'role_id'=>1))->find();
         $msg_code = session('sale_msg_code');
         if(empty($msg_code)){
             $res_info['code'] = 1;
