@@ -338,7 +338,7 @@
 	padding-top:10px;
 	text-align:left;
 }
-.hypz li{
+.hypz .new_li{
 	width:100%;
 	min-height:30px;
 	margin-top:13px;
@@ -873,7 +873,7 @@
 	width:347px;
 	padding-top:30px;
 	text-align:left;
-	margin-left:62px;
+	margin-left:75px;
 }
 
 .login .login_m ul li{

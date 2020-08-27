@@ -21,16 +21,56 @@
         })
 
     </script>
+    <style>
+        .n_p1{
+            font-size: 12px
+        }
+       .n_p2{
+           text-align: center;
+           font-size: 12px;
+           margin-top: 10px;
+       }
+        .n_d1{
+            width: 100px;
+            background: rgb(31,159,255);
+            font-size: 20px;
+            color: #fff;
+            padding: 20px 20px 10px 20px;
+            display: inline-block;
+            margin-right: 20px;
+            text-align: center;
+        }
+    </style>
     <!--框架高度设置-->
 </head>
 
 <body>
 <div id="right_ctn">
     <div class="right_m">
+
         <!--会议列表-->
-        <div class="hy_list">
+        <div class="hy_list" style="clear: none">
 
             <div class="tabBox">
+                <div style="margin:10px 0">
+                    <div class="n_d1"  style=" background: rgb(31,159,255);">
+                        <p class="n_p1" >昨日邀约总数</p>
+                        <p class="n_p2" >{$last_fir.num}</p>
+                    </div>
+                    <div  class="n_d1"    style="background: rgb(1,150,136)">
+                        <p class="n_p1" >七日邀约冠军</p>
+                        <p class="n_p2" >{$week_fir.sale_name}</p>
+                    </div>
+                    <div  class="n_d1"    style="background: rgb(255,88,35);">
+                        <p class="n_p1" >七日邀约总数</p>
+                        <p class="n_p2" >{$week_all_num}</p>
+                    </div>
+                    <div  class="n_d1"  style=" background: rgb(1,150,136);">
+                        <p  class="n_p1"  >七日A类客户总数</p>
+                        <p   class="n_p2" >{$a_num}</p>
+                    </div>
+                </div>
+
                 <ul class="tabNav">
                     <li class="now"><span>昨日邀约统计</span></li>
                     <li><span>近七日邀约统计</span></li>

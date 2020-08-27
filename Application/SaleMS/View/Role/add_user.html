@@ -6,21 +6,38 @@
     <link rel="stylesheet" type="text/css" href="__STATIC__/Assets/css/reset.css"/>
     <link rel="stylesheet" type="text/css" href="__STATIC__/Assets/css/common.css"/>
     <link rel="stylesheet" type="text/css" href="__STATIC__/Assets/css/thems.css">
+    <link rel="stylesheet" type="text/css" href="__STATIC__/Assets/css/easydropdown.css"/>
+
     <script type="text/javascript" src="__STATIC__/Assets/js/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="__STATIC__/Assets/js/WdatePicker.js"> </script>
-    <script type="text/javascript">
-        $(function(){
-            //自适应屏幕宽度
-
-            var main_h = $(window).height();
-            $('.hy_list').css('height',main_h-45+'px');
-
-            var main_w = $(window).width();
-            $('.xjhy').css('width',main_w-40+'px');
-
-        });
-
-    </script>
+    <script type="text/javascript" src="__STATIC__/Assets/js/jquery.easydropdown.min.js"> </script>
+    <style>
+        .hypz li .li_r input {
+            height: 30px;
+            line-height: 30px;
+        }
+        .new_title{
+            display: inline-block;
+            zoom: 1;
+            width: 130px;
+            text-align: right;
+            line-height: 25px;
+            vertical-align: top;
+            padding-top: 10px;
+        }
+        .new_lir{
+            display: inline-block;
+            *display: inline;
+            zoom: 1;
+            width: 400px;
+            vertical-align: middle;
+            text-align: left;
+            margin-left: 20px;
+        }
+        .dropdown .selected, .dropdown li {
+            font-size: 13px;
+        }
+    </style>
 </head>
 
 <body>
@@ -39,23 +56,23 @@
                 <div class="xjhy">
                     <!--基本配置-->
                     <ul class="hypz">
-                        <li class="clearfix">
+                        <li class="clearfix new_li">
                             <span class="title">姓名：</span>
                             <div class="li_r">
                                 <input  name="user_name" type="text">
                             </div>
                         </li>
 
-                        <li class="clearfix">
+                        <li class="clearfix new_li">
                             <span class="title">绑定手机号：</span>
                             <div class="li_r">
                                 <input  name="tel_phone" type="text">
                             </div>
                         </li>
-                        <li class="clearfix">
-                            <span class="title">所属角色：</span>
-                            <div class="li_r">
-                                <select name="role_id" class="" style="font-family:'microsoft yahei';">
+                        <div class="clearfix" style="margin-top: 10px">
+                            <span class="new_title">所属角色：</span>
+                            <div class="new_lir">
+                                <select name="role_id" class="dropdown" >
                                     <option value="">请选择</option>
                                     <option value="2">销售</option>
 <!--                                    <foreach name="role_list" item="v">-->
@@ -64,19 +81,18 @@
 
                                 </select>
                             </div>
-                        </li>
-                        <li class="clearfix">
-                            <span class="title">所属地区：</span>
-                            <div class="li_r">
-                                <select name="area" class="" style="font-family:'microsoft yahei';">
+                        </div>
+                        <div class="clearfix" style="margin-top: 10px">
+                            <span class="new_title">所属地区：</span>
+                            <div class="new_lir">
+                                <select name="area" class="dropdown" >
                                     <option value="">请选择</option>
                                     <option value="北京">北京</option>
                                     <option value="南京">南京</option>
                                     <option value="张家港">张家港</option>
-
                                 </select>
                             </div>
-                        </li>
+                        </div>
                         <li class="tj_btn">
                             <a id="add_course">提交</a>
                         </li>

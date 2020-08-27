@@ -24,16 +24,18 @@
 
 .dropdown{
 	position: relative;
-	width: 160px;
-	border: 1px solid #ccc;
+	width: 140px;
 	cursor: pointer;
-	background: #fff;
-
-	border-radius: 3px;
-	
+	font-weight: 200;
+	background: #f8f8f8;
 	-webkit-user-select: none;
 	-moz-user-select: none;
 	user-select: none;
+	float: left;
+	margin-left: 10px;
+	border: 1px solid #ccc;
+	border-radius: 2px;
+	margin-top: 5px;
 }
 
 .dropdown.open{
@@ -193,7 +195,7 @@
 /* .focus class is also added on hover */
 
 .dropdown li.focus{
-	background: #d24a67;
+	background: rgb(65,133,244);
 	position: relative;
 	z-index: 3;
 	color: #fff;

@@ -271,13 +271,39 @@ class DmController extends CommonController {
     {
         $last_time = strtotime(date("Y-m-d",strtotime("-1 day")));
         $last_end_time = strtotime(date("Y-m-d",time()));
-
+        //昨日邀约数据
         $last_list = M("sms_invite_count")->where(array('record_date'=>$last_time))->select();
-
+        $last_fir = M("sms_invite_count")
+            ->where(array('record_date'=>$last_time))
+            ->field('sum(yy_num) as num,sale_name')
+            ->find();
         $week_time = strtotime(date("Y-m-d",strtotime("-1 week")));
         $maps['record_date'] = array("BETWEEN",array($week_time,$last_end_time));
+        //七日邀约数据
         $week_list = M("sms_invite_count")->where($maps)->select();
+        //七日邀约冠军
+        $week_fir = M("sms_invite_count")
+            ->where($maps)
+            ->field('sum(yy_num) as num,sale_name')
+            ->group('sale_name')
+            ->order('num desc')
+            ->find();
+        //七日邀约总数
+        $week_all_num = 0;
+        for($i=0; $i<count($week_list);$i++){
+            $week_all_num = $week_all_num+$week_list[$i]['yy_num'];
+        }
+        //七日A类总和
+        $new_maps['update_time'] = array("BETWEEN",array($week_time,$last_end_time));
+        $new_maps['client_level'] = array("EQ",'A');
+        $a_num = M('sms_offer_record')
+            ->where($new_maps)
+            ->count();
 
+       $this->assign('a_num',$a_num);
+       $this->assign('last_fir',$last_fir);
+       $this->assign('week_fir',$week_fir);
+       $this->assign('week_all_num',$week_all_num);
        $this->assign('last_list',$last_list);
        $this->assign('week_list',$week_list);
        $this->display();
