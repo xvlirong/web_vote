@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="__STATIC__/css/head.css">
     <link rel="stylesheet" href="__STATIC__/css/layui.css">
     <link rel="stylesheet" href="__STATIC__/css/layer.css">
-    <link rel="stylesheet" href="__STATIC__/css/easydropdown.metro.css">
+    <link rel="stylesheet" href="__STATIC__/css/easydropdown.css">
     <!--引入js-->
     <script src="__STATIC__/js/jquery-1.12.2.min.js"></script>
     <script src="__STATIC__/js/rem.js"></script>
@@ -33,6 +33,7 @@
             width: 80%;
             margin: 1em auto;
             box-shadow: 1px 1px 5px rgb(240,240,240);
+
         }
         .info_p{
             height: 3em;
@@ -55,16 +56,20 @@
         }
         .dropdown{
             width: 17em;
+            margin-left: 0;
+            font-size: 1.1em;
+            height: 2.8em;
         }
         .info_p input{
             background: rgb(245,249,252);
             width: 17em;
-            height: 2.4em;
+            height: 2.8em;
             padding-left: 1em;
             border: 1px solid #ccc;
             box-shadow: 1px 1px 5px #fff;
-            margin-left: .8em;
+            /*margin-left: .8em;*/
             margin-right: .8em;
+            font-size: 1.1em;
         }
         .info_p textarea{
             background: rgb(245,249,252);
@@ -73,12 +78,17 @@
             padding-left: 1em;
             border: 1px solid #ccc;
             box-shadow: 1px 1px 5px #fff;
-            margin-left: .8em;
+            /*margin-left: .8em;*/
             margin-right: .8em;
+            font-size: 1.1em;
         }
         .layui-btn{
             margin-left: 22%;
             width: 10em;
+            margin-top: .8em;
+        }
+        .dropdown .selected, .dropdown li {
+            padding: 13px 12px;
         }
     </style>
 </head>
@@ -140,7 +150,7 @@
                     <p class="info_p last_p" style="height: 5.4em">
                         <textarea name="mark" id="sel_mark"  cols="30" placeholder="用户反馈" rows="10">{$info.mark}</textarea>
                     </p>
-                    <p class="info_p last_p">
+                    <p class="info_p last_p" style="margin-bottom: 1em;">
                         <button type="button" id="sub" class="layui-btn layui-btn-normal">提交</button>
                     </p>
                 </form>
