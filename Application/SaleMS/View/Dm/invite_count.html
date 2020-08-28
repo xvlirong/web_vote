@@ -55,11 +55,23 @@
                 <div style="margin:10px 0">
                     <div class="n_d1"  style=" background: rgb(31,159,255);">
                         <p class="n_p1" >昨日邀约总数</p>
-                        <p class="n_p2" >{$last_fir.num}</p>
+                        <p class="n_p2" >
+                            <notempty name="last_fir">
+                                {$last_fir.num}
+                                <else />
+                                0
+                            </notempty>
+                        </p>
                     </div>
                     <div  class="n_d1"    style="background: rgb(1,150,136)">
                         <p class="n_p1" >七日邀约冠军</p>
-                        <p class="n_p2" >{$week_fir.sale_name}</p>
+                        <p class="n_p2" >
+                            <notempty name="week_fir">
+                                {$week_fir.sale_name}
+                                <else />
+                                无
+                            </notempty>
+                        </p>
                     </div>
                     <div  class="n_d1"    style="background: rgb(255,88,35);">
                         <p class="n_p1" >七日邀约总数</p>
