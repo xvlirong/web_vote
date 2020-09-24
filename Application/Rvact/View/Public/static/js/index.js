@@ -83,7 +83,7 @@ var brand={
     },
     move:function(iNow){
         if(iNow==3){
-            $("#wrap").height(3250)
+            $("#wrap").height(3350)
         }else{
             $("#wrap").height(3840)
         }
