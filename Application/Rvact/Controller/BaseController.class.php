@@ -131,8 +131,14 @@ class BaseController extends Controller {
 
             $area_str = M('dm_mobile')->where(array('MobileNumber'=>$phone_str))->getField('MobileArea');
             $phone_array = explode(' ',$area_str);
-            $info['prov'] = $phone_array[0];
-            $info['city'] = $phone_array[1];
+            if(count($phone_array)==1){
+                $info['prov'] = $phone_array[0];
+                $info['city'] = $phone_array[0];
+            }else{
+                $info['prov'] = $phone_array[0];
+                $info['city'] = $phone_array[1];
+            }
+
             return $info;
         }
     }
