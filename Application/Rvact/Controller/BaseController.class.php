@@ -127,12 +127,10 @@ class BaseController extends Controller {
             $info['prov'] = '未知';
             $info['city'] = '未知';
         }else{
-            $phone_json = file_get_contents('http://sp0.baidu.com/8aQDcjqpAAV3otqbppnN2DJv/api.php?query={'.$mobile.'}&resource_id=6004&ie=utf8&oe=utf8&format=json');
-            $phone_array = json_decode($phone_json,true);
-            $phone_info = array();
-            $phone_info['mobile'] = $mobile;
-            $phone_info['type'] = $phone_array['data'][0]['type'];
-            $phone_info['location'] = $phone_array['data'][0]['prov'].$phone_array['data'][0]['city'];
+            $phone_str = substr($mobile,0,7);
+
+            $area_str = M('dm_mobile')->where(array('MobileNumber'=>$phone_str))->getField('MobileArea');
+            $phone_array = explode(' ',$area_str);
             $info['prov'] = $phone_array['data'][0]['prov'];
             $info['city'] = $phone_array['data'][0]['city'];
             return $info;
