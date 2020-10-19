@@ -71,19 +71,9 @@ class IndexController extends BaseController {
         $sign_cookie = cookie('sign_cookie');
         if(empty($sign_cookie)){
         }else{
-            $now_time = time();
             $cookie_info = explode('+',$sign_cookie);
-            if($now_time>$info['start_time']&&$now_time<$info['end_time']){
-                if($cookie_info[1]==$info['id']){
-                    $source = M("act_registration")
-                        ->where(array('userphone'=>$cookie_info[0]))
-                        ->order(array('id'=>'desc'))
-                        ->getField('source');
-                    $this->redirect('Index/signSuccess', array('id' => $info['id'],'source'=>$source));
-                    die;
-                }
 
-            }elseif ($cookie_info[0]==18515490885){
+            if($cookie_info[1]==$info['id']){
                 $source = M("act_registration")
                     ->where(array('userphone'=>$cookie_info[0]))
                     ->order(array('id'=>'desc'))
@@ -91,6 +81,8 @@ class IndexController extends BaseController {
                 redirect("/Rvact/Index/signSuccess/id/".$info['id']."/source/"."$source");
                 die;
             }
+
+
         }
     }
 
@@ -164,6 +156,7 @@ class IndexController extends BaseController {
         if(empty($data['userphone'])){
             return $this->jsonData(0,'手机号码不能为空');
         }
+        $info = M("activity")->where(array('id'=>$data['act_id']))->find();
         $area_info = $this->getMobileInfo($data['userphone']);
         $data['mobile_province'] = $area_info['prov'];
         if($area_info['prov'] == ''){
@@ -175,11 +168,14 @@ class IndexController extends BaseController {
         $data['source_title'] = M("source")->where(array('source_id'=>$data['source']))->getField('source_title');
         //发送短信
         $send_res = $this->send($data['userphone'],$data['act_id']);
-       // print_r($send_res);die;
         $activityData=M('act_registration')->data($data)->add();
         if($activityData){
-            $sign_cookie = $data['userphone'].'+'.$data['act_id'];
-            cookie('sign_cookie',$sign_cookie,86400*5);
+            $now_time = time();
+            if($now_time>$info['start_time']&&$now_time<$info['end_time']){
+                $sign_cookie = $data['userphone'].'+'.$data['act_id'];
+                cookie('sign_cookie',$sign_cookie,86400*5);
+            }
+
             echo $this->jsonData(200,"发送成功");
         }else{
             echo $this->jsonData(0,"发送失败");
