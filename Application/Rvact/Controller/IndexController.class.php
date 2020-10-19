@@ -88,7 +88,7 @@ class IndexController extends BaseController {
                     ->where(array('userphone'=>$cookie_info[0]))
                     ->order(array('id'=>'desc'))
                     ->getField('source');
-                redirect("/Rvact/Index/signSuccess/id/".$cookie_info[0]."/source/"."$source");
+                redirect("/Rvact/Index/signSuccess/id/".$info['id']."/source/"."$source");
                 die;
             }
         }
