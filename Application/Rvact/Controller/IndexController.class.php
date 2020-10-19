@@ -8,9 +8,11 @@ class IndexController extends BaseController {
 
         $refer = $_SERVER['HTTP_REFERER'];
         $all_url = $_SERVER['REQUEST_URI'];
-        $this->assign('all_url',$all_url);
         //基础信息
         $info = M("activity")->where(array('id'=>$id))->find();
+        $this->checkIsSign($info);
+        $this->assign('all_url',$all_url);
+
         $info['lines'] = explode('|',$info['car_line']);
         $info['act_highlights'] = explode('|',$info['act_highlights']);
         $this->assign('info',$info);
@@ -61,6 +63,35 @@ class IndexController extends BaseController {
             ->select();
         $this->assign('brand_list',$brand_label);
         $this->display($template_name);
+    }
+
+
+    public function checkIsSign($info)
+    {
+        $sign_cookie = cookie('sign_cookie');
+        if(empty($sign_cookie)){
+        }else{
+            $now_time = time();
+            $cookie_info = explode('+',$sign_cookie);
+            if($now_time>$info['start_time']&&$now_time<$info['end_time']){
+                if($cookie_info[1]==$info['id']){
+                    $source = M("act_registration")
+                        ->where(array('userphone'=>$cookie_info[0]))
+                        ->order(array('id'=>'desc'))
+                        ->getField('source');
+                    $this->redirect('Index/signSuccess', array('id' => $info['id'],'source'=>$source));
+                    die;
+                }
+
+            }elseif ($cookie_info[0]==18515490885){
+                $source = M("act_registration")
+                    ->where(array('userphone'=>$cookie_info[0]))
+                    ->order(array('id'=>'desc'))
+                    ->getField('source');
+                $this->redirect('Index/signSuccess', array('id' => $info['id'],'source'=>$source));
+                die;
+            }
+        }
     }
 
     //获取报名人数
@@ -147,6 +178,8 @@ class IndexController extends BaseController {
        // print_r($send_res);die;
         $activityData=M('act_registration')->data($data)->add();
         if($activityData){
+            $sign_cookie = $data['userphone'].'+'.$data['act_id'];
+            cookie('sign_cookie',$sign_cookie,86400*5);
             echo $this->jsonData(200,"发送成功");
         }else{
             echo $this->jsonData(0,"发送失败");
@@ -209,6 +242,7 @@ class IndexController extends BaseController {
         $this->display($template);
 
     }
+
 
     public function header(){
         $header=file_get_contents("http://www.rvtimes.cn/info.php?fid=208");
