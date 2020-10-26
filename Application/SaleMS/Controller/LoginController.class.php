@@ -179,7 +179,7 @@ class LoginController extends Controller {
             ->group('sale_id')
             ->select();
         $add_arr = array();
-        for($i = 0;$i<count($list_fp);$i++){
+        for($i = 0;$i<=count($list_fp);$i++){
             $add_arr[$i]['yy_num'] = 0;
             $add_arr[$i]['sale_name'] = $list_fp[$i]['user_name'];
             for($j=0;$j<count($list_yy);$j++){
