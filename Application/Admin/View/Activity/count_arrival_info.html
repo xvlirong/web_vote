@@ -29,7 +29,7 @@
         <!--会议列表-->
         <div class="hy_list">
             <div class="box_t">
-                <span class="name">报名统计</span>
+                <span class="name">到场统计</span>
 
             </div>
             <!--列表-->
@@ -56,7 +56,7 @@
     function ajax_count(){
         var act_id=$("#act_id").val();
         $.ajax({
-            url:"{:U('Activity/countUser')}",
+            url:"{:U('Activity/countArrUser')}",
             data:{id:act_id},
             dataType:"json",
             success: function (data) {
@@ -127,7 +127,7 @@
     function ajax_count1(){
         var act_id=$("#act_id").val();
         $.ajax({
-            url:"{:U('Activity/countSignUserPie')}",
+            url:"{:U('Activity/countArrUserPie')}",
             data:{id:act_id},
             dataType:"json",
             success: function (data) {
@@ -171,7 +171,7 @@
     function ajax_count2(){
         var act_id=$("#act_id").val();
         $.ajax({
-            url:"{:U('Activity/countSourceUserPie')}",
+            url:"{:U('Activity/countSourceArrPie')}",
             data:{id:act_id},
             dataType:"json",
             success: function (data) {
@@ -216,7 +216,7 @@
     $(function () {
         ajax_count();  //城市柱状图
         ajax_count1();  //城市饼状图
-        ajax_count2();  //城市饼状图
+        ajax_count2();  //渠道饼状图
     });
 </script>
 </body>

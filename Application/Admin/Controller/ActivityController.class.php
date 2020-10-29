@@ -578,15 +578,162 @@ class ActivityController extends CommonController
     {
         $id = I('id');
 
+        $this->assign('id',$id);
+
+        $this->display();
+    }
+
+    public function count_arrival_info()
+    {
+        $id = I('id');
+
+        $this->assign('id',$id);
+
+        $this->display();
+    }
+
+
+    //到场统计
+    public function countArrUser()
+    {
+        $id = I('id');
         $list = M("act_registration")
-            ->where(array('act_id'=>$id))
+            ->where(array('act_id'=>$id,'arrival_status'=>2))
             ->group('mobile_province')
             ->field('mobile_province,count(id) as num')
             ->order('num desc')
             ->select();
-        $this->assign('list',$list);
+        for($i=0;$i<count($list);$i++){
+            if($list[$i]['mobile_province'] == null){
+                $list[$i]['mobile_province'] = ' ';
+            }
+            $str['province'][] = $list[$i]['mobile_province'];
 
-        $this->display();
+            $str['num'][]=intval($list[$i]['num']);
+        }
+
+
+        echo json_encode($str);
+    }
+
+
+    //报名统计
+    public function countUser()
+    {
+        $id = I('id');
+        $list = M("act_registration")
+            ->where(array('act_id'=>$id,'arrival_status'=>0))
+            ->group('mobile_province')
+            ->field('mobile_province,count(id) as num')
+            ->order('num desc')
+            ->select();
+        for($i=0;$i<count($list);$i++){
+            if($list[$i]['mobile_province'] == null){
+                $list[$i]['mobile_province'] = ' ';
+            }
+            $str['province'][] = $list[$i]['mobile_province'];
+
+            $str['num'][]=intval($list[$i]['num']);
+        }
+
+
+        echo json_encode($str);
+    }
+
+    public function countSignUserPie()
+    {
+        $id = I('id');
+        $all_num = M("act_registration")->where(array('act_id'=>$id))->count();
+
+        $list = M("act_registration")
+            ->where(array('act_id'=>$id,'arrival_status'=>0))
+            ->group('mobile_province')
+            ->field('mobile_province,count(id) as num')
+            ->order('num desc')
+            ->select();
+        for($i=0;$i<count($list);$i++){
+            if($list[$i]['mobile_province'] == null){
+                $list[$i]['mobile_province'] = ' ';
+            }
+            $str['list'][$i]['name'] = $list[$i]['mobile_province'];
+            $str['list'][$i]['y'] =  floatval(sprintf("%.2f", $list[$i]['num']/$all_num*100));
+
+        }
+
+
+       echo json_encode($str);
+    }
+
+    public function countSourceUserPie()
+    {
+        $id = I('id');
+        $all_num = M("act_registration")->where(array('act_id'=>$id))->count();
+
+        $list = M("act_registration")
+            ->where(array('act_id'=>$id,'arrival_status'=>0))
+            ->group('source_title')
+            ->field('source_title,count(id) as num')
+            ->order('num desc')
+            ->select();
+        for($i=0;$i<count($list);$i++){
+            if($list[$i]['source_title'] == null){
+                $list[$i]['source_title'] = ' ';
+            }
+            $str['list'][$i]['name'] = $list[$i]['source_title'];
+            $str['list'][$i]['y'] =  floatval(sprintf("%.2f", $list[$i]['num']/$all_num*100));
+
+        }
+
+
+        echo json_encode($str);
+    }
+
+    public function countArrUserPie()
+    {
+        $id = I('id');
+        $all_num = M("act_registration")->where(array('act_id'=>$id))->count();
+
+        $list = M("act_registration")
+            ->where(array('act_id'=>$id,'arrival_status'=>2))
+            ->group('mobile_province')
+            ->field('mobile_province,count(id) as num')
+            ->order('num desc')
+            ->select();
+        for($i=0;$i<count($list);$i++){
+            if($list[$i]['mobile_province'] == null){
+                $list[$i]['mobile_province'] = ' ';
+            }
+            $str['list'][$i]['name'] = $list[$i]['mobile_province'];
+            $str['list'][$i]['y'] =  floatval(sprintf("%.2f", $list[$i]['num']/$all_num*100));
+
+        }
+
+
+        echo json_encode($str);
+    }
+
+    public function countSourceArrPie()
+    {
+        $id = I('id');
+        $all_num = M("act_registration")->where(array('act_id'=>$id))->count();
+
+        $list = M("act_registration")
+            ->where(array('act_id'=>$id,'arrival_status'=>2))
+            ->group('source_title')
+            ->field('source_title,count(id) as num')
+            ->order('num desc')
+            ->select();
+        for($i=0;$i<count($list);$i++){
+            if($list[$i]['source_title'] == null){
+                $list[$i]['source_title'] = ' ';
+            }
+            $str['list'][$i]['name'] = $list[$i]['source_title'];
+            $str['list'][$i]['y'] =  floatval(sprintf("%.2f", $list[$i]['num']/$all_num*100));
+
+        }
+
+
+        echo json_encode($str);
     }
 
     public function into_enroll()
@@ -940,6 +1087,79 @@ class ActivityController extends CommonController
 
             $this->getExcel($filename,$headArr,$data);
         }
+    }
+
+    public function upload_user()
+    {
+        //活动列表
+        $act_list = M("activity")->order('id desc')->field('id,title')->select();
+        $this->assign('act_list',$act_list);
+
+        $this->display();
+    }
+
+    public function uploadUserExcel()
+    {
+        $act_id = I('pid');
+        set_time_limit(0);
+        $config  = C('UPLOAD_CONFIG');
+        $config['exts'] = array("xls","xlsx");
+        $config['savePath'] = 'upload/excel/';
+        $upload = new Upload($config);
+        // 上传文件
+        $active = I('active');
+        $info   =   $upload->upload();
+        if(!$info) {// 上传错误提示错误信息
+            $this->error($upload->getError());
+        }else{// 上传成功
+            $excelData = $this->getExcelData('./Public/upload/excel/'.$info['excel']['savename'], $active,$info['excel']['ext']);
+            $list = array();
+            for ($i = 1; $i<count($excelData); $i++){
+                $list[$i]['username'] = $excelData[$i][1];
+                $list[$i]['userphone'] = $excelData[$i][2];
+                preg_replace('# #','',$excelData[$i][3]);
+                $arr = explode('+',$excelData[$i][3]);
+                $list[$i]['mobile_province'] = $arr[0];
+                $list[$i]['mobile_area'] = $arr[1];
+                $list[$i]['source_title'] = $excelData[$i][4];
+                $add_time = $excelData[$i][5];
+                $list[$i]['add_time'] = strtotime("$add_time");
+                $list[$i]['act_id'] = $act_id;
+            }
+            $new_list = array_merge($list);
+            M('act_registration')->addAll($new_list);
+        }
+
+    }
+
+    public function saveSignState()
+    {
+        $pid = I('pid');
+        //所有到店用户
+        $all_sign = M("act_registration")->where(array('arrival_status'=>1,'act_id'=>$pid))->field('id,userphone')->select();
+        $use_sign = array_column($all_sign,'userphone');
+
+        //所有报名用户
+
+        $all_user = M("act_registration")->where(array('arrival_status'=>0,'act_id'=>$pid))->field('id,userphone')->select();
+        $use_user = array_column($all_sign,'userphone');
+        $result = array_intersect($use_sign, $use_user);
+        // 重新索引
+        $result = array_values($result);
+
+        $use_phone = implode(',',$result);
+
+        $maps['userphone'] = array("IN",$use_phone);
+        $maps['arrival_status'] = array("EQ",0);
+        $maps['act_id'] = array("EQ",$pid);
+
+        $res =  M("act_registration")->where($maps)->save(array('arrival_status'=>2));
+        if($res){
+            echo 1;
+        }
+
+
+
     }
 
 
