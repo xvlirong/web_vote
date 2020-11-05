@@ -171,10 +171,11 @@ class IndexController extends BaseController {
         $activityData=M('act_registration')->data($data)->add();
         if($activityData){
             $now_time = time();
-            if($now_time>$info['start_time']&&$now_time<$info['end_time']){
-                $sign_cookie = $data['userphone'].'+'.$data['act_id'];
-                cookie('sign_cookie',$sign_cookie,86400*5);
-            }
+//            if($now_time>$info['start_time']&&$now_time<$info['end_time']){
+//
+//            }
+            $sign_cookie = $data['userphone'].'+'.$data['act_id'];
+            cookie('sign_cookie',$sign_cookie,86400*5);
 
             echo $this->jsonData(200,"发送成功");
         }else{
