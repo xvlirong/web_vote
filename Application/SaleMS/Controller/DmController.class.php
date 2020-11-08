@@ -148,7 +148,7 @@ class DmController extends CommonController {
 
         $maps['belong_state'] = array('EQ',0);
         $count = M("sms_user_data")->where($maps)->count();
-        $Page = new \Extend\Page($count,50);// 实例化分页类 传入总f记录数和每页显示的记录数(25)
+        $Page = new \Extend\Page($count,100);// 实例化分页类 传入总f记录数和每页显示的记录数(25)
         $show = $Page->show($map_str);// 分页显示输出
         $list = M("sms_user_data")
             ->where($maps)
