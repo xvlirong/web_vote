@@ -609,7 +609,7 @@ class ActivityController extends CommonController
             }
             $str['province'][] = $list[$i]['mobile_province'];
 
-            $str['num'][]=intval($list[$i]['num']);
+            $str['num'][]= ($list[$i]['num']);
         }
 
 
