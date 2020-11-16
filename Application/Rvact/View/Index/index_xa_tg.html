@@ -1,0 +1,322 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>{$info.title}</title>
+    <link rel="stylesheet" href="__STATIC__/css/neat.css" />
+    <link rel="stylesheet" href="__STATIC__/css/index1.css?time=04221414" />
+    <style type="text/css">
+        /*.header { background:url("__PUBLIC__/upload/banner/{$info.banner}") no-repeat center top; }*/
+        #desc .abstract dd a{color: #3e629f;}
+        .highlights li{
+            width: 40.7%;
+            padding: 21px 38px 32px;
+        }
+    </style>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=tBW47T7lwTiNXTigAGMKt42K"></script>
+</head>
+<body>
+<div id="mask"></div>
+<div id="message"></div>
+<div id="wrap" class="main" style="height: 3100px">
+    <div class="footer_bg"></div>
+    <div id="header">
+        <div class="header" id="box_hea">
+            <div class="con_one"><img src="__PUBLIC__/upload/banner/{$info.banner}" alt=""></div>
+        </div>
+    </div>
+    <div class="main_text_one">
+        <!-- 活动相关 start -->
+        <div id="activity">
+            <div class="clearfix">
+                <div class="form fl">
+                    <h2>本活动已有<span>{$activityNum}</span>人报名</h2>
+                    <div class="content">
+                        <div class="formBox">
+                            <div class="item">
+                                <h4>您的意向购买车型</h4>
+                                <div class="checkbox">
+                                    <input type="checkbox" name="model" value="B型房车"><span>B型房车</span>
+                                    <input type="checkbox" name="model" value="C型房车"><span>C型房车</span>
+                                    <input type="checkbox" name="model" value="拖挂式房车"><span>拖挂式房车</span>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <input type="text" class="text" id="username" placeholder="您的姓名"/>
+                            </div>
+                            <div class="item">
+                                <input type="text" class="text" id="phone" placeholder="您的手机号"/>
+                            </div>
+                            <div class="item">
+                                <eq name="act_status" value="1">
+                                    <input type="submit" class="submit" id="submit" value="免费报名" />
+                                    <else />
+                                    <input type="submit" class="submit no" value="免费报名" />
+                                </eq>
+                            </div>
+                            <div class="txt">
+                                <p><!--价值50元门票限量免费发送{$info.ticket_num}张--></p>
+                                <p style="margin-top: 35px">任何问题请拨打咨询热线 {$info.service_phone}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="signlist fl">
+                    <h3>最近报名的团友</h3>
+                    <div class="ticket">
+                        <img src="__STATIC__/images/ticket.png" alt=""/>
+                    </div>
+                    <div class="list">
+                        <ul>
+                            <foreach name="activityMemberList" item="v">
+                                <li>
+                                    <span class="username">{$v.username}</span><span class="userphone">{$v.userphone}</span><span class="usercar">{$v.usercar}</span><span class="usertime">{$v.usertime}</span>
+                                </li>
+                            </foreach>
+                        </ul>
+                    </div>
+                </div>
+                <div class="countdown fl" id="dateShow1">
+                    <img style="width: 320px;margin-left: 30px;margin-top: 35px" src="__STATIC__/images/gift3.jpg" alt="">
+                    <div class="time1">
+                        <p style="font-size: 22px;margin-left: 70px;margin-bottom: 5px;color: #484848;">活动剩余时间</p>
+                        <span class="date-tiem-span d">00</span>
+                        <span class="date-def">天</span>
+                        <span class="date-tiem-span h">00</span>
+                        <span class="date-def">时</span>
+                        <span class="date-tiem-span m">00</span>
+                        <span class="date-def">分</span>
+                        <span class="date-tiem-span s">00</span>
+                        <span class="date-def">秒</span>
+                    </div>
+                    <!--                    <div class="time">-->
+                    <!--                        <span>-</span>-->
+                    <!--                        <span>-</span>-->
+                    <!--                        <span>-</span>-->
+                    <!--                        <span>-</span>-->
+                    <!--                    </div>-->
+                </div>
+            </div>
+        </div>
+        <!-- 活动相关 end -->
+        <!-- 活动流程 start -->
+        <!--        <div id="flow" class="flow">-->
+        <!--            <div class="con" style="width: 1240px">-->
+        <!--                <h2>【报名流程】</h2>-->
+        <!--                <img src="__STATIC__/images/liucheng.jpg" alt="" />-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <!-- 活动流程 end -->
+        <!-- 活动简介 start -->
+        <div id="desc">
+            <div class="con">
+                <div class="box">
+                    <div class="title">
+                        <h2>【活动简介】</h2>
+                    </div>
+                    <div class="content clearfix" style="height: 550px">
+                        <div id="allmap" style="height: 550px"></div>
+                        <div class="abstract">
+                            <ul>
+                                <li>
+                                    <p><span>支持单位：</span>{$info.support}</p>
+                                    <p><span>主办单位：</span>{$info.sponsor_unit}</p>
+                                    <if condition="$info.co_sponsored neq ''"><p><span>联合主办：</span>{$info.co_sponsored}</p></if>
+                                    <p class="chengban"><span>承办单位：</span></p>
+                                    <p><span>咨询热线：</span>{$info.consult_phone}</p>
+                                </li>
+                                <li class="host_red">
+                                    <h3>乘车路线：</h3>
+                                    <foreach name="info['lines']" item="v">
+                                        <p>{$v}</p>
+                                    </foreach>
+                                </li>
+                                <li class="host_green" style="height: 175px">
+                                    <h3>参与品牌：</h3>
+                                    <p>{$info.act_intro}</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 活动简介 end -->
+        <!-- 合作品牌 start -->
+<!--        <div id="brand">-->
+<!--            <div class="con">-->
+<!--                <div class="title">-->
+<!--                    <h2>【参与品牌】</h2>-->
+<!--                </div>-->
+<!--                <div class="list">-->
+<!--                    <ul style="margin-left: 0px;">-->
+<!--                        <foreach name="brand_list" item="v" key="i">-->
+<!--                            <if condition="($i+1)%40 eq 1"><li class="clearfix"></if>-->
+<!--                            <div><img src="__PUBLIC__/upload/brand/{$v.brand_logo}" alt="" /></div>-->
+<!--                            <if condition="($i+1)%40 eq 0"></li> </if>-->
+<!--                        </foreach>-->
+<!--                    </ul>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+        <!-- 合作品牌 end -->
+        <!-- 车展亮点 start -->
+        <div id="guarantee" style="width: 1240px;margin: 0 auto">
+            <div class="con">
+                <div class="title">
+                    <h2>【活动政策】</h2>
+                </div>
+                <!-- class="highlights_bg"-->
+                <div>
+                    <div class="highlights">
+                        <ul class="clearfix clearfloat">
+                            <foreach name="info['act_highlights']" item="v" key="k">
+                                <li <if condition="$i gt 2">class="abs abs{$i} li{$k+1}"</if><p>{$v}</p></li>
+                            </foreach>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 车展亮点 end -->
+        <!-- 参展现场 start -->
+        <div id="scene">
+            <div class="con">
+                <div class="title">
+                    <h2>【活动现场】</h2>
+                </div>
+                <div class="scene_img">
+                    <img src="__PUBLIC__/upload/scene/{$scene_img.img_url}" alt="" />
+                </div>
+            </div>
+        </div>
+        <!-- 参展现场 end -->
+    </div>
+    <div id="footer" style="top: -530px">
+        <!--        <div class="con">-->
+        <!--            <div class="texts clearfix">-->
+        <!--                <div class="txt first">-->
+        <!--                    <dl>-->
+        <!--                        <dt>招商类别：</dt>-->
+        <!--                        <dd>{$info.investment_type}</dd>-->
+        <!--                    </dl>-->
+        <!--                    <dl>-->
+        <!--                        &lt;!&ndash;<dt>专业观众接待电话：</dt>&ndash;&gt;-->
+        <!--                        &lt;!&ndash;<dd>{$activityData.majorphone}</dd>&ndash;&gt;-->
+        <!--                        <dt>主办单位：</dt>-->
+        <!--                        <dd>{$info.sponsor_unit}</dd>-->
+        <!--                    </dl>-->
+        <!--                </div>-->
+        <!--                <div class="txt">-->
+        <!--                    <dl>-->
+        <!--                        <dt>咨询热线：</dt>-->
+        <!--                        <dd>{$info.consult_phone}</dd>-->
+        <!--                    </dl>-->
+        <!--                    <if condition="$activityData.co_sponsored neq ''">-->
+        <!--                        <dl>-->
+        <!--                            &lt;!&ndash;<dt>主办单位：</dt>&ndash;&gt;-->
+        <!--                            &lt;!&ndash;<dd>{$activityData.host_unit}</dd>&ndash;&gt;-->
+        <!--                            <dt>联合主办：</dt>-->
+        <!--                            <dd>海尔数字科技（青岛）有限公司</dd>-->
+        <!--                        </dl>-->
+        <!--                    </if>-->
+        <!--                </div>-->
+        <!--            </div>-->
+        <!--            <div class="img">-->
+        <!--                <img src="__PUBLIC__/upload/wx_img/{$info.wx_img}" alt="" />-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <div class="copy" style="background: #fff;height: 45px;">&copy; 2014-2020 房车时代 京ICP备07503663号 京公网安备11010802015289号</div>
+    </div>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+    // 百度地图API功能
+    var lgt="{$info.map_longitude}";
+    var lat="{$info.map_latitude}";
+    var themes='__STATIC__';
+    //倒计时
+    var time_end='{$info.end_time}'*1000;
+    //表单
+    var id="{$info['id']}";
+    var source='{$source}';
+    var all_url='{$all_url}';
+    var url_refer='{$url_refer}';
+    var type='pc';
+    //var url='{$refererUrl}';
+    var organizer='{$info.undertaking_unit}';
+    var use_url = "__APP__/Rvact/Index/sign";
+    var base_url = "__APP__/Rvact/Index/";
+</script>
+<script type="text/javascript" src="__STATIC__/js/jquery.min.js"></script>
+<script type="text/javascript" src="__STATIC__/js/global.js"></script>
+<script type="text/javascript" src="__STATIC__/js/index.js"></script>
+<script type="text/javascript" src="__STATIC__/js/activity.js"></script>
+<script src="__STATIC__/js/leftTime.min.js"></script>
+<script>
+    $(function() {
+        var data={};
+        var enddate = "{$end_date}";
+        var nowdate = "{$now_date}";
+        data.enddate = parseInt(enddate);
+        data.nowdate = parseInt(nowdate);
+        data.init = true;
+        //日期倒计时
+        $.leftTime(data,function(d){
+            if(d.status){
+                var $dateShow1=$("#dateShow1");
+                $dateShow1.find(".d").html(d.d);
+                $dateShow1.find(".h").html(d.h);
+                $dateShow1.find(".m").html(d.m);
+                $dateShow1.find(".s").html(d.s);
+            }
+        });
+
+    });
+    organize(organizer);
+    function organize(organizer){
+        let arr=organizer.split('、');
+        let dom='';
+        for(let i = 0; i < arr.length; i++){
+            if(arr[i].indexOf('房车时代')>-1){
+                dom+='<a href="http://www.rvtimes.cn/" class="organizer">'+arr[i]+'、</a>';
+            } else{
+                dom+='<i class="organizer">'+arr[i]+'、</i>';
+            }
+        }
+        $('.chengban').append(dom);
+        $('.organizer:last').text($('.organizer:last').text().split('、')[0]);
+    }
+    assignHeight();
+    //车展亮点设置高度，同行取最大值设置
+    function assignHeight(){
+        let baseArray=$('.highlights li');
+        let liWidth=$('.highlights li').width();
+        let boxWidth=$('.highlights').width();
+        let len=$('.highlights li').length;
+        let column=Math.floor(boxWidth/liWidth);
+        let lineNum = len % column === 0 ? len / column : Math.floor( (len / column) + 1 );
+        let arr=[];
+        for (let i = 0; i < lineNum; i++) {
+            let arrNew = baseArray.slice(i*column, i*column+column);
+            arr.push(arrNew);
+        }
+        for(let i=0;i<arr.length;i++){
+            var _h=[];
+            for(let j=0;j<arr[i].length;j++){
+                _h.push($(arr[i][j]).height());
+
+            }
+            let max=Math.max.apply(null, _h);
+            $(arr[i]).height(max);
+        }
+    }
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?45b5abb08536534812572d35aec22430";
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
