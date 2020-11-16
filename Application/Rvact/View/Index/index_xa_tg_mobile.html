@@ -158,6 +158,21 @@
                 </foreach>
             </div>
         </div>
+        <!--车展简介-->
+        <div id="desc">
+            <div class="title"><h3>活动简介</h3></div>
+            <dl>
+                <dt style="height: 0"><!--▶ 展会详细信息 --></dt>
+                <dd><span>时　　间：</span>{$info.start_time|date="m月d日",###}-{$info.end_time|date="m月d日",###}</dd>
+                <dd><span>地　　点：</span>{$info.act_address}</dd>
+                <if condition="$activityData.support neq ''"><dd><span>支持单位：</span>{$info.support}</dd></if>
+                <dd><span>主办单位：</span>{$info.sponsor_unit}</dd>
+                <if condition="$info.co_sponsored neq ''"><dd><span>联合主办：</span>{$info.co_sponsored}</dd></if>
+                <dd class="chengban"><span>承办单位：</span></dd>
+                <dd><span>咨询热线：</span>{$info.consult_phone}</dd>
+                <!--                <dd><p>{$info.act_intro}</p></dd>-->
+            </dl>
+        </div>
         <!--车展会场-->
         <div id="scene">
             <div class="title"><h3>【往届回顾】</h3></div>
@@ -173,21 +188,7 @@
                 </div>
             </div>
         </div>
-        <!--车展简介-->
-        <div id="desc">
-            <div class="title"><h3>活动简介</h3></div>
-            <dl>
-                <dt style="height: 0"><!--▶ 展会详细信息 --></dt>
-                <dd><span>时　　间：</span>{$info.start_time|date="m月d日",###}-{$info.end_time|date="m月d日",###}</dd>
-                <dd><span>地　　点：</span>{$info.act_address}</dd>
-                <if condition="$activityData.support neq ''"><dd><span>支持单位：</span>{$info.support}</dd></if>
-                <dd><span>主办单位：</span>{$info.sponsor_unit}</dd>
-                <if condition="$info.co_sponsored neq ''"><dd><span>联合主办：</span>{$info.co_sponsored}</dd></if>
-                <dd class="chengban"><span>承办单位：</span></dd>
-                <dd><span>咨询热线：</span>{$info.consult_phone}</dd>
-<!--                <dd><p>{$info.act_intro}</p></dd>-->
-            </dl>
-        </div>
+
         <div class="copy">&copy; 2014-2020 房车时代 <p>京ICP备07503663号 京公网安备11010802015289号</p> </div>
     </div>
     <!--
