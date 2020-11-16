@@ -609,7 +609,7 @@ class ActivityController extends CommonController
             }
             $str['province'][] = $list[$i]['mobile_province'];
 
-            $str['num'][]= ($list[$i]['num']);
+            $str['num'][]= intval($list[$i]['num']);
         }
 
 
@@ -705,6 +705,7 @@ class ActivityController extends CommonController
             }
             $str['list'][$i]['name'] = $list[$i]['mobile_province'];
             $str['list'][$i]['y'] =  floatval(sprintf("%.2f", $list[$i]['num']/$all_num*100));
+
 
         }
 
@@ -1139,18 +1140,23 @@ class ActivityController extends CommonController
         $all_sign = M("act_registration")->where(array('arrival_status'=>1,'act_id'=>$pid))->field('id,userphone')->select();
         $use_sign = array_column($all_sign,'userphone');
 
-        //所有报名用户
+//        //所有报名用户
+//
+//        $all_user = M("act_registration")->where(array('arrival_status'=>0,'act_id'=>$pid))->field('id,userphone')->select();
+//        $use_user = array_column($all_user,'userphone');
+//        $result = array_intersect($use_sign, $use_user);
+//        // 重新索引
+//        //$result = array_values($result);
+//      //  print_r($result);die;
+//        $result1 = array_diff($use_sign,$result);
+//        $result2 = array_merge($result,$result1);
+//        $result2 = array_values($result2);
+//        print_r($result2);die;
 
-        $all_user = M("act_registration")->where(array('arrival_status'=>0,'act_id'=>$pid))->field('id,userphone')->select();
-        $use_user = array_column($all_sign,'userphone');
-        $result = array_intersect($use_sign, $use_user);
-        // 重新索引
-        $result = array_values($result);
-
-        $use_phone = implode(',',$result);
+        $use_phone = implode(',',$use_sign);
 
         $maps['userphone'] = array("IN",$use_phone);
-        $maps['arrival_status'] = array("EQ",0);
+        //$maps['arrival_status'] = array("EQ",0);
         $maps['act_id'] = array("EQ",$pid);
 
         $res =  M("act_registration")->where($maps)->save(array('arrival_status'=>2));
