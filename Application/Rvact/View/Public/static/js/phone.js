@@ -1,7 +1,7 @@
 (function(){
     // 百度地图API功能
     var map = new BMap.Map("allmap");    // 创建Map实例
-    map.centerAndZoom(new BMap.Point(lgt*1,lat*1), 17);  // 初始化地图,设置中心点坐标和地图级别
+    map.centerAndZoom(new BMap.Point(lgt*1-0.003,lat*1+0.001), 17);  // 初始化地图,设置中心点坐标和地图级别
     var top_left_control = new BMap.ScaleControl({anchor: BMAP_ANCHOR_TOP_LEFT});// 左上角，添加比例尺
     var top_left_navigation = new BMap.NavigationControl();  //左上角，添加默认缩放平移控件
 //添加地图类型控件
