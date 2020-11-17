@@ -597,8 +597,10 @@ class ActivityController extends CommonController
     public function countArrUser()
     {
         $id = I('id');
+        $map['add_time'] = array("GT",1604592000);
+        $map['act_id'] = array("EQ",$id);
         $list = M("act_registration")
-            ->where(array('act_id'=>$id,'arrival_status'=>2))
+            ->where($map)
             ->group('mobile_province')
             ->field('mobile_province,count(id) as num')
             ->order('num desc')
@@ -654,7 +656,7 @@ class ActivityController extends CommonController
             if($list[$i]['mobile_province'] == null){
                 $list[$i]['mobile_province'] = ' ';
             }
-            $str['list'][$i]['name'] = $list[$i]['mobile_province'];
+            $str['list'][$i]['name'] = $list[$i]['mobile_province']."(".$list[$i]['num']."人)";
             $str['list'][$i]['y'] =  floatval(sprintf("%.2f", $list[$i]['num']/$all_num*100));
 
         }
@@ -678,7 +680,7 @@ class ActivityController extends CommonController
             if($list[$i]['source_title'] == null){
                 $list[$i]['source_title'] = ' ';
             }
-            $str['list'][$i]['name'] = $list[$i]['source_title'];
+            $str['list'][$i]['name'] = $list[$i]['source_title']."(".$list[$i]['num']."人)";
             $str['list'][$i]['y'] =  floatval(sprintf("%.2f", $list[$i]['num']/$all_num*100));
 
         }
@@ -692,8 +694,10 @@ class ActivityController extends CommonController
         $id = I('id');
         $all_num = M("act_registration")->where(array('act_id'=>$id))->count();
 
+        $map['add_time'] = array("GT",1604592000);
+        $map['act_id'] = array("EQ",$id);
         $list = M("act_registration")
-            ->where(array('act_id'=>$id,'arrival_status'=>2))
+            ->where($map)
             ->group('mobile_province')
             ->field('mobile_province,count(id) as num')
             ->order('num desc')
@@ -702,7 +706,7 @@ class ActivityController extends CommonController
             if($list[$i]['mobile_province'] == null){
                 $list[$i]['mobile_province'] = ' ';
             }
-            $str['list'][$i]['name'] = $list[$i]['mobile_province'];
+            $str['list'][$i]['name'] = $list[$i]['mobile_province']."(".$list[$i]['num']."人)";
             $str['list'][$i]['y'] =  floatval(sprintf("%.2f", $list[$i]['num']/$all_num*100));
 
 
@@ -727,7 +731,7 @@ class ActivityController extends CommonController
             if($list[$i]['source_title'] == null){
                 $list[$i]['source_title'] = ' ';
             }
-            $str['list'][$i]['name'] = $list[$i]['source_title'];
+            $str['list'][$i]['name'] = $list[$i]['source_title']."(".$list[$i]['num']."人)";
             $str['list'][$i]['y'] =  floatval(sprintf("%.2f", $list[$i]['num']/$all_num*100));
 
         }
@@ -1165,6 +1169,34 @@ class ActivityController extends CommonController
 
 
 
+    }
+
+
+    public function handleArrivalStatus()
+    {
+        $pid = I('pid');
+        //所有到店用户
+        $all_sign = M("act_registration")->where(array('arrival_status'=>2,'act_id'=>$pid))->field('id,userphone')->select();
+        $use_sign = array_column($all_sign,'userphone');
+
+        //所有到店用户
+        $arrival_sign = M("act_registration")->where(array('arrival_status'=>1,'act_id'=>$pid))->field('id,userphone')->select();
+        $arr_sign = array_column($arrival_sign,'userphone');
+
+        $result1 = array_diff($arr_sign,$use_sign);
+        $result2 = array_values($result1);
+        $use_phone = implode(',',$result2);
+
+
+        $maps['userphone'] = array("IN",$use_phone);
+        //$maps['arrival_status'] = array("EQ",0);
+        $maps['act_id'] = array("EQ",$pid);
+        $maps['add_time'] = array("GT",1604592000);
+
+        $res =  M("act_registration")->where($maps)->save(array('arrival_status'=>2));
+        if($res){
+            echo 1;
+        }
     }
 
 
