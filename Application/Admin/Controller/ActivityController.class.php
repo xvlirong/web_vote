@@ -597,17 +597,15 @@ class ActivityController extends CommonController
     public function countArrUser()
     {
         $id = I('id');
-        $map['add_time'] = array("GT",1604592000);
         $map['act_id'] = array("EQ",$id);
-        $list = M("act_registration")
-            ->where($map)
-            ->group('mobile_province')
-            ->field('mobile_province,count(id) as num')
+        $list = M("act_count")
+            ->where(array('pid'=>$id,'type'=>1))
+            ->field('title as mobile_province,num')
             ->order('num desc')
             ->select();
         for($i=0;$i<count($list);$i++){
             if($list[$i]['mobile_province'] == null){
-                $list[$i]['mobile_province'] = ' ';
+                $list[$i]['mobile_province'] = '其他';
             }
             $str['province'][] = $list[$i]['mobile_province'];
             $str['num'][]= intval($list[$i]['num']);
@@ -617,85 +615,12 @@ class ActivityController extends CommonController
         echo json_encode($str);
     }
 
-
-    //报名统计
-    public function countUser()
+    //到场统计
+    public function countArrUser1()
     {
         $id = I('id');
-        $list = M("act_registration")
-            ->where(array('act_id'=>$id,'arrival_status'=>0))
-            ->group('mobile_province')
-            ->field('mobile_province,count(id) as num')
-            ->order('num desc')
-            ->select();
-        for($i=0;$i<count($list);$i++){
-            if($list[$i]['mobile_province'] == null){
-                $list[$i]['mobile_province'] = ' ';
-            }
-            $str['province'][] = $list[$i]['mobile_province'];
-
-            $str['num'][]=intval($list[$i]['num']);
-        }
-
-
-        echo json_encode($str);
-    }
-
-    public function countSignUserPie()
-    {
-        $id = I('id');
-        $all_num = M("act_registration")->where(array('act_id'=>$id))->count();
-
-        $list = M("act_registration")
-            ->where(array('act_id'=>$id,'arrival_status'=>0))
-            ->group('mobile_province')
-            ->field('mobile_province,count(id) as num')
-            ->order('num desc')
-            ->select();
-        for($i=0;$i<count($list);$i++){
-            if($list[$i]['mobile_province'] == null){
-                $list[$i]['mobile_province'] = ' ';
-            }
-            $str['list'][$i]['name'] = $list[$i]['mobile_province']."(".$list[$i]['num']."人)";
-            $str['list'][$i]['y'] =  floatval(sprintf("%.2f", $list[$i]['num']/$all_num*100));
-
-        }
-
-
-       echo json_encode($str);
-    }
-
-    public function countSourceUserPie()
-    {
-        $id = I('id');
-        $all_num = M("act_registration")->where(array('act_id'=>$id))->count();
-
-        $list = M("act_registration")
-            ->where(array('act_id'=>$id,'arrival_status'=>0))
-            ->group('source_title')
-            ->field('source_title,count(id) as num')
-            ->order('num desc')
-            ->select();
-        for($i=0;$i<count($list);$i++){
-            if($list[$i]['source_title'] == null){
-                $list[$i]['source_title'] = ' ';
-            }
-            $str['list'][$i]['name'] = $list[$i]['source_title']."(".$list[$i]['num']."人)";
-            $str['list'][$i]['y'] =  floatval(sprintf("%.2f", $list[$i]['num']/$all_num*100));
-
-        }
-
-
-        echo json_encode($str);
-    }
-
-    public function countArrUserPie()
-    {
-        $id = I('id');
-        $all_num = M("act_registration")->where(array('act_id'=>$id))->count();
-
-        $map['add_time'] = array("GT",1604592000);
         $map['act_id'] = array("EQ",$id);
+        $map['arrival_status'] = array("EQ",2);
         $list = M("act_registration")
             ->where($map)
             ->group('mobile_province')
@@ -704,38 +629,126 @@ class ActivityController extends CommonController
             ->select();
         for($i=0;$i<count($list);$i++){
             if($list[$i]['mobile_province'] == null){
+                $list[$i]['mobile_province'] = '其他';
+            }
+            $list[$i]['title'] = $list[$i]['mobile_province'];
+            $list[$i]['type'] = 1;
+            $list[$i]['pid'] = $id;
+            $list[$i]['add_time'] = time();
+            $data[] = $list[$i];
+        }
+        $res = M("act_count")->addAll($data);
+        if($res){
+            echo 1;die;
+        }else{
+            echo 0;die;
+        }
+
+        echo json_encode($str);
+    }
+
+
+    //报名统计
+    public function countUser()
+    {
+        $id = I('id');
+        $map['act_id'] = array("EQ",$id);
+        $list = M("act_count")
+            ->where(array('pid'=>$id,'type'=>4))
+            ->field('title as mobile_province,num')
+            ->order('num desc')
+            ->select();
+        for($i=0;$i<count($list);$i++){
+            if($list[$i]['mobile_province'] == null){
+                $list[$i]['mobile_province'] = '其他';
+            }
+            $str['province'][] = $list[$i]['mobile_province'];
+            $str['num'][]= intval($list[$i]['num']);
+        }
+
+        echo json_encode($str);
+    }
+
+    public function countSignUserPie()
+    {
+        $id = I('id');
+
+        $map['pid'] = array("EQ",$id);
+        $map['type'] = array("EQ",5);
+        $list = M("act_count")
+            ->where($map)
+            ->field('title as mobile_province,num,pie_rate')
+            ->order('num desc')
+            ->select();
+        for($i=0;$i<count($list);$i++){
+            if($list[$i]['mobile_province'] == null){
                 $list[$i]['mobile_province'] = ' ';
             }
             $str['list'][$i]['name'] = $list[$i]['mobile_province']."(".$list[$i]['num']."人)";
-            $str['list'][$i]['y'] =  floatval(sprintf("%.2f", $list[$i]['num']/$all_num*100));
+            $str['list'][$i]['y'] =  floatval($list[$i]['pie_rate']);
+        }
+        echo json_encode($str);
+    }
 
+    public function countSourceUserPie()
+    {
+        $id = I('id');
+
+        $list = M("act_count")
+            ->where(array('pid'=>$id,'type'=>6))
+            ->field('title,pie_rate,num')
+            ->order('num desc')
+            ->select();
+        for($i=0;$i<count($list);$i++){
+            if($list[$i]['title'] == null){
+                $list[$i]['title'] = ' ';
+            }
+            $str['list'][$i]['name'] = $list[$i]['title']."(".$list[$i]['num']."人)";
+            $str['list'][$i]['y'] =  floatval($list[$i]['pie_rate']);
 
         }
 
+        echo json_encode($str);
+    }
 
+    public function countArrUserPie()
+    {
+        $id = I('id');
+
+        $map['pid'] = array("EQ",$id);
+        $map['type'] = array("EQ",2);
+        $list = M("act_count")
+            ->where($map)
+            ->field('title as mobile_province,num,pie_rate')
+            ->order('num desc')
+            ->select();
+        for($i=0;$i<count($list);$i++){
+            if($list[$i]['mobile_province'] == null){
+                $list[$i]['mobile_province'] = ' ';
+            }
+            $str['list'][$i]['name'] = $list[$i]['mobile_province']."(".$list[$i]['num']."人)";
+            $str['list'][$i]['y'] =  floatval($list[$i]['pie_rate']);
+        }
         echo json_encode($str);
     }
 
     public function countSourceArrPie()
     {
         $id = I('id');
-        $all_num = M("act_registration")->where(array('act_id'=>$id))->count();
 
-        $list = M("act_registration")
-            ->where(array('act_id'=>$id,'arrival_status'=>2))
-            ->group('source_title')
-            ->field('source_title,count(id) as num')
+        $list = M("act_count")
+            ->where(array('pid'=>$id,'type'=>3))
+            ->field('title,pie_rate,num')
             ->order('num desc')
             ->select();
         for($i=0;$i<count($list);$i++){
-            if($list[$i]['source_title'] == null){
-                $list[$i]['source_title'] = ' ';
+            if($list[$i]['title'] == null){
+                $list[$i]['title'] = ' ';
             }
-            $str['list'][$i]['name'] = $list[$i]['source_title']."(".$list[$i]['num']."人)";
-            $str['list'][$i]['y'] =  floatval(sprintf("%.2f", $list[$i]['num']/$all_num*100));
+            $str['list'][$i]['name'] = $list[$i]['title']."(".$list[$i]['num']."人)";
+            $str['list'][$i]['y'] =  floatval($list[$i]['pie_rate']);
 
         }
-
 
         echo json_encode($str);
     }
