@@ -95,7 +95,7 @@ class LoginController extends Controller {
         }
         $username = I('username');
         $code = I('code');
-        $exist = M("sms_user")->where(array('tel_phone'=>$username))->find();
+        $exist = M("sms_user")->where(array('tel_phone'=>$username,'role_id'=>2))->find();
         $msg_code = session('sale_msg_code');
         if(empty($msg_code)){
             $res_info['code'] = 1;
