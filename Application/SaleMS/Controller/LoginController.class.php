@@ -165,6 +165,7 @@ class LoginController extends Controller {
         $last_time = strtotime(date("Y-m-d",strtotime("-1 day")));
         $last_end_time = strtotime(date("Y-m-d",time()));
         $maps['update_time'] = array("EQ",0);
+        $maps['role_id'] = array("EQ",2);
         $list_fp = M("sms_offer_record")
             ->join("left join sms_user on sms_offer_record.sale_id=sms_user.id")
             ->where($maps)
@@ -172,6 +173,7 @@ class LoginController extends Controller {
             ->group('sale_id')
             ->select();
         $maps1['update_time'] = array("BETWEEN",array($last_time,$last_end_time));
+        $maps1['role_id'] = array("EQ",2);
         $list_yy = M("sms_offer_record")
             ->join("left join sms_user on sms_offer_record.sale_id=sms_user.id")
             ->where($maps1)
