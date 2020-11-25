@@ -97,9 +97,9 @@
                       <a href="{:U('Index/invite_info',array('id'=>$v['id']))}">
                       <span>{$v.phone}</span>
                           <eq name="state" value="1">
-                              <span class="r_span">{$v.add_time|date="Y.m.d H:i:s",###}</span>
-                              <else />
                               <span class="r_span">{$v.update_time|date="Y.m.d H:i:s",###}</span>
+                              <else />
+                              <span class="r_span">{$v.add_time|date="Y.m.d H:i:s",###}</span>
 
                           </eq>
                       </a>
