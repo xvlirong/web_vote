@@ -6,11 +6,13 @@ class IndexController extends BaseController {
         $maps['sms_offer_record.update_time'] = array('EQ',0);
         $invite_state = I('invite_state');
         $title = I('title');
+        $map_order = array('sms_offer_record.add_time'=>'desc');
         if($invite_state===''&&$title===''){
         }else{
             if($title===''){
                 if($invite_state == 1){
                     $maps['sms_offer_record.update_time'] = array("GT",0);
+                    $map_order = array('sms_offer_record.update_time'=>'desc');
                 }else{
                     $maps['sms_offer_record.update_time'] = array("EQ",0);
                 }
@@ -20,6 +22,7 @@ class IndexController extends BaseController {
             }else{
                 if($invite_state == 1){
                     $maps['sms_offer_record.update_time'] = array("GT",0);
+                    $map_order = array('sms_offer_record.update_time'=>'desc');
                 }else{
                     $maps['sms_offer_record.update_time'] = array("EQ",0);
                 }
@@ -28,11 +31,12 @@ class IndexController extends BaseController {
         }
         $user_id = session('sale_our_saleId');
         $maps['sale_id'] = array('EQ',$user_id);
+
         $list = M("sms_user_data")
             ->join("left join sms_offer_record on sms_user_data.id=sms_offer_record.pid")
             ->where($maps)
-            ->order(array('sms_offer_record.add_time'=>'desc'))
-            ->field('sms_user_data.id,phone,sms_offer_record.add_time')
+            ->order($map_order)
+            ->field('sms_user_data.id,phone,sms_offer_record.add_time,sms_offer_record.update_time')
             ->select();
 
         $this->assign('state',$invite_state);
