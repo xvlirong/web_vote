@@ -32,6 +32,10 @@ class IndexController extends BaseController {
         $user_id = session('sale_our_saleId');
         $maps['sale_id'] = array('EQ',$user_id);
 
+        $admin_arr = array(14,15,16,17,18);
+        if(in_array($user_id,$admin_arr)){
+            $maps['area'] = array('LIKE',"%西安%");
+        }
         $list = M("sms_user_data")
             ->join("left join sms_offer_record on sms_user_data.id=sms_offer_record.pid")
             ->where($maps)
