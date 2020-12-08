@@ -32,7 +32,7 @@ class IndexController extends BaseController {
         $user_id = session('sale_our_saleId');
         $maps['sale_id'] = array('EQ',$user_id);
 
-        $admin_arr = array(14,15,16,17,18);
+        $admin_arr = array(14,15,16,18);
         if(in_array($user_id,$admin_arr)){
             $maps['area'] = array('LIKE',"%西安%");
         }
