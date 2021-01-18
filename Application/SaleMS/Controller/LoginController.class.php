@@ -91,7 +91,9 @@ class LoginController extends Controller {
             $res['msg'] = '手机号格式错误';
             $this->ajaxReturn($res);die;
         }else{
-            $exist = M("sms_user")->where(array('tel_phone'=>$phone,'role_id'=>1))->find();
+            $maps['tel_phone'] = array('EQ',$phone);
+            $maps['role_id'] = array('in',array(1,3));
+            $exist = M("sms_user")->where($maps)->find();
             if($exist){
                 $res = $this->handleSendMs($phone,$project);
                 $this->ajaxReturn($res);
@@ -115,7 +117,9 @@ class LoginController extends Controller {
         }
         $username = I('username');
         $code = I('code');
-        $exist = M("sms_user")->where(array('tel_phone'=>$username,'role_id'=>1))->find();
+        $maps['tel_phone'] = array('EQ',$username);
+        $maps['role_id'] = array('in',array(1,3));
+        $exist = M("sms_user")->where($maps)->find();
         $msg_code = session('sale_msg_code');
         if(empty($msg_code)){
             $res_info['code'] = 1;
@@ -133,6 +137,7 @@ class LoginController extends Controller {
             session('sale_our_adminId',$exist['id']);
             cookie('admin_id',$exist['id'],time()+86400);
             cookie('admin_name',$exist['user_name'],time()+86400);
+            session('admin_access',$this->setUserAccess($exist['role_id']));
             $url = U('Index/index');
             $res_info['code'] = 0;
             $res_info['msg'] = '登陆成功';
@@ -143,6 +148,17 @@ class LoginController extends Controller {
         }
         $this->ajaxReturn($res_info);
 
+    }
+
+    private function setUserAccess($role_id)
+    {
+
+        $list = M('member_module_classify')
+            ->field('module')
+            ->where(array('role_id'=>$role_id))
+            ->select();
+        $list = array_column($list,'module');
+        return $list;
     }
     //数字随机码
     public function randNumber($len = 6)

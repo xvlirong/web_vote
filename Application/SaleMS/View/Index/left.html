@@ -29,19 +29,23 @@ $(function(){
 <body>
 <div id="left_ctn">
     <ul class="sidenav">
-
+        <if condition="in_array('邀约管理',session('admin_access'))">
         <li class="now">
             <div class="nav_m">
-                <span><a>项目管理</a></span>
+                <span><a>邀约管理</a></span>
                 <i>&nbsp;</i>
             </div>
             <ul class="erji">
                 <li class="now_li">
                     <span><a href="{:U('Dm/invite_count')}" target="main">邀约统计</a></span>
                 </li>
-
+                <li>
+                    <span><a href="{:U('Dm/invite_info')}" target="main">邀约详情</a></span>
+                </li>
             </ul>
         </li>
+        </if>
+        <if condition="in_array('角色管理',session('admin_access'))">
         <li>
             <div class="nav_m">
                 <span><a>角色管理</a></span>
@@ -54,7 +58,8 @@ $(function(){
 
             </ul>
         </li>
-
+        </if>
+        <if condition="in_array('数据管理',session('admin_access'))">
         <li>
             <div class="nav_m">
                 <span><a>数据管理</a></span>
@@ -67,12 +72,11 @@ $(function(){
                 <li>
                     <span><a href="{:U('Dm/data_dtb')}" target="main">数据分配</a></span>
                 </li>
-                <li>
-                    <span><a href="{:U('Dm/invite_info')}" target="main">邀约详情</a></span>
-                </li>
+
 
             </ul>
         </li>
+        </if>
     <!--    <li>
             <div class="nav_m">
                 <span><a>终端管理</a></span>
