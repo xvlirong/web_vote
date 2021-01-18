@@ -137,7 +137,7 @@ class LoginController extends Controller {
             session('sale_our_adminId',$exist['id']);
             cookie('admin_id',$exist['id'],time()+86400);
             cookie('admin_name',$exist['user_name'],time()+86400);
-            $list = M('member_module_classify')
+            $list = M('sms_admin_module')
                 ->field('module')
                 ->where(array('role_id'=>$exist['role_id']))
                 ->select();
