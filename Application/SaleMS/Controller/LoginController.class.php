@@ -180,7 +180,7 @@ class LoginController extends Controller {
         $list_fp = M("sms_offer_record")
             ->join("left join sms_user on sms_offer_record.sale_id=sms_user.id")
             ->where($maps)
-            ->field('count(*) AS num,user_name,sale_id')
+            ->field('count(*) AS num,user_name,sale_id,area')
             ->group('sale_id')
             ->select();
         $maps1['update_time'] = array("BETWEEN",array($last_time,$last_end_time));
@@ -201,6 +201,7 @@ class LoginController extends Controller {
                 }
             }
             $add_arr[$i]['wyy_num'] = $list_fp[$i]['num'];
+            $add_arr[$i]['area'] = $list_fp[$i]['area'];
             $add_arr[$i]['record_date'] = strtotime(date("Y-m-d",strtotime("-1 day")));
         }
         $res = M("sms_invite_count")->addAll($add_arr);

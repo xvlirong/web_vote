@@ -148,7 +148,7 @@ class DmController extends CommonController {
 
         $maps['belong_state'] = array('EQ',0);
         $count = M("sms_user_data")->where($maps)->count();
-        $Page = new \Extend\Page($count,100);// 实例化分页类 传入总f记录数和每页显示的记录数(25)
+        $Page = new \Extend\Page($count,23);// 实例化分页类 传入总f记录数和每页显示的记录数(25)
         $show = $Page->show($map_str);// 分页显示输出
         $list = M("sms_user_data")
             ->where($maps)
@@ -216,7 +216,14 @@ class DmController extends CommonController {
 
     public function invite_info()
     {
-        $sale_list = M("sms_user")->where(array('role_id'=>'2'))->select();
+        $admin_id = session('sale_our_adminId');
+        $admin_info = M("sms_user")->where(array('id'=>$admin_id))->find();
+        if($admin_info['role_id']==3){
+            $sale_list = M("sms_user")->where(array('role_id'=>'2','area'=>$admin_info['area']))->select();
+        }else{
+            $sale_list = M("sms_user")->where(array('role_id'=>'2'))->select();
+        }
+
         $this->assign('sale_list',$sale_list);
 
         $sale_id = I('sale_id');
@@ -272,13 +279,22 @@ class DmController extends CommonController {
         $last_time = strtotime(date("Y-m-d",strtotime("-1 day")));
         $last_end_time = strtotime(date("Y-m-d",time()));
         //昨日邀约数据
-        $last_list = M("sms_invite_count")->where(array('record_date'=>$last_time))->select();
+        $admin_id = session('sale_our_adminId');
+        $admin_info = M("sms_user")->where(array('id'=>$admin_id))->find();
+        if($admin_info['role_id']==3){
+            $last_list = M("sms_invite_count")->where(array('record_date'=>$last_time,'area'=>'张家港'))->select();
+        }else{
+            $last_list = M("sms_invite_count")->where(array('record_date'=>$last_time))->select();
+        }
         $last_fir = M("sms_invite_count")
             ->where(array('record_date'=>$last_time))
             ->field('sum(yy_num) as num,sale_name')
             ->find();
         $week_time = strtotime(date("Y-m-d",strtotime("-1 week")));
         $maps['record_date'] = array("BETWEEN",array($week_time,$last_end_time));
+        if($admin_info['role_id']==3){
+            $maps['area'] = array("EQ",'张家港');
+        }
         //七日邀约数据
         $week_list = M("sms_invite_count")->where($maps)->select();
         //七日邀约冠军
