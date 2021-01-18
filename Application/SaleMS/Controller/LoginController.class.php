@@ -142,7 +142,7 @@ class LoginController extends Controller {
                 ->where(array('role_id'=>$exist['role_id']))
                 ->select();
             $list = array_column($list,'module');
-            session('admin_access',$this->setUserAccess($list);
+            session('admin_access',$this->setUserAccess($list));
             $url = U('Index/index');
             $res_info['code'] = 0;
             $res_info['msg'] = '登陆成功';
