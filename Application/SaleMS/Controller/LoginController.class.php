@@ -137,7 +137,12 @@ class LoginController extends Controller {
             session('sale_our_adminId',$exist['id']);
             cookie('admin_id',$exist['id'],time()+86400);
             cookie('admin_name',$exist['user_name'],time()+86400);
-            session('admin_access',$this->setUserAccess($exist['role_id']));
+            $list = M('member_module_classify')
+                ->field('module')
+                ->where(array('role_id'=>$exist['role_id']))
+                ->select();
+            $list = array_column($list,'module');
+            session('admin_access',$this->setUserAccess($list);
             $url = U('Index/index');
             $res_info['code'] = 0;
             $res_info['msg'] = '登陆成功';
@@ -150,16 +155,6 @@ class LoginController extends Controller {
 
     }
 
-    private function setUserAccess($role_id)
-    {
-
-        $list = M('member_module_classify')
-            ->field('module')
-            ->where(array('role_id'=>$role_id))
-            ->select();
-        $list = array_column($list,'module');
-        return $list;
-    }
     //数字随机码
     public function randNumber($len = 6)
     {
