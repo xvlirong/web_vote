@@ -528,6 +528,7 @@ header {
 }
 #desc dd {
     font-size: 0.24rem;
+    line-height: 0.48rem;
 }
 #desc dd span {
     font-weight: bold;
@@ -610,6 +611,9 @@ footer img {
     left: 0.68rem;
     top: 50%;
     margin-top: -0.205rem;
+}
+.spot .list .clearfix p{
+    line-height: 0.5rem;
 }
 
 
