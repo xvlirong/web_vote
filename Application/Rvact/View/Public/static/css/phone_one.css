@@ -389,6 +389,8 @@ header {
     line-height: 0.37rem;
     color: #303030;
     font-weight: bold;
+    margin-top: .12rem;
+    margin-bottom: .2rem;
 }
 #brand {
     background: #ffffff;
@@ -521,7 +523,8 @@ header {
     border-bottom:1px dotted #484848;
     height: 0.6rem;
     line-height: 0.6rem;
-    margin-bottom: 0.2rem;
+    margin-bottom: 0.4rem;
+    margin-top: .2rem;
 }
 #desc dd {
     font-size: 0.24rem;
