@@ -95,41 +95,36 @@ class IndexController extends BaseController {
 
     //获取报名数据
     private function getActivityMemberList($id){
-        $len=30;
-        //如果报名数据不满9条，则用测试数据
-        $data=array(
-            array("username" => "张xx", "userphone" => "136****6112", "usercar" => "B型房车", "usertime" => "2分钟以前"),
-            array("username" => "侯xx", "userphone" => "187****3723", "usercar" => "拖挂式房车", "usertime" => "4分钟以前"),
-            array("username" => "吴xx", "userphone" => "152****0236", "usercar" => "C型房车", "usertime" => "6分钟以前"),
-            array("username" => "刘xx", "userphone" => "136****0413", "usercar" => "C型房车", "usertime" => "7分钟以前"),
-            array("username" => "李xx", "userphone" => "181****6237", "usercar" => "B型房车", "usertime" => "12分钟以前"),
-            array("username" => "佟xx", "userphone" => "133****1189", "usercar" => "C型房车", "usertime" => "16分钟以前"),
-            array("username" => "王xx", "userphone" => "139****9082", "usercar" => "C型房车", "usertime" => "16分钟以前"),
-            array("username" => "张xx", "userphone" => "186****7132", "usercar" => "拖挂式房车", "usertime" => "20分钟以前"),
-            array("username" => "赵xx", "userphone" => "176****5364", "usercar" => "B型房车", "usertime" => "33分钟以前"),
-            array("username" => "王xx", "userphone" => "139****8569", "usercar" => "C型房车", "usertime" => "33分钟以前"),
-            array("username" => "李xx", "userphone" => "186****7189", "usercar" => "拖挂式房车", "usertime" => "35分钟以前"),
-            array("username" => "白xx", "userphone" => "176****5364", "usercar" => "B型房车", "usertime" => "36分钟以前"),
-            array("username" => "王xx", "userphone" => "139****7854", "usercar" => "B型房车", "usertime" => "37分钟以前"),
-            array("username" => "黄xx", "userphone" => "183****5632", "usercar" => "拖挂式房车", "usertime" => "40分钟以前"),
-            array("username" => "孙xx", "userphone" => "189****7845", "usercar" => "C型房车", "usertime" => "50分钟以前"),
-            array("username" => "周xx", "userphone" => "186****7137", "usercar" => "拖挂式房车", "usertime" => "51分钟以前"),
-            array("username" => "李xx", "userphone" => "139****7002", "usercar" => "C型房车", "usertime" => "51分钟以前"),
-            array("username" => "张xx", "userphone" => "136****8152", "usercar" => "拖挂式房车", "usertime" => "52分钟以前"),
-            array("username" => "王xx", "userphone" => "183****5364", "usercar" => "B型房车", "usertime" => "56分钟以前")
-        );
-        if($this->getActivityNum($id)-$this->num>=13){
-            $map['activityid'] = $id;
-            $data=M('act_registration')->where($map)->field('username,userphone,car_type models')->order('id desc')->limit($len)->select();
-            $numArr=$this->renderNum($len);
-            foreach ($data as $k=>&$v){
-                $v['username']=mb_substr($v['username'],0,1,'utf-8').'xx';
-                $v['userphone']=substr($v['userphone'],0,3).'****'.substr($v['userphone'],7,4);
-                $v['usercar']=explode(',',$v['models'])[0];
-                $v['usertime']=$numArr[$k].'分钟以前';
-            }
+
+        $data = M("show_enroll")->where(array('pid'=>$id))->order(array('usertime'=>'desc'))->limit(50)->select();
+
+        for( $i = 0; $i < count($data); $i++ ){
+            $data[$i]['usertimes'] = $this->formatDate($data[$i]['usertime']);
         }
         return $data;
+    }
+    
+    //计算时间差
+
+    public function formatDate($sTime)
+    {
+        //sTime=源时间，cTime=当前时间，dTime=时间差
+        $cTime  = time();
+        $dTime  = $cTime - $sTime;
+        $dDay  = intval(date("Ymd",$cTime)) - intval(date("Ymd",$sTime));
+        $dYear  = intval(date("Y",$cTime)) - intval(date("Y",$sTime));
+        if( $dTime < 60 ){
+            $dTime =  $dTime."秒前";
+        }elseif( $dTime < 3600 ){
+            $dTime =  intval($dTime/60)."分钟前";
+        }elseif( $dTime >= 3600 && $dDay == 0  ){
+            $dTime =  $text = floor(($cTime-$sTime) / (60 * 60)) . '小时前'; // 一天内;
+        }elseif($dYear==0){
+            $dTime =  date("m-d H:i",$sTime);
+        }else{
+            $dTime =  date("Y-m-d H:i",$sTime);
+        }
+        return $dTime;
     }
     //生成随机数
     private function renderNum($num){
@@ -139,6 +134,22 @@ class IndexController extends BaseController {
         }
         sort($arr);
         return $arr;
+    }
+
+    /**
+     * @param $data
+     *
+     */
+    public function handleShowEnroll($username,$userphone,$usercar,$usertime,$id)
+    {
+        $data['username'] = mb_substr($username,0,1,'utf-8').'xx';
+        $data['userphone'] = substr($userphone,0,3).'****'.substr($userphone,7,4);
+        $data['usercar'] = $usercar;
+        $data['usertime'] = $usertime;
+
+        $data['pid'] = $id;
+
+        $res = M("show_enroll")->add($data);
     }
 
 
@@ -170,6 +181,7 @@ class IndexController extends BaseController {
         $send_res = $this->send($data['userphone'],$data['act_id']);
         $activityData=M('act_registration')->data($data)->add();
         if($activityData){
+            $this->handleShowEnroll($data['username'],$data['userphone'],$data['car_type'],$data['add_time'],$data['act_id']);
             $now_time = time();
             if($now_time>$info['start_time']&&$now_time<$info['end_time']){
                 $sign_cookie = $data['userphone'].'+'.$data['act_id'];
@@ -474,6 +486,92 @@ class IndexController extends BaseController {
         }
 
 
+    }
+
+    /**
+     * @param $count
+     * @param string $type
+     * @param bool $white_space
+     * @return array|false|string|string[]|null
+     * 虚拟手机号
+     */
+    public function generate_name($count,$type="array",$white_space=true)
+    {
+        $arr = array(
+            130,131,132,133,134,135,136,137,138,139,
+            144,147,
+            150,151,152,153,155,156,157,158,159,
+            176,177,178,
+            180,181,182,183,184,185,186,187,188,189,
+        );
+        for($i = 0; $i < $count; $i++) {
+            $tmp[] = $arr[array_rand($arr)].' **** '.mt_rand(1000,9999);
+        }
+        if($type==="string"){
+            $tmp=json_encode($tmp);//如果是字符串，解析成字符串
+        }
+        if($white_space===true){
+            $tmp=preg_replace("/\s*/","",$tmp);
+        }
+        return $tmp;
+    }
+
+    /**
+     * @param int $name_count
+     * @return array|string
+     * 虚拟姓名
+     */
+    public function getname($name_count=1)
+    {
+        $firstname_arr  = array('赵','钱','孙','李','周','吴','郑','王','冯','陈','褚','卫','蒋','沈','韩','杨','朱','秦','尤','许','何','吕','施','张','孔','曹','严','华','金','魏','陶','姜',
+            '戚','谢','邹','喻','柏','水','窦','章','云','苏','潘','葛','奚','范','彭','郎','鲁','韦','昌','马','苗','凤','花','方','任','袁','柳','鲍','史','唐','费','薛','雷','贺','倪',
+            '汤','滕','殷','罗','毕','郝','安','常','傅','卞','齐','元','顾','孟','平','黄','穆','萧','尹','姚','邵','湛','汪','祁','毛','狄','米','伏','成','戴','谈','宋','茅','庞','熊',
+            '纪','舒','屈','项','祝','董','梁','杜','阮','蓝','闵','季','贾','路','娄','江','童','颜','郭','梅','盛','林','钟','徐','邱','骆','高','夏','蔡','田','樊','胡','凌','霍','虞',
+            '万','支','柯','管','卢','莫','柯','房','裘','缪','解','应','宗','丁','宣','邓','单','杭','洪','包','诸','左','石','崔','吉','龚','程','嵇','邢','裴','陆','荣','翁','荀','于',
+            '惠','甄','曲','封','储','仲','伊','宁','仇','甘','武','符','刘','景','詹','龙','叶','幸','司','黎','溥','印','怀','蒲','邰','从','索','赖','卓','屠','池','乔','胥','闻','莘',
+            '党','翟','谭','贡','劳','逄','姬','申','扶','堵','冉','雍','桑','寿','通','燕','浦','尚','农','温','别','庄','晏','柴','瞿','阎','连','习','容','向','古','易','廖','庾',
+            '终','步','都','耿','满','弘','匡','国','文','寇','广','禄','阙','东','利','师','巩','聂','关','荆');
+
+        //,$file_name='name.txt'
+        // }
+        $temp = '';
+        for( $j=1 ;$j<=$name_count; $j++ )
+        {
+            $firstname_rand_key   = mt_rand( 0,count( $firstname_arr )-1 );
+            $firstname   =  $firstname_arr[$firstname_rand_key];
+            $temp[]=$firstname. 'xx';
+        }
+        return $temp;
+    }
+
+
+
+    public function show_enroll()
+    {
+        $id = I('id');
+        //生成用户姓名
+        $username = $this->getname(1);
+        //生成用户手机号
+        $userphone = $this->generate_name(1,'array');
+        //生成报名时间
+        $start_time = M("show_enroll")->order('id desc')->getField('usertime');
+        $end_time = time();
+        $use_time = rand($start_time,$end_time);
+        //生成用户车型
+        $car_class = array('B型房车','C型房车','拖挂式房车');
+        $use_num = rand(0,2);
+
+        //新增虚拟用户
+        $data['username'] = $username[0];
+        $data['userphone'] = $userphone[0];
+        $data['usertime'] = $use_time;
+        $data['usercar'] = $car_class[$use_num];
+        $data['pid'] = $id;
+
+        $res = M("show_enroll")->add($data);
+        if($res){
+            M("activity")->where(array('id'=>$id))->setInc('ticket_base_num',1);
+        }
     }
 
 }
