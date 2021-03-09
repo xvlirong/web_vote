@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{$info.title}</title>
+    <link rel="stylesheet" href="__STATIC__/css/neat.css" />
+    <link rel="stylesheet" href="__STATIC__/css/swiper.css" />
+    <link rel="stylesheet" href="__STATIC__/css/phone_new.css" />
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=tBW47T7lwTiNXTigAGMKt42K"></script>
+</head>
+<body style="background: #D41212;font-size: 12px">
+<div id="mask"></div>
+<div id="message">必填项不能为空</div>
+    <div>
+        <!--顶图-->
+        <div class="top">
+            <img src="__PUBLIC__/upload/banner/{$info.banner_mobile}" alt="房车时代" >
+        </div>
+        <!--报名人数图-->
+        <div class="act_num">
+            <p>
+                <img src="__STATIC__/images/cheche.png" style="width: 9rem;margin-left: -141px;margin-top: -19px;" alt="">
+                已有<span style="color: #D41212">{$activityNum}</span>报名领票
+                <img src="__STATIC__/images/go.png" style="width: 8rem;margin-top: -3rem;margin-right: -14rem;" alt="">
+            </p>
+<!--            <img src="__STATIC__/images/act_num.png" alt="">-->
+        </div>
+
+        <div class="sign_box">
+            <!--流程图-->
+            <div class="lc_box">
+                <img src="__STATIC__/images/bmlc.jpg" alt="">
+            </div>
+            <!--报名表单-->
+            <div class="info_box">
+                <p class="car-type">
+                    <input  type="checkbox" name="model" value="B型房车"><span>B型房车</span>
+                    <input  type="checkbox" name="model" value="C型房车"><span>C型房车</span>
+                    <input type="checkbox" name="model" value="拖挂式房车"><span>拖挂式房车</span>
+                </p>
+
+                <p class="p_name">
+                    <span class="s_name">姓名</span>
+                    <input type="text" id="username" placeholder=" 例：张先生">
+                </p>
+                <p class="p_name">
+                    <span class="p_phone">手机号</span>
+                    <input type="number" id="phone" placeholder="请输入您的手机号码">
+                </p>
+                <p class="p_submit">
+                    <eq name="act_status" value="1">
+                        <input type="submit" class="submit" id="submit" value="免费报名领票" />
+                        <else />
+                        <input type="submit" class="submit no" style="background: #ccc;" value="免费报名领票" />
+                    </eq>
+                </p>
+                <div class="signlist clearfix">
+                    <div class="list">
+                        <ul>
+                            <foreach name="activityMemberList" item="v">
+                                <li>
+                                    <img src="__STATIC__/images/laba.png" alt="">
+                                    <span class="username">{$v.username}</span><span class="userphone">{$v.userphone}</span><span class="usercar">{$v.usercar}</span><span class="usertime">{$v.usertimes}</span>
+                                </li>
+                            </foreach>
+                        </ul>
+                    </div>
+                </div>
+                <p style="clear: both">
+                    <span class="tishi">*客服热线：</span>&nbsp;&nbsp;<a style="color: black" href="tel:{$info.service_phone}"><span>{$info.service_phone}</span></a>
+                </p>
+                <p>
+                    <span class="tishi">*温馨提示：</span>&nbsp;&nbsp;<span>预约成功后，您将收到报名成功短线，现场凭短信签到入场</span>
+                </p>
+
+            </div>
+        </div>
+        <!--展会亮点-->
+        <div class="act_ld">
+            <img src="__STATIC__/images/act_ld.png" alt="">
+        </div>
+        <!--亮点一-->
+        <div class="ld_box">
+            <div class="ld_con">
+                <p>
+                    <img src="__STATIC__/images/ld_1.jpg" class="ld_img" alt="">
+                </p>
+                <div class="ld_line">
+                <div class="ld1_box">
+                    <ul class="clearfix clearfloat">
+                        <li class="ld_imgs"><img src="__STATIC__/images/ld_demo1.jpg" alt=""></li>
+                        <li class="ld_info"><p>{$info.highlight_one}</p></li>
+                    </ul>
+                </div>
+                </div>
+            </div>
+            <!--亮点2-->
+            <div class="ld_con">
+                <p>
+                    <img src="__STATIC__/images/ld_2.jpg" class="ld_img" alt="">
+                </p>
+                <div class="ld2_line">
+                    <div class="ld2_box">
+                        <ul class="clearfix clearfloat">
+                            <li class="ld_imgs"><img src="__STATIC__/images/ld_demo2.jpg" alt=""></li>
+                            <li class="ld_info"><p>{$info.highlight_two}</p></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!--亮点3-->
+            <div class="ld_con">
+                <p>
+                    <img src="__STATIC__/images/ld_3.jpg" class="ld_img" alt="">
+                </p>
+                <div class="ld3_line">
+                    <div class="ld3_box">
+                        <ul class="clearfix clearfloat">
+                            <li class="ld_imgs"><img src="__STATIC__/images/ld_demo3.jpg" alt=""></li>
+                            <li class="ld_info"><p>{$info.highlight_three}</p></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!--亮点4-->
+            <div class="ld_con">
+                <p>
+                    <img src="__STATIC__/images/ld_4.jpg" class="ld_img" alt="">
+                </p>
+                <div class="ld4_line">
+                    <div class="ld4_box">
+                        <ul class="clearfix clearfloat">
+                            <li class="ld_imgs"><img src="__STATIC__/images/ld_demo4.jpg" alt=""></li>
+                            <li class="ld_info"><p>{$info.highlight_four}</p></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--展会说明-->
+        <div class="act_ld">
+            <img src="__STATIC__/images/act_sm.png" alt="">
+        </div>
+
+        <div class="act_info_box">
+            <div class="act_content_box">
+                <p><img src="__STATIC__/images/zbdw.jpg" alt=""></p>
+                <p class="act_info_p">{$info.sponsor_unit}</p>
+                <p class="info_line"></p>
+            </div>
+            <div class="act_content_box">
+                <p><img src="__STATIC__/images/cbdw.jpg" alt=""></p>
+                <p class="act_info_p">{$info.undertaking_unit}</p>
+                <p class="info_line"></p>
+            </div>
+            <div class="act_content_box">
+                <p><img src="__STATIC__/images/zxrx.jpg" alt=""></p>
+                <p class="act_info_p">{$info.consult_phone}</p>
+                <p class="info_line"></p>
+            </div>
+            <div class="act_content_box" style="margin-bottom: 1.5rem">
+                <p class="act_info_p">
+                    {$info.act_intro}
+                </p>
+            </div>
+            <!--合作品牌-->
+            <div id="brand">
+                <div class="wjhg_d">
+                    <span class="wjhg_line"></span>
+                    <p class="wjhg_p">合作品牌</p>
+                </div>
+                <div class="list">
+                    <ul class="clearfix">
+                        <foreach name="brand_list" item="v" key="i">
+                            <if condition="$i lt 36">
+                                <li>
+                                    <div>
+                                        <img class="lazy" data-original="__PUBLIC__/upload/brand/{$v.zh_logo}"  alt="" />
+                                    </div>
+                                </li>
+                                <else />
+                                <li class="none">
+                                    <div>
+                                        <img class="lazy" data-original="__PUBLIC__/upload/brand/{$v.zh_logo}"  alt="" />
+                                    </div>
+                                </li>
+                            </if>
+                        </foreach>
+                    </ul>
+                </div>
+                <div class="more" id="more">查看更多品牌</div>
+            </div>
+
+
+
+            <!--往届回顾-->
+            <div class="wjhg_box">
+                <div class="wjhg_d">
+                    <span class="wjhg_line"></span>
+                    <p class="wjhg_p">往届回顾</p>
+                </div>
+                <div style="margin: 1rem 1rem 1rem 0;">
+                    <img src="__PUBLIC__/upload/scene/{$v.img_url}" alt="">
+                </div>
+            </div>
+            <!--乘车路线-->
+            <div class="cclx_box">
+                <div class="wjhg_d">
+                    <span class="wjhg_line"></span>
+                    <p class="wjhg_p">乘车路线</p>
+                </div>
+            </div>
+            <div class="lx_detail">
+                <div id="allmaps"></div>
+                <div>
+                    <ul class="clearfix clearfloat">
+                        <li class="subway_box">
+                            <div class="sub_title">
+                                <img src="__STATIC__/images/ditie.png" alt="">
+                                <span class="sub_info">地铁:</span>
+                            </div>
+                            <p>{$info.subway}</p>
+                        </li>
+                        <li class="subway_box" style="background-image: linear-gradient(#EFBF6A,#DA8D01)">
+                            <div class="sub_title">
+                                <img src="__STATIC__/images/gj.png" alt="">
+                                <span class="sub_info">途径公交站点:</span>
+                            </div>
+                            <p>{$info.bus}</p>
+                        </li>
+                        <li class="subway_box" style="background-image: linear-gradient(#FB4142, #CE0000);">
+                            <div class="sub_title">
+                                <img src="__STATIC__/images/zijia.png" alt="">
+                                <span class="sub_info">自驾:</span>
+                            </div>
+                            <p>{$info.use_car}</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</body>
+</html>
+<script type="text/javascript">
+    // 百度地图API功能
+    var lgt="{$info.map_longitude}";
+    var lat="{$info.map_latitude}";
+    var themes='__STATIC__';
+    //倒计时
+    var time_end='{$info.end_time}'*1000;
+    //表单
+    var id="{$info['id']}";
+    var source='{$source}';
+    var all_url='{$all_url}';
+    var url_refer='{$url_refer}';
+    //var url='{$refererUrl}';
+    var organizer='{$info.undertaking_unit}';
+    var use_url = "__APP__/Rvact/Index/sign";
+    var type='mobile';
+    var base_url = "__APP__/Rvact/Index/";
+
+</script>
+<script type="text/javascript" src="__STATIC__/js/jquery.min.js"></script>
+<script type="text/javascript" src="__STATIC__/js/swiper.js"></script>
+<script type="text/javascript" src="__STATIC__/js/global.js"></script>
+<script type="text/javascript" src="__STATIC__/js/phone_new.js"></script>
+<script type="text/javascript" src="__STATIC__/js/activity.js"></script>
+<script src="__STATIC__/js/jquery.lazyload.js?v=1.9.1"></script>
+<script>
+    $(function() {
+
+        $("img.lazy").lazyload({effect: "fadeIn"});
+
+    });
+</script>

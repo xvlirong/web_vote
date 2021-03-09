@@ -1,4 +1,5 @@
 (function () {
+
     function alertBox(message){
         $('#mask').show();
         $('#message').show();
