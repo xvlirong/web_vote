@@ -68,6 +68,23 @@ class ActivityController extends CommonController
         $wx_img = $_FILES['wx_img'];
         $data['wx_img'] = $this->uploadImgs($wx_img,'wx_img');
 
+        //亮点配图
+        $highlight_one_img = $_FILES['highlight_one_img'];
+        if($_FILES['highlight_one_img']['name'] != ''){
+            $data['highlight_one_img'] = $this->uploadImgs($highlight_one_img,'wx_img');
+        }
+        $highlight_two_img = $_FILES['highlight_two_img'];
+        if($_FILES['highlight_two_img']['name'] != ''){
+            $data['highlight_two_img'] = $this->uploadImgs($highlight_two_img,'wx_img');
+        }
+        $highlight_three_img = $_FILES['highlight_three_img'];
+        if($_FILES['highlight_three_img']['name'] != ''){
+            $data['highlight_three_img'] = $this->uploadImgs($highlight_three_img,'wx_img');
+        }
+        $highlight_four_img = $_FILES['highlight_four_img'];
+        if($_FILES['highlight_four_img']['name'] != ''){
+            $data['highlight_four_img'] = $this->uploadImgs($highlight_four_img,'wx_img');
+        }
         $res = M("activity")->add($data);
 
         if($res){
@@ -289,6 +306,26 @@ class ActivityController extends CommonController
         if($_FILES['wx_img']['name'] != ''){
             $data['wx_img'] = $this->uploadImgs($wx_img,'wx_img');
         }
+
+        //亮点配图
+        $highlight_one_img = $_FILES['highlight_one_img'];
+        if($_FILES['highlight_one_img']['name'] != ''){
+            $data['highlight_one_img'] = $this->uploadImgs($highlight_one_img,'wx_img');
+        }
+        $highlight_two_img = $_FILES['highlight_two_img'];
+        if($_FILES['highlight_two_img']['name'] != ''){
+            $data['highlight_two_img'] = $this->uploadImgs($highlight_two_img,'wx_img');
+        }
+        $highlight_three_img = $_FILES['highlight_three_img'];
+        if($_FILES['highlight_three_img']['name'] != ''){
+            $data['highlight_three_img'] = $this->uploadImgs($highlight_three_img,'wx_img');
+        }
+        $highlight_four_img = $_FILES['highlight_four_img'];
+        if($_FILES['highlight_four_img']['name'] != ''){
+            $data['highlight_four_img'] = $this->uploadImgs($highlight_four_img,'wx_img');
+        }
+
+
         $this->handleAddSceneImg($data['id']);
         $res = M("activity")->save($data);
         if($res){

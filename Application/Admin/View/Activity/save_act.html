@@ -11,7 +11,7 @@
     <script type="text/javascript">
         $(function(){
             //自适应屏幕宽度
-            window.onresize=function(){ location=location };
+            // window.onresize=function(){ location=location };
 
             var main_h = $(window).height();
             $('.hy_list').css('height',main_h-45+'px');
@@ -193,21 +193,9 @@
                                                     </div>
                                                 </li>
                                                 <li class="clearfix">
-                                                    <span class="title"></span>
-                                                    <img src="__PUBLIC__/upload/wx_img/{$info.wx_img}" alt="" style="max-width: 200px;">
-                                                </li>
-                                            </td>
-                                            <td>
-                                                <li class="clearfix">
-                                                    <span class="title">乘车路线：</span>
-                                                    <div class="li_r">
-                                                        <textarea name="car_line" cols="30" placeholder="多条请使用“|”分割" rows="10">{$info.car_line}</textarea>
-                                                    </div>
-                                                </li>
-                                                <li class="clearfix">
                                                     <span class="title">主办单位：</span>
                                                     <div class="li_r">
-                                                        <textarea name="sponsor_unit"  cols="30" rows="10">{$info.sponsor_unit}</textarea>
+                                                        <textarea name="sponsor_unit"  cols="30" rows="5">{$info.sponsor_unit}</textarea>
                                                     </div>
                                                 </li>
                                                 <li class="clearfix">
@@ -235,9 +223,88 @@
                                                     </div>
                                                 </li>
                                                 <li class="clearfix">
+                                                    <span class="title"></span>
+                                                    <img src="__PUBLIC__/upload/wx_img/{$info.wx_img}" alt="" style="max-width: 200px;">
+                                                </li>
+                                            </td>
+                                            <td>
+                                                <li class="clearfix">
+                                                    <span class="title">乘车路线：</span>
+                                                    <div class="li_r">
+                                                        <textarea name="car_line" cols="30" placeholder="多条请使用“|”分割" rows="10">{$info.car_line}</textarea>
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix">
+                                                    <span class="title">地铁线路：</span>
+                                                    <div class="li_r">
+                                                        <textarea name="subway"  cols="30" rows="5" >{$info.subway}</textarea>
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix">
+                                                    <span class="title">公交线路：</span>
+                                                    <div class="li_r">
+                                                        <textarea name="bus"  cols="30" rows="5" >{$info.bus}</textarea>
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix">
+                                                    <span class="title">自驾线路：</span>
+                                                    <div class="li_r">
+                                                        <textarea name="use_car"  cols="30" rows="5" >{$info.use_car}</textarea>
+                                                    </div>
+                                                </li>
+
+                                                <li class="clearfix">
                                                     <span class="title">活动亮点：</span>
                                                     <div class="li_r">
                                                         <textarea name="act_highlights"  cols="30" rows="10" placeholder="多条请使用“|”分割">{$info.act_highlights}</textarea>
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix">
+                                                    <span class="title">亮点1：</span>
+                                                    <div class="li_r">
+                                                        <textarea name="highlight_one"  cols="30" rows="5" >{$info.highlight_one}</textarea>
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix">
+                                                    <span class="title">亮点2：</span>
+                                                    <div class="li_r">
+                                                        <textarea name="highlight_two"  cols="30" rows="5" >{$info.highlight_two}</textarea>
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix">
+                                                    <span class="title">亮点3：</span>
+                                                    <div class="li_r">
+                                                        <textarea name="highlight_three"  cols="30" rows="5" >{$info.highlight_three}</textarea>
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix">
+                                                    <span class="title">亮点4：</span>
+                                                    <div class="li_r">
+                                                        <textarea name="highlight_four"  cols="30" rows="5" >{$info.highlight_four}</textarea>
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix">
+                                                    <span class="title">亮点一配图：</span>
+                                                    <div class="li_r">
+                                                        <input type="file" name="highlight_one_img">
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix">
+                                                    <span class="title">亮点二配图：</span>
+                                                    <div class="li_r">
+                                                        <input type="file" name="highlight_two_img">
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix">
+                                                    <span class="title">亮点三配图：</span>
+                                                    <div class="li_r">
+                                                        <input type="file" name="highlight_three_img">
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix">
+                                                    <span class="title">亮点四配图：</span>
+                                                    <div class="li_r">
+                                                        <input type="file" name="highlight_four_img">
                                                     </div>
                                                 </li>
 
