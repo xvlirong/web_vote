@@ -24,6 +24,7 @@
         });
         modelValue=modelValue.substr(0,modelValue.length-1);
 
+        
         // if(!username || !phone || !modelValue|| reg.test(username) || reg.test(phone) || reg.test(modelValue)) {
         //     alertBox('必填项不能为空');
         //     return false;
