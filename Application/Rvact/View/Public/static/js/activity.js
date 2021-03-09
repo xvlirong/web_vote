@@ -24,11 +24,10 @@
         });
         modelValue=modelValue.substr(0,modelValue.length-1);
 
-        
-        // if(!username || !phone || !modelValue|| reg.test(username) || reg.test(phone) || reg.test(modelValue)) {
-        //     alertBox('必填项不能为空');
-        //     return false;
-        // }
+        if(!username || !phone || !modelValue|| reg.test(username) || reg.test(phone) || reg.test(modelValue)) {
+            alertBox('必填项不能为空');
+            return false;
+        }
         if(!text.test(username)) {
             alertBox('姓名格式错误');
             return false;

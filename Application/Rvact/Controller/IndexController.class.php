@@ -155,7 +155,6 @@ class IndexController extends BaseController {
 
 
     public function sign(){
-        echo 111;die;
         $data = $_POST;
         if(empty($data['act_id'])){
             return $this->jsonData(0,'活动ID不能为空');
