@@ -204,7 +204,9 @@
                     <p class="wjhg_p">往届回顾</p>
                 </div>
                 <div style="margin: 1rem 1rem 1rem 0;">
-                    <img src="__PUBLIC__/upload/scene/{$v.img_url}" alt="">
+                    <foreach name="scene_img" item="v">
+                        <img src="__PUBLIC__/upload/scene/{$v.img_url}" alt="">
+                    </foreach>
                 </div>
             </div>
             <!--乘车路线-->
