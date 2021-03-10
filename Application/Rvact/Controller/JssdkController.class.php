@@ -2,10 +2,7 @@
 namespace Rvact\Controller;
 use Think\Controller;
 class JssdkController extends BaseController {
-    private $appId='wxbd4d33e0bd2dbe99';
-    private $appSecret='91b9a69fbb9747a4363659eb201b9146';
-
-    public function __construct($appId, $appSecret) {
+    public function __construct() {
 
         $this->appId = C('weixin.appid');
         $this->appSecret = C('weixin.appsecret');
@@ -71,7 +68,7 @@ class JssdkController extends BaseController {
             $data['expires_time']=time()+7000;
             $data['appid']=$appid;
             //dump($data);die;
-            $weixin->where(array('appid'=>$appid))->add($data);
+            $weixin->where(array('appid'=>$appid))->save($data);
         }else{
 
             $jsapi_ticket=$data['jsapi_ticket'];
