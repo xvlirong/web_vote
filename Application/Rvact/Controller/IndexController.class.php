@@ -8,7 +8,6 @@ class IndexController extends BaseController {
         cookie('act_id',$id,time()+3600);
         $refer = $_SERVER['HTTP_REFERER'];
         $all_url = $_SERVER['REQUEST_URI'];
-        
         $fx_url = 'http://peoplerv.rvtimes.cn/rvact/index/js_api';
         //基础信息
         $info = M("activity")->where(array('id'=>$id))->find();
