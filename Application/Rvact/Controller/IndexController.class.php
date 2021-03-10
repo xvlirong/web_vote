@@ -5,6 +5,7 @@ class IndexController extends BaseController {
     public function index(){
         //活动id
         $id = I('id',1);
+        
         cookie('act_id',$id,time()+3600);
         $refer = $_SERVER['HTTP_REFERER'];
         $all_url = $_SERVER['REQUEST_URI'];
