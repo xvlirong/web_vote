@@ -6,12 +6,15 @@ class IndexController extends BaseController {
         //活动id
         $id = I('id',1);
 
+        cookie('act_id',$id,time()+3600);
         $refer = $_SERVER['HTTP_REFERER'];
         $all_url = $_SERVER['REQUEST_URI'];
+        $fx_url = 'http://peoplerv.rvtimes.cn/rvact/index/jsapi';
         //基础信息
         $info = M("activity")->where(array('id'=>$id))->find();
         $this->checkIsSign($info);
         $this->assign('all_url',$all_url);
+        $this->assign('fx_url',$fx_url);
 
         $info['lines'] = explode('|',$info['car_line']);
         $info['act_highlights'] = explode('|',$info['act_highlights']);
@@ -573,6 +576,32 @@ class IndexController extends BaseController {
         if($res){
             M("activity")->where(array('id'=>$id))->setInc('ticket_base_num',1);
         }
+    }
+
+    /**
+     * 分享
+     */
+    public function js_api(){
+        $url=htmlspecialchars_decode(trim(I('url')));
+        $jssdk=A("Jssdk");
+        $signPackage = $jssdk->GetSignPackage($url);
+        $pid = cookie('act_id');
+        $info = M("activity")->where(array('id'=>$pid))->find();
+        $share_data['title']=$info['title'];
+        $share_data['desc']="欢迎您的到来";
+        $share_data['link']=HTTP_TYPE."peoplerv.rvtimes.cn/rvact/index/index/id/".$pid."/souce/share";
+        $share_data['imgUrl']=HTTP_TYPE."peoplerv.rvtimes.cn/Public/img/logo.jpg";
+
+        if($signPackage){
+            $data['result']="success";
+            $data['js_data']=$signPackage;
+            $data['share_data']=$share_data;
+        }else{
+            $data['result']="error";
+            $data['js_data']='';
+            $data['share_data']='';
+        }
+        $this->ajaxReturn($data);
     }
 
 }
