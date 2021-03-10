@@ -7,7 +7,7 @@ return array(
     ),
     'MULTI_MODULE'=> false,
     'weixin'=>array(
-        'appid' => 'wxbd4d33e0bd2dbe99',
-        'appsecret' => '91b9a69fbb9747a4363659eb201b9146'
+        'appid' => 'wx25c3d8d3570674cd',
+        'appsecret' => '913e9fe977454d5ba1a98a2ea51b62ad'
     ),
 );
