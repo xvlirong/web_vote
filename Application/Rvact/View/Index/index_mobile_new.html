@@ -8,23 +8,24 @@
     <title>{$info.title}</title>
     <link rel="stylesheet" href="__STATIC__/css/neat.css" />
     <link rel="stylesheet" href="__STATIC__/css/swiper.css" />
-    <link rel="stylesheet" href="__STATIC__/css/phone_new.css?time=1728" />
+    <link rel="stylesheet" href="__STATIC__/css/phone_new.css?time=1116" />
     <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=tBW47T7lwTiNXTigAGMKt42K"></script>
 </head>
 <body style="background: #D41212;font-size: 12px">
 <div id="mask"></div>
 <div id="message">必填项不能为空</div>
-    <div>
+    <div class="con">
         <!--顶图-->
         <div class="top">
             <img src="__PUBLIC__/upload/banner/{$info.banner_mobile}" alt="房车时代" >
         </div>
+        <a name="fix"></a>
         <!--报名人数图-->
         <div class="act_num">
             <p>
-                <img src="__STATIC__/images/cheche.png" style="width: 9rem;margin-left: -141px;margin-top: -19px;" alt="">
-                已有<span style="color: #D41212">{$activityNum}</span>报名领票
-                <img src="__STATIC__/images/go.png" style="width: 8rem;margin-top: -3rem;margin-right: -14rem;" alt="">
+                <img class="left_che" src="__STATIC__/images/cheche1.png"  alt="">
+               已有<span style="color: #D41212">{$activityNum}</span>报名领票
+                <img class="right_go" src="__STATIC__/images/go1.png"  alt="">
             </p>
 <!--            <img src="__STATIC__/images/act_num.png" alt="">-->
         </div>
@@ -32,7 +33,7 @@
         <div class="sign_box">
             <!--流程图-->
             <div class="lc_box">
-                <img src="__STATIC__/images/bmlc.jpg" alt="">
+                <img src="__STATIC__/images/bmlc.png" alt="">
             </div>
             <!--报名表单-->
             <div class="info_box">
@@ -70,7 +71,7 @@
                     </div>
                 </div>
                 <p style="clear: both">
-                    <span class="tishi">*客服热线：</span>&nbsp;&nbsp;<a style="color: black" href="tel:{$info.service_phone}"><span>{$info.service_phone}</span></a>
+                    <span class="tishi">*客服热线：</span>&nbsp;&nbsp;<a class="tel_b" href="tel:{$info.service_phone}"><span>{$info.service_phone}</span></a>
                 </p>
                 <p>
                     <span class="tishi">*温馨提示：</span>&nbsp;&nbsp;<span>预约成功后，您将收到报名成功短线，现场凭短信签到入场</span>
@@ -91,7 +92,7 @@
                 <div class="ld_line">
                 <div class="ld1_box">
                     <ul class="clearfix clearfloat">
-                        <li class="ld_imgs"><img src="__STATIC__/images/ld_demo1.jpg" alt=""></li>
+                        <li class="ld_imgs"><img src="__PUBLIC__/upload/wx_img/{$info.highlight_one_img}" alt=""></li>
                         <li class="ld_info"><p>{$info.highlight_one}</p></li>
                     </ul>
                 </div>
@@ -105,7 +106,7 @@
                 <div class="ld2_line">
                     <div class="ld2_box">
                         <ul class="clearfix clearfloat">
-                            <li class="ld_imgs"><img src="__STATIC__/images/ld_demo2.jpg" alt=""></li>
+                            <li class="ld_imgs"><img src="__PUBLIC__/upload/wx_img/{$info.highlight_two_img}" alt=""></li>
                             <li class="ld_info"><p>{$info.highlight_two}</p></li>
                         </ul>
                     </div>
@@ -119,7 +120,7 @@
                 <div class="ld3_line">
                     <div class="ld3_box">
                         <ul class="clearfix clearfloat">
-                            <li class="ld_imgs"><img src="__STATIC__/images/ld_demo3.jpg" alt=""></li>
+                            <li class="ld_imgs"><img src="__PUBLIC__/upload/wx_img/{$info.highlight_three_img}" alt=""></li>
                             <li class="ld_info"><p>{$info.highlight_three}</p></li>
                         </ul>
                     </div>
@@ -133,7 +134,7 @@
                 <div class="ld4_line">
                     <div class="ld4_box">
                         <ul class="clearfix clearfloat">
-                            <li class="ld_imgs"><img src="__STATIC__/images/ld_demo4.jpg" alt=""></li>
+                            <li class="ld_imgs"><img src="__PUBLIC__/upload/wx_img/{$info.highlight_four_img}" alt=""></li>
                             <li class="ld_info"><p>{$info.highlight_four}</p></li>
                         </ul>
                     </div>
@@ -158,7 +159,7 @@
                 <p class="info_line"></p>
             </div>
             <div class="act_content_box">
-                <p><img src="__STATIC__/images/zxrx.jpg" alt=""></p>
+                <p><img src="__STATIC__/images/zsrx.jpg" alt=""></p>
                 <p class="act_info_p">{$info.consult_phone}</p>
                 <p class="info_line"></p>
             </div>
@@ -246,8 +247,14 @@
             </div>
         </div>
 
-
+        <div class="copy">&copy; 2014-2021 房车时代 <p>京ICP备07503663号 京公网安备11010802015289号</p> </div>
     </div>
+<div id="fixed">
+    <ul class="footer clearfloat">
+        <li style="background: #DA8D01"><a href="#fix" target="_self">&nbsp;&nbsp;&nbsp;立即报名</a></li>
+        <li style="background: #FB4142"><a href="tel:{$info.recept_phone}">&nbsp;&nbsp;&nbsp;电话咨询</a></li>
+    </ul>
+</div>
 
 </body>
 </html>
