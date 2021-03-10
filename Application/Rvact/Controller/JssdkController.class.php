@@ -4,6 +4,7 @@ use Think\Controller;
 class JssdkController extends BaseController {
 
     public function __construct() {
+        
         $this->appId = C('weixin.appid');
         $this->appSecret = C('weixin.appsecret');
     }
