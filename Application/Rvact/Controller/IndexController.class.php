@@ -587,8 +587,8 @@ class IndexController extends BaseController {
         $signPackage = $jssdk->GetSignPackage($url);
         $pid = cookie('act_id');
         $info = M("activity")->where(array('id'=>$pid))->find();
-        $share_data['title']=$info['title'];
-        $share_data['desc']="欢迎您的到来";
+        $share_data['title']="【展会报名】".$info['title'];
+        $share_data['desc']="点击链接即可报名";
         $share_data['link']=HTTP_TYPE."peoplerv.rvtimes.cn/rvact/index/index/id/".$pid."/souce/share";
         $share_data['imgUrl']=HTTP_TYPE."peoplerv.rvtimes.cn/Public/img/logo.jpg";
 
