@@ -44,8 +44,8 @@ class JssdkController extends BaseController {
     }
 
     public function  getJsApiTicket(){
-        $appid='wx25c3d8d3570674cd';
-        $appsecret = '913e9fe977454d5ba1a98a2ea51b62ad';
+        $appid='wxa51037e86bcb82b7';
+        $appsecret = 'b6fbeaec46481eca8312828bdb0f7281';
         $weixin=M('weixin_access');
         $now=time();
         //dump($now);die;
