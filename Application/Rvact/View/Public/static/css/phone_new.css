@@ -166,7 +166,7 @@
     color: #FEF8E2;
     border-radius: 20px;
     font-size: 18px;
-    margin-left: 30%;
+    margin-left: 32.5%;
     position: relative;
     z-index: 2;
     font-weight: bold;
@@ -183,7 +183,7 @@
     z-index: 1;
 }
 .cclx_box{
-    margin: .8rem 0 0 2rem;
+    margin: .8rem 0 0 1rem;
 }
 
 #allmaps{
