@@ -586,11 +586,11 @@ class IndexController extends BaseController {
         $jssdk = A("Jssdk");
         $signPackage = $jssdk->GetSignPackage($url);
         $pid = cookie('act_id');
-        $info = M("activity")->where(array('id'=>$pid))->find();
-        $share_data['title']="【房车展会】".$info['title'];
-        $share_data['desc']="点击链接查看展会详情";
-        $share_data['link']=HTTP_TYPE."peoplerv.rvtimes.cn/rvact/index/index/id/".$pid."/souce/share";
-        $share_data['imgUrl']=HTTP_TYPE."peoplerv.rvtimes.cn/Public/img/logo.jpg";
+        $info = M("act_share")->where(array('pid'=>$pid))->find();
+        $share_data['title'] = $info['title'];
+        $share_data['desc'] = $info['intro'];
+        $share_data['link'] = HTTP_TYPE."peoplerv.rvtimes.cn/rvact/index/index/id/".$pid."/souce/share";
+        $share_data['imgUrl'] = HTTP_TYPE."peoplerv.rvtimes.cn/Public/img/logo.jpg";
 
         if($signPackage){
             $data['result']="success";
