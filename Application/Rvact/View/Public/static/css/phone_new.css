@@ -433,3 +433,7 @@
     color: #737373;
     font-size: 12px;
 }
+.usercar{
+    width: 6rem;
+    text-overflow:ellipsis;
+}
