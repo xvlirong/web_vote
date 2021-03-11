@@ -24,7 +24,7 @@ class JssdkController extends BaseController {
         $signature = sha1($string);
 
         $signPackage = array(
-            "appId"     => 'wx25c3d8d3570674cd',
+            "appId"     => 'wxa51037e86bcb82b7',
             "nonceStr"  => $nonceStr,
             "timestamp" => $timestamp,
             "url"       => $url,
