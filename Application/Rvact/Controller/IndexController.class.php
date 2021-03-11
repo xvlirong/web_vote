@@ -1,11 +1,11 @@
 <?php
 namespace Rvact\Controller;
 use Think\Controller;
+use Rvact\Controller\JssdkController;
 class IndexController extends BaseController {
     public function index(){
         //活动id
         $id = I('id',1);
-        
         cookie('act_id',$id,time()+3600);
         $refer = $_SERVER['HTTP_REFERER'];
         $all_url = $_SERVER['REQUEST_URI'];
@@ -583,7 +583,7 @@ class IndexController extends BaseController {
      */
     public function js_api(){
         $url=htmlspecialchars_decode(trim(I('url')));
-        $jssdk=A("Jssdk");
+        $jssdk = A("Jssdk");
         $signPackage = $jssdk->GetSignPackage($url);
         $pid = cookie('act_id');
         $info = M("activity")->where(array('id'=>$pid))->find();
@@ -603,5 +603,4 @@ class IndexController extends BaseController {
         }
         $this->ajaxReturn($data);
     }
-
 }

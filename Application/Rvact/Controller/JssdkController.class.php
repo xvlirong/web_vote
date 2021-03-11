@@ -3,11 +3,7 @@ namespace Rvact\Controller;
 use Think\Controller;
 class JssdkController extends BaseController {
 
-    public function __construct() {
-        
-        $this->appId = C('weixin.appid');
-        $this->appSecret = C('weixin.appsecret');
-    }
+
 
     public function getSignPackage($url='') {
         $jsapiTicket = $this->getJsApiTicket();
@@ -47,7 +43,7 @@ class JssdkController extends BaseController {
         return $str;
     }
 
-    private function  getJsApiTicket(){
+    public function  getJsApiTicket(){
         $appid='wx25c3d8d3570674cd';
         $appsecret = '913e9fe977454d5ba1a98a2ea51b62ad';
         $weixin=M('weixin_access');
@@ -68,7 +64,6 @@ class JssdkController extends BaseController {
             $data['jsapi_ticket']=$jsapi_ticket;
             $data['expires_time']=time()+7000;
             $data['appid']=$appid;
-            //dump($data);die;
             $weixin->where(array('appid'=>$appid))->save($data);
         }else{
 
