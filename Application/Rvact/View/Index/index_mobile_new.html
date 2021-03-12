@@ -162,6 +162,13 @@
                 <p class="act_info_p">{$info.undertaking_unit}</p>
                 <p class="info_line"></p>
             </div>
+            <if condition="$info.co_unit neq ''">
+                <div class="act_content_box">
+                    <p><img src="__STATIC__/images/xbdw.jpg" alt=""></p>
+                    <p class="act_info_p">{$info.co_unit}</p>
+                    <p class="info_line"></p>
+                </div>
+            </if>
             <div class="act_content_box">
                 <p><img src="__STATIC__/images/zsrx.jpg" alt=""></p>
                 <p class="act_info_p">{$info.consult_phone}</p>
