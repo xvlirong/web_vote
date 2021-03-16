@@ -82,7 +82,7 @@
                                                         <select name="template_id" class="" style="font-family:'microsoft yahei';">
                                                             <option value="">请选择</option>
                                                             <foreach name="tpl_list" item="v">
-                                                                <option value="{$v.id}" <eq name="v['id']" value="$info['template_id']">selected</eq>>{$v.title}</option>
+                                                                <option disabled="disabled" value="{$v.id}" <eq name="v['id']" value="$info['template_id']">selected</eq>>{$v.title}</option>
                                                             </foreach>
                                                         </select>
                                                     </div>
