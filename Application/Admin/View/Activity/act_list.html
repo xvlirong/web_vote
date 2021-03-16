@@ -41,8 +41,8 @@
                         <th scope="col">开始时间</th>
                         <th scope="col">结束时间</th>
                         <th scope="col">报名信息</th>
-                        <th scope="col">报名统计</th>
-                        <th scope="col">到场统计</th>
+                        <th scope="col">微信分享</th>
+<!--                        <th scope="col">到场统计</th>-->
                         <th scope="col">编辑</th>
                     </tr>
                     <foreach name="list" item="v">
@@ -52,8 +52,8 @@
                             <td>{$v.start_time|date="Y-m-d",###}</td>
                             <td>{$v.end_time|date="Y-m-d",###}</td>
                             <td><a href="{:U('entry_info',array('id'=>$v['id']))}" class="btn">报名信息</a></td>
-                            <td><a href="{:U('count_sign_info',array('id'=>$v['id']))}" class="btn">报名统计</a></td>
-                            <td><a href="{:U('count_arrival_info',array('id'=>$v['id']))}" class="btn">到场统计</a></td>
+                            <td><a href="{:U('act_share',array('id'=>$v['id']))}" class="btn">微信分享</a></td>
+<!--                            <td><a href="{:U('count_arrival_info',array('id'=>$v['id']))}" class="btn">到场统计</a></td>-->
                             <td><a href="{:U('save_act',array('id'=>$v['id']))}" class="btn">编辑</a></td>
                         </tr>
                     </foreach>

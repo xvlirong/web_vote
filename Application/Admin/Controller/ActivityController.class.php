@@ -580,6 +580,7 @@ class ActivityController extends CommonController
             $data['zh_logo'] = $this->uploadImgs($file1,'brand');
         }
         $data['sort'] = I('sort');
+        $data['show_state'] = I('show_state');
         $res = M("brand_library")->where(array('id'=>$id))->save($data);
         if($res){
             $this->success('处理成功',U('brand_list'));
@@ -1246,6 +1247,35 @@ class ActivityController extends CommonController
         $res =  M("act_registration")->where($maps)->save(array('arrival_status'=>2));
         if($res){
             echo 1;
+        }
+    }
+
+    public function act_share()
+    {
+        $pid = I('id');
+        $info = M("act_share")->where(array('pid'=>$pid))->find();
+        if(empty($info)){
+            M("act_share")->data(array('pid'=>$pid,'add_time'=>time()))->add();
+        }
+        $this->assign('info',$info);
+
+        $this->display();
+    }
+
+    /**
+     * 自定义分享信息修改
+     */
+    public function saveShare()
+    {
+        $pid = I('pid');
+        $data['title'] = I('title');
+        $data['intro'] = I('intro');
+        $data['save_time'] = time();
+        $res = M('act_share')->where(array('pid'=>$pid))->save($data);
+        if($res){
+            echo "<script>alert('处理成功'); location.replace(document.referrer);</script>";
+        } else {
+            echo "<script>alert('处理失败'); location.replace(document.referrer);</script>";
         }
     }
 

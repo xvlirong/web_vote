@@ -186,11 +186,41 @@
                                                         <input name="recept_phone" value="{$info.recept_phone}" type="text">
                                                     </div>
                                                 </li>
+<!--                                                <li class="clearfix">-->
+<!--                                                    <span class="title">微信公众号：</span>-->
+<!--                                                    <div class="li_r">-->
+<!--                                                        <input type="file" name="wx_img">-->
+<!--                                                    </div>-->
+<!--                                                </li>-->
+
+<!--                                                <li class="clearfix">-->
+<!--                                                    <span class="title"></span>-->
+<!--                                                    <img src="__PUBLIC__/upload/wx_img/{$info.wx_img}" alt="" style="max-width: 200px;">-->
+<!--                                                </li>-->
+                                            </td>
+                                            <td>
                                                 <li class="clearfix">
-                                                    <span class="title">微信公众号：</span>
+                                                    <span class="title">现场照片(PC端)：</span>
                                                     <div class="li_r">
-                                                        <input type="file" name="wx_img">
+                                                        <input type="file" name="pc_img">
                                                     </div>
+                                                </li>
+                                                <li class="clearfix">
+                                                    <span class="title"></span>
+                                                    <img src="__PUBLIC__/upload/scene/{$pc_scene.img_url}" alt="" style="max-width: 200px;">
+                                                </li>
+                                                <li class="clearfix">
+                                                    <span class="title">现场照片(移动端)：</span>
+                                                    <div class="li_r">
+                                                        <input type="file" name="mobile_img">
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix">
+                                                    <span class="title"></span>
+                                                    <volist name="mobile_scene" id="v">
+                                                        <img id="scene_{$v.id}" onclick="delImg({$v.id})" src="__PUBLIC__/upload/scene/{$v.img_url}" title="点击删除" style="max-width: 200px;margin-right: 20px">
+
+                                                    </volist>
                                                 </li>
                                                 <li class="clearfix">
                                                     <span class="title">主办单位：</span>
@@ -202,6 +232,12 @@
                                                     <span class="title">承办单位：</span>
                                                     <div class="li_r">
                                                         <input name="undertaking_unit" type="text" value="{$info.undertaking_unit}">
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix">
+                                                    <span class="title">协办单位：</span>
+                                                    <div class="li_r">
+                                                        <input name="undertaking_unit" type="text" value="{$info.co_unit}">
                                                     </div>
                                                 </li>
                                                 <li class="clearfix">
@@ -222,12 +258,42 @@
                                                         <input name="sponsor" type="text" value="{$info.sponsor}">
                                                     </div>
                                                 </li>
+
+
                                                 <li class="clearfix">
-                                                    <span class="title"></span>
-                                                    <img src="__PUBLIC__/upload/wx_img/{$info.wx_img}" alt="" style="max-width: 200px;">
+                                                    <span class="title">活动简介：</span>
+                                                    <div class="li_r">
+                                                        <textarea name="act_intro"  cols="30" rows="10">{$info.act_intro}</textarea>
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix">
+                                                    <span class="title">报名成功后显示文字：</span>
+                                                    <div class="li_r">
+                                                        <textarea name="success_info" id="" cols="30" rows="10">{$info.success_info}</textarea>
+                                                    </div>
                                                 </li>
                                             </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">&nbsp;</td>
+                                        </tr>
+                                    </table>
+                                    <li class="tj_btn">
+                                        <a class="add_course">提交</a>
+                                    </li>
+                                </ul>
+                                <!--网口地址配置-->
+                            </div>
+                            <div class="tabCont">
+                                <!--本地地址列表-->
+                                <ul class="hypz gjpz clearfix">
+                                    <table cellpadding="0" cellspacing="0" class="wlpz">
+                                        <tr>
                                             <td>
+
                                                 <li class="clearfix">
                                                     <span class="title">乘车路线：</span>
                                                     <div class="li_r">
@@ -307,76 +373,19 @@
                                                         <input type="file" name="highlight_four_img">
                                                     </div>
                                                 </li>
+<!--                                                <li class="clearfix">-->
+<!--                                                    <span class="title">品牌库:</span>-->
+<!--                                                    <div class="li_r" style="width: 80%">-->
+<!--&lt;!&ndash;                                                        <volist name="brand_list" id="v">&ndash;&gt;-->
+<!--&lt;!&ndash;                                                            <input type="checkbox" name="brand_list[]" value="{$v.id}" class="checkbox"/>{$v.brand_name}&nbsp;&nbsp;&nbsp;&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        </volist>&ndash;&gt;-->
 
-                                                <li class="clearfix">
-                                                    <span class="title">活动简介：</span>
-                                                    <div class="li_r">
-                                                        <textarea name="act_intro"  cols="30" rows="10">{$info.act_intro}</textarea>
-                                                    </div>
-                                                </li>
-                                                <li class="clearfix">
-                                                    <span class="title">报名成功后显示文字：</span>
-                                                    <div class="li_r">
-                                                        <textarea name="success_info" id="" cols="30" rows="10">{$info.success_info}</textarea>
-                                                    </div>
-                                                </li>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2">&nbsp;</td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2">&nbsp;</td>
-                                        </tr>
-                                    </table>
-                                    <li class="tj_btn">
-                                        <a class="add_course">提交</a>
-                                    </li>
-                                </ul>
-                                <!--网口地址配置-->
-                            </div>
-                            <div class="tabCont">
-                                <!--本地地址列表-->
-                                <ul class="hypz gjpz clearfix">
-                                    <table cellpadding="0" cellspacing="0" class="wlpz">
-                                        <tr>
-                                            <td>
-                                                <li class="clearfix">
-                                                    <span class="title">现场照片(PC端)：</span>
-                                                    <div class="li_r">
-                                                        <input type="file" name="pc_img">
-                                                    </div>
-                                                </li>
-                                                <li class="clearfix">
-                                                    <span class="title"></span>
-                                                    <img src="__PUBLIC__/upload/scene/{$pc_scene.img_url}" alt="" style="max-width: 200px;">
-                                                </li>
-                                                <li class="clearfix">
-                                                    <span class="title">现场照片(移动端)：</span>
-                                                    <div class="li_r">
-                                                        <input type="file" name="mobile_img">
-                                                    </div>
-                                                </li>
-                                                <li class="clearfix">
-                                                    <span class="title"></span>
-                                                    <volist name="mobile_scene" id="v">
-                                                        <img id="scene_{$v.id}" onclick="delImg({$v.id})" src="__PUBLIC__/upload/scene/{$v.img_url}" title="点击删除" style="max-width: 200px;margin-right: 20px">
+<!--                                                        <foreach name="brand_list" item="v">-->
+<!--                                                            <input type="checkbox" value="{$v.id}" onclick="addLabel({$v.id},3)"  class="checkbox" <in name="v.id" value="$brand_label">checked</in>>{$v.brand_name}&nbsp;-->
+<!--                                                        </foreach>&nbsp;-->
+<!--                                                    </div>-->
 
-                                                    </volist>
-                                                </li>
-                                                <li class="clearfix">
-                                                    <span class="title">品牌库:</span>
-                                                    <div class="li_r" style="width: 80%">
-<!--                                                        <volist name="brand_list" id="v">-->
-<!--                                                            <input type="checkbox" name="brand_list[]" value="{$v.id}" class="checkbox"/>{$v.brand_name}&nbsp;&nbsp;&nbsp;-->
-<!--                                                        </volist>-->
-
-                                                        <foreach name="brand_list" item="v">
-                                                            <input type="checkbox" value="{$v.id}" onclick="addLabel({$v.id},3)"  class="checkbox" <in name="v.id" value="$brand_label">checked</in>>{$v.brand_name}&nbsp;
-                                                        </foreach>&nbsp;
-                                                    </div>
-
-                                                </li>
+<!--                                                </li>-->
                                             </td>
 
                                         </tr>

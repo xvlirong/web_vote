@@ -32,6 +32,15 @@
             $('.xial_m span').click(function(){
                 $(this).parent('.xial_m').siblings('.xl_ctn').toggle();
             });
+            
+            $("#next_box").click(function () {
+                $("#base_nav").removeClass("now");
+                $("#kz_nav").addClass("now");
+                $("#base_box").hide();
+                $("#kz_box").show();
+                //滚动到顶部
+                document.body.scrollTop=document.documentElement.scrollTop=0
+            })
         });
     </script>
     <style>
@@ -42,7 +51,7 @@
     </style>
 </head>
 
-<body onLoad="Resize();">
+<body>
 <div id="right_ctn">
     <div class="right_m">
         <!--会议列表-->
@@ -60,15 +69,15 @@
                     <div class="tabBox_t">
                         <div class="tabBox">
                             <ul class="tabNav">
-                                <li class="now" style="width:150px;"><span style="width:150px;">基础</span></li>
-                                <li style="width:150px;"><span style="width:150px;">扩展</span></li>
+                                <li class="now" id="base_nav" style="width:150px;"><span style="width:150px;">基础</span></li>
+                                <li style="width:150px;" id="kz_nav"><span style="width:150px;">扩展</span></li>
                             </ul>
-                            <div class="tabCont" style="display:block;">
+                            <div class="tabCont" style="display:block;" id="base_box">
                                 <!--网口地址配置-->
                                 <ul class="hypz gjpz clearfix">
                                     <table cellpadding="0" cellspacing="0" class="wlpz">
                                         <tr>
-                                            <td>
+                                            <td style="width: 50%">
                                                 <li class="clearfix">
                                                     <span class="title">活动标题：</span>
                                                     <div class="li_r">
@@ -78,7 +87,7 @@
                                                 <li class="clearfix" id="act_id">
                                                     <span class="title">选择模板：</span>
                                                     <div class="li_r">
-                                                        <select name="template_id" class="" style="font-family:'microsoft yahei';">
+                                                        <select name="template_id"  onchange="handle_block(this)" style="font-family:'microsoft yahei';">
                                                             <option value="">请选择</option>
                                                             <foreach name="tpl_list" item="v">
                                                                 <option value="{$v.id}">{$v.title}</option>
@@ -177,16 +186,33 @@
                                                         <input name="recept_phone" type="text">
                                                     </div>
                                                 </li>
+<!--                                                <li class="clearfix">-->
+<!--                                                    <span class="title">微信公众号：</span>-->
+<!--                                                    <div class="li_r">-->
+<!--                                                        <input type="file" name="wx_img">-->
+<!--                                                    </div>-->
+<!--                                                </li>-->
+
+
+
+                                            </td>
+                                            <td>
                                                 <li class="clearfix">
-                                                    <span class="title">微信公众号：</span>
+                                                    <span class="title">现场照片(PC端)：</span>
                                                     <div class="li_r">
-                                                        <input type="file" name="wx_img">
+                                                        <input type="file" name="pc_img">
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix">
+                                                    <span class="title">现场照片(移动端)：</span>
+                                                    <div class="li_r">
+                                                        <input type="file" name="mobile_img">
                                                     </div>
                                                 </li>
                                                 <li class="clearfix">
                                                     <span class="title">主办单位：</span>
                                                     <div class="li_r">
-                                                        <textarea name="sponsor_unit"  cols="30" rows="10"></textarea>
+                                                        <textarea name="sponsor_unit"  cols="30" rows="5"></textarea>
                                                     </div>
                                                 </li>
                                                 <li class="clearfix">
@@ -214,90 +240,6 @@
                                                     </div>
                                                 </li>
 
-
-                                            </td>
-                                            <td>
-                                                <li class="clearfix">
-                                                    <span class="title">乘车路线：</span>
-                                                    <div class="li_r">
-                                                        <textarea name="car_line" cols="30" placeholder="多条请使用“|”分割" rows="5"></textarea>
-                                                    </div>
-                                                </li>
-                                                <li class="clearfix">
-                                                    <span class="title">地铁线路：</span>
-                                                    <div class="li_r">
-                                                        <textarea name="subway"  cols="30" rows="5" ></textarea>
-                                                    </div>
-                                                </li>
-                                                <li class="clearfix">
-                                                    <span class="title">公交线路：</span>
-                                                    <div class="li_r">
-                                                        <textarea name="bus"  cols="30" rows="5" ></textarea>
-                                                    </div>
-                                                </li>
-                                                <li class="clearfix">
-                                                    <span class="title">自驾线路：</span>
-                                                    <div class="li_r">
-                                                        <textarea name="use_car"  cols="30" rows="5" ></textarea>
-                                                    </div>
-                                                </li>
-
-
-                                                <li class="clearfix">
-                                                    <span class="title">活动亮点：</span>
-                                                    <div class="li_r">
-                                                        <textarea name="act_highlights"  cols="30" rows="5" placeholder="多条请使用“|”分割"></textarea>
-                                                    </div>
-                                                </li>
-                                                <li class="clearfix">
-                                                    <span class="title">亮点1：</span>
-                                                    <div class="li_r">
-                                                        <textarea name="highlight_one"  cols="30" rows="5" ></textarea>
-                                                    </div>
-                                                </li>
-                                                <li class="clearfix">
-                                                    <span class="title">亮点2：</span>
-                                                    <div class="li_r">
-                                                        <textarea name="highlight_two"  cols="30" rows="5" ></textarea>
-                                                    </div>
-                                                </li>
-                                                <li class="clearfix">
-                                                    <span class="title">亮点3：</span>
-                                                    <div class="li_r">
-                                                        <textarea name="highlight_three"  cols="30" rows="5" ></textarea>
-                                                    </div>
-                                                </li>
-                                                <li class="clearfix">
-                                                    <span class="title">亮点4：</span>
-                                                    <div class="li_r">
-                                                        <textarea name="highlight_four"  cols="30" rows="5" ></textarea>
-                                                    </div>
-                                                </li>
-                                                <li class="clearfix">
-                                                    <span class="title">亮点一配图：</span>
-                                                    <div class="li_r">
-                                                        <input type="file" name="highlight_one_img">
-                                                    </div>
-                                                </li>
-                                                <li class="clearfix">
-                                                    <span class="title">亮点二配图：</span>
-                                                    <div class="li_r">
-                                                        <input type="file" name="highlight_two_img">
-                                                    </div>
-                                                </li>
-                                                <li class="clearfix">
-                                                    <span class="title">亮点三配图：</span>
-                                                    <div class="li_r">
-                                                        <input type="file" name="highlight_three_img">
-                                                    </div>
-                                                </li>
-                                                <li class="clearfix">
-                                                    <span class="title">亮点四配图：</span>
-                                                    <div class="li_r">
-                                                        <input type="file" name="highlight_four_img">
-                                                    </div>
-                                                </li>
-
                                                 <li class="clearfix">
                                                     <span class="title">活动简介：</span>
                                                     <div class="li_r">
@@ -318,41 +260,116 @@
                                         <tr>
                                             <td colspan="2">&nbsp;</td>
                                         </tr>
+
                                     </table>
-                                    <li class="tj_btn">
-                                        <a class="add_course">提交</a>
+                                    <li class="tj_btn" id="next_box">
+                                        <a >下一步</a>
                                     </li>
                                 </ul>
                                 <!--网口地址配置-->
                             </div>
-                            <div class="tabCont">
+                            <div class="tabCont" id="kz_box">
                                 <!--本地地址列表-->
                                 <ul class="hypz gjpz clearfix">
                                     <table cellpadding="0" cellspacing="0" class="wlpz">
                                         <tr>
                                             <td>
-                                                <li class="clearfix">
-                                                    <span class="title">现场照片(PC端)：</span>
+                                                <li class="clearfix old_tem">
+                                                    <span class="title">乘车路线：</span>
                                                     <div class="li_r">
-                                                        <input type="file" name="pc_img">
+                                                        <textarea name="car_line" cols="30" placeholder="多条请使用“|”分割" rows="5"></textarea>
                                                     </div>
                                                 </li>
-                                                <li class="clearfix">
-                                                    <span class="title">现场照片(移动端)：</span>
-                                                    <div class="li_r">
-                                                        <input type="file" name="mobile_img">
-                                                    </div>
-                                                </li>
-                                                <li class="clearfix">
-                                                    <span class="title">品牌库:</span>
-                                                    <div class="li_r" style="width: 80%">
-                                                        <input type="checkbox" id="checkOrCancelAll" class="checkbox"/>全选
-                                                        <volist name="brand_list" id="v">
-                                                            <input type="checkbox" name="brand_list[]" value="{$v.id}" class="checkbox"/>{$v.brand_name}&nbsp;&nbsp;
-                                                        </volist>
-                                                    </div>
 
+
+
+                                                <li class="clearfix old_tem">
+                                                    <span class="title">活动亮点：</span>
+                                                    <div class="li_r">
+                                                        <textarea name="act_highlights"  cols="30" rows="5" placeholder="多条请使用“|”分割"></textarea>
+                                                    </div>
                                                 </li>
+                                                <li class="clearfix new_tem">
+                                                    <span class="title">亮点1：</span>
+                                                    <div class="li_r">
+                                                        <textarea name="highlight_one"  cols="30" rows="5" ></textarea>
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix new_tem">
+                                                    <span class="title">亮点2：</span>
+                                                    <div class="li_r">
+                                                        <textarea name="highlight_two"  cols="30" rows="5" ></textarea>
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix new_tem">
+                                                    <span class="title">亮点3：</span>
+                                                    <div class="li_r">
+                                                        <textarea name="highlight_three"  cols="30" rows="5" ></textarea>
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix new_tem">
+                                                    <span class="title">亮点4：</span>
+                                                    <div class="li_r">
+                                                        <textarea name="highlight_four"  cols="30" rows="5" ></textarea>
+                                                    </div>
+                                                </li>
+
+
+                                            </td>
+                                            <td style="width: 50%">
+                                                <li class="clearfix new_tem">
+                                                    <span class="title">亮点一配图：</span>
+                                                    <div class="li_r">
+                                                        <input type="file" name="highlight_one_img">
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix new_tem">
+                                                    <span class="title">亮点二配图：</span>
+                                                    <div class="li_r">
+                                                        <input type="file" name="highlight_two_img">
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix new_tem">
+                                                    <span class="title">亮点三配图：</span>
+                                                    <div class="li_r">
+                                                        <input type="file" name="highlight_three_img">
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix new_tem">
+                                                    <span class="title">亮点四配图：</span>
+                                                    <div class="li_r">
+                                                        <input type="file" name="highlight_four_img">
+                                                    </div>
+                                                </li>
+
+                                                <li class="clearfix new_tem">
+                                                    <span class="title">地铁线路：</span>
+                                                    <div class="li_r">
+                                                        <textarea name="subway"  cols="30" rows="5" ></textarea>
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix new_tem">
+                                                    <span class="title">公交线路：</span>
+                                                    <div class="li_r">
+                                                        <textarea name="bus"  cols="30" rows="5" ></textarea>
+                                                    </div>
+                                                </li>
+                                                <li class="clearfix new_tem">
+                                                    <span class="title">自驾线路：</span>
+                                                    <div class="li_r">
+                                                        <textarea name="use_car"  cols="30" rows="5" ></textarea>
+                                                    </div>
+                                                </li>
+<!--                                                <li class="clearfix">-->
+<!--                                                    <span class="title">品牌库:</span>-->
+<!--                                                    <div class="li_r" style="width: 50%">-->
+<!--                                                        <input type="checkbox" id="checkOrCancelAll" class="checkbox"/>全选-->
+<!--                                                        <volist name="brand_list" id="v">-->
+<!--                                                            <input type="checkbox" name="brand_list[]" value="{$v.id}" class="checkbox"/>{$v.brand_name}&nbsp;&nbsp;-->
+<!--                                                        </volist>-->
+<!--                                                    </div>-->
+
+<!--                                                </li>-->
                                             </td>
 
                                         </tr>
@@ -419,6 +436,16 @@
             }
         }
     });
+    function handle_block(_this) {
+        var tid = $(_this).val();
+        if(tid == 7){
+            $(".old_tem").hide();
+            $(".new_tem").show();
+        }else{
+            $(".old_tem").show();
+            $(".new_tem").hide();
+        }
+    }
 
 </script>
 </html>

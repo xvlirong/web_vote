@@ -19,6 +19,11 @@
             //$('.list_hy').css('width',search_w+'px');
         });
     </script>
+    <style>
+        .list_hy th{
+            text-align: center;
+        }
+    </style>
     <!--框架高度设置-->
 </head>
 
@@ -37,12 +42,14 @@
             </div>
             <!--列表-->
             <form action="" method="post">
-                <table cellpadding="0" cellspacing="0" class="list_hy" style="width: 95%">
+                <table cellpadding="0" cellspacing="0" class="list_hy" style="width: 95%;text-align: center">
                     <tr>
 <!--                        <th scope="col">编号</th>-->
                         <th scope="col">品牌名称</th>
-                        <th scope="col">团购logo</th>
+<!--                        <th scope="col">团购logo</th>-->
                         <th scope="col">展会logo</th>
+                        <th scope="col">展会展示</th>
+                        <th scope="col">团购展示</th>
                         <th scope="col">排序</th>
                         <th scope="col">编辑</th>
                     </tr>
@@ -50,16 +57,26 @@
                         <tr>
 <!--                            <td>{$v.id}</td>-->
                             <td>{$v.brand_name}</td>
+<!--                            <td>-->
+<!--                                <notempty name="v['brand_logo']">-->
+<!--                                    <img src="__PUBLIC__/upload/brand/{$v.brand_logo}" style="width: 200px" alt="">-->
+<!--                                </notempty>-->
+<!--                            </td>-->
                             <td>
-                                <notempty name="v['brand_logo']">
-                                    <img src="__PUBLIC__/upload/brand/{$v.brand_logo}" style="width: 200px" alt="">
+                                <notempty name="v['zh_logo']">
+                                    <img src="__PUBLIC__/upload/brand/{$v.zh_logo}" style="width: 110px" alt="">
+
                                 </notempty>
                             </td>
                             <td>
-                                <notempty name="v['zh_logo']">
-                                    <img src="__PUBLIC__/upload/brand/{$v.zh_logo}" style="width: 200px" alt="">
+                                <eq name="v['show_state']" value="1">是</eq>
+                                <eq name="v['show_state']" value="0">否</eq>
 
-                                </notempty>
+                            </td>
+                            <td>
+                                <eq name="v['brand_state']" value="1">是</eq>
+                                <eq name="v['brand_state']" value="0">否</eq>
+
                             </td>
                             <td>{$v.sort}</td>
                             <td><a href="{:U('update_brand',array('id'=>$v['id']))}" class="btn">编辑</a>
