@@ -24,8 +24,8 @@ body {
 }
 .main{
     background: #f5f5f5;
-    height: 3840px;
-    /*height: 3550px;*/
+    /*height: 3840px;*/
+    height: 3588px;
     overflow: hidden;
     position: relative;
 }
@@ -336,9 +336,9 @@ width: 100px;
     float: left;
 }
 #brand li div {
-    width: 143px;
-    height: 143px;
-    /*padding: 14px;*/
+    width: 80px;
+    height: 80px;
+    padding: 31px;
     border: 1px solid #ebebeb;
     background: #fff;
     float: left;
@@ -346,8 +346,8 @@ width: 100px;
     *display: inline;
 }
 #brand li img {
-    width: 143px;
-    height: 143px;
+    width: 80px;
+    height: 80px;
 }
 #brandNum {
     padding-top: 15px;
@@ -428,7 +428,8 @@ width: 100px;
 #footer {
     height: 266px;
     position: relative;
-    top: -590px;
+    top: -545px;
+    background: #fff;
 }
 
 #footer .con {

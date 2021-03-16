@@ -404,9 +404,9 @@ header {
     margin-right: -0.1rem;
 }
 #brand li {
-    width: 1.5rem;
-    height: 1.5rem;
-    /*padding:  0.12rem;*/
+    width: 1rem;
+    height: 1rem;
+    padding:  0.25rem;
     float: left;
     border:1px solid #e8e8e8;
     margin:0 0.1rem 0.1rem 0;
@@ -416,8 +416,8 @@ header {
     display: none;
 }
 #brand li img {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 1rem;
+    height: 1rem;
 }
 #brand .more {
     width: 6.65rem;

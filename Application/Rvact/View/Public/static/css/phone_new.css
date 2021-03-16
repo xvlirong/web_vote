@@ -283,8 +283,8 @@
     background: #fff;
 }
 #brand li img {
-    width: 7rem;
-    height: 7rem;
+    width: 4rem;
+    height: 4rem;
 }
 .act_num p{
     /* margin: 0 auto; */
@@ -437,4 +437,7 @@
 .usercar{
     width: 6rem;
     text-overflow:ellipsis;
+}
+.list div{
+    padding: 1.5rem;
 }

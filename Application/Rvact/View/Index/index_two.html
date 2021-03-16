@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>{$info.title}</title>
     <link rel="stylesheet" href="__STATIC__/css/neat.css" />
-    <link rel="stylesheet" href="__STATIC__/css/index1.css?time=04221414" />
+    <link rel="stylesheet" href="__STATIC__/css/index1.css?time=0316" />
     <style type="text/css">
         /*.header { background:url("__PUBLIC__/upload/banner/{$info.banner}") no-repeat center top; }*/
         #desc .abstract dd a{color: #3e629f;}
@@ -151,7 +151,7 @@
                     <ul style="margin-left: 0px;">
                         <foreach name="brand_list" item="v" key="i">
                             <if condition="($i+1)%40 eq 1"><li class="clearfix"></if>
-                            <div><img src="__PUBLIC__/upload/brand/{$v.brand_logo}" alt="" /></div>
+                            <div><img src="__PUBLIC__/upload/brand/{$v.zh_logo}" alt="" /></div>
                             <if condition="($i+1)%40 eq 0"></li> </if>
                         </foreach>
                     </ul>
@@ -191,8 +191,9 @@
         </div>
         <!-- 参展现场 end -->
     </div>
-    <div id="footer" style="top: -530px">
-<!--        <div class="con">-->
+    <div class="copy" style="background: #fff;height: 45px;">&copy; 2014-2021 房车时代 京ICP备07503663号 京公网安备11010802015289号</div>
+    <!--  <div id="footer" style="top: -530px">
+        <div class="con">-->
 <!--            <div class="texts clearfix">-->
 <!--                <div class="txt first">-->
 <!--                    <dl>-->
@@ -224,9 +225,8 @@
 <!--            <div class="img">-->
 <!--                <img src="__PUBLIC__/upload/wx_img/{$info.wx_img}" alt="" />-->
 <!--            </div>-->
-<!--        </div>-->
-        <div class="copy" style="background: #fff;height: 45px;">&copy; 2014-2019 房车时代 京ICP备07503663号 京公网安备11010802015289号</div>
-    </div>
+<!--        </div>
+    </div>-->
 </div>
 </body>
 </html>

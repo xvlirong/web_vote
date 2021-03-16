@@ -58,12 +58,19 @@ class IndexController extends BaseController {
         $this->assign('scene_img',$scene_img);
 
         //品牌库
-        $brand_label = M("brand_library")
-            ->join("left join act_brand on brand_library.id=act_brand.brand_id")
-            ->where(array('act_brand.act_id'=>$id))
-            ->order(array('brand_library.sort'=>'asc'))
-            ->field('brand_library.*')
-            ->select();
+        if($template['act_type'] == 1){
+            $brand_label = M("brand_library")
+                ->where(array('show_state'=>1))
+                ->order(array('brand_library.sort'=>'asc'))
+                ->select();
+        }else{
+            $brand_label = M("brand_library")
+                ->where(array('brand_state'=>1))
+                ->order(array('brand_library.sort'=>'asc'))
+                ->select();
+        }
+
+
         $this->assign('brand_list',$brand_label);
         $this->display($template_name);
 
