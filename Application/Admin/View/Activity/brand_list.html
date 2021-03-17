@@ -70,13 +70,27 @@
                                 </notempty>
                             </td>
                             <td>
-                                <eq name="v['show_state']" value="1">是</eq>
-                                <eq name="v['show_state']" value="0">否</eq>
+                                <select name="show_state" onchange="handleShowState(this,1,{$v.id})" style="width: 50px;">
+                                    <eq name="v['show_state']" value="1">
+                                        <option value="1" selected="selected">是</option>
+                                        <option value="0">否</option>
+                                        <else />
+                                        <option value="1" >是</option>
+                                        <option value="0" selected="selected">否</option>
+                                    </eq>
 
+                                </select>
                             </td>
                             <td>
-                                <eq name="v['brand_state']" value="1">是</eq>
-                                <eq name="v['brand_state']" value="0">否</eq>
+                                <select name="brand_state" onchange="handleShowState(this,2,{$v.id})" style="width: 50px;">
+                                <eq name="v['brand_state']" value="1">
+                                    <option value="1" selected="selected">是</option>
+                                    <option value="0">否</option>
+                                    <else />
+                                    <option value="1" >是</option>
+                                    <option value="0" selected="selected">否</option>
+                                </eq>
+                                </select>
 
                             </td>
                             <td><a href="{:U('update_brand',array('id'=>$v['id']))}" class="btn">编辑</a>
@@ -115,6 +129,23 @@
             var new_url = url+"&id="+id;
             location.href = new_url;
         }
+    }
+    function handleShowState(_this,s_id,pid) {
+        var s_state = $(_this).val();
+        var title = '';
+        if(s_id == 1){
+             title = {show_state:s_state,id:pid};
+        }else{
+            title = {brand_state:s_state,id:pid};
+        }
+
+        $.ajax({
+            type:"POST",
+            url:"{:U('saveShowState')}",
+            data:title,
+            success:function (data) {
+            }
+        })
     }
 </script>
 </body>

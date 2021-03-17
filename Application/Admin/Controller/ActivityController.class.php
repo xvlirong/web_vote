@@ -1279,6 +1279,13 @@ class ActivityController extends CommonController
         }
     }
 
+    public function saveShowState()
+    {
+        $data = $_POST;
+        $pid = $data['id'];
+        $res = M("brand_library")->where(array('id'=>$pid))->save($data);
+    }
+
 
 }
 
