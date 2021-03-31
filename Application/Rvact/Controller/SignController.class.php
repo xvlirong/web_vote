@@ -3,9 +3,9 @@ namespace Rvact\Controller;
 use Think\Controller;
 use Rvact\Controller\JssdkController;
 class SignController extends BaseController {
-    private $appid = 'wxd7a97a42e5662a75';
+    private $appid = 'wx60a219d641d78c8a';
     private $sessionKey = '';
-    private $appsecret = '6d008722f5447af67d7d61e40589d16d';
+    private $appsecret = '453d4bcb7b2082f1f596bcd47e398e23';
     /**
      * 构造函数
      * @param $sessionKey string 用户在小程序登录后获取的会话密钥
