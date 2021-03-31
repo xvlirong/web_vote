@@ -137,12 +137,12 @@ class SignController extends BaseController {
                    $res['msg'] = '签到成功';
                }else{
                    $res['code'] = 0;
-                   $res['sign_time'] = date("Y-m-d H:i",$exist['arrival_time']);
                    $res['msg'] = '处理失败';
                }
            }else{
                $res['code'] = 1;
                $res['msg'] = '已签到';
+               $res['sign_time'] = date("Y-m-d H:i",$exist['arrival_time']);
            }
         } else {
             $res['code'] = 0;
