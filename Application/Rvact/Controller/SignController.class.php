@@ -158,6 +158,14 @@ class SignController extends BaseController {
         $data['username'] = I('username');
         $data['arrival_status'] = 1;
         $data['arrival_time'] = time();
+        $area_info = $this->getMobileInfo($data['userphone']);
+        $data['mobile_province'] = $area_info['prov'];
+        if($area_info['prov'] == ''){
+            $data['mobile_province'] = $area_info['city'];
+        }
+        $data['mobile_area'] = $area_info['city'];
+        $data['add_time']=time();
+        $data['source_title'] = '小程序';
         $addRes = M("act_registration")->add($data);
         if($addRes){
             $res['code'] = 1;
