@@ -177,4 +177,13 @@ class SignController extends BaseController {
         }
         $this->ajaxReturn($res);
     }
+
+    public function checkSignState()
+    {
+        $pid = I('pid',23);
+        $status = M("activity")->where(array("id"=>$pid))->getField('sign_status');
+        $res['code'] = $status;
+        $res['msg'] = '查询签到开启状态处理成功';
+        $this->ajaxReturn($res);
+    }
 }
