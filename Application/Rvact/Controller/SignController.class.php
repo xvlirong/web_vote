@@ -33,7 +33,7 @@ class SignController extends BaseController {
         //记录sessionKey
         $arr['open_id'] = $open_id;
         $arr['code'] = 1;
-        $arr['signcity'] = '武汉市';
+        $arr['signcity'] = M("activity")->where(array('id'=>23))->getField('sign_distance');
         $arr['errMsg'] = '请求成功';
         $this->ajaxReturn($arr);
     }
