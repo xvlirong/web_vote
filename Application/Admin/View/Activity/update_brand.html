@@ -55,12 +55,12 @@
 <!--                            </div>-->
 
 <!--                        </li>-->
+<!--                        <li class="clearfix">-->
+<!--                            <span class="title"></span>-->
+<!--                            <img src="__PUBLIC__/upload/brand/{$info.brand_logo}" alt="" style="max-width: 200px;">-->
+<!--                        </li>-->
                         <li class="clearfix">
-                            <span class="title"></span>
-                            <img src="__PUBLIC__/upload/brand/{$info.brand_logo}" alt="" style="max-width: 200px;">
-                        </li>
-                        <li class="clearfix">
-                            <span class="title">展会logo：</span>
+                            <span class="title">品牌logo：</span>
                             <div class="li_r">
                                 <input  name="zh_logo" type="file">
                             </div>
@@ -76,19 +76,19 @@
                                 <input  name="sort" value="{$info.sort}" type="text">
                             </div>
                         </li>
-                        <li class="clearfix">
-                            <span class="title">是否展示：</span>
-                            <div class="li_r">
-                                <eq name="info['show_state']" value="1">
-                                    <input style="width: 15px;margin-right: 8px" type="radio" name="show_state" value="1" checked="checked">是
-                                    <input style="width: 15px;margin-right: 8px;margin-left: 8px" type="radio" name="show_state" value="0">否
-                                    <else />
-                                    <input style="width: 15px;margin-right: 8px;" type="radio" name="show_state" value="1" >是
-                                    <input style="width: 15px;margin-right: 8px;margin-left: 8px" type="radio" name="show_state" value="0" checked="checked">否
-                                </eq>
+<!--                        <li class="clearfix">-->
+<!--                            <span class="title">是否展示：</span>-->
+<!--                            <div class="li_r">-->
+<!--                                <eq name="info['show_state']" value="1">-->
+<!--                                    <input style="width: 15px;margin-right: 8px" type="radio" name="show_state" value="1" checked="checked">是-->
+<!--                                    <input style="width: 15px;margin-right: 8px;margin-left: 8px" type="radio" name="show_state" value="0">否-->
+<!--                                    <else />-->
+<!--                                    <input style="width: 15px;margin-right: 8px;" type="radio" name="show_state" value="1" >是-->
+<!--                                    <input style="width: 15px;margin-right: 8px;margin-left: 8px" type="radio" name="show_state" value="0" checked="checked">否-->
+<!--                                </eq>-->
 
-                            </div>
-                        </li>
+<!--                            </div>-->
+<!--                        </li>-->
                         <li class="tj_btn">
                             <a id="add_course">提交</a>
                         </li>
