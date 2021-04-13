@@ -1226,7 +1226,12 @@ class ActivityController extends CommonController
                 $list[$i]['act_id'] = $act_id;
             }
             $new_list = array_merge($list);
-            M('act_registration')->addAll($new_list);
+           $res = M('act_registration')->addAll($new_list);
+            if($res){
+                echo "<script>alert('处理成功'); location.replace(document.referrer);</script>";
+            } else {
+                echo "<script>alert('处理失败'); location.replace(document.referrer);</script>";
+            }
         }
 
     }
