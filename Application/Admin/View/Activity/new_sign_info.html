@@ -40,7 +40,7 @@
                         <input type="text" id="key2" name="end_time" <gt name="end_time" value="0">value="{$end_time|date='Y-m-d',###}" </gt>   onClick="WdatePicker()" readonly="readonly">
                         <input type="hidden" name="id" value="{$id}">
                         <a class="btn" id="sub">查询</a>
-                        <span>今日新签到人数 {$today_num}人&nbsp;&nbsp;&nbsp;&nbsp;共计报名{$all_num}人</span>
+                        <span>今日新签到人数 {$today_num}人&nbsp;&nbsp;&nbsp;&nbsp;共计签到{$all_num}人</span>
                         <!--                        <a href="{:U('Activity/exam_export',array('id'=>$id))}" class="btn">导出信息</a>-->
                         <a onclick="export_info()" class="btn">导出信息</a>
                     </div>
