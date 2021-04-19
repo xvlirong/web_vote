@@ -151,11 +151,13 @@
         </div>
 
         <div class="act_info_box">
-            <div class="act_content_box">
-                <p><img src="__STATIC__/images/zcdw.png" alt=""></p>
-                <p class="act_info_p">{$info.support}</p>
-                <p class="info_line"></p>
-            </div>
+            <if condition="$info.support neq ''">
+                <div class="act_content_box">
+                    <p><img src="__STATIC__/images/zcdw.png" alt=""></p>
+                    <p class="act_info_p">{$info.support}</p>
+                    <p class="info_line"></p>
+                </div>
+            </if>
             <div class="act_content_box">
                 <p><img src="__STATIC__/images/zbdw.jpg" alt=""></p>
                 <p class="act_info_p">{$info.sponsor_unit}</p>
