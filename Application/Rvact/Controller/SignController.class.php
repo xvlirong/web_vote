@@ -33,7 +33,8 @@ class SignController extends BaseController {
         //记录sessionKey
         $arr['open_id'] = $open_id;
         $arr['code'] = 1;
-        $arr['signcity'] = M("activity")->where(array('id'=>23))->getField('sign_distance');
+        $pid = M("sign_ticket")->where(array('sort'=>1))->getField('pid');
+        $arr['signcity'] = M("activity")->where(array('id'=>$pid))->getField('sign_distance');
         $arr['errMsg'] = '请求成功';
         $this->ajaxReturn($arr);
     }
@@ -121,7 +122,7 @@ class SignController extends BaseController {
 
     public function handleUserSign()
     {
-        $pid = I('pid',23);
+        $pid = M("sign_ticket")->where(array('sort'=>1))->getField('pid');
         $userphone = I('userphone');
 
         $maps['userphone'] = $userphone;
@@ -154,7 +155,7 @@ class SignController extends BaseController {
 
     public function handleUserEnroll()
     {
-        $data['act_id'] = I('pid',23);
+        $data['act_id'] = M("sign_ticket")->where(array('sort'=>1))->getField('pid');
         $data['userphone'] = I('userphone');
         $data['username'] = I('username');
         $data['arrival_status'] = 1;
@@ -181,10 +182,21 @@ class SignController extends BaseController {
 
     public function checkSignState()
     {
-        $pid = I('pid',23);
+        $info =  M("sign_ticket")->where(array('sort'=>1))->find();
+        $pid = $info['pid'];
         $status = M("activity")->where(array("id"=>$pid))->getField('sign_status');
         $res['code'] = $status;
         $res['msg'] = '查询签到开启状态处理成功';
+        $this->ajaxReturn($res);
+    }
+
+    public function checkSignInfo()
+    {
+        $info =  M("sign_ticket")->where(array('sort'=>1))->find();
+        $res['lat'] = $info['sign_lat'];
+        $res['lng'] = $info['sign_lng'];
+        $res['img'] = 'https://peoplerv.rvtimes.cn/Public/upload/sign/'.$info['sign_img'];
+        $res['msg'] = '查询签到页面信息';
         $this->ajaxReturn($res);
     }
 }
