@@ -193,6 +193,7 @@ class SignController extends BaseController {
     public function checkSignInfo()
     {
         $info =  M("sign_ticket")->where(array('sort'=>1))->find();
+        $res['title'] = M("activity")->where(array('id'=>$info['pid']))->getField('title');
         $res['lat'] = $info['sign_lat'];
         $res['lng'] = $info['sign_lng'];
         $res['img'] = 'https://peoplerv.rvtimes.cn/Public/upload/sign/'.$info['sign_img'];
