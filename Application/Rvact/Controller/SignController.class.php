@@ -147,8 +147,31 @@ class SignController extends BaseController {
                $res['sign_time'] = date("Y-m-d H:i",$exist['arrival_time']);
            }
         } else {
-            $res['code'] = 0;
-            $res['msg'] = '未查询到报名信息，请完善您的姓名';
+           // $res['code'] = 0;
+           // $res['msg'] = '未查询到报名信息，请完善您的姓名';
+
+            $data['act_id'] = M("sign_ticket")->where(array('sort'=>1))->getField('pid');
+            $data['userphone'] = $userphone;
+            $data['username'] = I('username');
+            $data['arrival_status'] = 1;
+            $data['arrival_time'] = time();
+            $area_info = $this->getMobileInfo($data['userphone']);
+            $data['mobile_province'] = $area_info['prov'];
+            if($area_info['prov'] == ''){
+                $data['mobile_province'] = $area_info['city'];
+            }
+            $data['mobile_area'] = $area_info['city'];
+            $data['add_time']=time();
+            $data['source_title'] = '小程序';
+            $addRes = M("act_registration")->add($data);
+            if($addRes){
+                $res['code'] = 1;
+                $res['sign_time'] = date("Y-m-d H:i",time());
+                $res['msg'] = '报名及签到成功';
+            }else{
+                $res['code'] = 0;
+                $res['msg'] = '处理失败';
+            }
         }
         $this->ajaxReturn($res);
     }
