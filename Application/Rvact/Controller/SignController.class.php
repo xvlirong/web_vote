@@ -210,7 +210,7 @@ class SignController extends BaseController {
         $act_info = M("activity")->where(array("id"=>$pid))->field('sign_status,start_time,end_time')->find();
         $now = time();
         //判断签到状态为可签到且当前时间为可签到时间
-        if($act_info['status'] == 1 && $now > $act_info['start_time'] && $now < $act_info['end_time']){
+        if($act_info['sign_status'] == 1 && $now > $act_info['start_time'] && $now < $act_info['end_time']){
             $status = 1;
         }else{
             $status = 0;
