@@ -135,7 +135,7 @@ class SignController extends BaseController {
                $save_res = M("act_registration")->where($maps)->save($data);
                if($save_res){
                    $res['code'] = 1;
-                   $res['actId'] = $pid;
+                   $res['act_id'] = $pid;
                    $res['sign_time'] = date("Y-m-d H:i",time());
                    $res['msg'] = '签到成功';
                }else{
@@ -195,7 +195,7 @@ class SignController extends BaseController {
         $addRes = M("act_registration")->add($data);
         if($addRes){
             $res['code'] = 1;
-            $res['actId'] = $data['act_id'];
+            $res['act_id'] = $data['act_id'];
             $res['sign_time'] = date("Y-m-d H:i",time());
             $res['msg'] = '报名及签到成功';
         }else{
