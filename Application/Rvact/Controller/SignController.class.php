@@ -207,7 +207,7 @@ class SignController extends BaseController {
     {
         $info =  M("sign_ticket")->where(array('sort'=>1))->find();
         $pid = $info['pid'];
-        $act_info = M("activity")->where(array("id"=>$pid))->field('sign_status,start_time,end_time');
+        $act_info = M("activity")->where(array("id"=>$pid))->field('sign_status,start_time,end_time')->find();
         $now = time();
         //判断签到状态为可签到且当前时间为可签到时间
         if($act_info['status'] == 1 && $now > $act_info['start_time']){
