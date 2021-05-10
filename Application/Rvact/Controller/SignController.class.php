@@ -144,6 +144,7 @@ class SignController extends BaseController {
                }
            }else{
                $res['code'] = 1;
+               $res['act_id'] = $pid;
                $res['msg'] = '已签到';
                $res['sign_time'] = date("Y-m-d H:i",$exist['arrival_time']);
            }
