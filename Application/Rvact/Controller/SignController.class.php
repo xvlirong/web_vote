@@ -167,6 +167,7 @@ class SignController extends BaseController {
             $addRes = M("act_registration")->add($data);
             if($addRes){
                 $res['code'] = 1;
+                $res['act_id'] = $data['act_id'];
                 $res['sign_time'] = date("Y-m-d H:i",time());
                 $res['msg'] = '报名及签到成功';
             }else{
