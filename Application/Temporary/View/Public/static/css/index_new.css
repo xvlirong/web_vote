@@ -27,8 +27,9 @@
     *display: inline;
 }
 #brand li img {
-    width: 128px;
-    height: 128px;
+    width: 90px;
+    height: 90px;
+    padding: 10px;
 }
 #brandNum {
     padding-top: 15px;
