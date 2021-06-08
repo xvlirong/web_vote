@@ -238,10 +238,10 @@ class SignController extends BaseController {
 
     public function handleAdInfo()
     {
-        $pid = I('pid');
+        $name = $_POST['name'];
 
         $res['code'] = 0;
-        $res['message'] = $pid;
+        $res['message'] = $name;
         $this->ajaxReturn($res);
     }
 }
