@@ -2,6 +2,7 @@
 namespace Rvact\Controller;
 use Think\Controller;
 use Rvact\Controller\JssdkController;
+use Rvact\Controller\IndexController;
 class SignController extends BaseController {
     private $appid = 'wx60a219d641d78c8a';
     private $sessionKey = '';
@@ -248,10 +249,18 @@ class SignController extends BaseController {
         $location = explode('+',$new_data['location']);
         $info['mobile_province'] = $location[0];
         $info['mobile_area'] = $location[1];
-        M("act_registration")->add($info);
+        $add_res = M("act_registration")->add($info);
 
-        $res['code'] = 0;
-        $res['message'] = $new_data['name'];
+        if($add_res){
+            $index = new IndexController();
+            $send_res = $index->send(18515490885,$info['act_id']);
+            $res['code'] = 0;
+            $res['message'] = 'success!';
+        }else{
+            $res['code'] = 1;
+            $res['message'] = 'add fail';
+        }
+
         $this->ajaxReturn($res);
     }
 }
