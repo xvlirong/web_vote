@@ -240,6 +240,16 @@ class SignController extends BaseController {
     {
         $data = file_get_contents("php://input");
         $new_data = json_decode($data,true);
+        $info['act_id'] = $new_data['pid'];
+        $info['username'] = $new_data['name'];
+        $info['userphone'] = $new_data['telphone'];
+        $info['add_time'] = $new_data['create_time'];
+
+        $location = explode('+',$new_data['location']);
+        $info['mobile_province'] = $location[0];
+        $info['mobile_area'] = $location[1];
+        M("act_registration")->add($info);
+
         $res['code'] = 0;
         $res['message'] = $new_data['name'];
         $this->ajaxReturn($res);
