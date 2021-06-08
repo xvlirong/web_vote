@@ -235,4 +235,12 @@ class SignController extends BaseController {
         $res['msg'] = '查询签到页面信息';
         $this->ajaxReturn($res);
     }
+
+    public function handleAdInfo()
+    {
+        $list = $_POST;
+        print_r($list)."|||||";
+        $new_list = json_decode($list);
+        print_r($new_list)."|||||";
+    }
 }
