@@ -238,11 +238,10 @@ class SignController extends BaseController {
 
     public function handleAdInfo()
     {
-        $list = $_POST;
-        $new_list = json_decode($list);
+        $pid = I('pid');
 
         $res['code'] = 0;
-        $res['message'] = $list;
+        $res['message'] = $pid;
         echo json_encode($res);
     }
 }
