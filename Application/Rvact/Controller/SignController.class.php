@@ -242,6 +242,6 @@ class SignController extends BaseController {
 
         $res['code'] = 0;
         $res['message'] = $pid;
-        echo json_encode($res);
+        $this->ajaxReturn($res);
     }
 }
