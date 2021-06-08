@@ -238,10 +238,10 @@ class SignController extends BaseController {
 
     public function handleAdInfo()
     {
-        $name = $_POST['name'];
-
+        $data = file_get_contents("php://input");
+        $new_data = json_decode($data,true);
         $res['code'] = 0;
-        $res['message'] = $name;
+        $res['message'] = $new_data['name'];
         $this->ajaxReturn($res);
     }
 }
