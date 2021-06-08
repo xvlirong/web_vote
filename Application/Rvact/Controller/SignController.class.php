@@ -242,5 +242,9 @@ class SignController extends BaseController {
         print_r($list)."|||||";
         $new_list = json_decode($list);
         print_r($new_list)."|||||";
+
+        $res['code'] = 0;
+        $res['message'] = '测试成功';
+        $this->ajaxReturn($res);
     }
 }
