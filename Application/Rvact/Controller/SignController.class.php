@@ -245,13 +245,12 @@ class SignController extends BaseController {
         $key = $this->ttKey;
         $token = openssl_encrypt($str, 'des-ecb', $key);
         $server = $this->getallheaders();
-        $server_info = json_decode($server);
-        if($server_info['Access-Token'] == $token){
+        if($server['Access-Token'] == $token){
             $res['code'] = 0;
-            $res['message'] = $server_info;
+            $res['message'] = 'success!!';
         }else{
             $res['code'] = 1;
-            $res['message'] = $server_info;
+            $res['message'] = 'request fail';
         }
         $this->ajaxReturn($res);
         die;
@@ -272,7 +271,7 @@ class SignController extends BaseController {
             $index = new IndexController();
             $send_res = $index->send($info['userphone'],$info['act_id']);
             $res['code'] = 0;
-            $res['message'] = $refer;
+            $res['message'] = 'success!';
         }else{
             $res['code'] = 1;
             $res['message'] = 'add fail';
