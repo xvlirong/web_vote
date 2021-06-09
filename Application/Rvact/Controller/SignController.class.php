@@ -7,6 +7,7 @@ class SignController extends BaseController {
     private $appid = 'wx60a219d641d78c8a';
     private $sessionKey = '';
     private $appsecret = '453d4bcb7b2082f1f596bcd47e398e23';
+    private $ttKey = 'cd585341e3f5c3fb'; //ttkey
     /**
      * 构造函数
      * @param $sessionKey string 用户在小程序登录后获取的会话密钥
@@ -17,6 +18,7 @@ class SignController extends BaseController {
         $sessionKey = $this->sessionKey;
         $appid = $this->appid;
         $appsecret = $this->appsecret;
+        $ttKey = $this->ttKey;
 
     }
     public function handleUserLogin()
@@ -239,12 +241,26 @@ class SignController extends BaseController {
 
     public function handleAdInfo()
     {
+        $str = '689addde40e4ee61';//fy
+        $key = $this->ttKey;
+        $token = openssl_encrypt($str, 'des-ecb', $key);
+        $refer = $_SERVER['HTTP_REFERER'];
         $data = file_get_contents("php://input");
+        if($data['token'] == $token && $data['key'] == $key){
+            $res['code'] = 0;
+            $res['message'] = $data;
+        }else{
+            $res['code'] = 1;
+            $res['message'] =$data;
+        }
+        $this->ajaxReturn($res);
+        die;
         $new_data = json_decode($data,true);
         $info['act_id'] = $new_data['pid'];
         $info['username'] = $new_data['name'];
         $info['userphone'] = $new_data['telphone'];
         $info['add_time'] = $new_data['create_time'];
+        $info['source_title'] = '头条';
 
         $location = explode('+',$new_data['location']);
         $info['mobile_province'] = $location[0];
@@ -253,9 +269,9 @@ class SignController extends BaseController {
 
         if($add_res){
             $index = new IndexController();
-            $send_res = $index->send(18515490885,$info['act_id']);
+            $send_res = $index->send($info['userphone'],$info['act_id']);
             $res['code'] = 0;
-            $res['message'] = 'success!';
+            $res['message'] = $refer;
         }else{
             $res['code'] = 1;
             $res['message'] = 'add fail';
