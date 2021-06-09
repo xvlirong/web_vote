@@ -244,7 +244,7 @@ class SignController extends BaseController {
         $str = '689addde40e4ee61';//fy
         $key = $this->ttKey;
         $token = openssl_encrypt($str, 'des-ecb', $key);
-        $server = getallheaders();
+        $server = $this->getallheaders();
         $refer = $_SERVER['HTTP_REFERER'];
         $data = file_get_contents("php://input");
         if($data['token'] == $token && $data['key'] == $key){
@@ -281,4 +281,16 @@ class SignController extends BaseController {
 
         $this->ajaxReturn($res);
     }
+
+    public  function getallheaders() {
+        $headers = [];
+        foreach ($_SERVER as $name => $value) {
+            if (substr($name, 0, 5) == 'HTTP_') {
+                $headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))))] = $value;
+            }
+        }
+        return $headers;
+    }
+
+
 }
