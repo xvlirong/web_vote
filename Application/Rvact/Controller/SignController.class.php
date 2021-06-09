@@ -245,7 +245,7 @@ class SignController extends BaseController {
         $key = $this->ttKey;
         $token = openssl_encrypt($str, 'des-ecb', $key);
         $server = $this->getallheaders();
-        $server_info = json_decode($server,true);
+        $server_info = json_decode($server);
         if($server_info['Access-Token'] == $token){
             $res['code'] = 0;
             $res['message'] = $server_info;
