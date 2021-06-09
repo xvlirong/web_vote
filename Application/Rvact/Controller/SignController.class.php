@@ -240,6 +240,9 @@ class SignController extends BaseController {
         $this->ajaxReturn($res);
     }
 
+    /**
+     * 头条第三方报名数据处理
+     */
     public function handleAdInfo()
     {
         $str =$this->ttIv;//fy
@@ -290,6 +293,52 @@ class SignController extends BaseController {
             }
         }
         return $headers;
+    }
+
+    /**
+     * 百度第三方报名数据处理
+     */
+    public function handleBdAdInfo()
+    {
+        $str =$this->ttIv;//fy
+        $key = $this->ttKey;
+        $server = $this->getallheaders();
+        $new_str = openssl_decrypt($server['Access-Token'], 'des-ecb', $key);
+        if($new_str == $str){
+            $data = file_get_contents("php://input");
+            $new_data = json_decode($data,true);
+            if($new_data['pid'] == ''){
+                $res['code'] = 1;
+                $res['message'] = 'data fail';
+            }else{
+                $info['act_id'] = $new_data['pid'];
+                $info['username'] = $new_data['name'];
+                $info['userphone'] = $new_data['telphone'];
+                $info['add_time'] = strtotime($new_data['create_time']);
+                $info['source_title'] = $new_data['source_title'];
+
+                $location = explode('+',$new_data['location']);
+                $info['mobile_province'] = $location[0];
+                $info['mobile_area'] = $location[1];
+                $add_res = M("act_registration")->add($info);
+
+                if($add_res){
+                    $index = new IndexController();
+
+                    //$send_res = $index->send($info['userphone'],$info['act_id']);
+                    $res['code'] = 0;
+                    $res['message'] = 'success!';
+                }else{
+                    $res['code'] = 1;
+                    $res['message'] = 'add fail';
+                }
+            }
+
+        }else{
+            $res['code'] = 1;
+            $res['message'] = 'request fail';
+        }
+        $this->ajaxReturn($res);
     }
 
 
