@@ -251,10 +251,11 @@ class SignController extends BaseController {
             $res['message'] = $server_info;
         }else{
             $res['code'] = 1;
-            $res['message'] = $server;
+            $res['message'] = $server_info;
         }
         $this->ajaxReturn($res);
-        die;$data = file_get_contents("php://input");
+        die;
+        $data = file_get_contents("php://input");
         $new_data = json_decode($data,true);
         $info['act_id'] = $new_data['pid'];
         $info['username'] = $new_data['name'];
