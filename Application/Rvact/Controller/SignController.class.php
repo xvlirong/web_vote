@@ -249,7 +249,7 @@ class SignController extends BaseController {
         if($new_str == $str){
             $data = file_get_contents("php://input");
             $new_data = json_decode($data,true);
-            if($new_data['act_id'] == ''){
+            if($new_data['pid'] == ''){
                 $res['code'] = 1;
                 $res['message'] = 'data fail';
             }else{
