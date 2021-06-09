@@ -317,7 +317,7 @@ class SignController extends BaseController {
                 $info['add_time'] = strtotime($new_data['create_time']);
                 $info['source_title'] = $new_data['source_title'];
 
-                $location = explode('+',$new_data['location']);
+                $location = explode(' ',$new_data['location']);
                 $info['mobile_province'] = $location[0];
                 $info['mobile_area'] = $location[1];
                 $add_res = M("act_registration")->add($info);
