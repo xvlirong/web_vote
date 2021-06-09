@@ -245,18 +245,16 @@ class SignController extends BaseController {
         $key = $this->ttKey;
         $token = openssl_encrypt($str, 'des-ecb', $key);
         $server = $this->getallheaders();
-        $refer = $_SERVER['HTTP_REFERER'];
-        $data = file_get_contents("php://input");
-        if($data['token'] == $token && $data['key'] == $key){
+        $server_info = json_decode($server,true);
+        if($server_info['Access-Token'] == $token){
             $res['code'] = 0;
-            $res['message'] = $data;
+            $res['message'] = $server_info;
         }else{
             $res['code'] = 1;
             $res['message'] = $server;
-            $res['refer'] = $refer;
         }
         $this->ajaxReturn($res);
-        die;
+        die;$data = file_get_contents("php://input");
         $new_data = json_decode($data,true);
         $info['act_id'] = $new_data['pid'];
         $info['username'] = $new_data['name'];
