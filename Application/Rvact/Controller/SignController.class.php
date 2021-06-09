@@ -8,6 +8,7 @@ class SignController extends BaseController {
     private $sessionKey = '';
     private $appsecret = '453d4bcb7b2082f1f596bcd47e398e23';
     private $ttKey = 'cd585341e3f5c3fb'; //ttkey
+    private $ttIv = '689addde40e4ee61';
     /**
      * 构造函数
      * @param $sessionKey string 用户在小程序登录后获取的会话密钥
@@ -241,11 +242,11 @@ class SignController extends BaseController {
 
     public function handleAdInfo()
     {
-        $str = '689addde40e4ee61';//fy
+        $str =$this->ttIv;//fy
         $key = $this->ttKey;
-        $token = openssl_encrypt($str, 'des-ecb', $key);
         $server = $this->getallheaders();
-        if($server['Access-Token'] == $token){
+        $new_str = openssl_decrypt($server['Access-Token'], 'des-ecb', $key);
+        if($new_str == $str){
             $res['code'] = 0;
             $res['message'] = 'success!!';
         }else{
