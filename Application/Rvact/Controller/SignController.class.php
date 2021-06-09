@@ -244,7 +244,7 @@ class SignController extends BaseController {
         $str = '689addde40e4ee61';//fy
         $key = $this->ttKey;
         $token = openssl_encrypt($str, 'des-ecb', $key);
-        $server = $_SERVER;
+        $server = getallheaders();
         $refer = $_SERVER['HTTP_REFERER'];
         $data = file_get_contents("php://input");
         if($data['token'] == $token && $data['key'] == $key){
