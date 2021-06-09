@@ -325,7 +325,7 @@ class SignController extends BaseController {
                 if($add_res){
                     $index = new IndexController();
 
-                    //$send_res = $index->send($info['userphone'],$info['act_id']);
+                    $send_res = $index->send($info['userphone'],$info['act_id']);
                     $res['code'] = 0;
                     $res['message'] = 'success!';
                 }else{
