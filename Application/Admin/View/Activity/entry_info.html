@@ -33,11 +33,21 @@
 
             </div>
             <div class="search gzrj">
-                <form action="{:U('Activity/entry_info')}" name="formtest" method="get">
+                <form action="__APP__/Activity/entry_info" name="formtest">
                     <div class="search">
                         <span>输入日期：</span>
                         <input type="text" id="key1" name="start_time" <gt name="start_time" value="0">value="{$start_time|date='Y-m-d',###}" </gt> onClick="WdatePicker()" readonly="readonly">--
                         <input type="text" id="key2" name="end_time" <gt name="end_time" value="0">value="{$end_time|date='Y-m-d',###}" </gt>   onClick="WdatePicker()" readonly="readonly">
+                        <select name="source" id="">
+                            <option value="0">请选择</option>
+                            <option value="头条">头条</option>
+                            <option value="搜索推广">搜索推广</option>
+                            <option value="信息流推广">信息流推广</option>
+                            <foreach name="source_list" item="v">
+                                <option value="{$v.source_title}">{$v.source_title}</option>
+                            </foreach>
+                            <option value="其他">其他</option>
+                        </select>
                         <input type="hidden" name="id" value="{$id}">
                         <a class="btn" id="sub">查询</a>
                         <span>今日新报名人数 {$today_num}人&nbsp;&nbsp;&nbsp;&nbsp;共计报名{$all_num}人</span>
