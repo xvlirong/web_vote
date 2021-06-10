@@ -343,14 +343,20 @@ class ActivityController extends CommonController
         $id = I('id');
         $this->assign('id',$id);
 
+        $source_list = M('source')->select();
+        $this->assign('source_list',$source_list);
         $start_time = strtotime(I('start_time',0));
+        $source = I('source','0');
         //echo $start_time;
         $this->assign('start_time',$start_time);
         $end_time = strtotime(I('end_time',0));
         $this->assign('end_time',$end_time);
-        if($start_time>0){
+        if($start_time>0 ){
             $end_time = $end_time+86400;
             $map['add_time'] = array('BETWEEN',array($start_time,$end_time));
+        }
+        if($source!='0'){
+            $map['source_title'] = array('EQ',$source);
         }
         $map['act_id'] = array('EQ',$id);
 
