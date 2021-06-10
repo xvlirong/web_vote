@@ -25,7 +25,7 @@ class ActivityController extends CommonController
      */
     public function act_list()
     {
-        $act_list = M("activity")->order(array('id'=>'desc'))->select();
+        $act_list = M("activity")->where(array('act_type'=>1))->order(array('id'=>'desc'))->select();
         $this->assign('list',$act_list);
 
         $this->display();
@@ -59,14 +59,18 @@ class ActivityController extends CommonController
         $data['end_time'] = strtotime($data['end_time']);
         //图片上传
         $pc_banner = $_FILES['banner'];
-        $data['banner'] = $this->uploadImgs($pc_banner,'banner');
+        if($_FILES['banner']['name'] != ''){
+            $data['banner'] = $this->uploadImgs($pc_banner,'banner');
+        }
         //移动端图片
         $mobile_banner =  $_FILES['banner_mobile'];
-        $data['banner_mobile'] = $this->uploadImgs($mobile_banner,'banner');
+        if($_FILES['banner_mobile']['name'] != ''){
+            $data['banner_mobile'] = $this->uploadImgs($mobile_banner,'banner');
+        }
         $data['add_time'] = time();
         //微信图片
-        $wx_img = $_FILES['wx_img'];
-        $data['wx_img'] = $this->uploadImgs($wx_img,'wx_img');
+      //  $wx_img = $_FILES['wx_img'];
+       // $data['wx_img'] = $this->uploadImgs($wx_img,'wx_img');
 
         //亮点配图
         $highlight_one_img = $_FILES['highlight_one_img'];
@@ -216,15 +220,13 @@ class ActivityController extends CommonController
         $this->assign('mobile_scene',$mobile_scene);
 
         //品牌库
-        $brand_label = M("brand_library")
+      /*  $brand_label = M("brand_library")
             ->join("left join act_brand on brand_library.id=act_brand.brand_id")
             ->where(array('act_brand.act_id'=>$id))
             ->order(array('brand_library.sort'=>'asc'))
             ->field('brand_library.*')
             ->select();
-        $this->assign('brand_label',array_column($brand_label,'id'));
-
-
+        $this->assign('brand_label',array_column($brand_label,'id'));*/
 
         $this->display();
     }
@@ -355,7 +357,7 @@ class ActivityController extends CommonController
         $list = M("act_registration")->where($map)->order('id desc')->select();
         $all_num = count($list);
         $count = count($list);
-        $Page = new \Extend\Page($count,100);
+        $Page = new \Extend\Page($count,300);
         $show = $Page->show();// 分页显示输出
         $list = M("act_registration")
             ->where($map)
@@ -1333,6 +1335,110 @@ class ActivityController extends CommonController
         $data = $_POST;
         $pid = $data['id'];
         $res = M("brand_library")->where(array('id'=>$pid))->save($data);
+    }
+
+    /**
+     * 签到信息表
+     */
+    public function sign_ticket()
+    {
+        $list = M("sign_ticket")
+            ->join("left join activity on activity.id=sign_ticket.pid")
+            ->order(array("sort"=>'asc','add_time'=>'desc'))
+            ->field('title,activity.sign_status,sign_ticket.*')
+            ->select();
+        $this->assign('list',$list);
+
+        $this->display();
+    }
+
+    /**
+     * 新增俱乐部
+     */
+    public function add_sign()
+    {
+        $this->display();
+    }
+
+    /**
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     * 俱乐部列表
+     */
+    public function club_list(){
+        $list = M('rv_club')->select();
+        $this->assign('list',$list);
+
+        $this->display();
+    }
+
+    /**
+     * 处理新增俱乐部
+     */
+    public function addClub()
+    {
+        $data['club_name'] = I('club_name');
+        $data['status'] = 1;
+        $data['add_time'] = time();
+        $res = M('rv_club')->data($data)->add();
+
+        if($res){
+            echo "<script>alert('处理成功'); location.replace(document.referrer);</script>";
+        } else {
+            echo "<script>alert('处理失败'); location.replace(document.referrer);</script>";
+        }
+    }
+
+    /**
+     * 修改俱乐部信息
+     */
+    public function update_club()
+    {
+        $id = I('id');
+        $this->assign('id',$id);
+        $info = M("rv_club")->where(array('id'=>$id))->find();
+        $this->assign('info',$info);
+
+        $this->display();
+
+    }
+
+    public function saveClub()
+    {
+        $id = I('id');
+        $data['club_name'] = I('club_name');
+
+        $res = M("rv_club")->where(array('id'=>$id))->save($data);
+        if($res){
+            echo "<script>alert('处理成功'); location.replace(document.referrer);</script>";
+        } else {
+            echo "<script>alert('处理失败'); location.replace(document.referrer);</script>";
+        }
+    }
+
+    public function riders()
+    {
+
+        $this->display();
+    }
+
+    public function riders_list()
+    {
+        $list = M("activity")->where(array('act_type'=>2))->order(array('id'=>'desc'))->select();
+        $this->assign('list',$list);
+
+        $this->display();
+    }
+
+    public function save_riders()
+    {
+        $id = I('id');
+
+        $info = M("activity")->where(array('id'=>$id))->find();
+        $this->assign('info',$info);
+
+        $this->display();
     }
 
 
