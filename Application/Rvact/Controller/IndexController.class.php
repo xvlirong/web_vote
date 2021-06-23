@@ -12,6 +12,11 @@ class IndexController extends BaseController {
         $fx_url = HTTP_TYPE.'peoplerv.rvtimes.cn/rvact/index/js_api';
         //基础信息
         $info = M("activity")->where(array('id'=>$id))->find();
+
+        if($info['act_type'] == 2){
+            $this->act_rider($info);
+            die;
+        }
         $this->checkIsSign($info);
         $this->assign('all_url',$all_url);
         $this->assign('fx_url',$fx_url);
@@ -193,15 +198,50 @@ class IndexController extends BaseController {
         $activityData=M('act_registration')->data($data)->add();
         if($activityData){
             $this->handleShowEnroll($data['username'],$data['userphone'],$data['car_type'],$data['add_time'],$data['act_id']);
-            $now_time = time();
-            if($now_time>$info['start_time']&&$now_time<$info['end_time']){
-                $sign_cookie = $data['userphone'].'+'.$data['act_id'];
-                cookie('sign_cookie',$sign_cookie,86400*5);
-            }
             echo $this->jsonData(200,"发送成功");
         }else{
             echo $this->jsonData(0,"发送失败");
         }
+    }
+
+    public function riderSign()
+    {
+        $data = $_POST;
+        $verify_info = session('msg_code');
+        $verify_arr = explode('+',$verify_info);
+        if($data['userphone'] == $verify_arr[0] && $data['verify_code'] == $verify_arr[1]){
+            unset($_SESSION['msg_code']);
+            if(empty($data['act_id'])){
+                return $this->jsonData(0,'活动ID不能为空');
+            }
+            if(empty($data['username'])){
+                return $this->jsonData(0,'用户名不能为空');
+            }
+            if(empty($data['userphone'])){
+                return $this->jsonData(0,'手机号码不能为空');
+            }
+            $info = M("activity")->where(array('id'=>$data['act_id']))->find();
+            $area_info = $this->getMobileInfo($data['userphone']);
+            $data['mobile_province'] = $area_info['prov'];
+            if($area_info['prov'] == ''){
+                $data['mobile_province'] = $area_info['city'];
+            }
+            $data['mobile_area'] = $area_info['city'];
+            $data['add_time']=time();
+
+            //发送短信
+             $send_res = $this->send($data['userphone'],$data['act_id']);
+            $activityData=M('riders')->data($data)->add();
+            if($activityData){
+                $this->handleShowEnroll($data['username'],$data['userphone'],$data['car_type'],$data['add_time'],$data['act_id']);
+                echo $this->jsonData(200,"发送成功");
+            }else{
+                echo $this->jsonData(0,"发送失败");
+            }
+        }else{
+            echo $this->jsonData(0,"验证码错误");
+        }
+
     }
 
 
@@ -259,6 +299,18 @@ class IndexController extends BaseController {
         }
         $this->display($template);
 
+    }
+
+    public function rider_success()
+    {
+        $id = I('id');
+        $this->assign('id',$id);
+        $info = M("activity")->where(array('id'=>$id))->find();
+        $this->assign('info',$info);
+
+        $source = I('source');
+        $this->assign('source',$source);
+        $this->display();
     }
 
 
@@ -330,7 +382,7 @@ class IndexController extends BaseController {
     {
         $url = "http://api.mysubmail.com/message/xsend.json";
         $appid = '40135';
-        $appkey = '1bb05e3b06a5b1e1c4d806d5367fa959';
+        $appkey = 'd344fc3ea811afdefe33146b7289d7b3';
         $code = $this->randNumber(6);
         $vars['code'] = $code;
         $js_code = json_encode($vars);
@@ -345,7 +397,7 @@ class IndexController extends BaseController {
         curl_close($ch);
         $info = json_decode($data,1);
         if($info['status'] == 'success'){
-            session('msg_code',$code);
+            session('msg_code',$phone.'+'.$code);
             $res_info['code'] = 1;
             $res_info['msg'] = '短信发送成功，请查收';
         }else{
@@ -362,11 +414,11 @@ class IndexController extends BaseController {
      * @throws \think\exception\DbException
      * 发送验证码
      */
-    public function sendMsCode()
+    public function sendMsCode1()
     {
         $project = 'Xuc3e';
         $phone = I('phone');
-        $check = '/^(1(([35789][0-9])|(47)))\d{8}$/';
+        $check = '/^1[3-9]\d{9}$/';
         if (!preg_match($check, $phone)) {
             $res['code'] = 3;
             $res['msg'] = '手机号格式错误';
@@ -379,6 +431,28 @@ class IndexController extends BaseController {
             $res['id'] = $exist['id'];
             $this->ajaxReturn($res);die;
         }
+        $res = $this->handleSendMs($phone,$project);
+        $this->ajaxReturn($res);
+    }
+    public function sendMsCode()
+    {
+        $project = 'Xuc3e';
+        $phone = I('phone');
+        $check = '/^1[3-9]\d{9}$/';
+        if (!preg_match($check, $phone)) {
+            $res['code'] = 3;
+            $res['msg'] = '手机号格式错误';
+            $this->ajaxReturn($res);die;
+        }
+        $exist = session('msg_code');
+        if($exist){
+            $res['code'] = 4;
+            $res['msg'] = '您的验证码还在有效期，请勿重复获取';
+            $res['id'] = $exist['id'];
+            $this->ajaxReturn($res);die;
+        }
+
+        $res['code'] = 1;
         $res = $this->handleSendMs($phone,$project);
         $this->ajaxReturn($res);
     }
@@ -610,4 +684,43 @@ class IndexController extends BaseController {
         }
         $this->ajaxReturn($data);
     }
+
+    /**
+     * 分享
+     */
+    public function rider_api(){
+        $url=htmlspecialchars_decode(trim(I('url')));
+        $jssdk = A("Jssdk");
+        $signPackage = $jssdk->GetSignPackage($url);
+        $pid = cookie('act_id');
+        $info = M("act_share")->where(array('pid'=>$pid))->find();
+        $share_data['title'] = $info['title'];
+        $share_data['desc'] = $info['intro'];
+        $share_data['link'] = HTTP_TYPE."peoplerv.rvtimes.cn/rvact/index/index/id/".$pid."/souce/share";
+        $share_data['imgUrl'] = HTTP_TYPE."peoplerv.rvtimes.cn/Public/img/logo.jpg";
+
+        if($signPackage){
+            $data['result']="success";
+            $data['js_data']=$signPackage;
+            $data['share_data']=$share_data;
+        }else{
+            $data['result']="error";
+            $data['js_data']='';
+            $data['share_data']='';
+        }
+        $this->ajaxReturn($data);
+    }
+
+    public function act_rider($info)
+    {
+        $fx_url = HTTP_TYPE.'peoplerv.rvtimes.cn/rvact/index/rider_api';
+        $this->assign('fx_url',$fx_url);
+
+        $club_list = M("rv_club")->select();
+        $this->assign('club_list',$club_list);
+        $this->assign('info',$info);
+        $this->display('act_rider');
+    }
+
+
 }

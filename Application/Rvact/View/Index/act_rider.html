@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="__STATIC__/css/common.css">
+<!--    <link rel="stylesheet" href="__STATIC__/css/awesome/css/font-awesome.min.css">-->
+    <link rel="stylesheet" href="__STATIC__/css/riders.css">
+    <script type="text/javascript" src="__STATIC__/js/rem.js"></script>
+    <script type="text/javascript" src="__STATIC__/js/jquery.min.js"></script>
+    <script type="text/javascript" src="__STATIC__/js/leftTime.min.js"></script>
+    <script>
+        var fx_url = '{$fx_url}';
+    </script>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js?time=0318"></script>
+    <script type="text/javascript" src="__STATIC__/js/act_share.js"></script>
+
+    <title>{$info.title}</title>
+</head>
+<body>
+<div id="mask"></div>
+<div id="message">必填项不能为空</div>
+  <div class="big_box">
+
+      <div class="header">
+            <h1>{$info.title}</h1>
+          <p>活动报名时间：{$info.start_time|date="m月d日",###}-{$info.end_time|date="m月d日",###}</p>
+      </div>
+
+      <div class="main_box">
+          <div class="sign_box">
+              <div class="form_box">
+                  <div class="selectBox">
+                      <div class="inputCase">
+                          <input class="imitationSelect" style="display: none;font-size: 0.8rem;" type="text" id="club_name" placeholder="请输入您的俱乐部名称" oulName="" oulId="" value=""/>
+                          <p id="club_p" class="imitationSelect1" >请选择您的俱乐部</p>
+                          <i class="fa fa-caret-down"></i>
+                      </div>
+                      <ul class="selectUl">
+                          <volist name="club_list" id="v">
+                              <li oliName="{$v.club_name}" >{$v.club_name}</li>
+                          </volist>
+                          <li oliName="0">其他</li>
+                      </ul>
+                  </div>
+                  <div class="name_box" >
+                      <input class="name_input" id="username" name="username" type="text" placeholder="请输入您的姓名">
+                  </div>
+                  <div class="name_box" >
+                      <input class="name_input" id="userphone" type="number" name="userphone" placeholder="请输入您的手机号">
+                  </div>
+                  <div class="name_box" style="float: left;width: 53%">
+                      <input class="verify_input" id="verify_code" type="number" name="verify_code" placeholder="请输入验证码">
+                  </div>
+                  <div class="btn">
+                      <button type="button" class="testBtn-a" id="dateBtn1">获取验证码</button>
+                  </div>
+                  <div class="btn_tj">
+                      <button id="sign_btn">立即报名</button>
+                  </div>
+              </div>
+
+          </div>
+
+          <div class="rule_box">
+              <div class="rule_detail">
+                  <h2>活动规则</h2>
+                  <div >
+                      <p>
+                          1.这里是第一条活动规则1.这里是第一条活动规则1.这里是第一条活动规则1.这里是第一条活动规则1.这里是第一条活动规则<br />
+                          2.这里是第二条活动规则这里是第二条活动规则这里是第二条活动规则这里是第二条活动规则这里是第二条活动规则这里是第二条活动规则 <br>
+                          3.这里是第3条活动规则这里是第3条活动规则这里是第3条活动规则这里是第3条活动规则这里是第3条活动规则这里是第3条活动规则这里是第3条活动规则这里是第3条活动规则
+                      </p>
+                  </div>
+              </div>
+
+          </div>
+      </div>
+  </div>
+<script type="text/javascript" src="__STATIC__/js/riders.js?time=0621"></script>
+
+  <script type="text/javascript">
+      var id="{$info['id']}";
+      var url_refer='{$url_refer}';
+      var use_url = "__APP__/Rvact.php/Index/riderSign";
+      var base_url = "__APP__/Rvact.php/Index/";
+      var source='{$source}';
+
+
+      //获取验证码
+      $("#dateBtn1").on("click",function(){
+          var _this=$(this);
+          //手机号码验证
+          var phone = $("#userphone").val();
+          if(!(/^1[3-9]\d{9}$/.test(phone)) || phone == ''){
+              alert("手机号码有误，请重填");
+              return false;
+          }
+          if(!$(this).hasClass("on")){
+              $.ajax({
+                  type:'post',
+                  url:base_url+"sendMsCode",
+                  data:{phone:phone},
+                  success:function (data) {
+                      var msg = data.msg;
+                      //   alert(msg)
+                      if(data.code == 1){
+                          $.leftTime(60,function(d){
+                              if(d.status){
+                                  _this.attr("class",'testBtn-b');
+                                  _this.addClass("on");
+                                  _this.html((d.s=="00"?"60":d.s)+"秒再获取");
+                              }else{
+                                  _this.attr("class",'testBtn-a');
+                                  _this.removeClass("on");
+                                  _this.html("获取验证码");
+                              }
+                          });
+                      }else if(data.code == 4){
+                          alertBox(data.msg);
+                      }
+                  }
+              });
+
+          }
+      });
+
+  </script>
+</body>
+
+</html>

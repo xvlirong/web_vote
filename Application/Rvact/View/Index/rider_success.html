@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{$activityData.subject}</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <link rel="stylesheet" href="__STATIC__/css/neat.css" />
+    <link rel="stylesheet" href="__STATIC__/css/signSuccess_phone.css" />
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=tBW47T7lwTiNXTigAGMKt42K"></script>
+    <script type="text/javascript">
+        function setFontSize(){
+            var oWrap=document.getElementById('wrap');
+            var width=document.documentElement.clientWidth;
+            var height=document.documentElement.clientHeight;
+            var oHtml=document.getElementsByTagName('html')[0];
+            var fz = width/750*100;
+            fz=fz>150?150:fz;
+            oHtml.style.width = 7.5*fz + 'px';
+            oHtml.style.fontSize = fz + 'px';
+            oWrap.style.display='block';
+        };
+        window.addEventListener('load',setFontSize,false);
+        window.addEventListener('resize',setFontSize,false);
+    </script>
+</head>
+<body>
+<div id="wrap">
+    <!--    <header id="header">-->
+    <!--        <nav>-->
+    <!--            <ul class="clearfix">-->
+    <!--                <li class="act">-->
+    <!--                    <a href="http://www.rvtimes.cn/mobile/">文章</a>-->
+    <!--                </li>-->
+    <!--                <li>-->
+    <!--                    <a href="http://www.rvtimes.cn/mobile/index.php?caid=1&addno=1">车型</a>-->
+    <!--                </li>-->
+    <!--                <li>-->
+    <!--                    <a href="http://www.rvtimes.cn/mobile/index.php?caid=804">游记</a>-->
+    <!--                </li>-->
+    <!--                <li>-->
+    <!--                    <a href="http://www.rvtimes.cn/mobile/index.php?caid=132">图库</a>-->
+    <!--                </li>-->
+    <!--                <li>-->
+    <!--                    <a href="http://www.rvtimes.cn/mobile/index.php?caid=1&addno=2">厂商</a>-->
+    <!--                </li>-->
+    <!--                <li>-->
+    <!--                    <a href="http://www.rvtimes.cn/mobile/index.php?caid=801">营地</a>-->
+    <!--                </li>-->
+    <!--            </ul>-->
+    <!--        </nav>-->
+    <!--    </header>-->
+    <section>
+        <div class="info">
+            <div class="img">
+                <img src="__STATIC__/images/sign_zan_phone.jpg" alt="">
+            </div>
+            <h3>恭喜您,报名成功！</h3>
+        </div>
+        <div class="content">
+            <p>{$info.success_info}</p>
+            <div class="weixin"></div>
+        </div>
+        <div class="links">
+            您可以：<a href="__APP__/Rvact/index/index/id/{$id}/souce/{$source}" target="_self">继续活动报名</a><a href="http://www.rvtimes.cn">房车时代首页</a><a href="http://www.rvtimes.cn/mobile/rv-car/">热门车型</a>
+        </div>
+    </section>
+</div>
+</body>
+</html>
