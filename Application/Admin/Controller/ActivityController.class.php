@@ -387,6 +387,53 @@ class ActivityController extends CommonController
         $this->display();
     }
 
+    public function rider_entry()
+    {
+        $id = I('id');
+        $this->assign('id',$id);
+
+        $source_list = M('source')->select();
+        $this->assign('source_list',$source_list);
+        $start_time = strtotime(I('start_time',0));
+        $source = I('source','0');
+        //echo $start_time;
+        $this->assign('start_time',$start_time);
+        $end_time = strtotime(I('end_time',0));
+        $this->assign('end_time',$end_time);
+        if($start_time>0 ){
+            $end_time = $end_time+86400;
+            $map['add_time'] = array('BETWEEN',array($start_time,$end_time));
+        }
+
+        $map['act_id'] = array('EQ',$id);
+
+        $list = M("riders")->where($map)->order('id desc')->select();
+        $all_num = count($list);
+        $count = count($list);
+        $Page = new \Extend\Page($count,100);
+        $show = $Page->show();// 分页显示输出
+        $list = M("riders")
+            ->where($map)
+            ->limit($Page->firstRow.','.$Page->listRows)
+            ->order('id desc')
+            ->select();
+        $this->assign('all_num',$all_num);
+
+        $today_time = strtotime(date("Y-m-d",time()));
+        // echo $end_time;die;
+        $maps['add_time'] = array("GT",$today_time);
+        $maps['act_id'] = array("EQ",$id);
+
+        $today_num = M("riders")->where($maps)->count();
+        $this->assign('today_num',$today_num);
+
+        $this->assign('list',$list);
+        $this->assign('id',$id);
+        $this->assign('page',$show);
+
+        $this->display();
+    }
+
     public function new_sign_info()
     {
         $id = I('id');
