@@ -436,6 +436,7 @@ class ActivityController extends CommonController
 
     public function new_sign_info()
     {
+        
         $id = I('id');
         $this->assign('id',$id);
 
