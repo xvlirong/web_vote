@@ -185,7 +185,7 @@ class SignController extends BaseController {
 
     public function handleUserEnroll()
     {
-        $data['act_id'] = M("sign_ticket")->where(array('sort'=>1))->getField('pid');
+        $data['act_id'] = M("sign_ticket")->where(array('sort'=>1,"sign_type"=>1))->getField('pid');
         $data['userphone'] = I('userphone');
         $data['username'] = I('username');
         $data['arrival_status'] = 1;
@@ -211,9 +211,54 @@ class SignController extends BaseController {
         $this->ajaxReturn($res);
     }
 
+    public function handleRiderEnroll()
+    {
+        $data['act_id'] = M("sign_ticket")->where(array('sort'=>1,"sign_type"=>2))->getField('pid');
+        $data['userphone'] = I('userphone');
+        $data['username'] = I('username');
+        $data['arrival_status'] = 1;
+        $data['add_time'] = time();
+        $area_info = $this->getMobileInfo($data['userphone']);
+        $data['mobile_province'] = $area_info['prov'];
+        if($area_info['prov'] == ''){
+            $data['mobile_province'] = $area_info['city'];
+        }
+        $data['mobile_area'] = $area_info['city'];
+        $data['add_time']=time();
+        $data['source_title'] = '小程序';
+        $addRes = M("riders")->add($data);
+        if($addRes){
+            $res['code'] = 1;
+            $res['act_id'] = $data['act_id'];
+            $res['sign_time'] = date("Y-m-d H:i",time());
+            $res['msg'] = '报名及签到成功';
+        }else{
+            $res['code'] = 0;
+            $res['msg'] = '处理失败';
+        }
+        $this->ajaxReturn($res);
+    }
+
     public function checkSignState()
     {
-        $info =  M("sign_ticket")->where(array('sort'=>1))->find();
+        $info =  M("sign_ticket")->where(array('sort'=>1,"sign_type"=>1))->find();
+        $pid = $info['pid'];
+        $act_info = M("activity")->where(array("id"=>$pid))->field('sign_status,start_time,end_time')->find();
+        $now = time();
+        //判断签到状态为可签到且当前时间为可签到时间
+        if($act_info['sign_status'] == 1 && $now > $act_info['start_time'] && $now < $act_info['end_time']){
+            $status = 1;
+        }else{
+            $status = 0;
+        }
+        $res['code'] = $status;
+        $res['msg'] = '查询签到开启状态处理成功';
+        $this->ajaxReturn($res);
+    }
+
+    public function riderSignState()
+    {
+        $info =  M("sign_ticket")->where(array('sort'=>1,"sign_type"=>2))->find();
         $pid = $info['pid'];
         $act_info = M("activity")->where(array("id"=>$pid))->field('sign_status,start_time,end_time')->find();
         $now = time();
@@ -230,7 +275,19 @@ class SignController extends BaseController {
 
     public function checkSignInfo()
     {
-        $info =  M("sign_ticket")->where(array('sort'=>1))->find();
+        $info =  M("sign_ticket")->where(array('sort'=>1,"sign_type"=>'1'))->find();
+        $res['pid'] = $info['pid'];
+        $res['title'] = M("activity")->where(array('id'=>$info['pid']))->getField('title');
+        $res['lat'] = $info['sign_lat'];
+        $res['lng'] = $info['sign_lng'];
+        $res['img'] = 'https://peoplerv.rvtimes.cn/Public/upload/sign/'.$info['sign_img'];
+        $res['msg'] = '查询签到页面信息';
+        $this->ajaxReturn($res);
+    }
+
+    public function checkRiderSign()
+    {
+        $info =  M("sign_ticket")->where(array('sort'=>1,"sign_type"=>'2'))->find();
         $res['pid'] = $info['pid'];
         $res['title'] = M("activity")->where(array('id'=>$info['pid']))->getField('title');
         $res['lat'] = $info['sign_lat'];
