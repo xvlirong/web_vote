@@ -124,9 +124,68 @@ class SignController extends BaseController {
         return 0;
     }
 
+    public function handleRiderSign()
+    {
+        $pid = M("sign_ticket")->where(array('sort'=>1,'sign_type'=>2))->getField('pid');
+        $userphone = I('userphone');
+
+        $maps['userphone'] = $userphone;
+        $maps['act_id'] = $pid;
+        $exist = M("riders")->where($maps)->find();
+        if ($exist) {
+            if ($exist['arrival_status'] == 0) {
+                $data['arrival_status'] = 1;
+                $data['arrival_time'] = time();
+                $save_res = M("riders")->where($maps)->save($data);
+                if($save_res){
+                    $res['code'] = 1;
+                    $res['act_id'] = $pid;
+                    $res['sign_time'] = date("Y-m-d H:i",time());
+                    $res['msg'] = '签到成功';
+                }else{
+                    $res['code'] = 0;
+                    $res['msg'] = '处理失败';
+                }
+            }else{
+                $res['code'] = 1;
+                $res['act_id'] = $pid;
+                $res['msg'] = '已签到';
+                $res['sign_time'] = date("Y-m-d H:i",$exist['arrival_time']);
+            }
+        } else {
+            // $res['code'] = 0;
+            // $res['msg'] = '未查询到报名信息，请完善您的姓名';
+
+            $data['act_id'] = $pid;
+            $data['userphone'] = $userphone;
+            $data['username'] = I('username');
+            $data['arrival_status'] = 1;
+            $data['arrival_time'] = time();
+            $area_info = $this->getMobileInfo($data['userphone']);
+            $data['mobile_province'] = $area_info['prov'];
+            if($area_info['prov'] == ''){
+                $data['mobile_province'] = $area_info['city'];
+            }
+            $data['mobile_area'] = $area_info['city'];
+            $data['add_time']=time();
+            $data['source_title'] = '小程序';
+            $addRes = M("riders")->add($data);
+            if($addRes){
+                $res['code'] = 1;
+                $res['act_id'] = $data['act_id'];
+                $res['sign_time'] = date("Y-m-d H:i",time());
+                $res['msg'] = '报名及签到成功';
+            }else{
+                $res['code'] = 0;
+                $res['msg'] = '处理失败';
+            }
+        }
+        $this->ajaxReturn($res);
+    }
+
     public function handleUserSign()
     {
-        $pid = M("sign_ticket")->where(array('sort'=>1))->getField('pid');
+        $pid = M("sign_ticket")->where(array('sort'=>1,'sign_type'=>1))->getField('pid');
         $userphone = I('userphone');
 
         $maps['userphone'] = $userphone;
@@ -156,7 +215,7 @@ class SignController extends BaseController {
            // $res['code'] = 0;
            // $res['msg'] = '未查询到报名信息，请完善您的姓名';
 
-            $data['act_id'] = M("sign_ticket")->where(array('sort'=>1))->getField('pid');
+            $data['act_id'] = $pid;
             $data['userphone'] = $userphone;
             $data['username'] = I('username');
             $data['arrival_status'] = 1;
