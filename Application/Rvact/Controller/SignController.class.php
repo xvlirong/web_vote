@@ -457,5 +457,35 @@ class SignController extends BaseController {
         $this->ajaxReturn($res);
     }
 
+    public function act_list()
+    {
+
+        $start_time = strtotime(date('Y',time()).'-01-01 00:00:00');
+        $end_time = strtotime((date('Y',time())+1).'-01-01 00:00:00');
+        $maps['act_type'] = array("EQ",1);
+        $maps['act_type'] = array("EQ",1);
+        $maps['act_status'] = array("EQ",1);
+        $maps['start_time'] = array("between",array($start_time,$end_time));
+        $now_list = M("activity")->where($maps)->order(array('act_status'=>'asc','add_time'=>'desc'))->select();
+        $now_list = $this->handleActTime($now_list);
+        $maps['act_status'] = array("EQ",2);
+        $end_list = M("activity")->where($maps)->order(array('act_status'=>'asc','add_time'=>'desc'))->select();
+        $end_list = $this->handleActTime($end_list);
+        $res['code'] = 1;
+        $res['now_list'] = $now_list;
+        $res['end_list'] = $end_list;
+        $res['msg'] = '请求成功';
+        $this->ajaxReturn($res);
+    }
+
+    public function handleActTime($list)
+    {
+        for($i = 0; $i < count($list); $i++){
+            $list[$i]['start_time'] = date("m月d日",$list[$i]['start_time']);
+            $list[$i]['end_time'] = date("m月d日",$list[$i]['end_time']);
+        }
+        return $list;
+    }
+
 
 }
