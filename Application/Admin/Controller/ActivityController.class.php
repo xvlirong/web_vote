@@ -72,6 +72,11 @@ class ActivityController extends CommonController
       //  $wx_img = $_FILES['wx_img'];
        // $data['wx_img'] = $this->uploadImgs($wx_img,'wx_img');
 
+        //列表页图片
+        $list_img =  $_FILES['list_img'];
+        if($_FILES['list_img']['name'] != ''){
+            $data['list_img'] = $this->uploadImgs($list_img,'banner');
+        }
         //亮点配图
         $highlight_one_img = $_FILES['highlight_one_img'];
         if($_FILES['highlight_one_img']['name'] != ''){
@@ -308,6 +313,11 @@ class ActivityController extends CommonController
         if($_FILES['wx_img']['name'] != ''){
             $data['wx_img'] = $this->uploadImgs($wx_img,'wx_img');
         }
+        //列表页图片
+        $list_img =  $_FILES['list_img'];
+        if($_FILES['list_img']['name'] != ''){
+            $data['list_img'] = $this->uploadImgs($list_img,'banner');
+        }
 
         //亮点配图
         $highlight_one_img = $_FILES['highlight_one_img'];
@@ -436,7 +446,6 @@ class ActivityController extends CommonController
 
     public function new_sign_info()
     {
-        
         $id = I('id');
         $this->assign('id',$id);
 
