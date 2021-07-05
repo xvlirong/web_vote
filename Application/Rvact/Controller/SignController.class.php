@@ -463,7 +463,26 @@ class SignController extends BaseController {
         $start_time = strtotime(date('Y',time()).'-01-01 00:00:00');
         $end_time = strtotime((date('Y',time())+1).'-01-01 00:00:00');
         $maps['act_type'] = array("EQ",1);
-        $maps['act_type'] = array("EQ",1);
+        $maps['act_status'] = array("EQ",1);
+        $maps['start_time'] = array("between",array($start_time,$end_time));
+        $now_list = M("activity")->where($maps)->order(array('act_status'=>'asc','add_time'=>'desc'))->select();
+        $now_list = $this->handleActTime($now_list);
+        $maps['act_status'] = array("EQ",2);
+        $end_list = M("activity")->where($maps)->order(array('act_status'=>'asc','add_time'=>'desc'))->select();
+        $end_list = $this->handleActTime($end_list);
+        $res['code'] = 1;
+        $res['now_list'] = $now_list;
+        $res['end_list'] = $end_list;
+        $res['msg'] = '请求成功';
+        $this->ajaxReturn($res);
+    }
+
+    public function rider_list()
+    {
+
+        $start_time = strtotime(date('Y',time()).'-01-01 00:00:00');
+        $end_time = strtotime((date('Y',time())+1).'-01-01 00:00:00');
+        $maps['act_type'] = array("EQ",2);
         $maps['act_status'] = array("EQ",1);
         $maps['start_time'] = array("between",array($start_time,$end_time));
         $now_list = M("activity")->where($maps)->order(array('act_status'=>'asc','add_time'=>'desc'))->select();
