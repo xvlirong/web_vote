@@ -713,6 +713,13 @@ class IndexController extends BaseController {
 
     public function act_rider($info)
     {
+        //活动状态
+        if($info['act_status'] == 1 && $info['end_time']>time()){
+            $act_status = 1;
+        }else{
+            $act_status = 0;
+        }
+        $this->assign('act_status',$act_status);
         $fx_url = HTTP_TYPE.'peoplerv.rvtimes.cn/rvact/index/rider_api';
         $this->assign('fx_url',$fx_url);
 

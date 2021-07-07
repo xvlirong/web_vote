@@ -344,6 +344,12 @@ class SignController extends BaseController {
         $this->ajaxReturn($res);
     }
 
+    /**
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     * 排序为1 sort  签到类型为2 sign_type   车友签到
+     */
     public function checkRiderSign()
     {
         $info =  M("sign_ticket")->where(array('sort'=>1,"sign_type"=>'2'))->find();
@@ -457,6 +463,12 @@ class SignController extends BaseController {
         $this->ajaxReturn($res);
     }
 
+    /**
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     * 展会活动列表
+     */
     public function act_list()
     {
 
@@ -477,9 +489,14 @@ class SignController extends BaseController {
         $this->ajaxReturn($res);
     }
 
+    /**
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     * 车友活动列表
+     */
     public function rider_list()
     {
-
         $start_time = strtotime(date('Y',time()).'-01-01 00:00:00');
         $end_time = strtotime((date('Y',time())+1).'-01-01 00:00:00');
         $maps['act_type'] = array("EQ",2);
