@@ -342,6 +342,7 @@ class SignController extends BaseController {
         $res['img'] = 'https://peoplerv.rvtimes.cn/Public/upload/sign/'.$info['sign_img'];
         $res['msg'] = '查询签到页面信息';
         $this->ajaxReturn($res);
+
     }
 
     /**
