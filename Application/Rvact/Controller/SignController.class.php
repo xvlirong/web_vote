@@ -478,10 +478,10 @@ class SignController extends BaseController {
         $maps['act_type'] = array("EQ",1);
         $maps['act_status'] = array("EQ",1);
 //        $maps['start_time'] = array("between",array($start_time,$end_time));
-        $now_list = M("activity")->where($maps)->order(array('act_status'=>'asc','add_time'=>'desc'))->select();
+        $now_list = M("activity")->where($maps)->order(array('act_status'=>'asc','start_time'=>'desc'))->select();
         $now_list = $this->handleActTime($now_list);
         $maps['act_status'] = array("EQ",2);
-        $end_list = M("activity")->where($maps)->order(array('act_status'=>'asc','add_time'=>'desc'))->select();
+        $end_list = M("activity")->where($maps)->order(array('act_status'=>'asc','start_time'=>'desc'))->select();
         $end_list = $this->handleActTime($end_list);
         $res['code'] = 1;
         $res['now_list'] = $now_list;
@@ -503,10 +503,10 @@ class SignController extends BaseController {
         $maps['act_type'] = array("EQ",2);
         $maps['act_status'] = array("EQ",1);
 //        $maps['start_time'] = array("between",array($start_time,$end_time));
-        $now_list = M("activity")->where($maps)->order(array('act_status'=>'asc','add_time'=>'desc'))->select();
+        $now_list = M("activity")->where($maps)->order(array('act_status'=>'asc','start_time'=>'desc'))->select();
         $now_list = $this->handleActTime($now_list);
         $maps['act_status'] = array("EQ",2);
-        $end_list = M("activity")->where($maps)->order(array('act_status'=>'asc','add_time'=>'desc'))->select();
+        $end_list = M("activity")->where($maps)->order(array('act_status'=>'asc','start_time'=>'desc'))->select();
         $end_list = $this->handleActTime($end_list);
         $res['code'] = 1;
         $res['now_list'] = $now_list;
